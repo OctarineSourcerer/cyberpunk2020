@@ -585,7 +585,7 @@
         }
       },
       "character": {
-        "templates": ["info", "lifepath", "stats", "role"],
+        "templates": ["info", "lifepath", "stats", "skills"],
         "damage": 0
       },
       "pawn": {
