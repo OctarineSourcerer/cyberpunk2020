@@ -582,6 +582,13 @@
         },
         "wounds": {
             "damage": 0
+        },
+        "gear": {
+            "eurobucks": 0,
+            "carried": 0,
+            "armor": [],
+            "weapons": [],
+            "gear": []
         }
       },
       "character": {
@@ -600,20 +607,41 @@
       }
     },
     "Item": {
-      "types": ["weapon", "spell"],
+      "types": ["weapon", "armor", "cyberwear", "gear"],
       "templates": {
-        "rarity": {
-          "rarity": "Common",
-          "price": 20
+        "common": {
+          "name": "Common",
+          "text": "",
+          "cost": 0
         }
       },
       "weapon": {
-        "templates": ["rarity"],
-        "damage": 5
+        "templates": ["common"],
+        "type": "P",
+        "accuracy": 0,
+        "concealability": "P",
+        "availability": "C",
+        "ammoType": "9mm",
+        "damage": "2d6+1",
+        "ap": false,
+        "shots": 12,
+        "rof": 2,
+        "reliability": "ST",
+        "range": 50
       },
-      "spell": {
-        "templates": ["rarity"],
-        "cost": 2
+      "armor": {
+        "templates": ["common"],
+        "stoppingPower": 4,
+        "coverage": ["Arms", "Torso", "Legs"],
+        "encumbrance": 0
+      },
+      "cyberwear": {
+        "templates": ["common"],
+        "surgCode": "N",
+        "humanityCost": "1d6"
+      },
+      "gear": {
+          "templates": ["common"]
       }
     }
 }
