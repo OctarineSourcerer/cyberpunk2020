@@ -205,7 +205,7 @@
                     "ip": 0,
                     "chipped": false
                 },
-                "expert": [],
+                "expert": {},
                 "gamble": {
                     "value": 0,
                     "ip": 0,
@@ -324,63 +324,63 @@
                     "ip": 0,
                     "chipped": false
                 },
-                "martial": [
-                    {"aikido": {
+                "martial": {
+                    "aikido": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"animalKungFu": {
+                    },
+                    "animalKungFu": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"boxing": {
+                    },
+                    "boxing": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"capoeira": {
+                    },
+                    "capoeira": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"choi": {
+                    },
+                    "choi": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"judo": {
+                    },
+                    "judo": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"karate": {
+                    },
+                    "karate": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"savate": {
+                    },
+                    "savate": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"taekwon": {
+                    },
+                    "taekwon": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"thaikick": {
+                    },
+                    "thaikick": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }},
-                    {"wrestle": {
+                    },
+                    "wrestle": {
                         "value": 0,
                         "ip": 0,
                         "chipped": false
-                    }}
-                ],
+                    }
+                },
                 "melee": {
                     "value": 0,
                     "ip": 0,
