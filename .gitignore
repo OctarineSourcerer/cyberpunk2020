@@ -1,1 +1,9 @@
 package-lock.json
+
+# IDE
+.idea/
+.vs/
+
+# Node Modules
+node_modules/
+npm-debug.log

@@ -1,12 +1,13 @@
 {
-    "name": "Cyberpunk2020",
+    "name": "cyberpunk2020",
     "title": "Cyberpunk 2020",
     "description": "R. Talsorian Games' Cyberpunk 2020 System",
     "version": "0.1.0",
+    "compatibleCoreVersion": "0.7.7",
     "templateVersion": 2,
     "author": "OctarineSourcerer",
     "scripts": [],
-    "esmodules": [],
+    "esmodules": ["module/cyberpunk.js"],
     "styles": [],
     "packs": [],
     "languages": [
