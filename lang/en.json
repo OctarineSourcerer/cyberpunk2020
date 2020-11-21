@@ -1,5 +1,7 @@
 {
-    "CYBERPUNK.ActorName": "Name",
+    "CYBERPUNK.ActorName": "Handle",
+    "CYBERPUNK.Role": "Role",
+    "CYBERPUNK.Age": "Age",
     "CYBERPUNK.TabInfo": "Info",
     "CYBERPUNK.TabSkills": "Skills",
     "CYBERPUNK.TabCombat": "Combat",

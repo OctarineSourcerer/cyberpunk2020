@@ -1,0 +1,51 @@
+// I'd have loved to give Stone Sans with this, but I don't have the license
+// Open Sans ExtraBold seems to do okay though
+$font-primary: "Noto Sans", sans-serif;
+$font-secondary: "Open Sans ExtraBold", sans-serif;
+$text-colour: black;
+
+#handle {
+    width: 9em;
+}
+#age {
+    width: 2em;
+}
+
+.cyberpunk section {
+    font-family: $font-primary;
+}
+
+.sheet header.sheet-header {
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.field {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+input.field-value {
+    font-family: $font-secondary;
+    font-weight: bold;
+    height: auto;
+    border-style: solid solid solid none;
+    padding-left: 5px;
+    border-width: 2px;
+    border-radius: 0px;
+    border-color: black;
+}
+
+div.field-label {
+    background-color: black;
+    color: whitesmoke;
+    font-weight: bold;
+    font-variant: small-caps;
+
+    padding: 5px;
+}

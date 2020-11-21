@@ -3,8 +3,17 @@
     {{!-- Sheet Header --}}
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'CYBERPUNK.ActorName'}}"/></h1>
+        <div class="field">
+            <div class="field-label">{{localize 'CYBERPUNK.ActorName'}}</div>
+            <input id="handle" class="field-value" name="name" type="text" value="{{actor.name}}"/>
+        </div>
+        <div class="field">
+            <div class="field-label">{{localize 'CYBERPUNK.Role'}}</div>
+            <input class="field-value" name="role" type="text" value="{{data.role.value}}"/>
+        </div>
+        <div class="field">
+            <div class="field-label">{{localize 'CYBERPUNK.Age'}}</div>
+            <input id="age" class="field-value" name="age" type="text" value="{{data.age}}"/>
         </div>
     </header>
 

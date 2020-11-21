@@ -8,7 +8,7 @@
     "author": "OctarineSourcerer",
     "scripts": [],
     "esmodules": ["module/cyberpunk.js"],
-    "styles": [],
+    "styles": ["css/cyberpunk.css"],
     "packs": [],
     "languages": [
       {
