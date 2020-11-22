@@ -1,10 +1,9 @@
-#handle {
-  width: 9em;
+#handle, #role {
   flex-grow: 2;
 }
 
 #age {
-  width: 2em;
+  flex-shrink: 3;
 }
 
 .cyberpunk section {
@@ -24,6 +23,16 @@
   align-items: stretch;
   margin-left: 5px;
   margin-right: 5px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.field div {
+  flex-grow: 0;
+  flex-shrink: 5;
+}
+.field input {
+  flex-grow: 3;
+  flex-shrink: 1;
 }
 
 input.field-value {

@@ -4,12 +4,11 @@ $font-primary: "Noto Sans", sans-serif;
 $font-secondary: "Open Sans ExtraBold", sans-serif;
 $text-colour: black;
 
-#handle {
-    width: 9em;
+#handle, #role {
     flex-grow: 2;
 }
 #age {
-    width: 2em;
+    flex-shrink: 3;
 }
 
 .cyberpunk section {
@@ -29,6 +28,17 @@ $text-colour: black;
     align-items: stretch;
     margin-left: 5px;
     margin-right: 5px;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    div {
+        flex-grow: 0;
+        flex-shrink: 5;
+    }
+    input {
+        flex-grow: 3;
+        flex-shrink: 1;
+    }
 }
 
 input.field-value {
