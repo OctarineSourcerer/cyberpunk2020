@@ -1,5 +1,6 @@
 #handle {
   width: 9em;
+  flex-grow: 2;
 }
 
 #age {
