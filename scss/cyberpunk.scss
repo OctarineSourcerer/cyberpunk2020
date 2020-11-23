@@ -3,6 +3,7 @@
 $font-primary: "Noto Sans", sans-serif;
 $font-secondary: "Open Sans ExtraBold", sans-serif;
 $text-colour: black;
+$text-colour-inverted: whitesmoke;
 
 #handle, #role {
     flex-grow: 2;
@@ -49,12 +50,12 @@ input.field-value {
     padding-left: 5px;
     border-width: 2px;
     border-radius: 0px;
-    border-color: black;
+    border-color: $text-colour;
 }
 
 div.field-label {
-    background-color: black;
-    color: whitesmoke;
+    background-color: $text-colour;
+    color: $text-colour-inverted;
     font-weight: bold;
     font-variant: small-caps;
 
