@@ -659,7 +659,7 @@
 		}
 	},
 	"Item": {
-		"types": ["weapon", "armor", "cyberwear", "gear"],
+		"types": ["weapon", "armor", "Cyberware", "gear"],
 		"templates": {
 			"common": {
 				"name": "Common",
@@ -691,7 +691,7 @@
 			],
 			"encumbrance": 0
 		},
-		"cyberwear": {
+		"Cyberware": {
 			"templates": ["common"],
 			"surgCode": "N",
 			"humanityCost": "1d6"
