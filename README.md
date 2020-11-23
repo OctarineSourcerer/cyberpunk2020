@@ -10,3 +10,5 @@ This is an early work, and thus far only has most of the underlying data structu
 * Attack hit roll automatically translated to the name of the hit location.
 
 I aim to, at first, do these things in a style akin to the original style of the book; more modern/neon/decklike styles may be considered later.
+
+All rights to Cyberpunk 2020 lie with R. Talsorian games. I don't intend to infringe on this and so, if not given express permission, I'm not likely to make compendiums with game content.
