@@ -1,3 +1,5 @@
+$stats-divider-thickness: 1px;
+
 // The grid that lists player stats
 .statsgrid {
     display: flex;
@@ -31,13 +33,14 @@ div.stat {
         border-color: $text-colour;
         border-style: none solid solid solid;
         border-width: 2px;
+        border-bottom-width: 1px;
     }
     .stat-mod {
         font-size: 9pt;
         color: $inactive-colour;
         border-color: $text-colour;
         border-bottom-style: solid;
-        border-width: 2px;
+        border-width: 1px;
     }
     .stat-temp {
         font-size: 9pt;
@@ -45,5 +48,6 @@ div.stat {
         // Is on right, so we don't want middle (left) border
         border-style: none solid solid none;
         border-width: 2px;
+        border-bottom-width: 1px;
     }
 }
