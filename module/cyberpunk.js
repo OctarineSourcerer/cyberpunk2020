@@ -4,6 +4,8 @@ import { CyberpunkActorSheet } from "./actor/actor-sheet.js";
 import { CyberpunkItem } from "./item/item.js";
 import { CyberpunkItemSheet } from "./item/item-sheet.js";
 
+import { preloadHandlebarsTemplates } from "./module/templates.js";
+
 Hooks.once('init', async function () {
 
     // Place classes in their own namespace for later reference.
@@ -46,6 +48,8 @@ Hooks.once('init', async function () {
     Handlebars.registerHelper('toLowerCase', function (str) {
         return str.toLowerCase();
     });
+
+    preloadHandlebarsTemplates();
 });
 
 Hooks.once("ready", async function () {
