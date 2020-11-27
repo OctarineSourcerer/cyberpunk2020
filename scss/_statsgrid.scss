@@ -1,0 +1,10 @@
+// The grid that lists player stats
+.statsgrid {
+    display: flex;
+    flex-direction: row;
+}
+
+div.stat {
+    display: flex;
+    flex-direction: column;
+}
