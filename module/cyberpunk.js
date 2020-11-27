@@ -49,6 +49,16 @@ Hooks.once('init', async function () {
         return str.toLowerCase();
     });
 
+    Handlebars.registerHelper("loop", function(amount, options) {
+        var ret = "";
+        
+        for (var i = 0; i < amount; i++) {
+            ret = ret + options.fn(this);
+        }
+        
+        return ret;
+    });
+
     preloadHandlebarsTemplates();
 });
 

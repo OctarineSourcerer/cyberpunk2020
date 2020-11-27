@@ -31,23 +31,21 @@ div.stat {
         color: $text-colour-inverted;
         background: $text-colour;
         border-color: $text-colour;
-        border-style: none solid solid solid;
+        border-style: none solid none solid;
         border-width: 2px;
-        border-bottom-width: 1px;
     }
     .stat-mod {
         font-size: 9pt;
-        color: $inactive-colour;
-        border-color: $text-colour;
-        border-bottom-style: solid;
-        border-width: 1px;
+        background: $inactive-colour;
+        color: $text-colour-inverted;
     }
     .stat-temp {
         font-size: 9pt;
-        border-color: $text-colour;
+        background: $inactive-colour;
+        color: $text-colour-inverted;
         // Is on right, so we don't want middle (left) border
-        border-style: none solid solid none;
+        border-right-style: solid;
+        border-right-color: $text-colour;
         border-width: 2px;
-        border-bottom-width: 1px;
     }
 }
