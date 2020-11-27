@@ -7,5 +7,15 @@
     "CYBERPUNK.TabSkills": "Skills",
     "CYBERPUNK.TabCombat": "Combat",
     "CYBERPUNK.TabCyber": "Cyberware",
-    "CYBERPUNK.TabGear": "Gear"
+    "CYBERPUNK.TabGear": "Gear",
+
+    "CYBERPUNK.Int": "INT",
+    "CYBERPUNK.Ref": "REF",
+    "CYBERPUNK.Tech": "TECH",
+    "CYBERPUNK.Cool": "COOL",
+    "CYBERPUNK.Attr": "ATTR",
+    "CYBERPUNK.Luck": "LUCK",
+    "CYBERPUNK.MA": "M.A",
+    "CYBERPUNK.BT": "B.T",
+    "CYBERPUNK.Emp": "EMP"
 }

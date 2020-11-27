@@ -7,4 +7,43 @@
 div.stat {
     display: flex;
     flex-direction: column;
+    margin-right: 3px;
+    width: 3em;
+
+    div {
+        text-align: center;
+    }
+    .field-label {
+        padding: 5px 0px 5px 0px;
+    }
+    .stat-total {
+        border-color: $text-colour;
+        border-style: none solid solid solid;
+        border-width: 2px;
+        color: $inactive-colour;
+        font-size: 13pt;
+        font-weight: bold;
+    }
+    .stat-base {
+        font-size: 9pt;
+        color: $text-colour-inverted;
+        background: $text-colour;
+        border-color: $text-colour;
+        border-style: none solid solid solid;
+        border-width: 2px;
+    }
+    .stat-mod {
+        font-size: 9pt;
+        color: $inactive-colour;
+        border-color: $text-colour;
+        border-bottom-style: solid;
+        border-width: 2px;
+    }
+    .stat-temp {
+        font-size: 9pt;
+        border-color: $text-colour;
+        // Is on right, so we don't want middle (left) border
+        border-style: none solid solid none;
+        border-width: 2px;
+    }
 }

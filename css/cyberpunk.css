@@ -2,14 +2,18 @@
   width: 30%;
 }
 
-.cyberpunk section {
+.cyberpunk section.window-content {
   font-family: "Noto Sans", sans-serif;
+  font-weight: bold;
 }
 
 .sheet header.cyberheader {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.sheet header.cyberheader > div {
+  margin-bottom: 5px;
 }
 .sheet header.cyberheader .topstats {
   width: 100%;
@@ -36,7 +40,7 @@
   flex-shrink: 1;
 }
 
-input.field-value {
+.cyberpunk .field-value {
   font-family: "Open Sans ExtraBold", sans-serif;
   font-weight: bold;
   height: auto;
@@ -57,10 +61,59 @@ div.field-label {
 
 .profile-img {
   max-height: 200px;
+  flex-shrink: 2;
+  margin-right: 4px;
 }
 
 .textfield {
   flex-basis: 2;
+}
+
+.statsgrid {
+  display: flex;
+  flex-direction: row;
+}
+
+div.stat {
+  display: flex;
+  flex-direction: column;
+  margin-right: 3px;
+  width: 3em;
+}
+div.stat div {
+  text-align: center;
+}
+div.stat .field-label {
+  padding: 5px 0px 5px 0px;
+}
+div.stat .stat-total {
+  border-color: black;
+  border-style: none solid solid solid;
+  border-width: 2px;
+  color: #464646;
+  font-size: 13pt;
+  font-weight: bold;
+}
+div.stat .stat-base {
+  font-size: 9pt;
+  color: whitesmoke;
+  background: black;
+  border-color: black;
+  border-style: none solid solid solid;
+  border-width: 2px;
+}
+div.stat .stat-mod {
+  font-size: 9pt;
+  color: #464646;
+  border-color: black;
+  border-bottom-style: solid;
+  border-width: 2px;
+}
+div.stat .stat-temp {
+  font-size: 9pt;
+  border-color: black;
+  border-style: none solid solid none;
+  border-width: 2px;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */

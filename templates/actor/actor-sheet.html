@@ -21,7 +21,10 @@
             </div>
         </div>
 
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="20%"/>
+        <div class="flexrow">
+            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="20%"/>
+            {{> "systems/cyberpunk2020/templates/actor/parts/statsgrid.html"}}
+        </div>
     </header>
 
     {{!-- Sheet Tab Navigation --}}

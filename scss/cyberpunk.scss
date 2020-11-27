@@ -4,19 +4,25 @@ $font-primary: "Noto Sans", sans-serif;
 $font-secondary: "Open Sans ExtraBold", sans-serif;
 $text-colour: black;
 $text-colour-inverted: whitesmoke;
+$inactive-colour: rgb(70, 70, 70);
 
 #handle, #role {
     width: 30%;
 }
 
-.cyberpunk section {
+.cyberpunk section.window-content {
     font-family: $font-primary;
+    font-weight: bold;
 }
 
 .sheet header.cyberheader {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    > div {
+        margin-bottom: 5px;
+    }
     
     .topstats {
         width: 100%;
@@ -45,7 +51,7 @@ $text-colour-inverted: whitesmoke;
     }
 }
 
-input.field-value {
+.cyberpunk .field-value {
     font-family: $font-secondary;
     font-weight: bold;
     height: auto;
@@ -67,8 +73,12 @@ div.field-label {
 
 .profile-img {
     max-height: 200px;
+    flex-shrink: 2;
+    margin-right: 4px;
 }
 
 .textfield {
     flex-basis: 2;
 }
+
+@import "statsgrid"
