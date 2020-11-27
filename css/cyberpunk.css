@@ -1,30 +1,31 @@
 #handle, #role {
-  flex-grow: 2;
-}
-
-#age {
-  flex-shrink: 3;
+  width: 30%;
 }
 
 .cyberpunk section {
   font-family: "Noto Sans", sans-serif;
 }
 
-.sheet header.sheet-header {
+.sheet header.cyberheader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.sheet header.cyberheader .topstats {
+  width: 100%;
+  display: flex;
   flex-direction: row;
   align-content: flex-start;
   align-items: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .field {
   display: flex;
   flex-direction: row;
+  width: 20%;
   align-items: stretch;
-  margin-left: 5px;
-  margin-right: 5px;
-  flex-grow: 1;
-  flex-shrink: 1;
+  margin: 0px 5px 5px 0px;
 }
 .field div {
   flex-grow: 0;
@@ -52,6 +53,14 @@ div.field-label {
   font-weight: bold;
   font-variant: small-caps;
   padding: 5px;
+}
+
+.profile-img {
+  max-height: 200px;
+}
+
+.textfield {
+  flex-basis: 2;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */
