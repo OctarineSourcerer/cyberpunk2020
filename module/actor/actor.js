@@ -25,9 +25,11 @@ export class CyberpunkActor extends Actor {
     const data = actorData.data;
     
     const stats = data.stats;
+    // Calculate stat totals using base+temp
     for(const stat of Object.values(stats)) {
       stat.total = stat.base + stat.tempMod;
     }
+
     // Reflex is affected by encumbrance values too
     for(const armor in data.armor) {
       if(armor.encumbrance != null) {
@@ -44,10 +46,13 @@ export class CyberpunkActor extends Actor {
     body.carry = body.total * 10;
     body.lift = body.total * 40;
     body.modifier = CyberpunkActor.btm(body.total);
+
+    // This is where the effect wounds would have would be calculated
   }
 
   /**
    * Get a body type modifier from the body type stat (body)
+   * I couldn't figure out a single formula that'd work for it (cos of the weird widths of BT values)
    */
   static btm(body) {
     if(body < 2) throw "Body type cannot be below 2."
@@ -65,7 +70,7 @@ export class CyberpunkActor extends Actor {
     }
   }
 
-
+  // Current wound state. 0 for uninjured, going up by 1 for each new one. 1 for Serious, 2 critical etc.
   woundState() {
     const damage = this.data.data.damage;
     if(damage == 0) return 0;
