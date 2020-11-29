@@ -31,6 +31,7 @@ export class CyberpunkActor extends Actor {
     }
 
     // Reflex is affected by encumbrance values too
+    stats.ref.armorMod = 0;
     for(const armor in data.armor) {
       if(armor.encumbrance != null) {
         stats.ref.armorMod -= armor.encumbrance;
