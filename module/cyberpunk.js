@@ -34,7 +34,7 @@ Hooks.once('init', async function () {
         for (var i = 0; i < amount; i++) {
             result = result + options.fn(this);
         }
-        return ret;
+        return result;
     });
 
     // Register and preload templates with Foundry. See templates.js for usage
