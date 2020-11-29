@@ -39,7 +39,7 @@ export class CyberpunkActor extends Actor {
     }
     stats.ref.total = stats.ref.base + stats.ref.tempMod + stats.ref.armorMod;
 
-    const move = stats.move;
+    const move = stats.ma;
     move.run = move.total * 3;
     move.leap = Math.floor(move.total / 4); 
 

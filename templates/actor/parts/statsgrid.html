@@ -1,90 +1,14 @@
 {{!-- Container for all the stats --}}
 <div class="statsgrid">
+    {{#each data.stats as |stat key|}}
     <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.Int'}}</div>
+        <div class="field-label">{{localize (localizeStat key)}}</div>
         <div class="flexrow">
-            <div class="stat-base">{{data.stats.int.base}}</div>
+            <div class="stat-base">{{stat.base}}</div>
             <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.int.tempMod}}</div>
+            <div class="stat-temp">{{stat.tempMod}}</div>
         </div>
-        <div class="stat-total">{{data.stats.int.total}}</div>
+        <div class="stat-total">{{stat.total}}</div>
     </div>
-    <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.Ref'}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{data.stats.ref.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.ref.tempMod}}</div>
-        </div>
-        <div class="stat-total">{{data.stats.ref.total}}</div>
-    </div>
-    <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.Tech'}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{data.stats.tech.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.tech.tempMod}}</div>
-        </div>
-        <div class="stat-total">{{data.stats.tech.total}}</div>
-    </div>
-
-    <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.Cool'}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{data.stats.cool.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.cool.tempMod}}</div>
-        </div>
-        <div class="stat-total">{{data.stats.cool.total}}</div>
-    </div>
-
-    <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.Attr'}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{data.stats.attr.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.attr.tempMod}}</div>
-        </div>
-        <div class="stat-total">{{data.stats.attr.total}}</div>
-    </div>
-
-    <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.Luck'}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{data.stats.luck.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.luck.tempMod}}</div>
-        </div>
-        <div class="stat-total">{{data.stats.luck.total}}</div>
-    </div>
-
-    <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.MA'}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{data.stats.move.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.move.tempMod}}</div>
-        </div>
-        <div class="stat-total">{{data.stats.move.total}}</div>
-    </div>
-
-    <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.BT'}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{data.stats.body.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.body.tempMod}}</div>
-        </div>
-        <div class="stat-total">{{data.stats.body.total}}</div>
-    </div>
-
-    <div class="stat">
-        <div class="field-label">{{localize 'CYBERPUNK.Emp'}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{data.stats.emp.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{data.stats.emp.tempMod}}</div>
-        </div>
-        <div class="stat-total">{{data.stats.emp.total}}</div>
-    </div>
+    {{/each}}
 </div>

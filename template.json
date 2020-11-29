@@ -30,11 +30,11 @@
 						"base": 5,
 						"tempMod": 0
 					},
-					"move": {
+					"ma": {
 						"base": 5,
 						"tempMod": 0
 					},
-					"body": {
+					"bt": {
 						"base": 5,
 						"tempMod": 0
 					},

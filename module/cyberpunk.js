@@ -23,9 +23,18 @@ Hooks.once('init', async function () {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("cyberpunk", CyberpunkItemSheet, { makeDefault: true });
 
-    Handlebars.registerHelper('toLowerCase', function (str) {
-        return str.toLowerCase();
-    });
+    let properCase = function (str) {
+        return str.replace(
+            /\w\S*/g,
+            function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
+    };
+    Handlebars.registerHelper('properCase', properCase);
+    Handlebars.registerHelper('localizeStat', function(str) {
+        return "CYBERPUNK." + properCase(str);
+    })
 
     // Repeat what's inside it X times.
     // Useful for testing the damage track. Use as, for example, {{#loop 4}}whatyouwanttorepeat{{/loop}}
