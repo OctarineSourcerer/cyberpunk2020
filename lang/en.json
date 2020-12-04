@@ -17,5 +17,11 @@
     "CYBERPUNK.Luck": "LUCK",
     "CYBERPUNK.Ma": "M.A",
     "CYBERPUNK.Bt": "B.T",
-    "CYBERPUNK.Emp": "EMP"
+    "CYBERPUNK.Emp": "EMP",
+
+    "CYBERPUNK.Uninjured": "Uninjured",
+    "CYBERPUNK.Light": "Light",
+    "CYBERPUNK.Critical": "Critical",
+    "CYBERPUNK.Serious": "Serious",
+    "CYBERPUNK.Mortal": "Mortal {mortality}"
 }

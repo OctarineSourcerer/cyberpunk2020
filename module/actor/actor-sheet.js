@@ -11,7 +11,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       classes: ["cyberpunk", "sheet", "actor"],
       template: "systems/cyberpunk2020/templates/actor/actor-sheet.html",
       // Default window dimensions
-      width: 600,
+      width: 590,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "info" }]
     });
@@ -27,9 +27,17 @@ export class CyberpunkActorSheet extends ActorSheet {
     // Prepare items.
     if (this.actor.data.type == 'character') {
       this._prepareCharacterItems(data);
+      this._addWoundTrack(data);3
     }
 
     return data;
+  }
+
+  _addWoundTrack(sheetData) {
+    // Add localized wound states, excluding uninjured. All non-mortal, plus mortal
+    const nonMortals = ["Light", "Critical", "Serious"].map(e => game.i18n.localize("CYBERPUNK."+e));
+    const mortals = Array(7).fill().map((_,index) => game.i18n.format("CYBERPUNK.Mortal", {mortality: index}));
+    sheetData.woundStates = nonMortals.concat(mortals);
   }
 
   /**

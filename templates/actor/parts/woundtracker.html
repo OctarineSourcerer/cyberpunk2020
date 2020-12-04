@@ -1,12 +1,14 @@
 <div class="wound-tracker">
-    {{!-- Uninjured --}}
+    {{!-- 10 wound states - Light, Serious, Critical, Mortal0-6 --}}
+    {{#each woundStates}}
     <div class="wound-state">
-        <div class="damage-unfilled"></div>
+        <div class="wound-state-label">{{this}}</div>
+        <div class="damageholder">
+            <div class="leftmost damage unfilled"></div>
+            <div class="damage unfilled"></div>
+            <div class="damage unfilled"></div>
+            <div class="rightmost damage unfilled"></div>
+        </div>
     </div>
-
-    <div class="wound-state">
-        {{#repeat 4}}
-            <div class="damage-unfilled"></div>
-        {{/repeat}}
-    </div>
+    {{/each}}
 </div>

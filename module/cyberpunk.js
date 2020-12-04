@@ -37,11 +37,11 @@ Hooks.once('init', async function () {
     })
 
     // Repeat what's inside it X times.
-    // Useful for testing the damage track. Use as, for example, {{#loop 4}}whatyouwanttorepeat{{/loop}}
+    // Useful for testing the damage track. Use as, for example, {{#repeat 4}}whatyouwanttorepeat{{/repeat}}
     Handlebars.registerHelper("repeat", function(amount, options) {
         var result = "";
         for (var i = 0; i < amount; i++) {
-            result = result + options.fn(this);
+            result = result + options.fn({i: i});
         }
         return result;
     });

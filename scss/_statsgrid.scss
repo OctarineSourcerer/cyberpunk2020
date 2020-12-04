@@ -4,6 +4,7 @@ $stats-divider-thickness: 1px;
 .statsgrid {
     display: flex;
     flex-direction: row;
+    margin-bottom: 5px;
 }
 
 div.stat {
@@ -11,6 +12,7 @@ div.stat {
     flex-direction: column;
     margin-right: 3px;
     width: 3em;
+    flex-grow: 1;
 
     div {
         text-align: center;

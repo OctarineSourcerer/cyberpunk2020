@@ -74,6 +74,8 @@ div.field-label {
 .profile-img {
     max-height: 200px;
     flex-shrink: 2;
+    flex-grow: 0;
+    width:20%;
     margin-right: 4px;
 }
 
