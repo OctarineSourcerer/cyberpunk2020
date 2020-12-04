@@ -1,3 +1,5 @@
+$damage-colour: firebrick;
+
 .wound-tracker {
     display: flex;
     flex-wrap: wrap;
@@ -36,6 +38,6 @@
     .damage.leftmost { border-left-width: 0px; }
     .damage.rightmost { border-right-width: 0px; }
 
-    .filled {}
-    .unfilled {}
+    .filled { background-color: $damage-colour; }
+    .unfilled { background-color: transparent; }
 }

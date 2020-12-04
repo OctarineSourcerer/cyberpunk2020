@@ -1,7 +1,3 @@
-#handle, #role {
-  width: 30%;
-}
-
 .cyberpunk section.window-content {
   font-family: "Noto Sans", sans-serif;
   font-weight: bold;
@@ -15,13 +11,16 @@
 .sheet header.cyberheader > div {
   margin-bottom: 5px;
 }
-.sheet header.cyberheader .topstats {
+.sheet header.cyberheader .topinfo {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-content: flex-start;
   align-items: flex-start;
   flex-wrap: nowrap;
+}
+.sheet header.cyberheader .topinfo .handle, .sheet header.cyberheader .topinfo .role {
+  width: 30%;
 }
 
 .field {
@@ -77,12 +76,18 @@ div.field-label {
   margin-bottom: 5px;
 }
 
+.mainstats {
+  display: flex;
+  flex-direction: column;
+}
+
 div.stat {
   display: flex;
   flex-direction: column;
   margin-right: 3px;
-  width: 3em;
+  width: 2em;
   flex-grow: 1;
+  flex-shrink: 1;
 }
 div.stat div {
   text-align: center;
@@ -117,6 +122,26 @@ div.stat .stat-temp {
   border-right-style: solid;
   border-right-color: black;
   border-width: 2px;
+}
+
+.derivedrow {
+  margin-top: -3px;
+  margin-bottom: 5px;
+}
+
+div.statderive {
+  display: flex;
+  align-items: baseline;
+  height: 100%;
+}
+div.statderive .label {
+  background-color: black;
+  color: whitesmoke;
+  font-size: small;
+  padding: 2px;
+}
+div.statderive .value {
+  font-size: small;
 }
 
 .wound-tracker {
@@ -160,6 +185,12 @@ div.stat .stat-temp {
 }
 .wound-tracker .damage.rightmost {
   border-right-width: 0px;
+}
+.wound-tracker .filled {
+  background-color: firebrick;
+}
+.wound-tracker .unfilled {
+  background-color: transparent;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */

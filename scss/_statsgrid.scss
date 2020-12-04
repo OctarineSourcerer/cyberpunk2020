@@ -7,12 +7,18 @@ $stats-divider-thickness: 1px;
     margin-bottom: 5px;
 }
 
+.mainstats {
+    display: flex;
+    flex-direction: column;
+}
+
 div.stat {
     display: flex;
     flex-direction: column;
     margin-right: 3px;
-    width: 3em;
+    width: 2em;
     flex-grow: 1;
+    flex-shrink: 1;
 
     div {
         text-align: center;
@@ -48,5 +54,26 @@ div.stat {
         border-right-style: solid;
         border-right-color: $text-colour;
         border-width: 2px;
+    }
+}
+
+.derivedrow {
+    margin-top: -3px;
+    margin-bottom: 5px;
+}
+
+div.statderive {
+    display: flex;
+    align-items: baseline;
+    height: 100%;
+
+    .label {
+        background-color: $text-colour;
+        color: $text-colour-inverted;
+        font-size: small;
+        padding: 2px;
+    }
+    .value {
+        font-size: small;
     }
 }

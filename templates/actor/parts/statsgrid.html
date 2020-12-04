@@ -1,14 +1,40 @@
 {{!-- Container for all the stats --}}
-<div class="statsgrid">
-    {{#each data.stats as |stat key|}}
-    <div class="stat">
-        <div class="field-label">{{localize (localizeStat key)}}</div>
-        <div class="flexrow">
-            <div class="stat-base">{{stat.base}}</div>
-            <div class="stat-mod">+</div>
-            <div class="stat-temp">{{stat.tempMod}}</div>
+<div class="flexcol">
+    <div class="statsgrid">
+        {{#each data.stats as |stat key|}}
+        <div class="stat">
+            <div class="field-label">{{localize (localizeStat key)}}</div>
+            <div class="flexrow">
+                <div class="stat-base">{{stat.base}}</div>
+                <div class="stat-mod">+</div>
+                <div class="stat-temp">{{stat.tempMod}}</div>
+            </div>
+            <div class="stat-total">{{stat.total}}</div>
         </div>
-        <div class="stat-total">{{stat.total}}</div>
+        {{/each}}
     </div>
-    {{/each}}
+    
+    {{!-- Run, Leap --}}
+    <div class="derivedrow">
+        <div class="statderive">
+            <div class="label">BTM</div>
+            <div class="value">{{data.stats.bt.modifier}}</div>
+        </div>
+        <div class="statderive">
+            <div class="label">LIFT</div>
+            <div class="value">{{data.stats.bt.lift}}</div>
+        </div>
+        <div class="statderive">
+            <div class="label">CARRY</div>
+            <div class="value">{{data.stats.bt.carry}}</div>
+        </div>
+        <div class="statderive">
+            <div class="label">RUN</div>
+            <div class="value">{{data.stats.ma.run}}</div>
+        </div>
+        <div class="statderive">
+            <div class="label">LEAP</div>
+            <div class="value">{{data.stats.ma.leap}}</div>
+        </div>
+    </div>
 </div>
