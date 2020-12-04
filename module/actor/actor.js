@@ -43,7 +43,7 @@ export class CyberpunkActor extends Actor {
     move.run = move.total * 3;
     move.leap = Math.floor(move.total / 4); 
 
-    const body = stats.body;
+    const body = stats.bm;
     body.carry = body.total * 10;
     body.lift = body.total * 40;
     body.modifier = CyberpunkActor.btm(body.total);
