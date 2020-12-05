@@ -156,6 +156,9 @@ div.statderive .value {
   width: 3em;
   flex-grow: 2;
 }
+div.statderive .value.rightborder {
+  border-right-width: 2px;
+}
 div.statderive + .statderive.liftstat {
   padding-right: 15px;
 }
