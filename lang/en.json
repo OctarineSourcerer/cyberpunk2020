@@ -19,6 +19,12 @@
     "CYBERPUNK.Bt": "B.T",
     "CYBERPUNK.Emp": "EMP",
 
+    "CYBERPUNK.BTmod": "BTM",
+    "CYBERPUNK.Carry": "Carry",
+    "CYBERPUNK.Lift": "Lift",
+    "CYBERPUNK.Run": "Run",
+    "CYBERPUNK.Leap": "Leap",
+
     "CYBERPUNK.Uninjured": "Uninjured",
     "CYBERPUNK.Light": "Light",
     "CYBERPUNK.Critical": "Critical",
