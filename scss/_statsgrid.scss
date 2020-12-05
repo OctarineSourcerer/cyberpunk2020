@@ -15,10 +15,12 @@ $stats-divider-thickness: 1px;
 div.stat {
     display: flex;
     flex-direction: column;
-    margin-right: 3px;
     width: 2em;
     flex-grow: 1;
     flex-shrink: 1;
+    +.stat {
+        margin-left: 3px;
+    }
 
     div {
         text-align: center;
@@ -91,7 +93,8 @@ div.statderive {
         border-right-width: 2px;
     }
 
+    // For gap between BT and MA-derived stats
     +.statderive.liftstat {
-        padding-right: 15px;
+        padding-right: 5px;
     }
 }
