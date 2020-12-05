@@ -84,5 +84,10 @@ div.field-label {
     flex-basis: 2;
 }
 
+// Used in the derived stats row - no right borders means consistent chaining, but the end ones do need to be given a border
+.rightborder {
+    border-right-width: 2px;
+}
+
 @import "statsgrid";
 @import "woundtracker";

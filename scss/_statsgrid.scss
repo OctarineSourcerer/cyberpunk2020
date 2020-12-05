@@ -59,21 +59,34 @@ div.stat {
 
 .derivedrow {
     margin-top: -3px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    display: flex;
 }
 
 div.statderive {
     display: flex;
     align-items: baseline;
     height: 100%;
+    flex-grow: 1;
 
     .label {
         background-color: $text-colour;
         color: $text-colour-inverted;
         font-size: small;
-        padding: 2px;
+        padding: 2px 5px;
     }
     .value {
         font-size: small;
+        border-width: 2px 0px 2px 0px;
+        border-style: solid;
+        border-color: black;
+        padding-left: 3px;
+        padding-right: 3px;
+        width: 3em;
+        flex-grow: 2;
+    }
+
+    +.statderive.liftstat {
+        padding-right: 15px;
     }
 }
