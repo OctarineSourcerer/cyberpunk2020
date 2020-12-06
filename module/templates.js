@@ -7,7 +7,8 @@ export const preloadHandlebarsTemplates = async function() {
     // Path to partial from foundry path. For cyberpunk, is "systems/cyberpunk2020/templates/actor/parts/___.html"
     return loadTemplates([
         "systems/cyberpunk2020/templates/actor/parts/statsgrid.html",
-        "systems/cyberpunk2020/templates/actor/parts/woundtracker.html"
+        "systems/cyberpunk2020/templates/actor/parts/woundtracker.html",
+        "systems/cyberpunk2020/templates/actor/parts/skills.html"
     ]);
   };
   

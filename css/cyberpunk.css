@@ -74,6 +74,14 @@ div.field-label {
   flex-basis: 2;
 }
 
+.sheet-body .tab {
+  height: 100%;
+}
+
+.editor {
+  height: 100%;
+}
+
 .statsgrid {
   display: flex;
   flex-direction: row;

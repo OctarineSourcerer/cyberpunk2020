@@ -13,7 +13,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       // Default window dimensions
       width: 590,
       height: 600,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "info" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
     });
   }
 

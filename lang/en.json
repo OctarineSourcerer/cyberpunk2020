@@ -23,5 +23,7 @@
     "CYBERPUNK.Light": "Light",
     "CYBERPUNK.Critical": "Critical",
     "CYBERPUNK.Serious": "Serious",
-    "CYBERPUNK.Mortal": "Mortal {mortality}"
+    "CYBERPUNK.Mortal": "Mortal {mortality}",
+
+    "CYBERPUNK.Life": "Life"
 }
