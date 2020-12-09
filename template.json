@@ -168,49 +168,47 @@
 						"chipped": false,
 						"stat": "cool"
 					},
-					"emp": {
-						"humanPerc": {
-							"value": 0,
-							"ip": 0,
-							"chipped": false,
-							"stat": "body"
-						},
-						"interview": {
-							"value": 0,
-							"ip": 0,
-							"chipped": false,
-							"stat": "body"
-						},
-						"leadership": {
-							"value": 0,
-							"ip": 0,
-							"chipped": false,
-							"stat": "body"
-						},
-						"seduction": {
-							"value": 0,
-							"ip": 0,
-							"chipped": false,
-							"stat": "body"
-						},
-						"social": {
-							"value": 0,
-							"ip": 0,
-							"chipped": false,
-							"stat": "body"
-						},
-						"persuasion": {
-							"value": 0,
-							"ip": 0,
-							"chipped": false,
-							"stat": "body"
-						},
-						"perform": {
-							"value": 0,
-							"ip": 0,
-							"chipped": false,
-							"stat": "body"
-						}
+					"humanPerc": {
+						"value": 0,
+						"ip": 0,
+						"chipped": false,
+						"stat": "body"
+					},
+					"interview": {
+						"value": 0,
+						"ip": 0,
+						"chipped": false,
+						"stat": "body"
+					},
+					"leadership": {
+						"value": 0,
+						"ip": 0,
+						"chipped": false,
+						"stat": "body"
+					},
+					"seduction": {
+						"value": 0,
+						"ip": 0,
+						"chipped": false,
+						"stat": "body"
+					},
+					"social": {
+						"value": 0,
+						"ip": 0,
+						"chipped": false,
+						"stat": "body"
+					},
+					"persuasion": {
+						"value": 0,
+						"ip": 0,
+						"chipped": false,
+						"stat": "body"
+					},
+					"perform": {
+						"value": 0,
+						"ip": 0,
+						"chipped": false,
+						"stat": "body"
 					},
 					"account": {
 						"value": 0,
