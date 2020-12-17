@@ -46,537 +46,541 @@
 			},
 			"skills": {
 				"skills": {
-					"auth": {
+					"Authority": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"charLead": {
+					"CharismaticLeadership": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"combatSense": {
+					"CombatSense": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"cred": {
+					"Credibility": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"family": {
+					"Family": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"interface": {
+					"Interface": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"juryRig": {
+					"JuryRig": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"medtech": {
+					"MedicalTech": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"resources": {
+					"Resources": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
-					"streetdeal": {
+					"Streetdeal": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "special"
 					},
 
-					"groom": {
+					"PersonalGrooming": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "attr"
 					},
-					"wardrobe": {
+					"WardrobeStyle": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "attr"
 					},
-					"endurance": {
+					"Endurance": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"strFeat": {
+					"StrengthFeat": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"swim": {
+					"Swim": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
 
-					"interrogation": {
+					"Interrogation": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "cool"
 					},
-					"intimidate": {
+					"Intimidate": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "cool"
 					},
-					"oratory": {
+					"Oratory": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "cool"
 					},
-					"resist": {
+					"ResistTortureDrugs": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "cool"
 					},
-					"streetwise": {
+					"Streetwise": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "cool"
 					},
-					"humanPerc": {
+					"HumanPerception": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"interview": {
+					"Interview": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"leadership": {
+					"Leadership": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"seduction": {
+					"Seduction": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"social": {
+					"Social": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"persuasion": {
+					"PersuasionFastTalk": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"perform": {
+					"Perform": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "body"
 					},
-					"account": {
+					"Accounting": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"anthrop": {
+					"Anthropology": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"aware": {
+					"AwarenessNotice": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"biology": {
+					"Biology": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"botany": {
+					"Botany": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"chemistry": {
+					"Chemistry": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"composition": {
+					"Composition": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"diagnose": {
+					"DiagnoseIllness": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"edu": {
+					"EducationGeneralKnowledge": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"expert": {},
-					"gamble": {
+					"Expert": {},
+					"Gamble": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"geology": {
+					"Geology": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"hide": {
+					"HideEvade": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"history": {
+					"History": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"knowLang": {},
-					"libSearch": {
+					"Language": {},
+					"LibrarySearch": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"maths": {
+					"Mathematics": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"physics": {
+					"Physics": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"program": {
+					"Programming": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"shadow": {
+					"ShadowTrack": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"stock": {
+					"StockMarket": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"sysKnow": {
+					"SystemKnowledge": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"teach": {
+					"Teaching": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"wilderness": {
+					"WildernessSurvival": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"zoology": {
+					"Zoology": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"stat": "int"
 					},
-					"archery": {
+					"Archery": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"athletics": {
+					"Athletics": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"brawl": {
+					"Brawling": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"dance": {
+					"Dance": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"dodge": {
+					"DodgeEscape": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"drive": {
+					"Driving": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"fence": {
+					"Fencing": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"handgun": {
+					"Handgun": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"hvyWeap": {
+					"HeavyWeapons": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"martial": {
-						"aikido": {
+					"MartialArts": {
+						"group": true,
+						"translationPrefix": "Martial",
+						"Aikido": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"animalKungFu": {
+						"AnimalKungFu": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"boxing": {
+						"Boxing": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"capoeira": {
+						"Capoeira": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"choi": {
+						"ChoiLiFut": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"judo": {
+						"Judo": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"karate": {
+						"Karate": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"savate": {
+						"Savate": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"taekwon": {
+						"TaeKwonDo": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"thaikick": {
+						"ThaiKickBoxing": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"wrestle": {
+						"Wrestling": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						}
 					},
-					"melee": {
+					"Melee": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"motorcycle": {
+					"Motorcycle": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"operateHvy": {
+					"OperateHeavyMachinery": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"pilot": {
-						"gyro": {
+					"Pilot": {
+						"group": true,
+						"translationPrefix": "Pilot",
+						"Gyro": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"fixedWing": {
+						"FixedWing": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"dirigible": {
+						"Dirigible": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						},
-						"vectThrust": {
+						"VectoredThrustVehicle": {
 							"value": 0,
 							"ip": 0,
 							"chipped": false,
 							"skill": "ref"
 						}
 					},
-					"rifle": {
+					"Rifle": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"stealth": {
+					"Stealth": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"submachine": {
+					"Submachinegun": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "ref"
 					},
-					"aero": {
+					"AeroTech": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"av": {
+					"AVTech": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"basic": {
+					"BasicTech": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"cryotank": {
+					"CryotankOperation": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"deckdesign": {
+					"CyberdeckDesign": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"cybertech": {
+					"Cybertech": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"demo": {
+					"Demolitions": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"disguise": {
+					"Disguise": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
@@ -588,67 +592,67 @@
 						"chipped": false,
 						"skill": "tech"
 					},
-					"elecSecurity": {
+					"ElectronicSecurity": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"firstAid": {
+					"FirstAid": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"forgery": {
+					"Forgery": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"gyro": {
+					"GyroTech": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"paintDraw": {
+					"PaintOrDraw": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"photoFilm": {
+					"PhotoFilm": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"pharma": {
+					"Pharmaceuticals": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"pickLock": {
+					"PickLock": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"pickPocket": {
+					"PickPocket": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"playInstrument": {
+					"PlayInstrument": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
 						"skill": "tech"
 					},
-					"weaponsmith": {
+					"Weaponsmith": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
