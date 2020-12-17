@@ -586,7 +586,7 @@
 						"chipped": false,
 						"skill": "tech"
 					},
-					"electronics": {
+					"Electronics": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
