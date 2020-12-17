@@ -1,0 +1,17 @@
+{{!-- Skills tab contents --}}
+
+{{!-- Search bar --}}
+<div class="flexrow">
+    <div class="skillsearch"></div>
+    <div class="skillsort"></div>
+</div>
+
+{{!-- Actual skills --}}
+<div class="skill-list">
+    {{#each data.skills}}
+        <div class="skill">
+            <div class="field-label">{{localize (skillRef @key)}}</div>
+            {{!-- <div>{{this.chipped}}</div> --}}
+        </div>
+    {{/each}}
+</div>

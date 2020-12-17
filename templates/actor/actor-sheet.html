@@ -42,7 +42,7 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body">
         <div class="tab skills flexcol" data-group="primary" data-tab="skills">
-             
+            {{> "systems/cyberpunk2020/templates/actor/parts/skills.html"}}
         </div>
 
         {{!-- Biography Tab --}}
@@ -52,6 +52,7 @@
                 {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
             </div>
         </div>
+
         
     </section>
 </form>

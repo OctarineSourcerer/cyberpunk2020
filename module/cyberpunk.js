@@ -45,6 +45,9 @@ Hooks.once('init', async function () {
         }
         return result;
     });
+    Handlebars.registerHelper("skillRef", function(skill) {
+        return "CYBERPUNK.Skill" + skill;
+    });
 
     // Register and preload templates with Foundry. See templates.js for usage
     preloadHandlebarsTemplates();

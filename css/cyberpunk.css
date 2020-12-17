@@ -226,4 +226,26 @@ div.statderive + .statderive.liftstat {
   background-color: transparent;
 }
 
+.skill-list {
+  display: flex;
+  flex-direction: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-right: -4px;
+}
+
+.skill {
+  display: flex;
+  flex-grow: 1;
+  width: 40%;
+  border-style: solid;
+  border-width: 2px;
+  margin-bottom: 4px;
+  margin-right: 4px;
+}
+.skill > .field-label {
+  padding: 3px;
+  flex-grow: 1;
+}
+
 /*# sourceMappingURL=cyberpunk.css.map */
