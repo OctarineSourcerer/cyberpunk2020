@@ -45,6 +45,7 @@
 				}
 			},
 			"skills": {
+				"ip": 0,
 				"skills": {
 					"Authority": {
 						"value": 0,

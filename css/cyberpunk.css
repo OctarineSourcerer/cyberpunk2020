@@ -238,14 +238,23 @@ div.statderive + .statderive.liftstat {
   display: flex;
   flex-grow: 1;
   width: 40%;
+  min-width: 185px;
   border-style: solid;
   border-width: 2px;
   margin-bottom: 4px;
   margin-right: 4px;
 }
-.skill > .field-label {
+.skill > * {
   padding: 3px;
+}
+.skill > .field-label {
   flex-grow: 1;
+  padding: 3px;
+}
+.skill > .skill-value {
+  color: whitesmoke;
+  background: black;
+  font-variant: small-caps;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */

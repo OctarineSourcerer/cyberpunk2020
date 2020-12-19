@@ -12,6 +12,8 @@
     display: flex;
     flex-grow: 1;
     width: 40%;
+    // Lets the skills go to a single column when narrow enough
+    min-width: 185px;
 
     border-style: solid;
     border-width: 2px;
@@ -19,8 +21,17 @@
     margin-bottom: 4px;
     margin-right: 4px;
 
-    >.field-label {
+    >* {
         padding: 3px;
+    }
+
+    >.field-label {
         flex-grow: 1;
+        padding: 3px;
+    }
+    >.skill-value {
+        color: $text-colour-inverted;
+        background: $text-colour;
+        font-variant: small-caps;
     }
 }

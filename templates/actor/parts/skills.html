@@ -11,7 +11,8 @@
     {{#each data.skills}}
         <div class="skill">
             <div class="field-label">{{localize (skillRef @key)}}</div>
-            {{!-- <div>{{this.chipped}}</div> --}}
+            <div class="skill-value">{{this.value}}</div>
+            <div></div>
         </div>
     {{/each}}
 </div>
