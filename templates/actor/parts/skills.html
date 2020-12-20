@@ -11,8 +11,14 @@
     {{#each data.skills}}
         <div class="skill">
             <div class="field-label">{{localize (skillRef @key)}}</div>
+            <div class="flex-pad field-label"></div>
+            {{!-- <div class="chip"></div> --}}
+            <div class="icon-holder">
+                <img class="chip-icon inactive" src="systems/cyberpunk2020/img/chip.png" alt="chip">
+                {{!-- <div>aa</div> --}}
+            </div>
+            
             <div class="skill-value">{{this.value}}</div>
-            <div></div>
         </div>
     {{/each}}
 </div>

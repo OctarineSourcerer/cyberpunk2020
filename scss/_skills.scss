@@ -25,13 +25,30 @@
         padding: 3px;
     }
 
+    
     >.field-label {
-        flex-grow: 1;
         padding: 3px;
     }
     >.skill-value {
-        color: $text-colour-inverted;
-        background: $text-colour;
+        padding-left: 5px;
+        padding-right: 5px;
+        color: $text-colour;
         font-variant: small-caps;
+        align-self:center;
+    }
+    .icon-holder { 
+        background-color: $text-colour;
+        padding: 0px;
+        display: contents;
+        display: flex;
+        align-items: center;
+        padding-right: 3px;
+    }
+    img.chip-icon {
+        // This just has to be less than the initial height of the bars...
+        height:1.5em;
+        width: auto;
+        border:0px;
+        border-radius: 0px;
     }
 }

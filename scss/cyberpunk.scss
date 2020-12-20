@@ -96,6 +96,15 @@ div.field-label {
     height: 100%;
 }
 
+.flex-pad {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.inactive {
+    filter: opacity(0.35);
+}
+
 @import "statsgrid";
 @import "woundtracker";
 @import "skills";

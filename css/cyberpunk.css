@@ -82,6 +82,15 @@ div.field-label {
   height: 100%;
 }
 
+.flex-pad {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.inactive {
+  filter: opacity(0.35);
+}
+
 .statsgrid {
   display: flex;
   flex-direction: row;
@@ -248,13 +257,28 @@ div.statderive + .statderive.liftstat {
   padding: 3px;
 }
 .skill > .field-label {
-  flex-grow: 1;
   padding: 3px;
 }
 .skill > .skill-value {
-  color: whitesmoke;
-  background: black;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: black;
   font-variant: small-caps;
+  align-self: center;
+}
+.skill .icon-holder {
+  background-color: black;
+  padding: 0px;
+  display: contents;
+  display: flex;
+  align-items: center;
+  padding-right: 3px;
+}
+.skill img.chip-icon {
+  height: 1.5em;
+  width: auto;
+  border: 0px;
+  border-radius: 0px;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */
