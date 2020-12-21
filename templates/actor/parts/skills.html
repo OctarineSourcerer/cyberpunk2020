@@ -1,0 +1,22 @@
+{{!-- Skills tab contents --}}
+
+{{!-- Search bar --}}
+<div class="flexrow">
+    <input class="skillsearch"></input>
+    <div class="skillsort"></div>
+</div>
+
+{{!-- Actual skills --}}
+<div class="skill-list">
+    {{#each data.skills}}
+        <div class="skill">
+            <div class="field-label"> {{localize (skillRef @key)}}</div>
+            <div class="flex-pad field-label"></div>
+            <div class="icon-holder">
+                <img class="chip-icon {{#unless chipped}}inactive{{/unless}}" src="systems/cyberpunk2020/img/chip.png" alt="chip">
+            </div>
+            
+            <div class="skill-value">{{this.value}}</div>
+        </div>
+    {{/each}}
+</div>

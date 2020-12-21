@@ -32,21 +32,28 @@
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="info">{{localize 'CYBERPUNK.ActorName'}}</a>
         <a class="item" data-tab="skills">{{localize 'CYBERPUNK.TabSkills'}}</a>
         <a class="item" data-tab="combat">{{localize 'CYBERPUNK.TabCombat'}}</a>
         <a class="item" data-tab="cyberware">{{localize 'CYBERPUNK.TabCyber'}}</a>
         <a class="item" data-tab="gear">{{localize 'CYBERPUNK.TabGear'}}</a>
+        <a class="item" data-tab="life">{{localize 'CYBERPUNK.Life'}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-
-        {{!-- Biography Tab --}}
-        <div class="tab biography" data-group="primary" data-tab="info">
-            {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+        <div class="tab skills flexcol" data-group="primary" data-tab="skills">
+            {{> "systems/cyberpunk2020/templates/actor/parts/skills.html"}}
         </div>
 
+        {{!-- Biography Tab --}}
+        <div class="tab life flexcol" data-group="primary" data-tab="life">
+            Let's try this again!
+            <div class="biography">
+                {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+            </div>
+        </div>
+
+        
     </section>
 </form>
 

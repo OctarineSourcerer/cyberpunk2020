@@ -74,6 +74,23 @@ div.field-label {
   flex-basis: 2;
 }
 
+.sheet-body .tab {
+  height: 100%;
+}
+
+.editor {
+  height: 100%;
+}
+
+.flex-pad {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.inactive {
+  filter: opacity(0.35);
+}
+
 .statsgrid {
   display: flex;
   flex-direction: row;
@@ -216,6 +233,52 @@ div.statderive + .statderive.liftstat {
 }
 .wound-tracker .unfilled {
   background-color: transparent;
+}
+
+.skill-list {
+  display: flex;
+  flex-direction: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-right: -4px;
+}
+
+.skill {
+  display: flex;
+  flex-grow: 1;
+  width: 40%;
+  min-width: 185px;
+  border-style: solid;
+  border-width: 2px;
+  margin-bottom: 4px;
+  margin-right: 4px;
+}
+.skill > * {
+  padding: 3px;
+}
+.skill > .field-label {
+  padding: 3px;
+}
+.skill > .skill-value {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: black;
+  font-variant: small-caps;
+  align-self: center;
+}
+.skill .icon-holder {
+  background-color: black;
+  padding: 0px;
+  display: contents;
+  display: flex;
+  align-items: center;
+  padding-right: 3px;
+}
+.skill img.chip-icon {
+  height: 1.5em;
+  width: auto;
+  border: 0px;
+  border-radius: 0px;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */

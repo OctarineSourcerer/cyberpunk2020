@@ -1,0 +1,53 @@
+.skill-list {
+    display: flex;
+    flex-direction: wrap;
+    flex-wrap: wrap;
+    width: 100%;
+
+    // Compensate for rightmost items having a 3px margin
+    margin-right: -4px;
+}
+
+.skill {
+    display: flex;
+    flex-grow: 1;
+    width: 40%;
+    // Lets the skills go to a single column when narrow enough
+    min-width: 185px;
+
+    border-style: solid;
+    border-width: 2px;
+
+    margin: 0px 2px 4px 2px;
+
+    >* {
+        padding: 3px;
+    }
+
+    
+    >.field-label {
+        padding: 3px;
+    }
+    >.skill-value {
+        padding-left: 5px;
+        padding-right: 5px;
+        color: $text-colour;
+        font-variant: small-caps;
+        align-self:center;
+    }
+    .icon-holder { 
+        background-color: $text-colour;
+        padding: 0px;
+        display: contents;
+        display: flex;
+        align-items: center;
+        padding-right: 3px;
+    }
+    img.chip-icon {
+        // This just has to be less than the initial height of the bars...
+        height:1.5em;
+        width: auto;
+        border:0px;
+        border-radius: 0px;
+    }
+}
