@@ -17,6 +17,6 @@ A snapshot of the sheet in construction:
 
 ![image](https://user-images.githubusercontent.com/6842867/102726466-fdb87d80-4316-11eb-9bd8-5cb9cf6c8ce6.png)
 
-The skills section currently does not reside in the main branch. It'll get there :)
+The sheet currently isn't interactive. Yet ;)
 
 To anyone thinking of contributing, fair warning, I've not yet gotten to removing all the stuff that came in from Boilerplate. Hopefully the commit messages are at least sane though.
