@@ -5,11 +5,11 @@
         <div class="stat">
             <div class="field-label">{{localize (localizeStat key)}}</div>
             <div class="flexrow">
-                <div class="stat-base">{{stat.base}}</div>
+                <input type="number" name="data.stats.{{key}}.base" value="{{stat.base}}" class="stat-base"/>
                 <div class="stat-mod">+</div>
-                <div class="stat-temp">{{stat.tempMod}}</div>
+                <input type="number" name="data.stats.{{key}}.tempMod" value={{stat.tempMod}} class="stat-temp"/>
             </div>
-            <div class="stat-total">{{stat.total}}</div>
+            <div class="stat-total action">{{stat.total}}</div>
         </div>
         {{/each}}
     </div>
@@ -19,23 +19,23 @@
     <div class="derivedrow">
         <div class="statderive">
             <div class="label">{{localize 'CYBERPUNK.BTmod'}}</div>
-            <div class="value">{{data.stats.bt.modifier}}</div>
+            <div class="value not-editable">{{data.stats.bt.modifier}}</div>
         </div>
         <div class="statderive">
             <div class="label">{{localize 'CYBERPUNK.Carry'}}</div>
-            <div class="value">{{data.stats.bt.carry}}</div>
+            <div class="value not-editable">{{data.stats.bt.carry}}</div>
         </div>
         <div class="statderive liftstat">
             <div class="label">{{localize 'CYBERPUNK.Lift'}}</div>
-            <div class="value rightborder">{{data.stats.bt.lift}}</div>
+            <div class="value rightborder not-editable">{{data.stats.bt.lift}}</div>
         </div>
         <div class="statderive">
             <div class="label">{{localize 'CYBERPUNK.Leap'}}</div>
-            <div class="value">{{data.stats.ma.leap}}</div>
+            <div class="value not-editable">{{data.stats.ma.leap}}</div>
         </div>
         <div class="statderive">
             <div class="label">{{localize 'CYBERPUNK.Run'}}</div>
-            <div class="value rightborder">{{data.stats.ma.run}}</div>
+            <div class="value rightborder not-editable">{{data.stats.ma.run}}</div>
         </div>
     </div>
 </div>

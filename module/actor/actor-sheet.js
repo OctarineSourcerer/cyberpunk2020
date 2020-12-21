@@ -27,7 +27,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     // Prepare items.
     if (this.actor.data.type == 'character') {
       this._prepareCharacterItems(data);
-      this._addWoundTrack(data);3
+      this._addWoundTrack(data);
     }
 
     return data;

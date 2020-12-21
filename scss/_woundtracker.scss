@@ -38,11 +38,23 @@ $damage-colour: firebrick;
         border-style: solid;
         border-width: 0px 1px 0px 1px;
         border-color: $text-colour;
+
+        transition: background-color $transition-period;
     }
     .damage + .damage { border-left-width: 0px; }
     .damage.leftmost { border-left-width: 0px; }
     .damage.rightmost { border-right-width: 0px; }
 
-    .filled { background-color: $damage-colour; }
-    .unfilled { background-color: transparent; }
+    .filled { 
+        background-color: $damage-colour;
+        &:hover {
+            background-color: transparent;
+        }
+    }
+    .unfilled { 
+        background-color: transparent;
+        &:hover {
+            background-color: $damage-colour;
+        }
+    }
 }
