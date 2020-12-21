@@ -15,6 +15,8 @@ All rights to Cyberpunk 2020 lie with R. Talsorian games. I don't intend to infr
 
 A snapshot of the sheet in construction:
 
-![image](https://user-images.githubusercontent.com/6842867/100489518-7fe4c600-310c-11eb-8cbd-68d061f05ff6.png)
+![image](https://user-images.githubusercontent.com/6842867/102726466-fdb87d80-4316-11eb-9bd8-5cb9cf6c8ce6.png)
+
+The sheet currently isn't interactive. Yet ;)
 
 To anyone thinking of contributing, fair warning, I've not yet gotten to removing all the stuff that came in from Boilerplate. Hopefully the commit messages are at least sane though.
