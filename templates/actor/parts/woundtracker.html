@@ -4,9 +4,9 @@
     <div class="wound-state">
         <div class="wound-state-label">{{this}}</div>
         <div class="damageholder">
-            {{#repeat 4}}
-                <div class="damage{{#if (equals i 1)}} leftmost{{/if}}{{#if (equals i 4)}} rightmost{{/if}}{{#if (isWound @key i ../../data.damage)}} filled{{/if}}"></div>
-            {{/repeat}}
+            {{#damageBoxes @key ../data.damage}}
+                <div class="{{classes}}"></div>
+            {{/damageBoxes}}
         </div>
     </div>
     {{/each}}

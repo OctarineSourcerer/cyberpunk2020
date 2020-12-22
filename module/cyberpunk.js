@@ -54,10 +54,26 @@ Hooks.once('init', async function () {
     // Woundstate: 0 for light, 1 for serious, etc
     // It's a little unintuitive, but handlebars loops start at 0, and that's our first would state
     // Damage: Which damage box in the woundstate - 1-4, as each has 4 boxes
-    Handlebars.registerHelper("isWound", function(woundState, boxNo, damage) {
+    Handlebars.registerHelper("damageBoxes", function(woundState, damage, options) {
         const woundsPerState = 4;
         const previousBoxes = woundState * woundsPerState;
-        return damage >= (previousBoxes + boxNo);
+        let ret = [];
+        for(let boxNo = 1; boxNo <= woundsPerState; boxNo++) {
+            const thisWound = previousBoxes + boxNo;
+            let classes = `damage dmg${thisWound}`;
+            if(boxNo === 1) {
+                classes += " leftmost"
+            }
+            else if (boxNo === woundsPerState) {
+                classes += " rightmost"
+            }
+    
+            if(damage >= thisWound) {
+                classes += " filled"
+            }
+            ret += options.fn({classes: classes, woundNo: thisWound});
+        }
+        return ret;
     });
 
     // Register and preload templates with Foundry. See templates.js for usage
