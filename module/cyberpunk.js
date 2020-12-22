@@ -53,13 +53,14 @@ Hooks.once('init', async function () {
     });
     // Woundstate: 0 for light, 1 for serious, etc
     // It's a little unintuitive, but handlebars loops start at 0, and that's our first would state
-    // Damage: Which damage box in the woundstate - 1-4, as each has 4 boxes
+    // Damage: How much damage the character has taken. Actor.data.data.damage.
+    // Provides within its context classes, and the current wound
     Handlebars.registerHelper("damageBoxes", function(woundState, damage, options) {
         const woundsPerState = 4;
         const previousBoxes = woundState * woundsPerState;
         let ret = [];
         for(let boxNo = 1; boxNo <= woundsPerState; boxNo++) {
-            const thisWound = previousBoxes + boxNo;
+            let thisWound = previousBoxes + boxNo;
             let classes = `damage dmg${thisWound}`;
             if(boxNo === 1) {
                 classes += " leftmost"
@@ -70,6 +71,11 @@ Hooks.once('init', async function () {
     
             if(damage >= thisWound) {
                 classes += " filled"
+            }
+            else { classes += " unfilled" }
+            // When the wound box is filled, make clicking it again essentially "deselect" that wound
+            if(damage == thisWound) {
+                thisWound -= 1;
             }
             ret += options.fn({classes: classes, woundNo: thisWound});
         }

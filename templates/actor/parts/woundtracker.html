@@ -1,11 +1,12 @@
 <div class="wound-tracker">
     {{!-- 10 wound states - Light, Serious, Critical, Mortal0-6 --}}
-    {{#each woundStates}}
+    {{#each woundStates as |stateName stateNo|}}
     <div class="wound-state">
-        <div class="wound-state-label">{{this}}</div>
+        <div class="wound-state-label">{{stateName}}</div>
         <div class="damageholder">
-            {{#damageBoxes @key ../data.damage}}
-                <div class="{{classes}}"></div>
+            {{!-- damageBoxes gives context. WoundNo is which wound, classes are mix of  --}}
+            {{#damageBoxes stateNo ../data.damage}}
+                <input type="radio" name="data.damage" value="{{woundNo}}" class="{{classes}}">
             {{/damageBoxes}}
         </div>
     </div>

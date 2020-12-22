@@ -229,6 +229,16 @@ div.statderive + .statderive.liftstat {
   height: 0.4em;
 }
 .wound-tracker .damage {
+  border: 0 none;
+  border-radius: 0px;
+  padding: unset;
+  height: unset;
+  min-width: unset;
+  font: inherit;
+  position: unset;
+  top: unset;
+  margin: unset;
+  -webkit-appearance: unset;
   height: 100%;
   width: 1.5em;
   flex-grow: 1;
@@ -236,6 +246,12 @@ div.statderive + .statderive.liftstat {
   border-width: 0px 1px 0px 1px;
   border-color: black;
   transition: background-color 0.25s;
+}
+.wound-tracker .damage:checked {
+  filter: none;
+}
+.wound-tracker .damage:hover {
+  background-color: rgba(178, 34, 34, 0.5);
 }
 .wound-tracker .damage + .damage {
   border-left-width: 0px;
@@ -249,14 +265,8 @@ div.statderive + .statderive.liftstat {
 .wound-tracker .filled {
   background-color: firebrick;
 }
-.wound-tracker .filled:hover {
-  background-color: transparent;
-}
 .wound-tracker .unfilled {
   background-color: transparent;
-}
-.wound-tracker .unfilled:hover {
-  background-color: firebrick;
 }
 
 .skill-list {

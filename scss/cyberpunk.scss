@@ -124,6 +124,18 @@ $transition-period: 0.25s;
     font: inherit;
 }
 
+@mixin reset-radio {
+    @include reset-input;
+    position: unset;
+    top: unset;
+    margin: unset;
+    -webkit-appearance: unset;
+
+    &:checked {
+        filter: none;
+    }
+}
+
 @import "statsgrid";
 @import "woundtracker";
 @import "skills";
