@@ -35,18 +35,29 @@ Hooks.once('init', async function () {
     Handlebars.registerHelper('localizeStat', function(str) {
         return "CYBERPUNK." + properCase(str);
     })
+    Handlebars.registerHelper('equals', function(x, y) {
+        return x === y;
+    })
 
-    // Repeat what's inside it X times.
+    // Repeat what's inside it X times. i starts at 1, ends at amount.
     // Useful for testing the damage track. Use as, for example, {{#repeat 4}}whatyouwanttorepeat{{/repeat}}
     Handlebars.registerHelper("repeat", function(amount, options) {
         var result = "";
-        for (var i = 0; i < amount; i++) {
+        for (var i = 1; i <= amount; i++) {
             result = result + options.fn({i: i});
         }
         return result;
     });
     Handlebars.registerHelper("skillRef", function(skill) {
         return "CYBERPUNK.Skill" + skill;
+    });
+    // Woundstate: 0 for light, 1 for serious, etc
+    // It's a little unintuitive, but handlebars loops start at 0, and that's our first would state
+    // Damage: Which damage box in the woundstate - 1-4, as each has 4 boxes
+    Handlebars.registerHelper("isWound", function(woundState, boxNo, damage) {
+        const woundsPerState = 4;
+        const previousBoxes = woundState * woundsPerState;
+        return damage >= (previousBoxes + boxNo);
     });
 
     // Register and preload templates with Foundry. See templates.js for usage
