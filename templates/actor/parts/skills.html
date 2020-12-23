@@ -14,7 +14,7 @@
             <div class="flex-pad field-label"></div>
             <div class="icon-holder">
                 <label class="chip-icon {{#unless skill.chipped}}inactive{{/unless}}">
-                    <input type="checkbox" name="data.skills.{{skillName}}.chipped" value="{{skill.chipped}}"/>
+                    <input type="checkbox" name="data.skills.{{skillName}}.chipped" {{checked skill.chipped}}/>
                 </label>
             </div>
             
