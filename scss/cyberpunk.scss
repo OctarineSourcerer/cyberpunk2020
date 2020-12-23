@@ -121,6 +121,8 @@ $transition-period: 0.25s;
     padding: unset;
     height: unset;
     min-width: unset;
+    -webkit-appearance: unset;
+    background-color: unset;
     font: inherit;
 }
 
@@ -129,7 +131,6 @@ $transition-period: 0.25s;
     position: unset;
     top: unset;
     margin: unset;
-    -webkit-appearance: unset;
 
     &:checked {
         filter: none;

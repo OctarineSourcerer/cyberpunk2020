@@ -8,15 +8,17 @@
 
 {{!-- Actual skills --}}
 <div class="skill-list">
-    {{#each data.skills}}
+    {{#each data.skills as |skill skillName|}}
         <div class="skill">
-            <div class="field-label"> {{localize (skillRef @key)}}</div>
+            <div class="field-label"> {{localize (skillRef skillName)}}</div>
             <div class="flex-pad field-label"></div>
             <div class="icon-holder">
-                <img class="chip-icon {{#unless chipped}}inactive{{/unless}}" src="systems/cyberpunk2020/img/chip.png" alt="chip">
+                <label class="chip-icon {{#unless skill.chipped}}inactive{{/unless}}">
+                    <input type="checkbox" name="data.skills.{{skillName}}.chipped" value="{{skill.chipped}}"/>
+                </label>
             </div>
             
-            <div class="skill-value">{{this.value}}</div>
+            <input class="skill-value" name="data.skills.{{skillName}}.value" value="{{skill.value}}"/>
         </div>
     {{/each}}
 </div>

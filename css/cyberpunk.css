@@ -128,11 +128,14 @@ div.stat div, div.stat input {
   padding: unset;
   height: unset;
   min-width: unset;
+  -webkit-appearance: unset;
+  background-color: unset;
   font: inherit;
   text-align: center;
 }
 div.stat .field-label {
   padding: 5px 0px 5px 0px;
+  background-color: black;
 }
 div.stat .stat-total {
   border-color: black;
@@ -234,11 +237,12 @@ div.statderive + .statderive.liftstat {
   padding: unset;
   height: unset;
   min-width: unset;
+  -webkit-appearance: unset;
+  background-color: unset;
   font: inherit;
   position: unset;
   top: unset;
   margin: unset;
-  -webkit-appearance: unset;
   height: 100%;
   width: 1.5em;
   flex-grow: 1;
@@ -293,11 +297,18 @@ div.statderive + .statderive.liftstat {
   padding: 3px;
 }
 .skill > .skill-value {
-  padding-left: 5px;
-  padding-right: 5px;
+  border: 0 none;
+  border-radius: 0px;
+  padding: unset;
+  height: unset;
+  min-width: unset;
+  -webkit-appearance: unset;
+  background-color: unset;
+  font: inherit;
+  width: 1.5em;
   color: black;
   font-variant: small-caps;
-  align-self: center;
+  text-align: center;
 }
 .skill .icon-holder {
   background-color: black;
@@ -307,11 +318,16 @@ div.statderive + .statderive.liftstat {
   align-items: center;
   padding-right: 3px;
 }
-.skill img.chip-icon {
+.skill .icon-holder input[type=checkbox] {
+  display: none;
+}
+.skill .icon-holder label.chip-icon {
   height: 1.5em;
-  width: auto;
+  width: 1.5em;
   border: 0px;
   border-radius: 0px;
+  background-image: url(../img/chip.png);
+  background-size: contain;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */
