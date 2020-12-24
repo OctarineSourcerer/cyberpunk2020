@@ -118,6 +118,10 @@ $transition-period: 0.25s;
     cursor: not-allowed;
 }
 
+.invisible {
+    display: none;
+}
+
 @mixin reset-input {
     border: 0 none;
     border-radius: 0px;

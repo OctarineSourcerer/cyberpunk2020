@@ -26,11 +26,52 @@ export class CyberpunkActorSheet extends ActorSheet {
 
     // Prepare items.
     if (this.actor.data.type == 'character') {
+      // Give space for temporary stuff. Delete on sheet close?
+      if(data.data.transient == null) {
+        data.data.transient = { skillFilter: "" };
+      }
       this._prepareCharacterItems(data);
       this._addWoundTrack(data);
+      this._filterSkills(data);
     }
 
     return data;
+  }
+
+  _filterSkills(data) {
+    if(data.data.transient.skillFilter == null) {
+      data.data.transient.skillFilter = "";
+    }
+    let upperSearch = data.data.transient.skillFilter.toUpperCase();
+    const fullSkills = data.data.skills;
+
+    // By default, we'll copy the whole list of skills, no filtering
+    let listToFilter = fullSkills;
+    let filterFn = (result, [k,v]) => {
+      result[k] = v;
+      return result;
+    };
+
+    // Only change those defaults if we actually need to filter
+    if(upperSearch !== "") {
+      // If we're searchin', we need to actually filter as we copy
+      filterFn = (result, [k,v]) => {
+        if(k.toUpperCase().includes(upperSearch)) {
+          result[k] = v;
+        }
+        return result;
+      }
+      // If we searched previously and the old search had results, we can filter those instead of the whole lot
+      if(data.data.transient.oldSearch != null 
+        && data.skillDisplayList != null
+        && upperSearch.startsWith(oldSearch)) {
+        listToFilter = data.skillDisplayList;
+      }
+    }
+    // Copy filtered skills to skillDisplayList.
+    data.skillDisplayList = Object
+        .entries(listToFilter)
+        .reduce(filterFn, {});
   }
 
   _addWoundTrack(sheetData) {
@@ -58,6 +99,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     // actorData.___ = different containers
   }
 
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -69,5 +111,7 @@ export class CyberpunkActorSheet extends ActorSheet {
 
     // Find elements with stuff like html.find('.cssClass').click(this.function.bind(this));
     // Bind makes the "this" object in the function this.
+    // html.find('.skill-search').click(this._onItemCreate.bind(this));
+
   }
 }
