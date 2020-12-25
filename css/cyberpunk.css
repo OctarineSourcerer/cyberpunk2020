@@ -299,6 +299,16 @@ div.statderive + .statderive.liftstat {
   flex-grow: 1;
   padding-left: 5px;
 }
+.skill-utils div.search-icon {
+  border: 0px;
+  border-radius: 0px;
+  background-size: contain;
+  height: 1.5em;
+  width: 1.5em;
+  padding: 2px 5px;
+  background-color: black;
+  background-image: url(../img/search.png);
+}
 
 .skill-list {
   display: flex;
@@ -352,12 +362,12 @@ div.statderive + .statderive.liftstat {
   display: none;
 }
 .skill .icon-holder label.chip-icon {
-  height: 1.5em;
-  width: 1.5em;
   border: 0px;
   border-radius: 0px;
-  background-image: url(../img/chip.png);
   background-size: contain;
+  height: 1.5em;
+  width: 1.5em;
+  background-image: url(../img/chip.png);
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */

@@ -144,6 +144,12 @@ $transition-period: 0.25s;
     }
 }
 
+@mixin image-bg {
+    border:0px;
+    border-radius: 0px;
+    background-size: contain;
+}
+
 @import "statsgrid";
 @import "woundtracker";
 @import "skills";
