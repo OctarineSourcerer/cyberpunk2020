@@ -1,23 +1,22 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
-
     {{!-- Sheet Header --}}
     <header class="cyberheader">
         <div class="topinfo">
             <div class="field textfield handle">
-                <div class="field-label">{{localize 'CYBERPUNK.ActorName'}}</div>
-                <input class="field-value" name="name" type="text" value="{{actor.name}}"/>
+                <label for="name" class="field-label">{{localize 'CYBERPUNK.ActorName'}}</label>
+                <input type="text" class="field-value" name="name"  value="{{actor.name}}"/>
             </div>
             <div class="field textfield role">
-                <div class="field-label">{{localize 'CYBERPUNK.Role'}}</div>
-                <input class="field-value" name="role" type="text" value="{{data.role.value}}"/>
+                <label for="data.role.value" class="field-label">{{localize 'CYBERPUNK.Role'}}</label>
+                <input class="field-value" name="data.role.value" type="text" value="{{data.role.value}}"/>
             </div>
             <div class="field age">
-                <div class="field-label">{{localize 'CYBERPUNK.Age'}}</div>
-                <input class="field-value" name="age" type="text" value="{{data.age}}"/>
+                <label for="data.age" class="field-label">{{localize 'CYBERPUNK.Age'}}</label>
+                <input class="field-value" name="data.age" type="text" value="{{data.age}}" data-dtype="Number"/>
             </div>
             <div class="field">
-                <div class="field-label">{{localize 'CYBERPUNK.Points'}}</div>
-                <input class="field-value" name="points" type="text" value="{{data.points}}"/>
+                <label for="data.points" class="field-label">{{localize 'CYBERPUNK.Points'}}</label>
+                <input  type="text" class="field-value" name="data.points" value="{{data.points}}" data-dtype="Number"/>
             </div>
         </div>
 

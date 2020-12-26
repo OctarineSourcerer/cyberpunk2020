@@ -1,4 +1,7 @@
+@use "sass:color";
+
 $damage-colour: firebrick;
+$transition-damage: color.change($damage-colour, $alpha: 0.5);
 
 .wound-tracker {
     display: flex;
@@ -31,6 +34,8 @@ $damage-colour: firebrick;
         height:0.4em;
     }
     .damage {
+        @include reset-radio;
+
         height: 100%;
         width: 1.5em;
         flex-grow: 1;
@@ -38,11 +43,22 @@ $damage-colour: firebrick;
         border-style: solid;
         border-width: 0px 1px 0px 1px;
         border-color: $text-colour;
+
+        transition: background-color $transition-period;
+        &:hover {
+            // Using a half-transparent color for hover means when user for example clears that damage, but hovers, it does not look mistakenly like it is a full box.
+            // May be worth having the transition colour each direction be closer to the destination
+            background-color: $transition-damage;
+        }
     }
     .damage + .damage { border-left-width: 0px; }
     .damage.leftmost { border-left-width: 0px; }
     .damage.rightmost { border-right-width: 0px; }
 
-    .filled { background-color: $damage-colour; }
-    .unfilled { background-color: transparent; }
+    .filled { 
+        background-color: $damage-colour;
+    }
+    .unfilled { 
+        background-color: transparent;
+    }
 }

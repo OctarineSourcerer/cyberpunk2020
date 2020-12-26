@@ -18,15 +18,21 @@ div.stat {
     width: 2em;
     flex-grow: 1;
     flex-shrink: 1;
+    font-weight: bold;
+    
+    border: 0 none;
+
     +.stat {
         margin-left: 3px;
     }
 
-    div {
+    div,input {
+        @include reset-input;
         text-align: center;
     }
     .field-label {
         padding: 5px 0px 5px 0px;
+        background-color: $text-colour;
     }
     .stat-total {
         border-color: $text-colour;
@@ -47,6 +53,7 @@ div.stat {
         font-size: 9pt;
         background: $inactive-colour;
         color: $text-colour-inverted;
+        padding: 0px 1px 0px 1px;
     }
     .stat-temp {
         font-size: 9pt;

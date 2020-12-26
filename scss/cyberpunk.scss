@@ -5,6 +5,8 @@ $font-secondary: "Open Sans ExtraBold", sans-serif;
 $text-colour: black;
 $text-colour-inverted: whitesmoke;
 $inactive-colour: rgb(70, 70, 70);
+// Transition period between colours
+$transition-period: 0.25s;
 
 
 .cyberpunk section.window-content {
@@ -16,6 +18,9 @@ $inactive-colour: rgb(70, 70, 70);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    // Bad header, stop taking up space the tabs should have.
+    flex-grow: 0;
 
     > div {
         margin-bottom: 5px;
@@ -46,7 +51,7 @@ $inactive-colour: rgb(70, 70, 70);
         margin-left: 5px;
     }
 
-    div {
+    label {
         flex-grow: 0;
         flex-shrink: 5;
     }
@@ -67,7 +72,7 @@ $inactive-colour: rgb(70, 70, 70);
     border-color: $text-colour;
 }
 
-div.field-label {
+.field-label {
     background-color: $text-colour;
     color: $text-colour-inverted;
     font-weight: bold;
@@ -103,6 +108,46 @@ div.field-label {
 
 .inactive {
     filter: opacity(0.35);
+}
+// This element DOES something when clicked
+.action {
+    cursor: pointer;
+}
+// Not-editable
+.not-editable {
+    cursor: not-allowed;
+}
+
+.invisible {
+    display: none;
+}
+
+@mixin reset-input {
+    border: 0 none;
+    border-radius: 0px;
+    padding: unset;
+    height: unset;
+    min-width: unset;
+    -webkit-appearance: unset;
+    background-color: unset;
+    font: inherit;
+}
+
+@mixin reset-radio {
+    @include reset-input;
+    position: unset;
+    top: unset;
+    margin: unset;
+
+    &:checked {
+        filter: none;
+    }
+}
+
+@mixin image-bg {
+    border:0px;
+    border-radius: 0px;
+    background-size: contain;
 }
 
 @import "statsgrid";

@@ -1,3 +1,5 @@
+import { SortOrders, sortSkills } from "./skill-sort.js";
+
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -14,7 +16,7 @@ export class CyberpunkActor extends Actor {
     // things organized.
     switch ( this.data.type ) {
       case "character":
-        return this._prepareCharacterData(this.data);
+        this._prepareCharacterData(this.data);
     }
   }
 
@@ -47,8 +49,13 @@ export class CyberpunkActor extends Actor {
     body.carry = body.total * 10;
     body.lift = body.total * 40;
     body.modifier = CyberpunkActor.btm(body.total);
+    // This is where the effect wounds would have to be calculated
 
-    // This is where the effect wounds would have would be calculated
+    // Only sort skills if we need to - sortSkills is essentially a dirty flag
+    if(this.getFlag('cyberpunk2020', 'sortSkills')) {
+      let sortOrder = this.getFlag('cyberpunk2020', 'skillSortOrder') || Object.keys(SortOrders)[0];
+      actorData.data.skills = sortSkills(data.skills, SortOrders[sortOrder])
+    }
   }
 
   /**

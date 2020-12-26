@@ -1,13 +1,45 @@
+.skill-utils {
+    border-style: solid;
+    border-width: 2px;
+    border-color: $text-colour;
+    margin-bottom: 3px;
+    flex-grow: 0;
+
+    display: flex;
+
+    .skill-search {
+        @include reset-input;
+        font-weight: bold;
+        flex-grow: 1;
+        padding-left: 5px;
+    }
+
+    div.search-icon {
+        @include image-bg;
+        height:1.5em;
+        width: 1.5em;
+        padding: 2px 5px;
+        background-color: $text-colour;
+        background-image: url(../img/search.png);
+    }
+}
+
+
 .skill-list {
     display: flex;
-    flex-direction: wrap;
     flex-wrap: wrap;
     width: 100%;
 
     // Compensate for rightmost items having a 3px margin
     margin-right: -4px;
+    flex-grow: 0;
+
+    +.spacer {
+        flex-grow: 1;
+    }
 }
 
+// Each individual skill in the list, as a whole.
 .skill {
     display: flex;
     flex-grow: 1;
@@ -29,11 +61,12 @@
         padding: 3px;
     }
     >.skill-value {
-        padding-left: 5px;
-        padding-right: 5px;
+        @include reset-input;
+
+        width: 1.5em;
         color: $text-colour;
         font-variant: small-caps;
-        align-self:center;
+        text-align:center;
     }
     .icon-holder { 
         background-color: $text-colour;
@@ -42,12 +75,17 @@
         display: flex;
         align-items: center;
         padding-right: 3px;
+
+        input[type="checkbox"] {
+            display: none;
+        } 
+        label.chip-icon {
+            // This just has to be less than the initial height of the bars...
+            @include image-bg;
+            height:1.5em;
+            width: 1.5em;
+            background-image: url(../img/chip.png);
+        }
     }
-    img.chip-icon {
-        // This just has to be less than the initial height of the bars...
-        height:1.5em;
-        width: auto;
-        border:0px;
-        border-radius: 0px;
-    }
+    
 }
