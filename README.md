@@ -17,6 +17,6 @@ A snapshot of the sheet in construction:
 
 ![image](https://user-images.githubusercontent.com/6842867/102726466-fdb87d80-4316-11eb-9bd8-5cb9cf6c8ce6.png)
 
-The sheet currently isn't interactive. Yet ;)
+The character sheet's pretty interactive rn, but I need to do item sheets and rolls etc. Have had a bit of a hiatus since Christmas, but I should really resume dev at some point (as of end of January).
 
 To anyone thinking of contributing, fair warning, I've not yet gotten to removing all the stuff that came in from Boilerplate. Hopefully the commit messages are at least sane though.
