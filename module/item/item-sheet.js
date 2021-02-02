@@ -22,7 +22,7 @@ export class CyberpunkItemSheet extends ItemSheet {
 
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
-    return `${path}/item-${this.item.data.type}-sheet.html`;
+    return `${path}/${this.item.data.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -30,7 +30,27 @@ export class CyberpunkItemSheet extends ItemSheet {
   /** @override */
   getData() {
     const data = super.getData();
+    switch (this.item.data.type) {
+      case "weapon":
+        this._prepareWeapon(data);
+        break;
+    
+      default:
+        break;
+    }
     return data;
+  }
+
+  _prepareWeapon(data) {
+    const typeLookup = {
+      "P": "Pistol",
+      "SMG": "Submachinegun",
+      "SHG": "Shotgun",
+      "RIF": "Rifle",
+      "HVY": "Heavy",
+      "MELEE": "Melee",
+      "EX": "Exotic"
+    };
   }
 
   /* -------------------------------------------- */
