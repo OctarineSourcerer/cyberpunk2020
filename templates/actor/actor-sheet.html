@@ -2,21 +2,21 @@
     {{!-- Sheet Header --}}
     <header class="cyberheader">
         <div class="topinfo">
-            <div class="field textfield handle">
+            <div class="field grow3">
                 <label for="name" class="field-label">{{localize 'CYBERPUNK.ActorName'}}</label>
-                <input type="text" class="field-value" name="name"  value="{{actor.name}}"/>
+                <input type="text" class="field-value textvalue" name="name"  value="{{actor.name}}"/>
             </div>
-            <div class="field textfield role">
+            <div class="field grow3">
                 <label for="data.role.value" class="field-label">{{localize 'CYBERPUNK.Role'}}</label>
-                <input class="field-value" name="data.role.value" type="text" value="{{data.role.value}}"/>
+                <input class="field-value textvalue" name="data.role.value" type="text" value="{{data.role.value}}"/>
             </div>
-            <div class="field age">
+            <div class="field">
                 <label for="data.age" class="field-label">{{localize 'CYBERPUNK.Age'}}</label>
-                <input class="field-value" name="data.age" type="text" value="{{data.age}}" data-dtype="Number"/>
+                <input class="field-value numvalue" name="data.age" type="text" value="{{data.age}}" data-dtype="Number"/>
             </div>
             <div class="field">
                 <label for="data.points" class="field-label">{{localize 'CYBERPUNK.Points'}}</label>
-                <input  type="text" class="field-value" name="data.points" value="{{data.points}}" data-dtype="Number"/>
+                <input  type="text" class="field-value numvalue" name="data.points" value="{{data.points}}" data-dtype="Number"/>
             </div>
         </div>
 
@@ -51,8 +51,6 @@
                 {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
             </div>
         </div>
-
-        
     </section>
 </form>
 
