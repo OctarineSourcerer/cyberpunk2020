@@ -13,9 +13,9 @@ I aim to, at first, do these things in a style akin to the original style of the
 
 All rights to Cyberpunk 2020 lie with R. Talsorian games. I don't intend to infringe on this and so, if not given express permission, I'm not likely to make compendiums with game content.
 
-A snapshot of the sheet in construction:
+Sheet currently looks like this:
 
-![image](https://user-images.githubusercontent.com/6842867/102726466-fdb87d80-4316-11eb-9bd8-5cb9cf6c8ce6.png)
+![image](https://user-images.githubusercontent.com/6842867/106651313-e6161b00-658b-11eb-9595-d4469b425718.png)
 
 The character sheet's pretty interactive rn, but I need to do item sheets and rolls etc. Have had a bit of a hiatus since Christmas, but I should really resume dev at some point (as of end of January).
 
