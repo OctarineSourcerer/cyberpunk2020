@@ -3,6 +3,47 @@
   font-weight: bold;
 }
 
+/* Overall sheet structure */
+.sheet header.cyberheader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 0;
+}
+.sheet header.cyberheader > div {
+  margin-bottom: 5px;
+}
+.sheet header.cyberheader .topinfo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.cyberpunk h1 {
+  font-size: 1.75em;
+  font-variant: petite-caps;
+  border: solid 0px;
+  margin-bottom: 0px;
+  flex-basis: 20em;
+  padding-right: 5px;
+}
+
+.field {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex-grow: 1;
+  flex-shrink: 1;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+}
+.field + .field {
+  margin-left: 5px;
+}
+
 .cyberpunk .field-label {
   background-color: black;
   color: whitesmoke;
@@ -29,25 +70,6 @@
   flex-shrink: 1;
 }
 
-/* Overall sheet structure */
-.sheet header.cyberheader {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex-grow: 0;
-}
-.sheet header.cyberheader > div {
-  margin-bottom: 5px;
-}
-.sheet header.cyberheader .topinfo {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-}
-
 .cyberpunk .numvalue {
   flex-basis: 2.5em;
   padding: 2px 0px 2px 0px;
@@ -62,21 +84,6 @@
 
 .cyberpunk .textvalue {
   flex-basis: 10em;
-}
-
-.field {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  margin-bottom: 5px;
-  flex-grow: 1;
-  flex-shrink: 1;
-  border-width: 2px;
-  border-style: solid;
-  border-color: black;
-}
-.field + .field {
-  margin-left: 5px;
 }
 
 .nogrow {

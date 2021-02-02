@@ -12,9 +12,58 @@ $transition-period: 0.25s;
 
 $field-border-width: 2px;
 
+// Make the regular font bold n primary
 .cyberpunk section.window-content {
     font-family: $font-primary;
     font-weight: bold;
+}
+
+/* Overall sheet structure */
+.sheet header.cyberheader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    // Bad header, stop taking up space the tabs should have.
+    flex-grow: 0;
+
+    > div {
+        margin-bottom: 5px;
+    }
+    
+    .topinfo {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+}
+
+.cyberpunk h1 {
+    font-size: 1.75em;
+    font-variant: petite-caps;
+    border: solid 0px;
+    margin-bottom: 0px;
+    flex-basis: 20em;
+    padding-right: 5px;
+}
+
+// Idea is have a field wrapping field-label and field-value
+.field {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    border-width: $field-border-width;
+    border-style: solid;
+    border-color: black;
+
+    +.field {
+        margin-left: 5px;
+    }
 }
 
 .cyberpunk .field-label {
@@ -37,33 +86,6 @@ $field-border-width: 2px;
     flex-shrink: 1;
 }
 
-/* Overall sheet structure */
-.sheet header.cyberheader {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    // Bad header, stop taking up space the tabs should have.
-    flex-grow: 0;
-
-    > div {
-        margin-bottom: 5px;
-    }
-    
-    .topinfo {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-content: flex-start;
-        align-items: flex-start;
-        flex-wrap: nowrap;
-
-        // .handle, .role {
-        //     width: 30%;
-        // }
-    }
-}
-
 .cyberpunk .numvalue {
     flex-basis: 2.5em;
     padding: 2px 0px 2px 0px;
@@ -77,26 +99,11 @@ $field-border-width: 2px;
 .cyberpunk .textvalue {
     flex-basis: 10em;
 }
-.field {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    margin-bottom: 5px;
-    flex-grow: 1;
-    flex-shrink: 1;
-
-    border-width: $field-border-width;
-    border-style: solid;
-    border-color: black;
-
-    +.field {
-        margin-left: 5px;
-    }
-}
 .nogrow {
     flex-grow: 0;
 }
 
+// More specific bits
 .profile-img {
     max-height: 200px;
     max-width: 20%;
