@@ -30,32 +30,39 @@ $field-border-width: 2px;
     > div {
         margin-bottom: 5px;
     }
-    
-    .topinfo {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        flex-wrap: nowrap;
+}
+.cyberpunk .fieldrow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    > * {
+        flex-grow: 1;
     }
 }
 
-.cyberpunk h1 {
+.cyberpunk h1.title {
     font-size: 1.75em;
+    font-weight: bold;
     font-variant: petite-caps;
     border: solid 0px;
     margin-bottom: 0px;
-    flex-basis: 20em;
     padding-right: 5px;
+    width: 6em;
+    flex-grow: 2;
+    > input {
+        padding-left: 0px;
+    }
 }
 
 // Idea is have a field wrapping field-label and field-value
-.field {
+.cyberpunk .field {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    flex-grow: 1;
-    flex-shrink: 1;
+    // flex: 0 0 auto;
 
     border-width: $field-border-width;
     border-style: solid;
@@ -65,7 +72,6 @@ $field-border-width: 2px;
         margin-left: 5px;
     }
 }
-
 .cyberpunk .field-label {
     background-color: $text-colour;
     color: $text-colour-inverted;
@@ -85,22 +91,39 @@ $field-border-width: 2px;
     flex-grow: 1;
     flex-shrink: 1;
 }
+.cyberpunk .field-value-no-reset {
+    font-family: $font-secondary;
+    font-weight: bold;
+    height: auto;
+    padding-left: 5px;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
 
-.cyberpunk .numvalue {
-    flex-basis: 2.5em;
+.cyberpunk .numsize {
+    width: 2.5em;
     padding: 2px 0px 2px 0px;
     text-align: center;
 }
-.cyberpunk .smallnumvalue {
-    flex-basis: 1.5em;
+.cyberpunk .smallnumsize {
+    width: 1.5em;
     padding: 2px 0px 2px 0px;
     text-align: center;
 }
-.cyberpunk .textvalue {
-    flex-basis: 10em;
+.cyberpunk .textsize {
+    width: 6em;
+    min-width: 2em;
 }
-.nogrow {
-    flex-grow: 0;
+.nowrap {
+    flex-wrap: nowrap;
+}
+// Overides
+// !important cos this is used as an override
+.cyberpunk .fillwidth {
+    width: 100%!important;
+}
+.cyberpunk .nogrow {
+    flex-grow: 0!important;
 }
 
 // More specific bits
@@ -135,3 +158,4 @@ $field-border-width: 2px;
 @import "statsgrid";
 @import "woundtracker";
 @import "skills";
+@import "itemSheets";

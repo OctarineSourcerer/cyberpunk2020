@@ -8,7 +8,12 @@ export const preloadHandlebarsTemplates = async function() {
     return loadTemplates([
         "systems/cyberpunk2020/templates/actor/parts/statsgrid.html",
         "systems/cyberpunk2020/templates/actor/parts/woundtracker.html",
-        "systems/cyberpunk2020/templates/actor/parts/skills.html"
+        "systems/cyberpunk2020/templates/actor/parts/skills.html",
+
+        // Shared templates
+        "systems/cyberpunk2020/templates/fields/text.html",
+        "systems/cyberpunk2020/templates/fields/number.html",
+        "systems/cyberpunk2020/templates/fields/boolean.html"
     ]);
   };
   

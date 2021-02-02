@@ -144,6 +144,12 @@
     "CYBERPUNK.SkillPickLock": "Pick Lock",
     "CYBERPUNK.SkillPickPocket": "Pick Pocket",
     "CYBERPUNK.SkillPlayInstrument": "PlayInstrument",
-    "CYBERPUNK.SkillWeaponsmith": "Weaponsmith"
-    
+    "CYBERPUNK.SkillWeaponsmith": "Weaponsmith",
+
+    "CYBERPUNK.Summary": "Summary",
+    "CYBERPUNK.Accuracy": "Accuracy",
+    "CYBERPUNK.Damage": "Damage",
+    "CYBERPUNK.Shots": "Shots",
+    "CYBERPUNK.AP": "AP",
+    "CYBERPUNK.RoF": "RoF"
 }

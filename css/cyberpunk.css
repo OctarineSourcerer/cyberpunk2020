@@ -13,34 +13,41 @@
 .sheet header.cyberheader > div {
   margin-bottom: 5px;
 }
-.sheet header.cyberheader .topinfo {
+
+.cyberpunk .fieldrow {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
 }
+.cyberpunk .fieldrow > * {
+  flex-grow: 1;
+}
 
-.cyberpunk h1 {
+.cyberpunk h1.title {
   font-size: 1.75em;
+  font-weight: bold;
   font-variant: petite-caps;
   border: solid 0px;
   margin-bottom: 0px;
-  flex-basis: 20em;
   padding-right: 5px;
+  width: 6em;
+  flex-grow: 2;
+}
+.cyberpunk h1.title > input {
+  padding-left: 0px;
 }
 
-.field {
+.cyberpunk .field {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  flex-grow: 1;
-  flex-shrink: 1;
   border-width: 2px;
   border-style: solid;
   border-color: black;
 }
-.field + .field {
+.cyberpunk .field + .field {
   margin-left: 5px;
 }
 
@@ -70,24 +77,42 @@
   flex-shrink: 1;
 }
 
-.cyberpunk .numvalue {
-  flex-basis: 2.5em;
+.cyberpunk .field-value-no-reset {
+  font-family: "Open Sans ExtraBold", sans-serif;
+  font-weight: bold;
+  height: auto;
+  padding-left: 5px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.cyberpunk .numsize {
+  width: 2.5em;
   padding: 2px 0px 2px 0px;
   text-align: center;
 }
 
-.cyberpunk .smallnumvalue {
-  flex-basis: 1.5em;
+.cyberpunk .smallnumsize {
+  width: 1.5em;
   padding: 2px 0px 2px 0px;
   text-align: center;
 }
 
-.cyberpunk .textvalue {
-  flex-basis: 10em;
+.cyberpunk .textsize {
+  width: 6em;
+  min-width: 2em;
 }
 
-.nogrow {
-  flex-grow: 0;
+.nowrap {
+  flex-wrap: nowrap;
+}
+
+.cyberpunk .fillwidth {
+  width: 100% !important;
+}
+
+.cyberpunk .nogrow {
+  flex-grow: 0 !important;
 }
 
 .profile-img {
@@ -392,6 +417,25 @@ div.statderive + .statderive.liftstat {
   height: 1.5em;
   width: 1.5em;
   background-image: url(../img/chip.png);
+}
+
+.cyberpunk textarea.description {
+  font-family: "Noto Sans", sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  align-self: stretch;
+  border: 2px solid black;
+  border-radius: 0px;
+  min-height: 5em;
+}
+
+.item-img {
+  max-height: 150px;
+  max-width: 20%;
+  flex-shrink: 2;
+  flex-grow: 0;
+  width: 20%;
+  margin-left: 4px;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */

@@ -32,6 +32,9 @@ Hooks.once('init', async function () {
         );
     };
     Handlebars.registerHelper('properCase', properCase);
+    Handlebars.registerHelper('localizeCyberpunk', function(str) {
+        return "CYBERPUNK." + str;
+    })
     Handlebars.registerHelper('localizeStat', function(str) {
         return "CYBERPUNK." + properCase(str);
     })
@@ -80,6 +83,18 @@ Hooks.once('init', async function () {
             ret += options.fn({classes: classes, woundNo: thisWound});
         }
         return ret;
+    });
+
+    Handlebars.registerHelper("template", function(templateName) {
+        return "systems/cyberpunk2020/templates/" + templateName + ".html";
+    });
+
+    Handlebars.registerHelper("deepLookup", function(context, path) {
+        let current = context;
+        path.split(".").forEach(segment => {
+            current = current[segment];
+        });
+        return current;
     });
 
     // Register and preload templates with Foundry. See templates.js for usage
