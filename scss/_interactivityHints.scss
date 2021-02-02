@@ -1,0 +1,15 @@
+.inactive {
+    filter: opacity(0.35);
+}
+// This element DOES something when clicked
+.action {
+    cursor: pointer;
+}
+// Not-editable
+.not-editable {
+    cursor: not-allowed;
+}
+
+.invisible {
+    display: none;
+}

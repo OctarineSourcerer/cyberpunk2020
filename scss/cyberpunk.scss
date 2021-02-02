@@ -1,3 +1,5 @@
+@import "resets";
+
 // I'd have loved to give Stone Sans with this, but I don't have the license
 // Open Sans ExtraBold seems to do okay though
 $font-primary: "Noto Sans", sans-serif;
@@ -8,12 +10,34 @@ $inactive-colour: rgb(70, 70, 70);
 // Transition period between colours
 $transition-period: 0.25s;
 
+$field-border-width: 2px;
 
 .cyberpunk section.window-content {
     font-family: $font-primary;
     font-weight: bold;
 }
 
+.cyberpunk .field-label {
+    background-color: $text-colour;
+    color: $text-colour-inverted;
+    font-weight: bold;
+    font-variant: small-caps;
+
+    padding: 2px 5px 2px 5px;
+    padding-left: calc(5px - #{$field-border-width});
+}
+
+.cyberpunk .field-value {
+    @include reset-input;
+    font-family: $font-secondary;
+    font-weight: bold;
+    height: auto;
+    padding-left: 5px;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+/* Overall sheet structure */
 .sheet header.cyberheader {
     display: flex;
     flex-direction: column;
@@ -34,51 +58,43 @@ $transition-period: 0.25s;
         align-items: flex-start;
         flex-wrap: nowrap;
 
-        .handle, .role {
-            width: 30%;
-        }
+        // .handle, .role {
+        //     width: 30%;
+        // }
     }
 }
 
+.cyberpunk .numvalue {
+    flex-basis: 2.5em;
+    padding: 2px 0px 2px 0px;
+    text-align: center;
+}
+.cyberpunk .smallnumvalue {
+    flex-basis: 1.5em;
+    padding: 2px 0px 2px 0px;
+    text-align: center;
+}
+.cyberpunk .textvalue {
+    flex-basis: 10em;
+}
 .field {
     display: flex;
     flex-direction: row;
-    width:20%;
     align-items: stretch;
     margin-bottom: 5px;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    border-width: $field-border-width;
+    border-style: solid;
+    border-color: black;
 
     +.field {
         margin-left: 5px;
     }
-
-    label {
-        flex-grow: 0;
-        flex-shrink: 5;
-    }
-    input {
-        flex-grow: 3;
-        flex-shrink: 1;
-    }
 }
-
-.cyberpunk .field-value {
-    font-family: $font-secondary;
-    font-weight: bold;
-    height: auto;
-    border-style: solid solid solid none;
-    padding-left: 5px;
-    border-width: 2px;
-    border-radius: 0px;
-    border-color: $text-colour;
-}
-
-.field-label {
-    background-color: $text-colour;
-    color: $text-colour-inverted;
-    font-weight: bold;
-    font-variant: small-caps;
-
-    padding: 5px;
+.nogrow {
+    flex-grow: 0;
 }
 
 .profile-img {
@@ -88,10 +104,6 @@ $transition-period: 0.25s;
     flex-grow: 0;
     width:20%;
     margin-right: 4px;
-}
-
-.textfield {
-    flex-basis: 2;
 }
 
 .sheet-body .tab {
@@ -106,50 +118,13 @@ $transition-period: 0.25s;
     flex-shrink: 1;
 }
 
-.inactive {
-    filter: opacity(0.35);
-}
-// This element DOES something when clicked
-.action {
-    cursor: pointer;
-}
-// Not-editable
-.not-editable {
-    cursor: not-allowed;
-}
-
-.invisible {
-    display: none;
-}
-
-@mixin reset-input {
-    border: 0 none;
-    border-radius: 0px;
-    padding: unset;
-    height: unset;
-    min-width: unset;
-    -webkit-appearance: unset;
-    background-color: unset;
-    font: inherit;
-}
-
-@mixin reset-radio {
-    @include reset-input;
-    position: unset;
-    top: unset;
-    margin: unset;
-
-    &:checked {
-        filter: none;
-    }
-}
-
 @mixin image-bg {
     border:0px;
     border-radius: 0px;
     background-size: contain;
 }
 
+@import "interactivityHints";
 @import "statsgrid";
 @import "woundtracker";
 @import "skills";
