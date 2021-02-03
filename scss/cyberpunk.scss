@@ -16,6 +16,7 @@ $field-border-width: 2px;
 .cyberpunk section.window-content {
     font-family: $font-primary;
     font-weight: bold;
+    overflow-y: scroll;
 }
 
 /* Overall sheet structure */
@@ -128,10 +129,10 @@ $field-border-width: 2px;
 
 // More specific bits
 .profile-img {
-    max-height: 200px;
+    max-height: 170px;
     max-width: 20%;
     flex-shrink: 2;
-    flex-grow: 0;
+    // flex-grow: 0;
     width:20%;
     margin-right: 4px;
 }
