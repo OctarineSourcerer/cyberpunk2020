@@ -151,5 +151,11 @@
     "CYBERPUNK.Damage": "Damage",
     "CYBERPUNK.Shots": "Shots",
     "CYBERPUNK.AP": "AP",
-    "CYBERPUNK.RoF": "RoF"
+    "CYBERPUNK.RoF": "RoF",
+    "CYBERPUNK.Reliability": "Reliability",
+    "CYBERPUNK.Range": "Range",
+    "CYBERPUNK.AmmoType": "Ammo Type",
+    "CYBERPUNK.Type": "Type",
+    "CYBERPUNK.Concealability": "Concealability",
+    "CYBERPUNK.Availability": "Availability"
 }

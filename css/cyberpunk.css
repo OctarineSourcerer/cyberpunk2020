@@ -1,6 +1,7 @@
 .cyberpunk section.window-content {
   font-family: "Noto Sans", sans-serif;
   font-weight: bold;
+  overflow-y: scroll;
 }
 
 /* Overall sheet structure */
@@ -116,10 +117,9 @@
 }
 
 .profile-img {
-  max-height: 200px;
+  max-height: 170px;
   max-width: 20%;
   flex-shrink: 2;
-  flex-grow: 0;
   width: 20%;
   margin-right: 4px;
 }
@@ -298,7 +298,7 @@ div.statderive + .statderive.liftstat {
   top: unset;
   margin: unset;
   height: 100%;
-  width: 1.5em;
+  width: 1.3em;
   flex-grow: 1;
   border-style: solid;
   border-width: 0px 1px 0px 1px;
