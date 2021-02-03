@@ -1,4 +1,6 @@
 import {weaponTypes} from "../lookups.js"
+import {DiceCyberpunk} from "../dice.js"
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -15,7 +17,7 @@ export class CyberpunkItem extends Item {
     // This is where the item would make a roll in the chat or something like that.
     switch (this.type) {
       case "weapon":
-        __weaponRoll();
+        this.__weaponRoll();
         break;
     
       default:
@@ -29,6 +31,13 @@ export class CyberpunkItem extends Item {
       throw new Error("This item isn't owned by anyone.");
     }
     let isRanged = this.type === weaponTypes.melee;
-    
+    let parts = [];
+    parts.push("@stats.ref.value")
+    DiceCyberpunk.d10Roll({
+      flavor: "BOOM",
+      data: owner.data.data,
+      parts: parts,
+      // chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs"
+    });
   }
 }
