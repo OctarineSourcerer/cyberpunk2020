@@ -56,7 +56,7 @@ export class CyberpunkItem extends Item {
       flavor: "BOOM",
       data: owner.data.data,
       parts: parts,
-      // chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs"
+      chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs"
     });
   }
 }
