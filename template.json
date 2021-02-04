@@ -770,7 +770,8 @@
 			"shots": 12,
 			"rof": 2,
 			"reliability": "ST",
-			"range": 50
+			"range": 50,
+			"attackType": ""
 		},
 		"armor": {
 			"templates": ["common"],
