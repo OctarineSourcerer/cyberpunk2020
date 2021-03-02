@@ -74,5 +74,6 @@ export class CyberpunkItemSheet extends ItemSheet {
     if (!this.options.editable) return;
 
     // Roll handlers, click handlers, etc. would go here, same as actor sheet.
+    html.find(".item-roll").click(this.item.roll.bind(this))
   }
 }

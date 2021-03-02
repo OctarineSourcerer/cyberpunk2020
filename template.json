@@ -771,7 +771,8 @@
 			"rof": 2,
 			"reliability": "ST",
 			"range": 50,
-			"attackType": ""
+			"attackType": "",
+			"attackSkill": "ref"
 		},
 		"armor": {
 			"templates": ["common"],

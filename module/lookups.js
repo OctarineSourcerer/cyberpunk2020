@@ -10,6 +10,7 @@ export let weaponTypes = {
 }
 
 // How a weapon attacks. Something like pistol or an SMG have rigid rules on how they can attack, but shotguns can be regular or auto shotgun, exotic can be laser, etc. So this is for weird and special stuff that isn't necessarily covered by the weapon's type or other information
+// If we change attack type to be an array, we could say, have ["BEAM" "LASER"]
 export let rangedAttackType = {
     auto: "AUTO",
     // Strange ranged weapons
@@ -39,6 +40,7 @@ export let rangedAttackType = {
 
 // This lot's a bit weird, because this is for storing an *item's* attack type, so it doesn't include martial
 export let meleeAttackType = {
+    martial: "MARTIAL",
     mono: "MONO", // Monokatanas, etc
     cyberbeast: "BEAST"
 }

@@ -18,7 +18,6 @@
         {{!-- Attributes Tab --}}
         <div class="tab" data-group="primary" data-tab="combat">
             <div class="flexcol">
-                {{!-- Yet to go: type, concealability, availability, ammo type --}}
                 <div class="fieldrow">
                     {{> (template "fields/number") loc="Accuracy" path="data.accuracy"}}
                     {{> (template "fields/text") loc="Damage" path="data.damage"}}
@@ -33,6 +32,8 @@
                     {{> (template "fields/text") loc="Concealability" path="data.concealability"}}
                     {{> (template "fields/text") loc="Availability" path="data.availability"}}
                 </div>
+
+                <a class="item-roll"><i>Fire</i></a>
             </div>
         </div>
         
