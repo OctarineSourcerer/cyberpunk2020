@@ -43,7 +43,7 @@ export class CyberpunkItem extends Item {
   // Grenades have fixed width. Throw up to 10xBOD
   // Gas? Wind effect. Dear lord.
 
-  // Let's just pretend the unusual ranged does exist for now
+  // Let's just pretend the unusual ranged doesn't exist for now
   /**
    * 
    * @param {Int} targetRange Range to target token, in meters.
@@ -59,7 +59,7 @@ export class CyberpunkItem extends Item {
     parts.push("@stats.ref.value");
     parts.push(`@stats.${this.attackSkill}.value`)
     DiceCyberpunk.d10Roll({
-      flavor: "BOOM",
+      flavor: this.name,
       data: owner.data.data,
       parts: parts,
       chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs"
