@@ -19,7 +19,11 @@
                 </label>
             </div>
             
-            <input class="skill-value" name="data.skills.{{skillName}}.value" value="{{skill.value}}"/>
+            {{#if skill.chipped}}
+                <input class="skill-value" name="data.skills.{{skillName}}.chipValue" value="{{#if skill.chipValue}}{{skill.chipValue}}{{else}}{{skill.value}}{{/if}}"/>
+            {{else}}
+                <input class="skill-value" name="data.skills.{{skillName}}.value" value="{{skill.value}}"/>
+            {{/if}}
         </div>
     {{/each}}
 </div>
