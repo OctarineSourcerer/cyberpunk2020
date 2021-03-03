@@ -399,18 +399,21 @@ div.statderive + .statderive.liftstat {
   font-variant: small-caps;
   text-align: center;
 }
-.skill .icon-holder {
-  background-color: black;
+.skill .chip-toggle {
   padding: 0px;
   display: contents;
+}
+.skill .chip-toggle label {
+  background-color: black;
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding-right: 3px;
 }
-.skill .icon-holder input[type=checkbox] {
+.skill .chip-toggle input[type=checkbox] {
   display: none;
 }
-.skill .icon-holder label.chip-icon {
+.skill .chip-toggle .chip-icon {
   border: 0px;
   border-radius: 0px;
   background-size: contain;

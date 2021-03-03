@@ -68,18 +68,23 @@
         font-variant: small-caps;
         text-align:center;
     }
-    .icon-holder { 
-        background-color: $text-colour;
+    .chip-toggle { 
+        // background-color: $text-colour;
         padding: 0px;
         display: contents;
-        display: flex;
-        align-items: center;
-        padding-right: 3px;
 
+        label {
+            background-color: $text-colour;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-right: 3px;
+        }
+        
         input[type="checkbox"] {
             display: none;
         } 
-        label.chip-icon {
+        .chip-icon {
             // This just has to be less than the initial height of the bars...
             @include image-bg;
             height:1.5em;

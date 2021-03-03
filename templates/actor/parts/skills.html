@@ -11,10 +11,11 @@
         <div class="skill">
             <div class="field-label"> {{localize (skillRef skillName)}}</div>
             <div class="flex-pad field-label"></div>
-            <div class="icon-holder">
+            <div class="chip-toggle">
                 {{!-- If this isn't in icon-holder, when chipped the colours are off --}}
-                <div class="not-editable field-label {{#if skill.chipped}}inactive{{/if}}">{{skill.stat}}</div>
-                <label class="chip-icon {{#unless skill.chipped}}inactive{{/unless}}">
+                <label>
+                    <div class="field-label {{#if skill.chipped}}inactive{{/if}}">{{skill.stat}}</div>
+                    <div class="chip-icon {{#unless skill.chipped}}inactive{{/unless}}"></div>
                     <input type="checkbox" name="data.skills.{{skillName}}.chipped" {{checked skill.chipped}}/>
                 </label>
             </div>
