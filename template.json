@@ -731,11 +731,7 @@
 				}
 			},
 			"gear": {
-				"eurobucks": 0,
-				"carried": 0,
-				"armor": [],
-				"weapons": [],
-				"gear": []
+				"eurobucks": 0
 			}
 		},
 		"character": {
@@ -744,29 +740,32 @@
 				"lifepath",
 				"stats",
 				"skills",
-				"locations"
+				"locations",
+				"gear"
 			],
 			"damage": 0
 		}
 	},
 	"Item": {
-		"types": ["weapon", "armor", "cyberware", "gear"],
+		"types": ["weapon", "armor", "cyberware", "misc"],
 		"templates": {
 			"common": {
 				"name": "Common",
 				"text": "",
-				"cost": 0
+				"cost": 0,
+				"weight": 0
 			}
 		},
 		"weapon": {
 			"templates": ["common"],
-			"type": "P",
+			"weaponType": "P",
 			"accuracy": 0,
 			"concealability": "P",
 			"availability": "C",
 			"ammoType": "9mm",
 			"damage": "2d6+1",
 			"ap": false,
+			"shotsLeft": 12,
 			"shots": 12,
 			"rof": 2,
 			"reliability": "ST",
@@ -789,7 +788,7 @@
 			"surgCode": "N",
 			"humanityCost": "1d6"
 		},
-		"gear": {
+		"misc": {
 			"templates": ["common"]
 		}
 	}

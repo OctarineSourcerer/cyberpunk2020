@@ -6,10 +6,10 @@
 </div>
 
 {{!-- Actual skills --}}
-<div class="skill-list">
+<div class="item-list">
     {{#each skillDisplayList as |skill skillName|}}
-        <div class="skill">
-            <div class="field-label"> {{localize (skillRef skillName)}}</div>
+        <div class="list-item skill">
+            <div class="field-label skill-roll action" data-skill-name="{{skillName}}">{{localize (skillRef skillName)}}</div>
             <div class="flex-pad field-label"></div>
             <div class="chip-toggle">
                 <label>
@@ -20,7 +20,7 @@
             </div>
             
             {{#if skill.chipped}}
-                <input class="skill-value" name="data.skills.{{skillName}}.chipValue" value="{{#if skill.chipValue}}{{skill.chipValue}}{{else}}{{skill.value}}{{/if}}"/>
+                <input class="skill-value" name="data.skills.{{skillName}}.chipValue" value="{{#if skill.chipValue}}{{skill.chipValue}}{{else}}0{{/if}}"/>
             {{else}}
                 <input class="skill-value" name="data.skills.{{skillName}}.value" value="{{skill.value}}"/>
             {{/if}}

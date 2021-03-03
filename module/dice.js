@@ -36,6 +36,7 @@ export class DiceCyberpunk {
         if(parts) {
             parts = [dice, ...parts]
         }
+        console.log(data);
         let roll = new Roll(parts.join(" + "), data).roll();
 
         // Convert the roll to a chat message

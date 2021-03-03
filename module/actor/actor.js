@@ -1,3 +1,4 @@
+import { DiceCyberpunk } from "../dice.js";
 import { SortOrders, sortSkills } from "./skill-sort.js";
 
 /**
@@ -89,6 +90,31 @@ export class CyberpunkActor extends Actor {
   saveThreshold() {
     const body = this.data.data.stats.body.total;
     return body - this.woundState();
+  }
+
+  _realSkillValue(skill) {
+    let value = skill.value;
+    if(skill.chipped && (skill.chipValue != undefined)) {
+      value = skill.chipValue;
+    }
+    return value;
+  }
+
+  // TODO: This needs to be tested for nested skills eventually
+  rollSkill(skillName) {
+    let skill = this.data.data.skills[skillName];
+    let value = this._realSkillValue(skill);
+
+    let rollParts = [];
+    rollParts.push(value);
+    if(skill.stat !== "special") {
+      rollParts.push(`@stats.${skill.stat}.total`);
+    }
+    DiceCyberpunk.d10Roll({
+      flavor: skillName,
+      data: this.data.data,
+      parts: rollParts
+    });
   }
 
 }

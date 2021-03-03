@@ -24,42 +24,18 @@
     }
 }
 
-
-.skill-list {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-
-    // Compensate for rightmost items having a 3px margin
-    margin-right: -4px;
-    flex-grow: 0;
-
-    +.spacer {
-        flex-grow: 1;
-    }
-}
-
-// Each individual skill in the list, as a whole.
+// Each individual skill in the list
 .skill {
-    display: flex;
-    flex-grow: 1;
     width: 40%;
-    // Lets the skills go to a single column when narrow enough
-    min-width: 185px;
+    // Background colour change is so that the editable part can have a transparent background
+    background-color: transparent;
 
-    border-style: solid;
-    border-width: 2px;
-
-    margin: 0px 2px 4px 2px;
-
+    // The rest, however, all background colour
+    // Usually this breaks inactive, which uses filter (and therefore washes out the background too), but the inactives in skills are ensconced in chip-toggle; a container whose background won't be affected by child filters
     >* {
-        padding: 3px;
+        background-color: $text-colour;
     }
 
-    
-    >.field-label {
-        padding: 3px;
-    }
     >.skill-value {
         @include reset-input;
 

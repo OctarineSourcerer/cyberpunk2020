@@ -1,0 +1,20 @@
+<div class="item-list">
+    {{#each data.gear.weapons as |weapon|}}
+        <div class="list-item weapon item-edit" data-item-id="{{weapon._id}}">
+            <div class="item-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
+            <div class="field-label name">{{weapon.name}}</div>
+            {{!-- {{#with weapon.data}}
+            {{#unless (equals type ../weaponTypes.melee)}}
+                <div class="field-label inactive">{{shotsLeft}}/{{shots}}</div>
+                {{#if ap}}
+                    <div class="field-label inactive">{{localize "CYBERPUNK.AP"}}</div>
+                {{/if}}
+            {{/unless}}
+            <div class="field-label inactive">{{damage}}</div>
+            <div class="field-label inactive">{{localize "CYBERPUNK.RoF"}}{{rof}}</div> --}}
+            <div class="flex-pad"></div>
+            <div class="field-label inactive">{{type}}</div>
+            {{!-- {{/with}} --}}
+        </div>
+    {{/each}}
+</div>

@@ -1,3 +1,5 @@
+import { weaponTypes } from "../lookups.js"
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -33,6 +35,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       this._prepareCharacterItems(data);
       this._addWoundTrack(data);
       this._filterSkills(data);
+      data.weaponTypes = weaponTypes;
     }
 
     return data;
@@ -92,13 +95,37 @@ export class CyberpunkActorSheet extends ActorSheet {
     const actorData = sheetData.actor;
 
     // Initialize containers.
-    const gear = [];
-    const features = [];
+    const misc = [];
+    const weapons = [];
+    const armor = [];
+    const cyberware = [];
 
-    // Assign and return.
-    // actorData.___ = different containers
+    const targetLookup = {
+      "weapon": weapons,
+      "armor": armor,
+      "cyberware": cyberware,
+      "misc": misc
+    };
+
+    let totalWeight = 0;
+    actorData.items.forEach(item => {
+      (targetLookup[item.type] || misc).push(item);
+      totalWeight += (item.weight || 0);
+    });
+
+    actorData.data.gear = {
+      carryWeight: totalWeight,
+      weapons: weapons,
+      armor: armor,
+      cyberware: cyberware,
+      misc: misc
+    };
   }
 
+  /**
+   * Get an owned item from a click event, for any event trigger with a data-item-id property
+   * @param {*} ev 
+   */
 
   /* -------------------------------------------- */
 
@@ -106,12 +133,31 @@ export class CyberpunkActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    function getEventItem(sheet, ev) {
+      let itemId = ev.currentTarget.dataset.itemId;
+      return sheet.actor.getOwnedItem(itemId);
+    }
+    
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
-
+    
     // Find elements with stuff like html.find('.cssClass').click(this.function.bind(this));
     // Bind makes the "this" object in the function this.
     // html.find('.skill-search').click(this._onItemCreate.bind(this));
 
+    html.find('.item-roll').click(ev => {
+      // Roll is often within child events, don't bubble please
+      ev.stopPropagation();
+      let item = getEventItem(this, ev);
+      item.roll();
+    });
+    html.find(".skill-roll").click(ev => {
+      let skillName = ev.currentTarget.dataset.skillName;
+      this.actor.rollSkill(skillName);
+    });
+    html.find('.item-edit').click(ev => {
+      let item = getEventItem(this, ev);
+      item.sheet.render(true);
+    });
   }
 }

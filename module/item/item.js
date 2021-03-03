@@ -54,15 +54,20 @@ export class CyberpunkItem extends Item {
       throw new Error("This item isn't owned by anyone.");
     }
     let isRanged = this.type !== weaponTypes.melee;
+    
     let parts = [];
-
-    parts.push("@stats.ref.value");
-    parts.push(`@stats.${this.attackSkill}.value`)
+    if(this.attackSkill) {
+      parts.push(`@stats.${this.attackSkill}.total`)
+    }
     DiceCyberpunk.d10Roll({
       flavor: this.name,
       data: owner.data.data,
       parts: parts,
-      chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs"
+      chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs",
+      chatTemplateData: {
+        description: this.data.data.text,
+        img: this.img
+      }
     });
   }
 }
