@@ -12,7 +12,6 @@
             <div class="field-label"> {{localize (skillRef skillName)}}</div>
             <div class="flex-pad field-label"></div>
             <div class="chip-toggle">
-                {{!-- If this isn't in icon-holder, when chipped the colours are off --}}
                 <label>
                     <div class="field-label {{#if skill.chipped}}inactive{{/if}}">{{skill.stat}}</div>
                     <div class="chip-icon {{#unless skill.chipped}}inactive{{/unless}}"></div>
