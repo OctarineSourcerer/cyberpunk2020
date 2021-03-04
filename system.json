@@ -9,7 +9,15 @@
     "scripts": [],
     "esmodules": ["module/cyberpunk.js"],
     "styles": ["css/cyberpunk.css"],
-    "packs": [],
+    "packs": [
+      {
+        "name": "roll-tables",
+        "label": "Roll Tables",
+        "system": "cyberpunk2020",
+        "path": "./packs/roll-tables.db",
+        "entity": "RollTable"
+      }
+    ],
     "languages": [
       {
         "lang": "en",
