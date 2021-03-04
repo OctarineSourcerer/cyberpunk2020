@@ -1,5 +1,6 @@
 import { DiceCyberpunk } from "../dice.js";
 import { SortOrders, sortSkills } from "./skill-sort.js";
+import { properCase } from "../utils.js"
 
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
@@ -107,6 +108,7 @@ export class CyberpunkActor extends Actor {
 
     let rollParts = [];
     rollParts.push(value);
+    // TODO: Check if there IS a stat that special skills use
     if(skill.stat !== "special") {
       rollParts.push(`@stats.${skill.stat}.total`);
     }
@@ -114,6 +116,15 @@ export class CyberpunkActor extends Actor {
       flavor: skillName,
       data: this.data.data,
       parts: rollParts
+    });
+  }
+
+  rollStat(statName) {
+    let fullName = game.i18n.localize("CYBERPUNK." + properCase(statName) + "Full");
+    DiceCyberpunk.d10Roll({
+      flavor: fullName,
+      data: this.data.data,
+      parts: [`@stats.${statName}.total`]
     });
   }
 

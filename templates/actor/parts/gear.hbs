@@ -1,6 +1,6 @@
 <div class="item-list">
     {{#each data.gear.weapons as |weapon|}}
-        <div class="list-item weapon item-edit" data-item-id="{{weapon._id}}">
+        <div class="list-item gear item-edit" data-item-id="{{weapon._id}}">
             <div class="item-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
             <div class="field-label name">{{weapon.name}}</div>
             {{!-- {{#with weapon.data}}
@@ -15,6 +15,30 @@
             <div class="flex-pad"></div>
             <div class="field-label inactive">{{type}}</div>
             {{!-- {{/with}} --}}
+        </div>
+    {{/each}}
+    {{#each data.gear.armor}}
+        <div class="list-item gear item-edit" data-item-id="{{_id}}">
+            <div class="item-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <div class="field-label name">{{name}}</div>
+            <div class="flex-pad"></div>
+            <div class="field-label inactive">{{type}}</div>
+        </div>
+    {{/each}}
+    {{#each data.gear.cyberware}}
+        <div class="list-item gear item-edit" data-item-id="{{_id}}">
+            <div class="item-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <div class="field-label name">{{name}}</div>
+            <div class="flex-pad"></div>
+            <div class="field-label inactive">{{type}}</div>
+        </div>
+    {{/each}}
+    {{#each data.gear.misc}}
+        <div class="list-item gear item-edit" data-item-id="{{_id}}">
+            <div class="item-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <div class="field-label name">{{name}}</div>
+            <div class="flex-pad"></div>
+            <div class="field-label inactive">{{type}}</div>
         </div>
     {{/each}}
 </div>

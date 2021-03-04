@@ -172,6 +172,7 @@ $field-border-width: 2px;
     display: flex;
     flex-grow: 1;
     // Lets the skills go to a single column when narrow enough
+    width: 40%;
     min-width: 185px;
 
     border-style: solid;

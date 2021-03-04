@@ -145,6 +145,10 @@ export class CyberpunkActorSheet extends ActorSheet {
     // Bind makes the "this" object in the function this.
     // html.find('.skill-search').click(this._onItemCreate.bind(this));
 
+    html.find('.stat-roll').click(ev => {
+      let statName = ev.currentTarget.dataset.statName;
+      this.actor.rollStat(statName);
+    });
     html.find('.item-roll').click(ev => {
       // Roll is often within child events, don't bubble please
       ev.stopPropagation();

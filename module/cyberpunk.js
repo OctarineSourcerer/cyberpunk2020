@@ -4,6 +4,7 @@ import { CyberpunkItem } from "./item/item.js";
 import { CyberpunkItemSheet } from "./item/item-sheet.js";
 
 import { preloadHandlebarsTemplates } from "./templates.js";
+import { properCase } from "./utils.js"
 
 Hooks.once('init', async function () {
 
@@ -23,14 +24,6 @@ Hooks.once('init', async function () {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("cyberpunk", CyberpunkItemSheet, { makeDefault: true });
 
-    let properCase = function (str) {
-        return str.replace(
-            /\w\S*/g,
-            function(txt) {
-                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-            }
-        );
-    };
     Handlebars.registerHelper('properCase', properCase);
     Handlebars.registerHelper('localizeCyberpunk', function(str) {
         return "CYBERPUNK." + str;
