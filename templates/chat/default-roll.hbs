@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+{{flavor}}
+<div class="flexcol">
+{{#each rolls}}
+    <div class="flexrow">
+        <div>{{name}}:</div>
+        <div>{{total}}</div>
+    </div>
+{{/each}}
+</div>
+
+{{!-- Here's some code to test it before it's hooked up properly with multiple rolls
+    let chatData = {
+                user: game.user._id,
+                speaker: undefined,
+                content: await renderTemplate("systems/cyberpunk2020/templates/chat/default-roll.hbs", {title: "Test roll", flavor:"Here's where we go to flavortown", rolls: [{name:"Attack", total:23}, {name:"Damage", total:20}]})
+            };
+    ChatMessage.create(chatData);
+ --}}

@@ -14,7 +14,11 @@ export const preloadHandlebarsTemplates = async function() {
         // Shared templates
         "systems/cyberpunk2020/templates/fields/text.html",
         "systems/cyberpunk2020/templates/fields/number.html",
-        "systems/cyberpunk2020/templates/fields/boolean.html"
+        "systems/cyberpunk2020/templates/fields/boolean.html",
+
+        // Roll templates
+        "systems/cyberpunk2020/templates/chat/default-roll.html",
+        "systems/cyberpunk2020/templates/chat/weapon-roll.html",
     ]);
   };
   

@@ -51,6 +51,7 @@ export class DiceCyberpunk {
                     total: roll.total,
                     isCrit: d10.total >= critical,
                     isFumble: d10.total <= fumble,
+                    title: title,
                     flavor: flavor,
                 },
                 chatTemplateData || {}
