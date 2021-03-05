@@ -689,45 +689,47 @@
 				"motivations": "",
 				"notes": ""
 			},
-			"locations": {
-				"head": {
-					"location": [
-						1
-					],
-					"armor": 0
-				},
-				"torso": {
-					"location": [
-						2,
-						4
-					],
-					"armor": 0
-				},
-				"rArm": {
-					"location": [
-						5
-					],
-					"armor": 0
-				},
-				"lArm": {
-					"location": [
-						6
-					],
-					"armor": 0
-				},
-				"lLeg": {
-					"location": [
-						7,
-						8
-					],
-					"armor": 0
-				},
-				"rLeg": {
-					"location": [
-						9,
-						10
-					],
-					"armor": 0
+			"hit-locations": {
+				"hit-locations": {
+					"head": {
+						"location": [
+							1
+						],
+						"armor": 0
+					},
+					"torso": {
+						"location": [
+							2,
+							4
+						],
+						"armor": 0
+					},
+					"rArm": {
+						"location": [
+							5
+						],
+						"armor": 0
+					},
+					"lArm": {
+						"location": [
+							6
+						],
+						"armor": 0
+					},
+					"lLeg": {
+						"location": [
+							7,
+							8
+						],
+						"armor": 0
+					},
+					"rLeg": {
+						"location": [
+							9,
+							10
+						],
+						"armor": 0
+					}
 				}
 			},
 			"gear": {
@@ -740,7 +742,7 @@
 				"lifepath",
 				"stats",
 				"skills",
-				"locations",
+				"hit-locations",
 				"gear"
 			],
 			"damage": 0
@@ -753,7 +755,8 @@
 				"name": "Common",
 				"text": "",
 				"cost": 0,
-				"weight": 0
+				"weight": 0,
+				"equipped": true
 			}
 		},
 		"weapon": {
@@ -777,9 +780,9 @@
 			"templates": ["common"],
 			"stoppingPower": 4,
 			"coverage": [
-				"Arms",
-				"Torso",
-				"Legs"
+				"lArm",
+				"rArm",
+				"torso"
 			],
 			"encumbrance": 0
 		},
