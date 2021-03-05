@@ -115,11 +115,11 @@ $field-border-width: 2px;
     width: 6em;
     min-width: 2em;
 }
-.nowrap {
-    flex-wrap: nowrap;
-}
 // Overides
 // !important cos this is used as an override
+.cyberpunk .flexwrap {
+    flex-wrap: wrap !important;
+}
 .cyberpunk .fillwidth {
     width: 100%!important;
 }

@@ -25,8 +25,8 @@ Hooks.once('init', async function () {
     Items.registerSheet("cyberpunk", CyberpunkItemSheet, { makeDefault: true });
 
     Handlebars.registerHelper('properCase', properCase);
-    Handlebars.registerHelper('localizeCyberpunk', function(str) {
-        return "CYBERPUNK." + str;
+    Handlebars.registerHelper('cLocal', function(str) {
+        return game.i18n.localize("CYBERPUNK." + str);
     })
     Handlebars.registerHelper('localizeStat', function(str) {
         return "CYBERPUNK." + properCase(str);

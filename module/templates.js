@@ -17,8 +17,8 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/cyberpunk2020/templates/fields/boolean.html",
 
         // Roll templates
-        "systems/cyberpunk2020/templates/chat/default-roll.html",
-        "systems/cyberpunk2020/templates/chat/weapon-roll.html",
+        "systems/cyberpunk2020/templates/chat/default-roll.hbs",
+        "systems/cyberpunk2020/templates/chat/weapon-roll.hbs",
     ]);
   };
   

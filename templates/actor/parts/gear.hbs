@@ -1,3 +1,6 @@
+{{#if (equals items.length 0)}}
+    <div class="inactive">Drag items here to add (for now)</div>
+{{/if}}
 <div class="item-list">
     {{#each data.gear.weapons as |weapon|}}
         <div class="list-item gear item-edit" data-item-id="{{weapon._id}}">

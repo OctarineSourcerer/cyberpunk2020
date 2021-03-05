@@ -166,5 +166,23 @@
     "CYBERPUNK.AmmoType": "Ammo Type",
     "CYBERPUNK.Type": "Type",
     "CYBERPUNK.Concealability": "Concealability",
-    "CYBERPUNK.Availability": "Availability"
+    "CYBERPUNK.Availability": "Availability",
+
+    "CYBERPUNK.Head": "Head",
+    "CYBERPUNK.Torso": "Torso",
+    "CYBERPUNK.LArm": "Left Arm",
+    "CYBERPUNK.RArm": "Right Arm",
+    "CYBERPUNK.LLeg": "Left Leg",
+    "CYBERPUNK.RLeg": "Right Leg",
+    "CYBERPUNK.SP": "SP",
+    "CYBERPUNK.SPFull": "Stopping Power",
+
+    "CYBERPUNK.Gear": "Gear",
+    "CYBERPUNK.Weapon": "Weapon",
+    "CYBERPUNK.Armor": "Armor",
+    "CYBERPUNK.Cyberware": "Cyberware",
+    "CYBERPUNK.Misc": "Misc",
+
+    "CYBERPUNK.Details": "Details",
+    "CYBERPUNK.ItemName": "Item Name"
 }

@@ -104,8 +104,8 @@
   min-width: 2em;
 }
 
-.nowrap {
-  flex-wrap: nowrap;
+.cyberpunk .flexwrap {
+  flex-wrap: wrap !important;
 }
 
 .cyberpunk .fillwidth {
@@ -151,6 +151,7 @@
 .list-item {
   display: flex;
   flex-grow: 1;
+  width: 40%;
   min-width: 185px;
   border-style: solid;
   border-width: 2px;
@@ -469,7 +470,7 @@ div.statderive + .statderive.liftstat {
   margin-left: 4px;
 }
 
-.weapon .name {
+.gear .name {
   min-width: 128px;
   padding-right: 10px;
 }
