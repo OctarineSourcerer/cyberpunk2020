@@ -8,3 +8,7 @@ export function properCase(str) {
         }
     );
 };
+
+export function localize(str) {
+    return game.i18n.localize("CYBERPUNK." + str);
+}

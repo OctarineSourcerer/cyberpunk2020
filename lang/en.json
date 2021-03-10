@@ -185,5 +185,7 @@
 
     "CYBERPUNK.Details": "Details",
     "CYBERPUNK.ItemName": "Item Name",
-    "CYBERPUNK.AttackSkill": "AttackSkill"
+    "CYBERPUNK.AttackSkill": "AttackSkill",
+    "CYBERPUNK.Attack": "Attack",
+    "CYBERPUNK.Location": "Location"
 }

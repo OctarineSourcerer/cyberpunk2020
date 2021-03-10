@@ -1,5 +1,6 @@
 import { weaponTypes } from "../lookups.js"
 import { DiceCyberpunk, Multiroll, makeD10Roll }  from "../dice.js"
+import { localize } from "../utils.js"
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -65,9 +66,9 @@ export class CyberpunkItem extends Item {
     let locationRoll = new Roll("1d10");
 
     let bigRoll = new Multiroll(this.name, this.data.data.text)
-      .addRoll(attackRoll, {name: "Attack"})
-      .addRoll(damageRoll, {name: "Damage"})
-      .addRoll(locationRoll, {name:"Location"});
+      .addRoll(attackRoll, {name: localize("Attack")})
+      .addRoll(damageRoll, {name: localize("Damage")})
+      .addRoll(locationRoll, {name: localize("Location")});
 
     bigRoll.execute(undefined, "systems/cyberpunk2020/templates/chat/default-roll.hbs", {img:this.img})
   }
