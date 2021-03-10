@@ -151,7 +151,7 @@ export class Multiroll {
      */
     addRoll(roll, { name=undefined, flavor=undefined, critThreshold = undefined, fumbleThreshold = undefined }, extra={}) {
         this.rolls.push(roll);
-        // This may have no 
+        // This should be fine if there are no dice - they'll end up as undefined, and that's dealt with in Multiroll
         if(critThreshold === undefined) {
             let firstDie = roll.terms.find(term => term instanceof Die);
             critThreshold = (firstDie.number * firstDie.faces);

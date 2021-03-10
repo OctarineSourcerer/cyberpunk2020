@@ -55,6 +55,7 @@ export class CyberpunkItem extends Item {
     }
     let isRanged = this.type !== weaponTypes.melee;
     
+
     let attackTerms = ["@stats.ref.total"];
     if(this.attackSkill) {
       attackTerms.push(`@skills.${this.attackSkill}.value`);
@@ -69,16 +70,5 @@ export class CyberpunkItem extends Item {
       .addRoll(locationRoll, {name:"Location"});
 
     bigRoll.execute(undefined, "systems/cyberpunk2020/templates/chat/default-roll.hbs", {img:this.img})
-    
-    // DiceCyberpunk.d10Roll({
-    //   flavor: this.name,
-    //   rollData: owner.data.data,
-    //   parts: parts,
-    //   chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs",
-    //   chatTemplateData: {
-    //     description: this.data.data.text,
-    //     img: this.img
-    //   }
-    // });
   }
 }
