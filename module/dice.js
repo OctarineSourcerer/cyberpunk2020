@@ -213,6 +213,7 @@ export class Multiroll {
         let chatData = {
             user: game.user._id,
             speaker: speaker,
+            sound: "sounds/dice.wav",
             content: await renderTemplate(templatePath, fullTemplateData)
         };
         await ChatMessage.create(chatData);
