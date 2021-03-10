@@ -1,3 +1,5 @@
+import {} from "../lookups.js"
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -42,15 +44,7 @@ export class CyberpunkItemSheet extends ItemSheet {
   }
 
   _prepareWeapon(data) {
-    const typeLookup = {
-      "P": "Pistol",
-      "SMG": "Submachinegun",
-      "SHG": "Shotgun",
-      "RIF": "Rifle",
-      "HVY": "Heavy",
-      "MELEE": "Melee",
-      "EX": "Exotic"
-    };
+    // TODO: Add skills used for weapons, stats to choose from
   }
 
   /* -------------------------------------------- */

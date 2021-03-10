@@ -14,6 +14,40 @@ export const makeD10Roll = function(terms, rollData) {
     return new Roll(terms.join(" + "), rollData)
 }
 
+// This is lifted from foundry.js so that we can apply the same prettiness, just... in a more sensible order in our own template; it'd be nice if rolls themselves contained this info
+export function classifyRollDice(roll) {
+    const parts = roll.dice.map(d => {
+        const cls = d.constructor;
+        return {
+          formula: d.expression,
+          total: d.total,
+          faces: d.faces,
+          flavor: d.flavor,
+          subrolls: d.results.map(r => {
+            const hasSuccess = r.success !== undefined;
+            const hasFailure = r.failure !== undefined;
+            const isMax = r.result === d.faces;
+            const isMin = r.result === 1;
+            return {
+              result: cls.getResultLabel(r.result),
+              classes: [
+                cls.name.toLowerCase(),
+                "d" + d.faces,
+                r.success ? "success" : null,
+                r.failure ? "failure" : null,
+                r.rerolled ? "rerolled" : null,
+                r.exploded ? "exploded" : null,
+                r.discarded ? "discarded" : null,
+                !(hasSuccess || hasFailure) && isMin ? "min" : null,
+                !(hasSuccess || hasFailure) && isMax ? "max" : null
+              ].filter(c => c).join(" ")
+            }
+          })
+        };
+      });
+    return parts;
+}
+
 
 export class DiceCyberpunk {
     /**
@@ -159,6 +193,7 @@ export class Multiroll {
                 // Add name, flavor, critThreshold, fumbleThreshold etc. Also add whether crit or fumble.
                 return mergeObject(metaData, { 
                     roll: roll,
+                    diceInfo: classifyRollDice(roll),
                     isCrit: roll.terms[0] >= metaData.critThreshold,
                     isFumble: roll.terms[0] >= metaData.fumbleThreshold
                 })

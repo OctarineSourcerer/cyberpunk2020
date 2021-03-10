@@ -3,12 +3,26 @@
     <h2>{{title}}</h2>
 </div>
 <p>{{flavor}}</p>
-<div class="flexcol">
 {{log this}}
+<div class="dice-tooltip flexcol">
 {{#each rolls}}
-    <div class="flexrow">
-        <div>{{name}}:</div>
-        <div>{{roll._total}}</div>
-    </div>
+    <header class="part-header flexrow">
+        <span class="part-formula">{{name}}:</span>
+        {{#if this.flavor}}<span class="part-flavor">{{this.flavor}}</span>{{/if}}
+        <span class="part-total {{#if isCrit}}crit {{/if}}{{#if isFumble}}fumble {{/if}}">{{roll._total}}</span>
+    </header>
+    <div class="dice-tooltip">
+    {{#each diceInfo}}
+    <section class="tooltip-part">
+        <div class="dice">
+            <ol class="dice-rolls">
+            {{#each this.subrolls}}
+                <li class="roll {{this.classes}}">{{{this.result}}}</li>
+            {{/each}}
+            </ol>
+        </div>
+    </section>
+    {{/each}}
+</div>
 {{/each}}
 </div>

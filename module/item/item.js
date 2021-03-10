@@ -55,9 +55,9 @@ export class CyberpunkItem extends Item {
     }
     let isRanged = this.type !== weaponTypes.melee;
     
-    let attackTerms = [];
+    let attackTerms = ["@stats.ref.total"];
     if(this.attackSkill) {
-      attackTerms.push(`@stats.${this.attackSkill}.total`);
+      attackTerms.push(`@skills.${this.attackSkill}.value`);
     }
     let attackRoll = makeD10Roll(attackTerms, owner.data.data);
     let damageRoll = new Roll(this.data.data.damage);
