@@ -1,5 +1,5 @@
 import { weaponTypes } from "../lookups.js"
-import { DiceCyberpunk } from "../dice.js"
+import { DiceCyberpunk, Multiroll, makeD10Roll }  from "../dice.js"
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -55,19 +55,30 @@ export class CyberpunkItem extends Item {
     }
     let isRanged = this.type !== weaponTypes.melee;
     
-    let parts = [];
+    let attackTerms = [];
     if(this.attackSkill) {
-      parts.push(`@stats.${this.attackSkill}.total`)
+      attackTerms.push(`@stats.${this.attackSkill}.total`);
     }
-    DiceCyberpunk.d10Roll({
-      flavor: this.name,
-      data: owner.data.data,
-      parts: parts,
-      chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs",
-      chatTemplateData: {
-        description: this.data.data.text,
-        img: this.img
-      }
-    });
+    let attackRoll = makeD10Roll(attackTerms, owner.data.data);
+    let damageRoll = new Roll(this.data.data.damage);
+    let locationRoll = new Roll("1d10");
+
+    let bigRoll = new Multiroll(this.name, this.data.data.text)
+      .addRoll(attackRoll, name = "Attack")
+      .addRoll(damageRoll, name = "Damage")
+      .addRoll(locationRoll, name = "Location");
+
+    bigRoll.execute(undefined, "systems/cyberpunk2020/templates/chat/default-roll.hbs", {img:this.img})
+    
+    // DiceCyberpunk.d10Roll({
+    //   flavor: this.name,
+    //   rollData: owner.data.data,
+    //   parts: parts,
+    //   chatTemplate: "systems/cyberpunk2020/templates/chat/weapon-roll.hbs",
+    //   chatTemplateData: {
+    //     description: this.data.data.text,
+    //     img: this.img
+    //   }
+    // });
   }
 }

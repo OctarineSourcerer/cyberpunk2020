@@ -1,6 +1,19 @@
+export const BaseDie = "1d10x10"
+
 export const formulaHasDice = function (formula) {
     return formula.match(/[0-9)][dD]/) || formula.match(/[dD][0-9(]/);
 };
+
+export const makeD10Roll = function(terms, rollData) {
+    if(terms) {
+        terms = [BaseDie, ...terms]
+    }
+    else {
+        terms = [BaseDie]
+    }
+    return new Roll(terms.join(" + "), rollData)
+}
+
 
 export class DiceCyberpunk {
     /**
@@ -19,31 +32,30 @@ export class DiceCyberpunk {
      * @param {Array} extraRolls      An array containing bonuses/penalties for extra rolls
      */
     static async d10Roll({
-        dice = "1d10x10",
-        parts,
-        data,
         title,
         speaker,
-        flavor,
+        dice = BaseDie,
+        terms,
         critical = 10,
         fumble = 1,
+        flavor,
+        rollData,
         chatTemplate,
         chatTemplateData,
     }) {
         // Handle input arguments
         flavor = flavor || title;
 
-        if(parts) {
-            parts = [dice, ...parts]
+        if(terms) {
+            terms = [dice, ...terms]
         }
-        console.log(data);
-        let roll = new Roll(parts.join(" + "), data).roll();
+        let roll = new Roll(terms.join(" + "), rollData).roll();
 
         // Convert the roll to a chat message
         if (chatTemplate) {
             // Create roll template data
             const d10 = roll.terms[0];
-            const rollData = mergeObject(
+            const fullTemplateData = mergeObject(
                 {
                     user: game.user._id,
                     formula: roll.formula,
@@ -61,7 +73,7 @@ export class DiceCyberpunk {
             let chatData = {
                 user: game.user._id,
                 speaker: speaker,
-                content: await renderTemplate(chatTemplate, rollData)
+                content: await renderTemplate(chatTemplate, fullTemplateData)
             };
 
             // Send message
@@ -76,5 +88,89 @@ export class DiceCyberpunk {
         }
 
         return roll;
+    }
+}
+
+/**
+ * This class allows for making multiple rolls in a single action. For example, an attack roll and a damage roll.
+ * The API is designed to make sure each roll WILL get an equivalent metadata, so users of Multiroll don't have to make sure to balance the number of rolls they add, and the metadata.
+ * 
+ * Example:
+ *    let bigRoll = new Multiroll("Shootin'");
+ *    bigRoll.addRoll(new Roll("1d10+3"), name="Attack");
+ *    bigRoll.addRoll(new Roll("1d6+2"), name="Damage");
+ *    bigRoll.execute();
+ * 
+ * Methods can be chained, e.g bigRoll.addRoll(...).addRoll(...)
+ */
+export class Multiroll {
+    constructor(title, flavor="") {
+        this.title = title;
+        this.flavor = flavor;
+        this.rolls = [];
+        this.rollMetaData = [];
+    }
+
+    /**
+     * 
+     * @param {Roll} roll A FoundryVTT roll 
+     * @param {data} metaData Extra data about the roll (such as name, crit thresholds).
+     */
+    addRoll(roll, name=undefined, flavor=undefined, critThreshold = 10, fumbleThreshold = 1, extra={}) {
+        this.rolls.push(roll);
+        this.rollMetaData.push(mergeObject({
+            name: name,
+            flavor: flavor, 
+            critThreshold: critThreshold,
+            fumbleThreshold: fumbleThreshold
+        }, extra));
+        return this;
+    }
+
+    /**
+     * 
+     * @param {*} speaker The speaker on the card for this multiroll
+     * @param {string} templatePath Path to the template. eg systems/cyberpunk2020/templates/chat/weapon-roll.hbs
+     * Template provided should be one that loops through rolls.
+     * Example data provided to the template:
+     * {
+     *  user,
+     *  title,
+     *  flavor,
+     *  rolls: [
+     *      {roll: Roll, name, flavor, isCrit, isFumble, critThreshold, fumbleThreshold}
+     *  ],
+     *  ...
+     * }
+     */
+    async execute(speaker, templatePath, extraTemplateData={}) {
+        this.rolls.forEach(r => {
+            if (!r._rolled) {
+                r.roll();
+            }
+        });
+        
+        const fullTemplateData = mergeObject({
+            user: game.user._id,
+            title: this.title,
+            flavor: this.flavor,
+            rolls: this.rolls.map((roll, i) => {
+                let metaData = this.rollMetaData[i];
+                // Add name, flavor, critThreshold, fumbleThreshold etc. Also add whether crit or fumble.
+                return mergeObject(metaData, { 
+                    roll: roll,
+                    isCrit: roll.terms[0] >= metaData.critThreshold,
+                    isFumble: roll.terms[0] >= metaData.fumbleThreshold
+                })
+            }),
+        }, extraTemplateData || {});
+
+        let chatData = {
+            user: game.user._id,
+            speaker: speaker,
+            content: await renderTemplate(templatePath, fullTemplateData)
+        };
+        await ChatMessage.create(chatData);
+        return this;
     }
 }

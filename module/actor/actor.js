@@ -114,7 +114,7 @@ export class CyberpunkActor extends Actor {
     }
     DiceCyberpunk.d10Roll({
       flavor: skillName,
-      data: this.data.data,
+      rollData: this.data.data,
       parts: rollParts
     });
   }
@@ -123,7 +123,7 @@ export class CyberpunkActor extends Actor {
     let fullName = game.i18n.localize("CYBERPUNK." + properCase(statName) + "Full");
     DiceCyberpunk.d10Roll({
       flavor: fullName,
-      data: this.data.data,
+      rollData: this.data.data,
       parts: [`@stats.${statName}.total`]
     });
   }
