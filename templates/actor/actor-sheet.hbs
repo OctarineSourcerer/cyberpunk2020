@@ -14,8 +14,8 @@
         <div class="flexrow">
             <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
             <div class="flexcol">
-                {{> "systems/cyberpunk2020/templates/actor/parts/statsgrid.html"}}
-                {{> "systems/cyberpunk2020/templates/actor/parts/woundtracker.html"}}
+                {{> "systems/cyberpunk2020/templates/actor/parts/statsgrid.hbs"}}
+                {{> "systems/cyberpunk2020/templates/actor/parts/woundtracker.hbs"}}
             </div>
         </div>
     </header>
@@ -32,17 +32,17 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body">
         <div class="tab skills flexcol" data-group="primary" data-tab="skills">
-            {{> "systems/cyberpunk2020/templates/actor/parts/skills.html"}}
+            {{> "systems/cyberpunk2020/templates/actor/parts/skills.hbs"}}
         </div>
 
         {{!-- Not complete --}}
         {{!-- <div class="tab combat flexcol" data-group="primary" data-tab="combat">
-            {{> "systems/cyberpunk2020/templates/actor/parts/skills.html"}}
+            {{> "systems/cyberpunk2020/templates/actor/parts/skills.hbs"}}
         </div> --}}
 
         {{!-- Not complete --}}
         {{!-- <div class="tab cyberware flexcol" data-group="primary" data-tab="cyberware">
-            {{> "systems/cyberpunk2020/templates/actor/parts/skills.html"}}
+            {{> "systems/cyberpunk2020/templates/actor/parts/skills.hbs"}}
         </div> --}}
 
         <div class="tab gear flexcol" data-group="primary" data-tab="gear">

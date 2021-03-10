@@ -79,7 +79,7 @@ Hooks.once('init', async function () {
     });
 
     Handlebars.registerHelper("template", function(templateName) {
-        return "systems/cyberpunk2020/templates/" + templateName + ".html";
+        return "systems/cyberpunk2020/templates/" + templateName + ".hbs";
     });
 
     Handlebars.registerHelper("deepLookup", function(context, path) {

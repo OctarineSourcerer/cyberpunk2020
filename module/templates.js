@@ -4,17 +4,17 @@
  * @return {Promise}
  */
 export const preloadHandlebarsTemplates = async function() {
-    // Path to partial from foundry path. For cyberpunk, is "systems/cyberpunk2020/templates/actor/parts/___.html"
+    // Path to partial from foundry path. For cyberpunk, is "systems/cyberpunk2020/templates/actor/parts/___.hbs". Is .hbs as they're handlebars files
     return loadTemplates([
-        "systems/cyberpunk2020/templates/actor/parts/statsgrid.html",
-        "systems/cyberpunk2020/templates/actor/parts/woundtracker.html",
-        "systems/cyberpunk2020/templates/actor/parts/skills.html",
+        "systems/cyberpunk2020/templates/actor/parts/statsgrid.hbs",
+        "systems/cyberpunk2020/templates/actor/parts/woundtracker.hbs",
+        "systems/cyberpunk2020/templates/actor/parts/skills.hbs",
         "systems/cyberpunk2020/templates/actor/parts/gear.hbs",
 
         // Shared templates
-        "systems/cyberpunk2020/templates/fields/text.html",
-        "systems/cyberpunk2020/templates/fields/number.html",
-        "systems/cyberpunk2020/templates/fields/boolean.html",
+        "systems/cyberpunk2020/templates/fields/text.hbs",
+        "systems/cyberpunk2020/templates/fields/number.hbs",
+        "systems/cyberpunk2020/templates/fields/boolean.hbs",
 
         // Roll templates
         "systems/cyberpunk2020/templates/chat/default-roll.hbs",

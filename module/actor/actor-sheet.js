@@ -11,7 +11,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       // Css classes
       classes: ["cyberpunk", "sheet", "actor"],
-      template: "systems/cyberpunk2020/templates/actor/actor-sheet.html",
+      template: "systems/cyberpunk2020/templates/actor/actor-sheet.hbs",
       // Default window dimensions
       width: 590,
       height: 600,
