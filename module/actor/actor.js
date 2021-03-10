@@ -115,7 +115,7 @@ export class CyberpunkActor extends Actor {
     DiceCyberpunk.d10Roll({
       flavor: skillName,
       rollData: this.data.data,
-      parts: rollParts
+      terms: rollParts
     });
   }
 
@@ -124,7 +124,7 @@ export class CyberpunkActor extends Actor {
     DiceCyberpunk.d10Roll({
       flavor: fullName,
       rollData: this.data.data,
-      parts: [`@stats.${statName}.total`]
+      terms: [`@stats.${statName}.total`]
     });
   }
 
