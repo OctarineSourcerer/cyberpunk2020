@@ -48,7 +48,6 @@ export function classifyRollDice(roll) {
     return parts;
 }
 
-
 export class DiceCyberpunk {
     /**
      * A standardized helper function for managing core Cyberpunk d10 rolls. Initially taken from Pathfinder1 and 5e, and modified
@@ -148,10 +147,20 @@ export class Multiroll {
     /**
      * 
      * @param {Roll} roll A FoundryVTT roll 
-     * @param {data} metaData Extra data about the roll (such as name, crit thresholds).
+     * @param {data} metaData Extra data about the roll (such as name, crit thresholds). Crit threshold applies to a roll's first (dice) term, default its max amount
      */
-    addRoll(roll, name=undefined, flavor=undefined, critThreshold = 10, fumbleThreshold = 1, extra={}) {
+    addRoll(roll, { name=undefined, flavor=undefined, critThreshold = undefined, fumbleThreshold = undefined }, extra={}) {
         this.rolls.push(roll);
+        // This may have no 
+        if(critThreshold === undefined) {
+            let firstDie = roll.terms.find(term => term instanceof Die);
+            critThreshold = (firstDie.number * firstDie.faces);
+        }
+        if(fumbleThreshold === undefined) {
+            let firstDie = roll.terms.find(term => term instanceof Die);
+            fumbleThreshold = firstDie.number;
+        }
+
         this.rollMetaData.push(mergeObject({
             name: name,
             flavor: flavor, 
@@ -190,12 +199,13 @@ export class Multiroll {
             flavor: this.flavor,
             rolls: this.rolls.map((roll, i) => {
                 let metaData = this.rollMetaData[i];
+                let firstDiceTerm = roll.terms.find(term => term instanceof Die) || roll.terms[0];
                 // Add name, flavor, critThreshold, fumbleThreshold etc. Also add whether crit or fumble.
                 return mergeObject(metaData, { 
                     roll: roll,
                     diceInfo: classifyRollDice(roll),
-                    isCrit: roll.terms[0] >= metaData.critThreshold,
-                    isFumble: roll.terms[0] >= metaData.fumbleThreshold
+                    isCrit: metaData.critThreshold && firstDiceTerm.total >= metaData.critThreshold,
+                    isFumble: metaData.fumbleThreshold && firstDiceTerm.total <= metaData.fumbleThreshold
                 })
             }),
         }, extraTemplateData || {});

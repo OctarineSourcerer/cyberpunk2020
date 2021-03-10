@@ -475,4 +475,21 @@ div.statderive + .statderive.liftstat {
   padding-right: 10px;
 }
 
+.cyberpunk-card h2 {
+  font-family: "Noto Sans", sans-serif;
+  font-variant: small-caps;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+  margin: 0px;
+}
+.cyberpunk-card .roll-image {
+  margin-right: 5px;
+}
+.cyberpunk-card .part-total.crit {
+  background-color: #77b968b8;
+}
+.cyberpunk-card .part-total.fumble {
+  background-color: #d1502fb8;
+}
+
 /*# sourceMappingURL=cyberpunk.css.map */

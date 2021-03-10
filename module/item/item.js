@@ -64,9 +64,9 @@ export class CyberpunkItem extends Item {
     let locationRoll = new Roll("1d10");
 
     let bigRoll = new Multiroll(this.name, this.data.data.text)
-      .addRoll(attackRoll, name = "Attack")
-      .addRoll(damageRoll, name = "Damage")
-      .addRoll(locationRoll, name = "Location");
+      .addRoll(attackRoll, {name: "Attack"})
+      .addRoll(damageRoll, {name: "Damage"})
+      .addRoll(locationRoll, {name:"Location"});
 
     bigRoll.execute(undefined, "systems/cyberpunk2020/templates/chat/default-roll.hbs", {img:this.img})
     
