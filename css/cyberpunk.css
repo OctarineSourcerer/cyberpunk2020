@@ -15,6 +15,12 @@
   margin-bottom: 5px;
 }
 
+.cyberpunk h2 {
+  font-family: "Noto Sans", sans-serif;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
 .cyberpunk .fieldrow {
   width: 100%;
   display: flex;
@@ -171,6 +177,28 @@
   max-width: 32px;
   width: 32px;
   padding: 0px 3px 0px 0px;
+}
+
+.number {
+  background-color: transparent;
+}
+.number > * {
+  background-color: black;
+}
+.number > input.field-value {
+  border: 0 none;
+  border-radius: 0px;
+  padding: unset;
+  height: unset;
+  min-width: unset;
+  -webkit-appearance: unset;
+  background-color: unset;
+  font: inherit;
+  width: 1.5em;
+  color: black;
+  font-variant: small-caps;
+  text-align: center;
+  flex-grow: 0;
 }
 
 .list-item:hover .item-image {
@@ -409,24 +437,6 @@ div.statderive + .statderive.liftstat {
 
 .skill {
   width: 40%;
-  background-color: transparent;
-}
-.skill > * {
-  background-color: black;
-}
-.skill > .skill-value {
-  border: 0 none;
-  border-radius: 0px;
-  padding: unset;
-  height: unset;
-  min-width: unset;
-  -webkit-appearance: unset;
-  background-color: unset;
-  font: inherit;
-  width: 1.5em;
-  color: black;
-  font-variant: small-caps;
-  text-align: center;
 }
 .skill .chip-toggle {
   padding: 0px;
@@ -490,6 +500,36 @@ div.statderive + .statderive.liftstat {
 }
 .cyberpunk-card .part-total.fumble {
   background-color: #d1502fb8;
+}
+
+.combat-tab {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 2fr;
+  grid-template-areas: "rolls armor" "weapons weapons";
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: start;
+}
+.combat-tab .armor-display {
+  grid-area: armor;
+}
+.combat-tab .combat-rolls {
+  grid-area: rolls;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.combat-tab .combat-rolls .field {
+  margin-left: 0px;
+  margin-bottom: 5px;
+}
+.combat-tab .weapons-list {
+  grid-area: weapons;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.combat-tab .weapons-list .list-item {
+  width: 100%;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */

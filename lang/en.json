@@ -179,6 +179,7 @@
 
     "CYBERPUNK.Gear": "Gear",
     "CYBERPUNK.Weapon": "Weapon",
+    "CYBERPUNK.Weapons": "Weapons",
     "CYBERPUNK.Armor": "Armor",
     "CYBERPUNK.Cyberware": "Cyberware",
     "CYBERPUNK.Misc": "Misc",
@@ -187,5 +188,9 @@
     "CYBERPUNK.ItemName": "Item Name",
     "CYBERPUNK.AttackSkill": "AttackSkill",
     "CYBERPUNK.Attack": "Attack",
-    "CYBERPUNK.Location": "Location"
+    "CYBERPUNK.Location": "Location",
+
+    "CYBERPUNK.Rolls": "Rolls",
+    "CYBERPUNK.Initiative": "Initiative",
+    "CYBERPUNK.StunDeathSave": "Stun/Death Save"
 }
