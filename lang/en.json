@@ -170,10 +170,14 @@
 
     "CYBERPUNK.Head": "Head",
     "CYBERPUNK.Torso": "Torso",
-    "CYBERPUNK.LArm": "Left Arm",
-    "CYBERPUNK.RArm": "Right Arm",
-    "CYBERPUNK.LLeg": "Left Leg",
-    "CYBERPUNK.RLeg": "Right Leg",
+    "CYBERPUNK.lArm": "Left Arm",
+    "CYBERPUNK.rArm": "Right Arm",
+    "CYBERPUNK.lLeg": "Left Leg",
+    "CYBERPUNK.rLeg": "Right Leg",
+    "CYBERPUNK.lArmShort": "L. Arm",
+    "CYBERPUNK.rArmShort": "R. Arm",
+    "CYBERPUNK.lLegShort": "L. Leg",
+    "CYBERPUNK.rLegShort": "R. Leg",
     "CYBERPUNK.SP": "SP",
     "CYBERPUNK.SPFull": "Stopping Power",
 
