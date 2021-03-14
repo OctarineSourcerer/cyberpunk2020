@@ -505,23 +505,48 @@ div.statderive + .statderive.liftstat {
 .combat-tab {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 2fr;
-  grid-template-areas: "rolls armor" "weapons weapons";
+  grid-template-rows: 1fr 10fr;
+  grid-template-areas: "rolls rolls" "weapons armor";
   column-gap: 10px;
   row-gap: 10px;
   align-items: start;
 }
-.combat-tab .armor-display {
+.combat-tab .armor-section {
   grid-area: armor;
+}
+.combat-tab .armor-section .armor-display {
+  max-height: 250px;
+  padding-left: 10%;
+  padding-right: 10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: ". head ." "lArm torso rArm" "lLeg . rLeg";
+  column-gap: 3px;
+  row-gap: 3px;
+  justify-items: center;
+}
+.combat-tab .armor-section .armor-display .armor-segment {
+  width: 100%;
+  border: 2px solid black;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  grid-template-columns: auto;
+  grid-template-areas: "sp" "name";
+}
+.combat-tab .armor-section .armor-display .armor-segment .segment-sp {
+  grid-area: sp;
+  justify-self: center;
+}
+.combat-tab .armor-section .armor-display .armor-segment .segment-name {
+  grid-area: name;
+  text-align: center;
+  padding: 0px;
 }
 .combat-tab .combat-rolls {
   grid-area: rolls;
   display: flex;
   flex-flow: column nowrap;
-}
-.combat-tab .combat-rolls .field {
-  margin-left: 0px;
-  margin-bottom: 5px;
 }
 .combat-tab .weapons-list {
   grid-area: weapons;

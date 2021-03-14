@@ -1,0 +1,77 @@
+{{!-- Actor sheet's combat tab --}}
+{{log this}}
+<div class="combat-tab">
+    <section class="combat-rolls">
+        <div class="flexrow flexwrap fillwidth">
+            <div class="field roll-initiative">
+                <label class="field-label fillwidth">{{cLocal "Initiative"}}</label>
+            </div>
+            <div class="field stun-death">
+                <label class="field-label fillwidth">{{cLocal "StunDeathSave"}}</label>
+            </div>
+        </div>
+    </section>
+    <section class="armor-section">
+        {{!-- TODO: It'd be quite possible to loop through hit locations here, I think. Would work well for other creatures. --}}
+        <header>
+            <h2>{{cLocal "Armor"}}</h2>
+        </header>
+        <div class="armor-display">
+            <div class="armor-segment" style="grid-area: head">
+                <div class="segment-sp">{{data.hitLocations.head.armor}}</div>
+                <div class="segment-name field-label">{{cLocal "Head"}}</div>
+            </div>
+            <div class="armor-segment" style="grid-area: torso">
+                <div class="segment-sp">{{data.hitLocations.torso.armor}}</div>
+                <div class="segment-name field-label">{{cLocal "Torso"}}</div>
+            </div>
+            <div class="armor-segment" style="grid-area: lArm">
+                <div class="segment-sp">{{data.hitLocations.lArm.armor}}</div>
+                <div class="segment-name field-label">{{cLocal "lArmShort"}}</div>
+            </div>
+            <div class="armor-segment" style="grid-area: rArm">
+                <div class="segment-sp">{{data.hitLocations.rArm.armor}}</div>
+                <div class="segment-name field-label">{{cLocal "rArmShort"}}</div>
+            </div>
+            <div class="armor-segment" style="grid-area: lLeg">
+                <div class="segment-sp">{{data.hitLocations.lLeg.armor}}</div>
+                <div class="segment-name field-label">{{cLocal "lLegShort"}}</div>
+            </div>
+            <div class="armor-segment" style="grid-area: rLeg">
+                <div class="segment-sp">{{data.hitLocations.rLeg.armor}}</div>
+                <div class="segment-name field-label">{{cLocal "rLegShort"}}</div>
+            </div>
+        </div>
+        {{#each data.gear.armor}}
+        <div class="list-item gear item-edit" data-item-id="{{_id}}">
+            <div class="item-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <div class="field-label name">{{name}}</div>
+            <div class="flex-pad"></div>
+            <div class="field-label inactive">{{type}}</div>
+        </div>
+        {{/each}}
+    </section>
+    <section class="weapons-list item-list">
+        <header>
+            <h2>{{cLocal "Weapons"}}</h2>
+        </header>
+        {{#each data.gear.weapons as |weapon|}}
+            <div class="list-item gear item-edit" data-item-id="{{weapon._id}}">
+                <div class="item-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
+                <div class="field-label name">{{weapon.name}}</div>
+                {{!-- {{#with weapon.data}}
+                {{#unless (equals type ../weaponTypes.melee)}}
+                    <div class="field-label inactive">{{shotsLeft}}/{{shots}}</div>
+                    {{#if ap}}
+                        <div class="field-label inactive">{{localize "CYBERPUNK.AP"}}</div>
+                    {{/if}}
+                {{/unless}}
+                <div class="field-label inactive">{{damage}}</div>
+                <div class="field-label inactive">{{localize "CYBERPUNK.RoF"}}{{rof}}</div> --}}
+                <div class="flex-pad"></div>
+                <div class="field-label inactive">{{type}}</div>
+                {{!-- {{/with}} --}}
+            </div>
+        {{/each}}
+    </section>
+</div>

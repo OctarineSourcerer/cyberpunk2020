@@ -1,0 +1,71 @@
+.combat-tab {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 10fr;
+    grid-template-areas: 
+        "rolls rolls"
+        "weapons armor";
+    column-gap: 10px;
+    row-gap: 10px;
+    align-items: start;
+
+
+    .armor-section {
+        grid-area: armor;
+
+        .armor-display {
+            max-height: 250px;
+            padding-left: 10%;
+            padding-right: 10%;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas: 
+                   ". head ."
+                "lArm torso rArm"
+                "lLeg . rLeg";
+            column-gap: 3px;
+            row-gap: 3px;
+            justify-items: center;
+
+            .armor-segment {
+                width:100%; 
+                border: 2px solid $text-colour;
+                display: grid;
+                grid-template-rows: 2fr 1fr;
+                grid-template-columns: auto;
+                grid-template-areas: 
+                    "sp"
+                    "name";
+
+                // TODO: Center this properly
+                .segment-sp {
+                    grid-area: sp;
+                    justify-self: center;
+                }
+                .segment-name {
+                    grid-area: name;
+                    text-align: center;
+                    padding: 0px;
+                }
+            }
+        }
+    }
+
+    .combat-rolls {
+        grid-area: rolls;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+    .weapons-list {
+        grid-area: weapons;
+        display: flex;
+        flex-flow: column nowrap;
+
+        .list-item {
+            width : 100%;
+        }
+    }
+}

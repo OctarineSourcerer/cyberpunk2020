@@ -689,26 +689,23 @@
 				"motivations": "",
 				"notes": ""
 			},
-			"hit-locations": {
-				"hit-locations": {
+			"hitLocations": {
+				"hitLocations": {
 					"head": {
 						"location": [
 							1
-						],
-						"armor": 0
+						]
 					},
 					"torso": {
 						"location": [
 							2,
 							4
-						],
-						"armor": 0
+						]
 					},
 					"rArm": {
 						"location": [
 							5
-						],
-						"armor": 0
+						]
 					},
 					"lArm": {
 						"location": [
@@ -720,8 +717,7 @@
 						"location": [
 							7,
 							8
-						],
-						"armor": 0
+						]
 					},
 					"rLeg": {
 						"location": [
@@ -742,7 +738,7 @@
 				"lifepath",
 				"stats",
 				"skills",
-				"hit-locations",
+				"hitLocations",
 				"gear"
 			],
 			"damage": 0
