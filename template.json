@@ -173,43 +173,43 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "emp"
 					},
 					"Interview": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "emp"
 					},
 					"Leadership": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "emp"
 					},
 					"Seduction": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "emp"
 					},
 					"Social": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "emp"
 					},
 					"PersuasionFastTalk": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "emp"
 					},
 					"Perform": {
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "emp"
 					},
 					"Accounting": {
 						"value": 0,
