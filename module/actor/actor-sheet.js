@@ -1,3 +1,4 @@
+import { DiceCyberpunk } from "../dice.js";
 import { weaponTypes } from "../lookups.js"
 
 /**
@@ -162,6 +163,9 @@ export class CyberpunkActorSheet extends ActorSheet {
     html.find('.item-edit').click(ev => {
       let item = getEventItem(this, ev);
       item.sheet.render(true);
+    });
+    html.find(".roll-initiative").click(ev => {
+      this.actor.rollInitiative();
     });
   }
 }

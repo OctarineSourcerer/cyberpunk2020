@@ -14,9 +14,10 @@
         grid-area: armor;
 
         .armor-display {
-            max-height: 250px;
+            max-height: 200px;
             padding-left: 10%;
             padding-right: 10%;
+            margin-bottom: 10px;
 
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -39,10 +40,12 @@
                     "sp"
                     "name";
 
-                // TODO: Center this properly
                 .segment-sp {
                     grid-area: sp;
-                    justify-self: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    text-align: center;
                 }
                 .segment-name {
                     grid-area: name;
@@ -59,13 +62,14 @@
         flex-flow: column nowrap;
     }
 
+    // Lists in here have full width
+    .list-item {
+        width : 100%;
+    }
+
     .weapons-list {
         grid-area: weapons;
         display: flex;
         flex-flow: column nowrap;
-
-        .list-item {
-            width : 100%;
-        }
     }
 }

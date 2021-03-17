@@ -515,9 +515,10 @@ div.statderive + .statderive.liftstat {
   grid-area: armor;
 }
 .combat-tab .armor-section .armor-display {
-  max-height: 250px;
+  max-height: 200px;
   padding-left: 10%;
   padding-right: 10%;
+  margin-bottom: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -536,7 +537,10 @@ div.statderive + .statderive.liftstat {
 }
 .combat-tab .armor-section .armor-display .armor-segment .segment-sp {
   grid-area: sp;
-  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 .combat-tab .armor-section .armor-display .armor-segment .segment-name {
   grid-area: name;
@@ -548,13 +552,13 @@ div.statderive + .statderive.liftstat {
   display: flex;
   flex-flow: column nowrap;
 }
+.combat-tab .list-item {
+  width: 100%;
+}
 .combat-tab .weapons-list {
   grid-area: weapons;
   display: flex;
   flex-flow: column nowrap;
-}
-.combat-tab .weapons-list .list-item {
-  width: 100%;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */

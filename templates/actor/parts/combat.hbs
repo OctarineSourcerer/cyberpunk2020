@@ -3,7 +3,7 @@
 <div class="combat-tab">
     <section class="combat-rolls">
         <div class="flexrow flexwrap fillwidth">
-            <div class="field roll-initiative">
+            <div class="field roll-initiative action">
                 <label class="field-label fillwidth">{{cLocal "Initiative"}}</label>
             </div>
             <div class="field stun-death">
@@ -42,12 +42,13 @@
                 <div class="segment-name field-label">{{cLocal "rLegShort"}}</div>
             </div>
         </div>
+
         {{#each data.gear.armor}}
-        <div class="list-item gear item-edit" data-item-id="{{_id}}">
+        <div class="list-item item-edit" data-item-id="{{_id}}">
             <div class="item-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
             <div class="field-label name">{{name}}</div>
             <div class="flex-pad"></div>
-            <div class="field-label inactive">{{type}}</div>
+            <div class="field-label inactive">{{displayArray data.coverage}}</div>
         </div>
         {{/each}}
     </section>
@@ -69,7 +70,7 @@
                 <div class="field-label inactive">{{damage}}</div>
                 <div class="field-label inactive">{{localize "CYBERPUNK.RoF"}}{{rof}}</div> --}}
                 <div class="flex-pad"></div>
-                <div class="field-label inactive">{{type}}</div>
+                <div class="field-label inactive">{{#if weapon.data.attackType}}{{weapon.data.attackType}}{{else}}{{weapon.data.weaponType}}{{/if}}</div>
                 {{!-- {{/with}} --}}
             </div>
         {{/each}}

@@ -90,6 +90,15 @@ Hooks.once('init', async function () {
         return current;
     });
 
+    // Display array of localizable strings, in short if possible
+    Handlebars.registerHelper("displayArray", function(array) {
+        return array.map(e => {
+            let makeShort = game.i18n.translations.CYBERPUNK[e + "Short"] !== undefined;
+            let key = "CYBERPUNK."+(makeShort ? e + "Short" : e)
+            return game.i18n.localize(key);
+        }).join("|");
+    });
+
     // Register and preload templates with Foundry. See templates.js for usage
     preloadHandlebarsTemplates();
 });

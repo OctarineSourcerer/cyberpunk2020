@@ -26,7 +26,7 @@
       }
     ],
     "socket": false,
-    "initiative": "1d10x{10} + @stats.ref",
+    "initiative": "1d10x10 + @stats.ref.total",
     "gridDistance": 5,
     "gridUnits": "ft",
     "primaryTokenAttribute": "resources.health",

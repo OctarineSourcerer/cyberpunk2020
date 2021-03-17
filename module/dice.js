@@ -53,10 +53,10 @@ export class DiceCyberpunk {
      * A standardized helper function for managing core Cyberpunk d10 rolls. Initially taken from Pathfinder1 and 5e, and modified
      *
      * @param {Event} event           The triggering event which initiated the roll
-     * @param {Array} parts           The dice roll component parts, excluding the initial d10
+     * @param {Array} terms           The dice roll component parts, excluding the initial d10
      * @param {String} dice           The initial d20
      * @param {Actor} actor           The Actor making the d10 roll
-     * @param {Object} data           Actor or item data against which to parse the roll. eg can include skillBonus etc? for at skillbonus etc
+     * @param {Object} rollData           Actor or item data against which to parse the roll. eg can include skillBonus etc? for at skillbonus etc
      * @param {String} title          The dice roll UI window title
      * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
      * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
