@@ -196,5 +196,8 @@
 
     "CYBERPUNK.Rolls": "Rolls",
     "CYBERPUNK.Initiative": "Initiative",
-    "CYBERPUNK.StunDeathSave": "Stun/Death Save"
+    "CYBERPUNK.StunDeathSave": "Stun/Death Save",
+    
+    "CYBERPUNK.Description": "Description",
+    "CYBERPUNK.Settings": "Settings"
 }
