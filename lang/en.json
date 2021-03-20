@@ -156,6 +156,7 @@
     "CYBERPUNK.SkillWeaponsmith": "Weaponsmith",
 
     "CYBERPUNK.Summary": "Summary",
+    "CYBERPUNK.Flavor": "Flavor",
     "CYBERPUNK.Accuracy": "Accuracy",
     "CYBERPUNK.Damage": "Damage",
     "CYBERPUNK.Shots": "Shots",
@@ -167,6 +168,14 @@
     "CYBERPUNK.Type": "Type",
     "CYBERPUNK.Concealability": "Concealability",
     "CYBERPUNK.Availability": "Availability",
+
+    "CYBERPUNK.Pistol": "Pistol",
+    "CYBERPUNK.SMG": "SMG",
+    "CYBERPUNK.Shotgun": "Shotgun",
+    "CYBERPUNK.Rifle": "Rifle",
+    "CYBERPUNK.Heavy": "Heavy",
+    "CYBERPUNK.Melee": "Melee",
+    "CYBERPUNK.Exotic": "Exotic",
 
     "CYBERPUNK.Head": "Head",
     "CYBERPUNK.Torso": "Torso",
@@ -189,10 +198,13 @@
     "CYBERPUNK.Misc": "Misc",
 
     "CYBERPUNK.Details": "Details",
+    "CYBERPUNK.Notes": "Notes",
     "CYBERPUNK.ItemName": "Item Name",
     "CYBERPUNK.AttackSkill": "AttackSkill",
     "CYBERPUNK.Attack": "Attack",
     "CYBERPUNK.Location": "Location",
+    "CYBERPUNK.WeaponType": "Weapon Type",
+    "CYBERPUNK.AttackType": "Attack Type",
 
     "CYBERPUNK.Rolls": "Rolls",
     "CYBERPUNK.Initiative": "Initiative",

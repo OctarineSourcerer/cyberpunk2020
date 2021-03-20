@@ -9,6 +9,10 @@ export function properCase(str) {
     );
 };
 
+export function replaceIn(replaceIn, replaceWith) {
+    return replaceIn.replace("[VAR]", replaceWith);
+}
+
 export function localize(str) {
     return game.i18n.localize("CYBERPUNK." + str);
 }

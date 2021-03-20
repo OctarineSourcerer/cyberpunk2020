@@ -86,7 +86,7 @@ export class CyberpunkActorSheet extends ActorSheet {
   }
 
   /**
-   * Organize and classify Items for Character sheets.
+   * Organize andp classify Items for Character sheets.
    *
    * @param {Object} actorData The actor to prepare.
    *

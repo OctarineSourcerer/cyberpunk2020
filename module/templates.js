@@ -23,7 +23,8 @@ export const preloadHandlebarsTemplates = async function() {
 
         // Item sheet
         "systems/cyberpunk2020/templates/item/item-sheet.hbs",
-        "systems/cyberpunk2020/templates/item/weapon-sheet.hbs"
+        "systems/cyberpunk2020/templates/item/parts/weapon/summary.hbs",
+        "systems/cyberpunk2020/templates/item/parts/weapon/settings.hbs"
     ]);
   };
   

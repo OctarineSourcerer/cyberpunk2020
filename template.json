@@ -749,7 +749,8 @@
 		"templates": {
 			"common": {
 				"name": "Common",
-				"text": "",
+				"flavor": "",
+				"notes": "",
 				"cost": 0,
 				"weight": 0,
 				"equipped": true
@@ -757,10 +758,10 @@
 		},
 		"weapon": {
 			"templates": ["common"],
-			"weaponType": "P",
+			"weaponType": "pistol",
 			"accuracy": 0,
 			"concealability": "P",
-			"availability": "C",
+			"availability": "common",
 			"ammoType": "9mm",
 			"damage": "2d6+1",
 			"ap": false,

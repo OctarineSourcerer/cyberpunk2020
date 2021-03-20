@@ -4,32 +4,39 @@
         settings tab contents
     {{/systems/cyberpunk2020/templates/item/item-sheet.hbs}}
  --}}
-<form class="{{cssClass}}" autocomplete="off">
+{{log this}}
+<form class="cyberpunk {{cssClass}}" autocomplete="off">
     <header class="flexrow nowrap">
         <div class="flexcol">
-            <h1 class="title fillwidth nogrow"><input class="field-value" name="name" type="text" value="{{item.name}}" placeholder="{{cLocal 'ItemName'}}"/></h1>
-            <textarea class="description" name="data.text" placeholder="{{cLocal 'Summary'}}">{{data.text}}</textarea>
+            <span class="infoline">
+                <h1 class="title">
+                    <input class="field-value fillwidth" name="name" type="text" value="{{item.name}}" placeholder="{{cLocal 'ItemName'}}"/>
+                </h1>
+                <span class="summary inactive">{{> (varTemplate "item/parts/[VAR]/summary.hbs" item.type)}}</span>
+            </span>
+            <textarea class="flavor" name="data.flavor" placeholder="{{cLocal 'Flavor'}}">{{data.flavor}}</textarea>
+            
         </div>
         <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
     </header>
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="notes">{{cLocal 'Notes'}}</a>
         <a class="item" data-tab="settings">{{cLocal 'Settings'}}</a>
-        <a class="item" data-tab="settings">{{cLocal 'Description'}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
         
         {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        <div class="tab" data-group="primary" data-tab="notes">
+            {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
         </div>
 
         {{!-- Attributes Tab --}}
         <div class="tab" data-group="primary" data-tab="settings">
-            {{> @partial-block }}
+             {{> (varTemplate "item/parts/[VAR]/settings.hbs" item.type)}}
         </div>
     </section>
 </form>

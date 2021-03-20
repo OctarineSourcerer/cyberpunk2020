@@ -65,7 +65,7 @@ export class CyberpunkItem extends Item {
     let damageRoll = new Roll(this.data.data.damage);
     let locationRoll = new Roll("1d10");
 
-    let bigRoll = new Multiroll(this.name, this.data.data.text)
+    let bigRoll = new Multiroll(this.name, this.data.data.flavor)
       .addRoll(attackRoll, {name: localize("Attack")})
       .addRoll(damageRoll, {name: localize("Damage")})
       .addRoll(locationRoll, {name: localize("Location")});

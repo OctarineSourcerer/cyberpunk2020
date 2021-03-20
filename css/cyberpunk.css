@@ -461,7 +461,7 @@ div.statderive + .statderive.liftstat {
   background-image: url(../img/chip.png);
 }
 
-.cyberpunk textarea.description {
+.cyberpunk textarea.flavor {
   font-family: "Noto Sans", sans-serif;
   font-weight: bold;
   font-style: italic;
@@ -478,6 +478,20 @@ div.statderive + .statderive.liftstat {
   flex-grow: 0;
   width: 20%;
   margin-left: 4px;
+}
+
+.infoline {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.summary {
+  flex-grow: 0;
+  font-variant: small-caps;
+  font-size: 15px;
+  white-space: nowrap;
+  margin-right: 5px;
 }
 
 .gear .name {
