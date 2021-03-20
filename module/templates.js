@@ -20,6 +20,10 @@ export const preloadHandlebarsTemplates = async function() {
         // Roll templates
         "systems/cyberpunk2020/templates/chat/default-roll.hbs",
         "systems/cyberpunk2020/templates/chat/weapon-roll.hbs",
+
+        // Item sheet
+        "systems/cyberpunk2020/templates/item/item-sheet.hbs",
+        "systems/cyberpunk2020/templates/item/weapon-sheet.hbs"
     ]);
   };
   
