@@ -1,0 +1,42 @@
+{{!-- Container for all the stats --}}
+<div class="stats flexcol">
+    <div class="statsrow">
+        {{#each data.stats as |stat key|}}
+        <div class="field stat">
+            <label>{{localize (localizeStat key)}}</label>
+            <div class="flexrow">
+                <input type="number" name="data.stats.{{key}}.base" value="{{stat.base}}" class="stat-base"/>
+                <div class="stat-mod">+</div>
+                <input type="number" name="data.stats.{{key}}.tempMod" value={{stat.tempMod}} class="stat-temp"/>
+            </div>
+            <div class="stat-total action stat-roll" data-stat-name="{{key}}">{{stat.total}}</div>
+        </div>
+        {{/each}}
+    </div>
+    
+    {{!-- Run, Leap etc. These are below, cos we're a lot less starved for vertical space than horizontal --}}
+    {{!-- If I had horizontal space, I'd just slap these against their relevant stats --}}
+    <div class="derivedrow">
+        <div class="field">
+            <label>{{localize 'CYBERPUNK.BTmod'}}</label>
+            <input class="value not-editable" value="{{data.stats.bt.modifier}}" readonly>
+        </div>
+        <div class="field">
+            <label>{{localize 'CYBERPUNK.Carry'}}</label>
+            <input class="value not-editable" value="{{data.stats.bt.carry}}" readonly>
+        </div>
+        <div class="field liftstat">
+            <label>{{localize 'CYBERPUNK.Lift'}}</label>
+            <input class="rightborder not-editable" value="{{data.stats.bt.lift}}" readonly>
+        </div>
+        <div class="flex-pad"></div>
+        <div class="field">
+            <label>{{localize 'CYBERPUNK.Leap'}}</label>
+            <input class="not-editable" value="{{data.stats.ma.leap}}" readonly>
+        </div>
+        <div class="field">
+            <label>{{localize 'CYBERPUNK.Run'}}</label>
+            <input class="rightborder not-editable" value="{{data.stats.ma.run}}" readonly>
+        </div>
+    </div>
+</div>
