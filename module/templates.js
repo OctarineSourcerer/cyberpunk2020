@@ -6,7 +6,7 @@
 export const preloadHandlebarsTemplates = async function() {
     // Path to partial from foundry path. For cyberpunk, is "systems/cyberpunk2020/templates/actor/parts/___.hbs". Is .hbs as they're handlebars files
     return loadTemplates([
-        "systems/cyberpunk2020/templates/actor/parts/statsgrid.hbs",
+        "systems/cyberpunk2020/templates/actor/parts/statsrow.hbs",
         "systems/cyberpunk2020/templates/actor/parts/woundtracker.hbs",
         "systems/cyberpunk2020/templates/actor/parts/skills.hbs",
         "systems/cyberpunk2020/templates/actor/parts/gear.hbs",

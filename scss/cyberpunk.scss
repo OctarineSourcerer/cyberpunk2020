@@ -62,7 +62,10 @@ $field-border-width: 2px;
     min-width: 6em;
     flex-grow: 2;
     > input {
-        padding-left: 0px;
+        @include reset-input;
+        color: $text-colour;
+        font-family: $font-secondary;
+        font-weight: bold;
     }
 }
 
@@ -74,51 +77,43 @@ $field-border-width: 2px;
 
     border-width: $field-border-width;
     border-style: solid;
-    border-color: black;
+    border-color: $text-colour;
 
-    // background-color: $text-colour;
-}
-.cyberpunk .field-label {
-    background-color: $text-colour;
-    color: $text-colour-inverted;
-    font-weight: bold;
-    font-variant: small-caps;
+    >* {
+        background-color: $text-colour;
+        font-weight: bold;
+        font-variant: small-caps;
+        padding: 2px 0px 2px 0px;
+    }
+    label {
+        color: $text-colour-inverted;
+        padding-left: calc(5px - #{$field-border-width});
+        padding-right: 5px;
+    }
+    input {
+        @include reset-input;
+        color: $text-colour;
+        font-family: $font-secondary;
+        padding-left: 5px;
+        padding-right: 0px;
+        flex-grow: 1;
+        flex-shrink: 1;
 
-    padding: 2px 5px 2px 5px;
-    padding-left: calc(5px - #{$field-border-width});
-}
-
-.cyberpunk .field-value {
-    @include reset-input;
-    font-family: $font-secondary;
-    font-weight: bold;
-    height: auto;
-    padding-left: 5px;
-    flex-grow: 1;
-    flex-shrink: 1;
-}
-.cyberpunk .field-value-no-reset {
-    font-family: $font-secondary;
-    font-weight: bold;
-    height: auto;
-    padding-left: 5px;
-    flex-grow: 1;
-    flex-shrink: 1;
-}
-
-.cyberpunk .numsize {
-    width: 2.5em;
-    padding: 2px 0px 2px 0px;
-    text-align: center;
-}
-.cyberpunk .smallnumsize {
-    width: 1.5em;
-    padding: 2px 0px 2px 0px;
-    text-align: center;
-}
-.cyberpunk .textsize {
-    width: 6em;
-    min-width: 2em;
+        &.number {
+            width: 2.5em;
+            // padding: 2px 0px 2px 0px;
+            text-align: center;
+        }
+        &.smallnumber {
+            width: 1.5em;
+            // padding: 2px 0px 2px 0px;
+            text-align: center;
+        }
+        &.textsize {
+            width: 6em;
+            min-width: 2em;
+        }
+    }
 }
 // Overides
 // !important cos this is used as an override
@@ -137,7 +132,6 @@ $field-border-width: 2px;
     max-height: 170px;
     max-width: 20%;
     flex-shrink: 2;
-    // flex-grow: 0;
     width:20%;
     margin-right: 4px;
 }
@@ -182,7 +176,6 @@ $field-border-width: 2px;
 
     border-style: solid;
     border-width: 2px;
-    background-color: $text-colour;
 
     margin: 0px 2px 4px 2px;
 
@@ -203,28 +196,6 @@ $field-border-width: 2px;
     }
 }
 
-// TODO: This may need cleanup; skills are list-items, and rolls in combat-tab are fields, but they use the same thing
-.number {
-    // Background colour change is so that the editable part can have a transparent background
-    background-color: transparent;
-
-    // The rest, however, all background colour
-    // Usually this breaks inactive, which uses filter (and therefore washes out the background too), but the inactives in skills are ensconced in chip-toggle; a container whose background won't be affected by child filters
-    >* {
-        background-color: $text-colour;
-    }
-
-    >input.field-value {
-        @include reset-input;
-
-        width: 2.5em;
-        color: $text-colour;
-        font-variant: small-caps;
-        text-align:center;
-        flex-grow: 0;
-    }
-}
-
 .list-item:hover .item-image {
     background-image: url("../../../icons/svg/d10-grey.svg") !important;
 }
@@ -238,7 +209,7 @@ $field-border-width: 2px;
 }
 
 @import "interactivityHints";
-@import "statsgrid";
+@import "statsrow";
 @import "woundtracker";
 @import "skills";
 @import "itemSheets";
