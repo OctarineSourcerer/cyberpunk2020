@@ -1,5 +1,6 @@
-<div class="field">
+<div class="field{{#unless noList}} list-item{{/unless}}">
     <label for="{{path}}" class="field-label">{{cLocal loc}}</label>
+    <span class="flex-pad"></span>
     <input class="field-value textsize" name="{{path}}" 
         type="text" value="{{deepLookup . path}}"/>
 </div>

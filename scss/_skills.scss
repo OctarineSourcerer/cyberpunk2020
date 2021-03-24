@@ -28,8 +28,11 @@
 .skill {
     width: 40%;
 
+    // With the default spacious number width, skills overflow
+    >input.field-value {
+        width: 1.5em;
+    }
     .chip-toggle { 
-        // background-color: $text-colour;
         padding: 0px;
         display: contents;
 

@@ -1,20 +1,17 @@
-<div class="flexcol">
-    <div class="fieldrow flexwrap">
-        {{> (template "fields/number") loc="Accuracy" path="data.accuracy"}}
-        {{> (template "fields/text") loc="Damage" path="data.damage"}}
-        {{> (template "fields/number") loc="Shots" path="data.shots"}}
-        {{> (template "fields/boolean") loc="AP" path="data.ap"}}
-        {{> (template "fields/number") loc="RoF" path="data.rof"}}
-        {{> (template "fields/text") loc="Reliability" path="data.reliability"}}
-        {{> (template "fields/number") loc="Range" path="data.range"}}
-        {{> (template "fields/text") loc="AmmoType" path="data.ammoType"}}
+<div class="item-list">
+    {{> (template "fields/number") loc="Accuracy" path="data.accuracy"}}
+    {{> (template "fields/text") loc="Damage" path="data.damage"}}
+    {{> (template "fields/number") loc="Shots" path="data.shots"}}
+    {{> (template "fields/boolean") loc="AP" path="data.ap"}}
+    {{> (template "fields/number") loc="RoF" path="data.rof"}}
+    {{> (template "fields/text") loc="Reliability" path="data.reliability"}}
+    {{> (template "fields/number") loc="Range" path="data.range"}}
+    {{> (template "fields/text") loc="AmmoType" path="data.ammoType"}}
 
-        {{> (template "fields/text") loc="WeaponType" path="data.weaponType"}}
-        {{> (template "fields/text") loc="AttackType" path="data.attackType"}}
-        {{> (template "fields/text") loc="Concealability" path="data.concealability"}}
+    {{> (template "fields/text") loc="WeaponType" path="data.weaponType"}}
+    {{> (template "fields/text") loc="AttackType" path="data.attackType"}}
+    {{> (template "fields/text") loc="Concealability" path="data.concealability"}}
 
-        {{> (template "fields/text") loc="Availability" path="data.availability"}}
-    </div>
-
-    <a class="item-roll"><i>Fire</i></a>
+    {{> (template "fields/text") loc="Availability" path="data.availability"}}
 </div>
+<a class="item-roll"><i>Fire</i></a>

@@ -48,6 +48,7 @@ $field-border-width: 2px;
 
     > * {
         flex-grow: 1;
+        margin-right: 5px;
     }
 }
 
@@ -58,7 +59,7 @@ $field-border-width: 2px;
     border: solid 0px;
     margin-bottom: 0px;
     padding-right: 5px;
-    width: 6em;
+    min-width: 6em;
     flex-grow: 2;
     > input {
         padding-left: 0px;
@@ -70,15 +71,12 @@ $field-border-width: 2px;
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    // flex: 0 0 auto;
 
     border-width: $field-border-width;
     border-style: solid;
     border-color: black;
 
-    +.field {
-        margin-left: 5px;
-    }
+    // background-color: $text-colour;
 }
 .cyberpunk .field-label {
     background-color: $text-colour;
@@ -219,7 +217,7 @@ $field-border-width: 2px;
     >input.field-value {
         @include reset-input;
 
-        width: 1.5em;
+        width: 2.5em;
         color: $text-colour;
         font-variant: small-caps;
         text-align:center;

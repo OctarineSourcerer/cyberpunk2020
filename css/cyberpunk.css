@@ -30,6 +30,7 @@
 }
 .cyberpunk .fieldrow > * {
   flex-grow: 1;
+  margin-right: 5px;
 }
 
 .cyberpunk h1.title {
@@ -39,7 +40,7 @@
   border: solid 0px;
   margin-bottom: 0px;
   padding-right: 5px;
-  width: 6em;
+  min-width: 6em;
   flex-grow: 2;
 }
 .cyberpunk h1.title > input {
@@ -53,9 +54,6 @@
   border-width: 2px;
   border-style: solid;
   border-color: black;
-}
-.cyberpunk .field + .field {
-  margin-left: 5px;
 }
 
 .cyberpunk .field-label {
@@ -194,7 +192,7 @@
   -webkit-appearance: unset;
   background-color: unset;
   font: inherit;
-  width: 1.5em;
+  width: 2.5em;
   color: black;
   font-variant: small-caps;
   text-align: center;
@@ -438,6 +436,9 @@ div.statderive + .statderive.liftstat {
 .skill {
   width: 40%;
 }
+.skill > input.field-value {
+  width: 1.5em;
+}
 .skill .chip-toggle {
   padding: 0px;
   display: contents;
@@ -565,6 +566,9 @@ div.statderive + .statderive.liftstat {
   grid-area: rolls;
   display: flex;
   flex-flow: column nowrap;
+}
+.combat-tab .combat-rolls .field + .field {
+  margin-left: 5px;
 }
 .combat-tab .list-item {
   width: 100%;

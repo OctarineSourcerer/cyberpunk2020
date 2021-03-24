@@ -60,6 +60,10 @@
         grid-area: rolls;
         display: flex;
         flex-flow: column nowrap;
+
+        .field+.field {
+            margin-left: 5px;
+        }
     }
 
     // Lists in here have full width
