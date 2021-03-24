@@ -9,7 +9,7 @@
                 <div class="stat-mod">+</div>
                 <input type="number" name="data.stats.{{key}}.tempMod" value={{stat.tempMod}} class="stat-temp"/>
             </div>
-            <div class="stat-total action stat-roll" data-stat-name="{{key}}">{{stat.total}}</div>
+            <input class="stat-total action stat-roll" data-stat-name="{{key}}" value="{{stat.total}}" readonly>
         </div>
         {{/each}}
     </div>

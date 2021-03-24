@@ -67,16 +67,25 @@
 }
 .cyberpunk .field > * {
   background-color: black;
+  color: whitesmoke;
   font-weight: bold;
   font-variant: small-caps;
   padding: 2px 0px 2px 0px;
 }
-.cyberpunk .field label {
+.cyberpunk .field .field-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  max-width: 32px;
+  width: 32px;
+  padding: 0px 3px 0px 0px;
+}
+.cyberpunk .field > label {
   color: whitesmoke;
   padding-left: calc(5px - 2px);
   padding-right: 5px;
 }
-.cyberpunk .field input {
+.cyberpunk .field > input {
   border: 0 none;
   border-radius: 0px;
   padding: unset;
@@ -92,17 +101,21 @@
   flex-grow: 1;
   flex-shrink: 1;
 }
-.cyberpunk .field input.number {
+.cyberpunk .field > input.number {
   width: 2.5em;
   text-align: center;
 }
-.cyberpunk .field input.smallnumber {
+.cyberpunk .field > input.smallnumber {
   width: 1.5em;
   text-align: center;
+  padding-left: 0px;
 }
-.cyberpunk .field input.textsize {
+.cyberpunk .field > input.textsize {
   width: 6em;
   min-width: 2em;
+}
+.cyberpunk .field p {
+  margin: 0px 3px 0px 3px;
 }
 
 .cyberpunk .flexwrap {
@@ -138,42 +151,25 @@
   flex-shrink: 1;
 }
 
-.item-list {
+.field-list {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  margin-right: -4px;
+  margin-right: -3px;
   flex-grow: 0;
 }
-.item-list + .spacer {
+.field-list + .spacer {
   flex-grow: 1;
 }
-
-.list-item {
-  display: flex;
+.field-list .field {
   flex-grow: 1;
   width: 40%;
   min-width: 185px;
-  border-style: solid;
-  border-width: 2px;
-  margin: 0px 2px 4px 2px;
-}
-.list-item > * {
-  padding: 3px;
-}
-.list-item > .field-label {
-  padding: 3px;
-}
-.list-item .item-image {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  max-width: 32px;
-  width: 32px;
-  padding: 0px 3px 0px 0px;
+  margin-right: 5px;
+  margin-bottom: 3px;
 }
 
-.list-item:hover .item-image {
+.field-image.roll:hover {
   background-image: url("../../../icons/svg/d10-grey.svg") !important;
 }
 
@@ -404,27 +400,28 @@ div.statderive .value.rightborder {
   background-image: url(../img/search.png);
 }
 
-.skill {
+.field.skill {
   width: 40%;
 }
-.skill > input.field-value {
-  width: 1.5em;
+.field.skill > * {
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
-.skill .chip-toggle {
+.field.skill .chip-toggle {
   padding: 0px;
   display: contents;
 }
-.skill .chip-toggle label {
+.field.skill .chip-toggle label {
   background-color: black;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-right: 3px;
 }
-.skill .chip-toggle input[type=checkbox] {
+.field.skill .chip-toggle input[type=checkbox] {
   display: none;
 }
-.skill .chip-toggle .chip-icon {
+.field.skill .chip-toggle .chip-icon {
   border: 0px;
   border-radius: 0px;
   background-size: contain;
@@ -466,7 +463,7 @@ div.statderive .value.rightborder {
   margin-right: 5px;
 }
 
-.gear .name {
+.gear label {
   min-width: 128px;
   padding-right: 10px;
 }
@@ -540,9 +537,6 @@ div.statderive .value.rightborder {
 }
 .combat-tab .combat-rolls .field + .field {
   margin-left: 5px;
-}
-.combat-tab .list-item {
-  width: 100%;
 }
 .combat-tab .weapons-list {
   grid-area: weapons;

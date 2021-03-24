@@ -1,11 +1,15 @@
 {{#if (equals items.length 0)}}
     <div class="inactive">Drag items here to add (for now)</div>
 {{/if}}
-<div class="item-list">
+<div class="field-list">
     {{#each data.gear.weapons as |weapon|}}
-        <div class="list-item gear item-edit" data-item-id="{{weapon._id}}">
-            <div class="item-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
-            <div class="field-label name">{{weapon.name}}</div>
+        <div class="field gear item-edit" data-item-id="{{weapon._id}}">
+            <div class="field-image roll item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
+            <label>{{weapon.name}}</label>
+            <span class="flex-pad"></span>
+            <span>
+                <p class="inactive">{{type}}</p>
+            </span>
             {{!-- {{#with weapon.data}}
             {{#unless (equals type ../weaponTypes.melee)}}
                 <div class="field-label inactive">{{shotsLeft}}/{{shots}}</div>
@@ -15,8 +19,7 @@
             {{/unless}}
             <div class="field-label inactive">{{damage}}</div>
             <div class="field-label inactive">{{localize "CYBERPUNK.RoF"}}{{rof}}</div> --}}
-            <div class="flex-pad"></div>
-            <div class="field-label inactive">{{type}}</div>
+            
             {{!-- {{/with}} --}}
         </div>
     {{/each}}

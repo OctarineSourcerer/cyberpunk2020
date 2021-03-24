@@ -1,3 +1,4 @@
+// Top bar above the list of skills itself
 .skill-utils {
     border-style: solid;
     border-width: 2px;
@@ -25,13 +26,14 @@
 }
 
 // Each individual skill in the list
-.skill {
+.field.skill {
     width: 40%;
-
-    // With the default spacious number width, skills overflow
-    >input.field-value {
-        width: 1.5em;
+    // Make them a little taller
+    >* {
+        padding-top:3px; 
+        padding-bottom: 3px;
     }
+
     .chip-toggle { 
         padding: 0px;
         display: contents;
