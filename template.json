@@ -691,20 +691,15 @@
 			},
 			"hitLocations": {
 				"hitLocations": {
-					"head": {
+					"Head": {
 						"location": [
 							1
 						]
 					},
-					"torso": {
+					"Torso": {
 						"location": [
 							2,
 							4
-						]
-					},
-					"rArm": {
-						"location": [
-							5
 						]
 					},
 					"lArm": {
@@ -712,6 +707,11 @@
 							6
 						],
 						"armor": 0
+					},
+					"rArm": {
+						"location": [
+							5
+						]
 					},
 					"lLeg": {
 						"location": [

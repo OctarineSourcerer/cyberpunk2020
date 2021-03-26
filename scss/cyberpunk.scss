@@ -33,6 +33,12 @@ $field-border-width: 2px;
     }
 }
 
+@mixin image-bg {
+    border:0px;
+    border-radius: 0px;
+    background-size: cover;
+}
+
 .cyberpunk h2 {
     font-family: $font-primary;
     font-variant: small-caps;
@@ -70,66 +76,7 @@ $field-border-width: 2px;
 }
 
 // Idea is have a field wrapping field-label and field-value
-.cyberpunk .field {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
 
-    border-width: $field-border-width;
-    border-style: solid;
-    border-color: $text-colour;
-
-    >* {
-        background-color: $text-colour;
-        color: $text-colour-inverted;
-        font-weight: bold;
-        font-variant: small-caps;
-        padding: 2px 0px 2px 0px;
-    }
-    // I'd have this as an img, but it turns out changing an img tag's source on rollover can't be done in CSS, sooo...
-    .field-image {
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        max-width: 32px;
-        width: 32px;
-        padding: 0px 3px 0px 0px;
-    }
-
-    >label {
-        color: $text-colour-inverted;
-        padding-left: calc(5px - #{$field-border-width});
-        padding-right: 5px;
-    }
-    >input {
-        @include reset-input;
-        color: $text-colour;
-        font-family: $font-secondary;
-        padding-left: 5px;
-        padding-right: 0px;
-        flex-grow: 1;
-        flex-shrink: 1;
-
-        &.number {
-            width: 2.5em;
-            // padding: 2px 0px 2px 0px;
-            text-align: center;
-        }
-        &.smallnumber {
-            width: 1.5em;
-            // padding: 2px 0px 2px 0px;
-            text-align: center;
-            padding-left: 0px;
-        }
-        &.textsize {
-            width: 6em;
-            min-width: 2em;
-        }
-    }
-    p {
-        margin:0px 3px 0px 3px;
-    }
-}
 // Overides
 // !important cos this is used as an override
 .cyberpunk .flexwrap {
@@ -163,12 +110,6 @@ $field-border-width: 2px;
     flex-shrink: 1;
 }
 
-@mixin image-bg {
-    border:0px;
-    border-radius: 0px;
-    background-size: contain;
-}
-
 .field-list {
     display: flex;
     flex-wrap: wrap;
@@ -192,10 +133,6 @@ $field-border-width: 2px;
     }
 }
 
-.field-image.roll:hover {
-    background-image: url("../../../icons/svg/d10-grey.svg") !important;
-}
-
 .roll-image {
     background-position: center;
     background-repeat: no-repeat;
@@ -204,6 +141,18 @@ $field-border-width: 2px;
     width: 32px;
 }
 
+// Only pull this animation when details is open
+// Do this to all elements after the *
+// Nabbed from https://stackoverflow.com/a/38215801/5708707
+details[open] summary ~ * {
+    animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+    0%    {opacity: 0; margin-left: -10px}
+    100%  {opacity: 1; margin-left: 0px}
+}
+
+@import "_fields";
 @import "interactivityHints";
 @import "statsrow";
 @import "woundtracker";

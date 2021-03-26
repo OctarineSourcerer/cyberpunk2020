@@ -10,11 +10,11 @@
         <div class="flexcol">
             <span class="infoline">
                 <h1 class="title">
-                    <input class="field-value fillwidth" name="name" type="text" value="{{item.name}}" placeholder="{{cLocal 'ItemName'}}"/>
+                    <input class="field-value fillwidth" name="name" type="text" value="{{item.name}}" placeholder="{{CPLocal 'ItemName'}}"/>
                 </h1>
                 <span class="summary inactive">{{> (varTemplate "item/parts/[VAR]/summary.hbs" item.type)}}</span>
             </span>
-            <textarea class="flavor" name="data.flavor" placeholder="{{cLocal 'Flavor'}}">{{data.flavor}}</textarea>
+            <textarea class="flavor" name="data.flavor" placeholder="{{CPLocal 'Flavor'}}">{{data.flavor}}</textarea>
             
         </div>
         <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
@@ -22,8 +22,8 @@
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="notes">{{cLocal 'Notes'}}</a>
-        <a class="item" data-tab="settings">{{cLocal 'Settings'}}</a>
+        <a class="item" data-tab="notes">{{CPLocal 'Notes'}}</a>
+        <a class="item" data-tab="settings">{{CPLocal 'Settings'}}</a>
     </nav>
 
     {{!-- Sheet Body --}}

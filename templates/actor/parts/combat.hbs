@@ -4,10 +4,10 @@
     <section class="combat-rolls">
         <div class="flexrow flexwrap fillwidth">
             <div class="field roll-initiative action">
-                <label class="field-label fillwidth">{{cLocal "Initiative"}}</label>
+                <label class="field-label fillwidth">{{CPLocal "Initiative"}}</label>
             </div>
             <div class="field stun-death">
-                <label class="field-label fillwidth">{{cLocal "StunDeathSave"}}</label>
+                <label class="field-label fillwidth">{{CPLocal "StunDeathSave"}}</label>
             </div>
         </div>
     </section>
@@ -15,33 +15,20 @@
     <section class="armor-section">
         {{!-- TODO: It'd be quite possible to loop through hit locations here, I think. Would work well for other creatures. --}}
         <header>
-            <h2>{{cLocal "Armor"}}</h2>
+            <h2>{{CPLocal "Armor"}}</h2>
         </header>
+
         <div class="armor-display">
-            <div class="armor-segment" style="grid-area: head">
-                <div class="segment-sp">{{data.hitLocations.head.armor}}</div>
-                <div class="segment-name field-label">{{cLocal "Head"}}</div>
+            {{#each data.hitLocations as |hitLoc name|}}
+            <div class="armor-segment field" style="grid-area: {{name}}">
+                <label class="segment-loc" title="{{CPLocal "HitLoc"}}">
+                    <p class="inactive">{{displayRange hitLoc.location}}</p>
+                </label>
+                {{!-- Wow doing an input really breaks things --}}
+                <div class="segment-sp" title="{{CPLocal "SPFull"}}">{{hitLoc.armor}}</div>
+                <label class="segment-name">{{shortCPLocal name}}</label>
             </div>
-            <div class="armor-segment" style="grid-area: torso">
-                <div class="segment-sp">{{data.hitLocations.torso.armor}}</div>
-                <div class="segment-name field-label">{{cLocal "Torso"}}</div>
-            </div>
-            <div class="armor-segment" style="grid-area: lArm">
-                <div class="segment-sp">{{data.hitLocations.lArm.armor}}</div>
-                <div class="segment-name field-label">{{cLocal "lArmShort"}}</div>
-            </div>
-            <div class="armor-segment" style="grid-area: rArm">
-                <div class="segment-sp">{{data.hitLocations.rArm.armor}}</div>
-                <div class="segment-name field-label">{{cLocal "rArmShort"}}</div>
-            </div>
-            <div class="armor-segment" style="grid-area: lLeg">
-                <div class="segment-sp">{{data.hitLocations.lLeg.armor}}</div>
-                <div class="segment-name field-label">{{cLocal "lLegShort"}}</div>
-            </div>
-            <div class="armor-segment" style="grid-area: rLeg">
-                <div class="segment-sp">{{data.hitLocations.rLeg.armor}}</div>
-                <div class="segment-name field-label">{{cLocal "rLegShort"}}</div>
-            </div>
+            {{/each}}
         </div>
 
         {{#each data.gear.armor}}
@@ -55,12 +42,12 @@
     </section>
     <section class="weapons-list item-list">
         <header>
-            <h2>{{cLocal "Weapons"}}</h2>
+            <h2>{{CPLocal "Weapons"}}</h2>
         </header>
         {{#each data.gear.weapons as |weapon|}}
-            <div class="list-item gear item-edit" data-item-id="{{weapon._id}}">
-                <div class="item-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
-                <div class="field-label name">{{weapon.name}}</div>
+            <div class="field item-edit" data-item-id="{{weapon._id}}">
+                <div class="field-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
+                <label class="field-label name">{{weapon.name}}</label>
                 {{!-- {{#with weapon.data}}
                 {{#unless (equals type ../weaponTypes.melee)}}
                     <div class="field-label inactive">{{shotsLeft}}/{{shots}}</div>
@@ -70,8 +57,10 @@
                 {{/unless}}
                 <div class="field-label inactive">{{damage}}</div>
                 <div class="field-label inactive">{{localize "CYBERPUNK.RoF"}}{{rof}}</div> --}}
-                <div class="flex-pad"></div>
-                <div class="field-label inactive">{{#if weapon.data.attackType}}{{weapon.data.attackType}}{{else}}{{weapon.data.weaponType}}{{/if}}</div>
+                <span class="flex-pad"></span>
+                <span>
+                    <div class="field-label inactive">{{#if weapon.data.attackType}}{{weapon.data.attackType}}{{else}}{{weapon.data.weaponType}}{{/if}}</div>
+                </span>
                 {{!-- {{/with}} --}}
             </div>
         {{/each}}

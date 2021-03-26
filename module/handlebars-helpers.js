@@ -1,17 +1,20 @@
-import { properCase, replaceIn } from "./utils.js"
+import { properCase, replaceIn, shortLocalize } from "./utils.js"
 
 const templatePath = "systems/cyberpunk2020/templates/";
 export function registerHandlebarsHelpers() {
     Handlebars.registerHelper('properCase', properCase);
-    Handlebars.registerHelper('cLocal', function(str) {
+    // Short for cyberpunk localize
+    Handlebars.registerHelper('CPLocal', function(str) {
         return game.i18n.localize("CYBERPUNK." + str);
-    })
+    });
+    Handlebars.registerHelper("shortCPLocal", shortLocalize);
+
     Handlebars.registerHelper('localizeStat', function(str) {
         return "CYBERPUNK." + properCase(str);
-    })
+    });
     Handlebars.registerHelper('equals', function(x, y) {
         return x === y;
-    })
+    });
 
     // Repeat what's inside it X times. i starts at 1, ends at amount.
     // Useful for testing the damage track. Use as, for example, {{#repeat 4}}whatyouwanttorepeat{{/repeat}}
@@ -70,8 +73,8 @@ export function registerHandlebarsHelpers() {
 
     // eg. {{> (replaceIn "systems/cyberpunk2020/templates/path/to/a-partial-[VAR]" foo)}}
     Handlebars.registerHelper("replaceIn", replaceIn);
-    // eg. {{> (cpTemplate "path/to/static-partial.hbs")}}
-    Handlebars.registerHelper("cpTemplate", function(path) {
+    // eg. {{> (CPTemplate "path/to/static-partial.hbs")}}
+    Handlebars.registerHelper("CPTemplate", function(path) {
         return templatePath + path;
     });
     // eg. {{> (varTemplate "path/to/[VAR]-partial.hbs" foo)}}
@@ -91,10 +94,19 @@ export function registerHandlebarsHelpers() {
      * For each string, will look it up as a localization, with "Short" appended if possible, then join with "|"
     **/
     Handlebars.registerHelper("displayArray", function(array) {
-        return array.map(e => {
-            let makeShort = game.i18n.translations.CYBERPUNK[e + "Short"] !== undefined;
-            let key = "CYBERPUNK."+(makeShort ? e + "Short" : e)
-            return game.i18n.localize(key);
-        }).join("|");
+        return array.map(shortLocalize).join("|");
+    });
+
+    /**
+     * Range array is either [a] or [a,b] usually - used in actors' hit locations
+     */
+    Handlebars.registerHelper("displayRange", function(rangeArray) {
+        if(rangeArray.length >= 2) {
+            return rangeArray[0] + "-" + rangeArray[1];
+        }
+        else if (rangeArray.length == 1) {
+            return String(rangeArray[0]);
+        }
+        return "";
     });
 }

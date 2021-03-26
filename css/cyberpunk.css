@@ -57,67 +57,6 @@
   font-weight: bold;
 }
 
-.cyberpunk .field {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  border-width: 2px;
-  border-style: solid;
-  border-color: black;
-}
-.cyberpunk .field > * {
-  background-color: black;
-  color: whitesmoke;
-  font-weight: bold;
-  font-variant: small-caps;
-  padding: 2px 0px 2px 0px;
-}
-.cyberpunk .field .field-image {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  max-width: 32px;
-  width: 32px;
-  padding: 0px 3px 0px 0px;
-}
-.cyberpunk .field > label {
-  color: whitesmoke;
-  padding-left: calc(5px - 2px);
-  padding-right: 5px;
-}
-.cyberpunk .field > input {
-  border: 0 none;
-  border-radius: 0px;
-  padding: unset;
-  height: unset;
-  min-width: unset;
-  -webkit-appearance: unset;
-  background-color: unset;
-  font: inherit;
-  color: black;
-  font-family: "Open Sans ExtraBold", sans-serif;
-  padding-left: 5px;
-  padding-right: 0px;
-  flex-grow: 1;
-  flex-shrink: 1;
-}
-.cyberpunk .field > input.number {
-  width: 2.5em;
-  text-align: center;
-}
-.cyberpunk .field > input.smallnumber {
-  width: 1.5em;
-  text-align: center;
-  padding-left: 0px;
-}
-.cyberpunk .field > input.textsize {
-  width: 6em;
-  min-width: 2em;
-}
-.cyberpunk .field p {
-  margin: 0px 3px 0px 3px;
-}
-
 .cyberpunk .flexwrap {
   flex-wrap: wrap !important;
 }
@@ -169,10 +108,6 @@
   margin-bottom: 3px;
 }
 
-.field-image.roll:hover {
-  background-image: url("../../../icons/svg/d10-grey.svg") !important;
-}
-
 .roll-image {
   background-position: center;
   background-repeat: no-repeat;
@@ -181,8 +116,94 @@
   width: 32px;
 }
 
+details[open] summary ~ * {
+  animation: sweep 0.5s ease-in-out;
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    margin-left: -10px;
+  }
+  100% {
+    opacity: 1;
+    margin-left: 0px;
+  }
+}
+/**
+* Best used like so, in its basic form:
+* <div class="field"><label></label><input></div>
+* 
+* Can include a div with a background using .field-image, and the size of the input adjusted with the classes .number, .smallnumber, or .textsize
+* This specifically does not adjust margins - that's up to containers.
+* Adjusting field size is best done by changing the font size and/or the childrens' padding
+*/
+.cyberpunk .field {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+}
+.cyberpunk .field > * {
+  background-color: black;
+  color: whitesmoke;
+  font-weight: bold;
+  font-variant: small-caps;
+  padding: 2px 3px 2px 0px;
+}
+.cyberpunk .field .field-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  max-width: 32px;
+  width: 32px;
+  padding: 0px 3px 0px 0px;
+}
+.cyberpunk .field:hover > .field-image.roll {
+  background-image: url("../../../icons/svg/d10-grey.svg") !important;
+}
+.cyberpunk .field > label, .cyberpunk .field summary {
+  color: whitesmoke;
+  padding-left: calc(5px - 2px);
+  padding-right: 5px;
+}
+.cyberpunk .field > input {
+  border: 0 none;
+  border-radius: 0px;
+  padding: unset;
+  height: unset;
+  min-width: unset;
+  -webkit-appearance: unset;
+  background-color: unset;
+  font: inherit;
+  color: black;
+  font-family: "Open Sans ExtraBold", sans-serif;
+  padding-left: 5px;
+  padding-right: 0px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.cyberpunk .field > input.number {
+  width: 2.5em;
+  text-align: center;
+}
+.cyberpunk .field > input.smallnumber {
+  width: 1.5em;
+  text-align: center;
+  padding-left: 0px;
+}
+.cyberpunk .field > input.textsize {
+  width: 6em;
+  min-width: 2em;
+}
+.cyberpunk .field p {
+  margin: 0px 3px 0px 3px;
+}
+
 .inactive {
-  filter: opacity(0.35);
+  filter: opacity(0.45);
 }
 
 .action {
@@ -392,7 +413,7 @@ div.statderive .value.rightborder {
 .skill-utils div.search-icon {
   border: 0px;
   border-radius: 0px;
-  background-size: contain;
+  background-size: cover;
   height: 1.5em;
   width: 1.5em;
   padding: 2px 5px;
@@ -424,7 +445,7 @@ div.statderive .value.rightborder {
 .field.skill .chip-toggle .chip-icon {
   border: 0px;
   border-radius: 0px;
-  background-size: contain;
+  background-size: cover;
   height: 1.5em;
   width: 1.5em;
   background-image: url(../img/chip.png);
@@ -497,6 +518,9 @@ div.statderive .value.rightborder {
 .combat-tab .armor-section {
   grid-area: armor;
 }
+.combat-tab .armor-section .armors-mockup .field label {
+  min-width: 3em;
+}
 .combat-tab .armor-section .armor-display {
   max-height: 200px;
   padding-left: 10%;
@@ -505,7 +529,7 @@ div.statderive .value.rightborder {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas: ". head ." "lArm torso rArm" "lLeg . rLeg";
+  grid-template-areas: ". Head ." "lArm Torso rArm" "lLeg . rLeg";
   column-gap: 3px;
   row-gap: 3px;
   justify-items: center;
@@ -514,9 +538,10 @@ div.statderive .value.rightborder {
   width: 100%;
   border: 2px solid black;
   display: grid;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 1fr auto 1fr;
   grid-template-columns: auto;
-  grid-template-areas: "sp" "name";
+  grid-template-areas: "loc" "sp" "name";
+  border-top-width: 0px;
 }
 .combat-tab .armor-section .armor-display .armor-segment .segment-sp {
   grid-area: sp;
@@ -524,9 +549,16 @@ div.statderive .value.rightborder {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  background-color: transparent;
+  color: black;
 }
 .combat-tab .armor-section .armor-display .armor-segment .segment-name {
   grid-area: name;
+  text-align: center;
+  padding: 0px;
+}
+.combat-tab .armor-section .armor-display .armor-segment .segment-loc {
+  grid-area: loc;
   text-align: center;
   padding: 0px;
 }
@@ -542,6 +574,9 @@ div.statderive .value.rightborder {
   grid-area: weapons;
   display: flex;
   flex-flow: column nowrap;
+}
+.combat-tab .weapons-list > .field {
+  margin-bottom: 3px;
 }
 
 /*# sourceMappingURL=cyberpunk.css.map */
