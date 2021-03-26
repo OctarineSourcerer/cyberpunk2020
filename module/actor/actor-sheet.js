@@ -80,7 +80,7 @@ export class CyberpunkActorSheet extends ActorSheet {
 
   _addWoundTrack(sheetData) {
     // Add localized wound states, excluding uninjured. All non-mortal, plus mortal
-    const nonMortals = ["Light", "Critical", "Serious"].map(e => game.i18n.localize("CYBERPUNK."+e));
+    const nonMortals = ["Light", "Serious", "Critical"].map(e => game.i18n.localize("CYBERPUNK."+e));
     const mortals = Array(7).fill().map((_,index) => game.i18n.format("CYBERPUNK.Mortal", {mortality: index}));
     sheetData.woundStates = nonMortals.concat(mortals);
   }
