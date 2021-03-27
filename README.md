@@ -35,3 +35,12 @@ Current progress (not a full list, but what comes to mind as I write):
 * Mech sheet: Yes this will come Ste, likely after Okay Weapon Rolls and the combat tab.
 
 Happy to take any feedback; feel free to add issues or to make a PR :)
+
+## Development notes
+### How to build
+At the moment, this project only requires running `sass --watch scss/cyberpunk.scss css/cyberpunk.css` in the project's folder as you develop - this will auto-compile the scss as you make edits.
+
+### A note on cloning
+It's tempting to just run `git clone https://github.com/OctarineSourcerer/cyberpunk2020-foundry.git`, but FoundryVTT expects the folder to have the same name as the system, so you want to actually run `git clone https://github.com/OctarineSourcerer/cyberpunk2020-foundry.git cyberpunk2020`. If you've already cloned, just rename the system folder to `cyberpunk2020`.
+Otherwise you'll get this message: `Invalid package cyberpunk2020 detected in directory cyberpunk2020-foundry`.
+I have foundry in the repo name for discoverability purposes, but having foundry in the system name seems a bit redundant to me - if this ends up being an issue, I may edit the repo name.
