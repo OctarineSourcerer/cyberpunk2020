@@ -16,6 +16,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/cyberpunk2020/templates/fields/text.hbs",
         "systems/cyberpunk2020/templates/fields/number.hbs",
         "systems/cyberpunk2020/templates/fields/boolean.hbs",
+        "systems/cyberpunk2020/templates/fields/select.hbs",
 
         // Roll templates
         "systems/cyberpunk2020/templates/chat/default-roll.hbs",

@@ -1,6 +1,6 @@
-<div class="field{{#unless noList}} list-item{{/unless}}">
-    <label for="{{path}}" class="field-label">{{CPLocal loc}}</label>
+<div class="field">
+    <label for="{{path}}">{{CPLocal loc}}</label>
     <span class="flex-pad"></span>
-    <input class="field-value textsize" name="{{path}}" 
+    <input class="textsize" name="{{path}}" 
         type="text" value="{{deepLookup . path}}"/>
 </div>
