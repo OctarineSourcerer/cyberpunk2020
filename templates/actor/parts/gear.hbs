@@ -24,11 +24,13 @@
         </div>
     {{/each}}
     {{#each data.gear.armor}}
-        <div class="list-item gear item-edit" data-item-id="{{_id}}">
-            <div class="item-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
-            <div class="field-label name">{{name}}</div>
-            <div class="flex-pad"></div>
-            <div class="field-label inactive">{{type}}</div>
+        <div class="field gear item-edit" data-item-id="{{_id}}">
+            <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <label class="name">{{name}}</label>
+            <span class="flex-pad"></span>
+            <span>
+                <label class="inactive">{{type}}</label>
+            </span>
         </div>
     {{/each}}
     {{#each data.gear.cyberware}}
