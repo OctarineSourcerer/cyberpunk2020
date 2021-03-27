@@ -31,16 +31,21 @@
             {{/each}}
         </div>
 
-        {{#each data.gear.armor}}
-        <div class="list-item item-edit" data-item-id="{{_id}}">
-            <div class="item-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
-            <div class="field-label name">{{name}}</div>
-            <div class="flex-pad"></div>
-            <div class="field-label inactive">{{displayArray data.coverage}}</div>
+        <div class="field-list">
+            {{#each data.gear.armor}}
+            <div class="field item-edit" data-item-id="{{_id}}">
+                <div class="item-image action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+                <label class="name">{{name}}</label>
+                <span class="flex-pad"></span>
+                <span>
+                    <label class="inactive">{{displayArray data.coverage}}</label>
+                </span>
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
+        
     </section>
-    <section class="weapons-list item-list">
+    <section class="weapons-list">
         <header>
             <h2>{{CPLocal "Weapons"}}</h2>
         </header>
