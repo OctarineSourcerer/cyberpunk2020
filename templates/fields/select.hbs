@@ -1,0 +1,9 @@
+<div class="field">
+    <label for="{{path}}">{{CPLocal loc}}</label>
+    <span class="flex-pad"></span>
+    <select name="{{path}}" value="{{deepLookup . path}}">
+        {{#each choices}}
+            <option value="{{this}}">{{this}}</option>
+        {{/each}}
+    </select>
+</div>
