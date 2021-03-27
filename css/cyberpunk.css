@@ -145,6 +145,15 @@ details[open] summary ~ * {
   border-width: 2px;
   border-style: solid;
   border-color: black;
+  overflow-x: auto;
+}
+.cyberpunk .field::-webkit-scrollbar-track {
+  background-color: black;
+  border-radius: 0px;
+}
+.cyberpunk .field::-webkit-scrollbar-thumb {
+  border-width: 0px;
+  background-color: #5a5a5a;
 }
 .cyberpunk .field > * {
   padding: 2px 3px 2px 0px;
@@ -189,12 +198,13 @@ details[open] summary ~ * {
 }
 .cyberpunk .field > input.number {
   width: 2.5em;
+  padding-left: 0px;
   text-align: center;
 }
 .cyberpunk .field > input.smallnumber {
   width: 1.5em;
-  text-align: center;
   padding-left: 0px;
+  text-align: center;
 }
 .cyberpunk .field > input.textsize {
   width: 6em;

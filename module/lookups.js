@@ -44,3 +44,11 @@ export let meleeAttackTypes = {
     mono: "Mono", // Monokatanas, etc
     cyberbeast: "Beast"
 }
+
+// These are preceded by Conceal, as for example, conceal Jacket is in fact supposed to show "Jacket/Coat/Shoulder Rig", so just "Jacket" doesn't make sense
+export let concealability = {
+    pocket: "ConcealPocket",
+    jacket: "ConcealJacket",
+    longcoat: "ConcealLongcoat",
+    noHide: "ConcealNoHide"
+}

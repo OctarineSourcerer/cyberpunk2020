@@ -10,7 +10,7 @@
 
     {{> (template "fields/select") loc="WeaponType" path="data.weaponType" choices=weaponTypes}}
     {{> (template "fields/select") loc="AttackType" path="data.attackType" choices=attackTypes}}
-    {{> (template "fields/text") loc="Concealability" path="data.concealability"}}
+    {{> (template "fields/select") loc="Concealability" path="data.concealability" choices=concealabilities}}
 
     {{> (template "fields/text") loc="Availability" path="data.availability"}}
 </div>

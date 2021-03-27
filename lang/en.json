@@ -232,6 +232,11 @@
     "CYBERPUNK.WeaponType": "Weapon Type",
     "CYBERPUNK.AttackType": "Attack Type",
 
+    "CYBERPUNK.ConcealPocket": "Pocket/Pants Leg/Sleeve",
+    "CYBERPUNK.ConcealJacket": "Jacket/Coat/Shoulder Rig",
+    "CYBERPUNK.ConcealLongcoat": "Long Coat",
+    "CYBERPUNK.ConcealNoHide": "Can't be hidden",
+
     "CYBERPUNK.Rolls": "Rolls",
     "CYBERPUNK.Initiative": "Initiative",
     "CYBERPUNK.StunDeathSave": "Stun/Death Save",

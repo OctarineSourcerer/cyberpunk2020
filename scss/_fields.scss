@@ -17,6 +17,17 @@
     border-style: solid;
     border-color: $text-colour;
 
+    overflow-x: auto;
+    &::-webkit-scrollbar-track {
+        background-color: $text-colour;
+        border-radius: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-width: 0px;
+        // border-radius: 0px;
+        background-color: $inactive-colour;
+    }
+
     // Only apply padding to direct children. Padding isn't on field itself, as it's the children that have the background color
     // (If the field itself had the bg-color, we'd never be able to have transparent input fields)
     >* {
@@ -59,14 +70,14 @@
 
         &.number {
             width: 2.5em;
-            // padding: 2px 0px 2px 0px;
+            // With center text, no padding needed
+            padding-left: 0px;
             text-align: center;
         }
         &.smallnumber {
             width: 1.5em;
-            // padding: 2px 0px 2px 0px;
-            text-align: center;
             padding-left: 0px;
+            text-align: center;
         }
         &.textsize {
             width: 6em;
