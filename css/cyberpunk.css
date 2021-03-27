@@ -146,12 +146,14 @@ details[open] summary ~ * {
   border-style: solid;
   border-color: black;
 }
+.cyberpunk .field > * {
+  padding: 2px 3px 2px 0px;
+}
 .cyberpunk .field > *, .cyberpunk .field > span > *, .cyberpunk .field > div > * {
   background-color: black;
   color: whitesmoke;
   font-weight: bold;
   font-variant: small-caps;
-  padding: 2px 3px 2px 0px;
 }
 .cyberpunk .field .field-image {
   background-position: center;

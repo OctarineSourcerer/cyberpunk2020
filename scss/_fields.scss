@@ -17,13 +17,17 @@
     border-style: solid;
     border-color: $text-colour;
 
+    // Only apply padding to direct children. Padding isn't on field itself, as it's the children that have the background color
+    // (If the field itself had the bg-color, we'd never be able to have transparent input fields)
+    >* {
+        padding: 2px 3px 2px 0px;
+    }
     // If we need to wrap anything (eg selects, inactives) to get them to display properly, ensure they get styled right too
     >*, >span>*, >div>* {
         background-color: $text-colour;
         color: $text-colour-inverted;
         font-weight: bold;
         font-variant: small-caps;
-        padding: 2px 3px 2px 0px;
     }
     // I'd have this as an img, but it turns out changing an img tag's source on rollover can't be done in CSS, sooo...
     .field-image {
