@@ -758,7 +758,7 @@
 		},
 		"weapon": {
 			"templates": ["common"],
-			"weaponType": "pistol",
+			"weaponType": "Pistol",
 			"accuracy": 0,
 			"concealability": "P",
 			"availability": "common",

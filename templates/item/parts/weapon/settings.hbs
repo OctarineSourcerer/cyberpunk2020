@@ -8,8 +8,8 @@
     {{> (template "fields/number") loc="Range" path="data.range"}}
     {{> (template "fields/text") loc="AmmoType" path="data.ammoType"}}
 
-    {{> (template "fields/text") loc="WeaponType" path="data.weaponType"}}
-    {{> (template "fields/text") loc="AttackType" path="data.attackType"}}
+    {{> (template "fields/select") loc="WeaponType" path="data.weaponType" choices=weaponTypes}}
+    {{> (template "fields/select") loc="AttackType" path="data.attackType" choices=attackTypes}}
     {{> (template "fields/text") loc="Concealability" path="data.concealability"}}
 
     {{> (template "fields/text") loc="Availability" path="data.availability"}}
