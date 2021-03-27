@@ -4,7 +4,7 @@
     {{> (template "fields/number") loc="Shots" path="data.shots"}}
     {{> (template "fields/boolean") loc="AP" path="data.ap"}}
     {{> (template "fields/number") loc="RoF" path="data.rof"}}
-    {{> (template "fields/text") loc="Reliability" path="data.reliability"}}
+    {{> (template "fields/select") loc="Reliability" path="data.reliability" choices=reliabilities}}
     {{> (template "fields/number") loc="Range" path="data.range"}}
     {{> (template "fields/text") loc="AmmoType" path="data.ammoType"}}
 
@@ -12,6 +12,6 @@
     {{> (template "fields/select") loc="AttackType" path="data.attackType" choices=attackTypes}}
     {{> (template "fields/select") loc="Concealability" path="data.concealability" choices=concealabilities}}
 
-    {{> (template "fields/text") loc="Availability" path="data.availability"}}
+    {{> (template "fields/select") loc="Availability" path="data.availability" choices=availabilities}}
 </div>
 <a class="item-roll"><i>Fire</i></a>

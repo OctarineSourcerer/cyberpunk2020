@@ -30,6 +30,7 @@
 
     // Only apply padding to direct children. Padding isn't on field itself, as it's the children that have the background color
     // (If the field itself had the bg-color, we'd never be able to have transparent input fields)
+    // IF we cease wanting transparent background, I'll happily make the background solid - it'll solve a fair few problems
     >* {
         padding: 2px 3px 2px 0px;
     }
@@ -89,6 +90,7 @@
     select {
         border-radius: 0px;
         border: 1px solid $inactive-colour;
+        width: 50%;
     }
     p {
         margin:0px 3px 0px 3px;

@@ -237,6 +237,15 @@
     "CYBERPUNK.ConcealLongcoat": "Long Coat",
     "CYBERPUNK.ConcealNoHide": "Can't be hidden",
 
+    "CYBERPUNK.Excellent": "Excellent",
+    "CYBERPUNK.Common": "Common",
+    "CYBERPUNK.Poor": "Poor",
+    "CYBERPUNK.Rare": "Rare",
+
+    "CYBERPUNK.VeryReliable": "Very Reliable",
+    "CYBERPUNK.Standard": "Standard",
+    "CYBERPUNK.Unreliable": "Unreliable",
+
     "CYBERPUNK.Rolls": "Rolls",
     "CYBERPUNK.Initiative": "Initiative",
     "CYBERPUNK.StunDeathSave": "Stun/Death Save",

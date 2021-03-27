@@ -213,6 +213,7 @@ details[open] summary ~ * {
 .cyberpunk .field select {
   border-radius: 0px;
   border: 1px solid #5a5a5a;
+  width: 50%;
 }
 .cyberpunk .field p {
   margin: 0px 3px 0px 3px;

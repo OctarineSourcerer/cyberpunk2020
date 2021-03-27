@@ -52,3 +52,16 @@ export let concealability = {
     longcoat: "ConcealLongcoat",
     noHide: "ConcealNoHide"
 }
+
+export let availability = {
+    excellent: "Excellent",
+    common: "Common",
+    poor: "Poor",
+    rare: "Rare"
+}
+
+export let reliability = {
+    very: "VeryReliable",
+    standard: "Standard",
+    unreliable: "Unreliable"
+}
