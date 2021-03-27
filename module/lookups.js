@@ -40,7 +40,7 @@ export let rangedAttackType = {
 
 // This lot's a bit weird, because this is for storing an *item's* attack type, so it doesn't include martial
 export let meleeAttackType = {
-    martial: "MARTIAL",
-    mono: "MONO", // Monokatanas, etc
-    cyberbeast: "BEAST"
+    martial: "Martial",
+    mono: "Mono", // Monokatanas, etc
+    cyberbeast: "Beast"
 }
