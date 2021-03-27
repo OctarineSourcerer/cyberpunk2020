@@ -69,6 +69,11 @@
         flex-grow: 1;
         flex-shrink: 1;
 
+        &[type=checkbox] {
+            // This is apparently non-standard. I'd like to find an alternate method
+            -webkit-appearance: checkbox;
+        }
+
         &.number {
             width: 2.5em;
             // With center text, no padding needed

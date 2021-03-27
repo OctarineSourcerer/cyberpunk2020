@@ -196,6 +196,9 @@ details[open] summary ~ * {
   flex-grow: 1;
   flex-shrink: 1;
 }
+.cyberpunk .field > input[type=checkbox] {
+  -webkit-appearance: checkbox;
+}
 .cyberpunk .field > input.number {
   width: 2.5em;
   padding-left: 0px;

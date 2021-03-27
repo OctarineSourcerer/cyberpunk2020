@@ -45,6 +45,9 @@ export let meleeAttackTypes = {
     cyberbeast: "Beast"
 }
 
+// There's a lot of these, so here's a sorted one for convenience 
+export let sortedAttackTypes = Object.values(rangedAttackTypes).concat(Object.values(meleeAttackTypes)).sort();
+
 // These are preceded by Conceal, as for example, conceal Jacket is in fact supposed to show "Jacket/Coat/Shoulder Rig", so just "Jacket" doesn't make sense
 export let concealability = {
     pocket: "ConcealPocket",
