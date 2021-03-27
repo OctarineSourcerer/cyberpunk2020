@@ -69,6 +69,25 @@ export class CyberpunkActor extends Actor {
       let sortOrder = this.getFlag('cyberpunk2020', 'skillSortOrder') || Object.keys(SortOrders)[0];
       actorData.data.skills = sortSkills(data.skills, SortOrders[sortOrder])
     }
+
+    // Apply wound effects
+    // Change stat total, but leave a record of the difference in stats.[statName].woundMod
+    // Modifies the very-end-total, idk if this'll need to change in the future
+    let woundState = this.woundState();
+    let woundStat = function(stat, totalChange) {
+        let newTotal = totalChange(stat.total)
+        stat.woundMod = -(stat.total - newTotal);
+        stat.total = newTotal;
+    }
+    if(woundState >= 4) {
+      [stats.ref, stats.int, stats.cool].forEach(stat => woundStat(stat, total => Math.ceil(total/3)));
+    } 
+    else if(woundState == 3) {
+      [stats.ref, stats.int, stats.cool].forEach(stat => woundStat(stat, total => Math.ceil(total/2)));
+    }
+    else if(woundState == 2) {
+      woundStat(stats.ref, total => total - 2);
+    }
   }
 
   /**
@@ -91,12 +110,12 @@ export class CyberpunkActor extends Actor {
     }
   }
 
-  // Current wound state. 0 for uninjured, going up by 1 for each new one. 1 for Serious, 2 critical etc.
+  // Current wound state. 0 for uninjured, going up by 1 for each new one. 1 for Light, 2 Serious, 3 Critical etc.
   woundState() {
     const damage = this.data.data.damage;
     if(damage == 0) return 0;
-    // Wound slots are 4 wide, so divide by 4, floor the result
-    return Math.floor((damage-1)/4);
+    // Wound slots are 4 wide, so divide by 4, ceil the result
+    return Math.ceil(damage/4);
   }
 
   saveThreshold() {

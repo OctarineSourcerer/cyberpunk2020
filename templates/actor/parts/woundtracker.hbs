@@ -4,7 +4,7 @@
     <div class="wound-state">
         <div class="wound-state-label">{{stateName}}</div>
         <div class="damageholder">
-            {{!-- damageBoxes gives context. WoundNo is which wound, classes are mix of  --}}
+            {{!-- damageBoxes gives context. WoundNo is which wound, classes dictate which are filled and which have left/right borders --}}
             {{#damageBoxes stateNo ../data.damage}}
                 <input type="radio" name="data.damage" value="{{woundNo}}" class="{{classes}}">
             {{/damageBoxes}}
