@@ -1,0 +1,82 @@
+// A block of information on the sheet, often displaying an item name, an edit field, etc.
+
+/**
+* Best used like so, in its basic form:
+* <div class="field"><label></label><input></div>
+* 
+* Can include a div with a background using .field-image, and the size of the input adjusted with the classes .number, .smallnumber, or .textsize
+* This specifically does not adjust margins - that's up to containers.
+* Adjusting field size is best done by changing the font size and/or the childrens' padding
+*/
+.cyberpunk .field {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    border-width: $field-border-width;
+    border-style: solid;
+    border-color: $text-colour;
+
+    // If we need to wrap anything (eg selects, inactives) to get them to display properly, ensure they get styled right too
+    >*, >span>*, >div>* {
+        background-color: $text-colour;
+        color: $text-colour-inverted;
+        font-weight: bold;
+        font-variant: small-caps;
+        padding: 2px 3px 2px 0px;
+    }
+    // I'd have this as an img, but it turns out changing an img tag's source on rollover can't be done in CSS, sooo...
+    .field-image {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        max-width: 32px;
+        width: 32px;
+        padding: 0px 3px 0px 0px;
+    }
+
+    &:hover > .field-image.roll {
+        background-image: url("../../../icons/svg/d10-grey.svg") !important;
+    }
+
+    >label,summary {
+        color: $text-colour-inverted;
+        padding-left: calc(5px - #{$field-border-width});
+        padding-right: 5px;
+    }
+    >input {
+        @include reset-input;
+        color: $text-colour;
+        font-family: $font-secondary;
+        padding-left: 5px;
+        padding-right: 0px;
+        flex-grow: 1;
+        flex-shrink: 1;
+
+        &.number {
+            width: 2.5em;
+            // padding: 2px 0px 2px 0px;
+            text-align: center;
+        }
+        &.smallnumber {
+            width: 1.5em;
+            // padding: 2px 0px 2px 0px;
+            text-align: center;
+            padding-left: 0px;
+        }
+        &.textsize {
+            width: 6em;
+            min-width: 2em;
+        }
+    }
+    // Apparently selects don't stretch in a flexbox, so best bet is to wrap child selects in a span
+    // Trouble is, that means it doesn't get the >* rule, so we add that here.
+    select {
+        border-radius: 0px;
+        border: 1px solid $inactive-colour;
+    }
+    p {
+        margin:0px 3px 0px 3px;
+    }
+    // Do I do a thing for divs here? when it's just displaying and isn't visible
+}
