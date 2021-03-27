@@ -146,7 +146,7 @@ details[open] summary ~ * {
   border-style: solid;
   border-color: black;
 }
-.cyberpunk .field > * {
+.cyberpunk .field > *, .cyberpunk .field > span > *, .cyberpunk .field > div > * {
   background-color: black;
   color: whitesmoke;
   font-weight: bold;
@@ -197,6 +197,10 @@ details[open] summary ~ * {
 .cyberpunk .field > input.textsize {
   width: 6em;
   min-width: 2em;
+}
+.cyberpunk .field select {
+  border-radius: 0px;
+  border: 1px solid #5a5a5a;
 }
 .cyberpunk .field p {
   margin: 0px 3px 0px 3px;
@@ -268,13 +272,13 @@ details[open] summary ~ * {
 }
 .statsrow > div.stat .stat-mod {
   font-size: 9pt;
-  background: #464646;
+  background: #5a5a5a;
   color: whitesmoke;
   padding: 0px 1px 0px 1px;
 }
 .statsrow > div.stat .stat-temp {
   font-size: 9pt;
-  background: #464646;
+  background: #5a5a5a;
   color: whitesmoke;
   border-right-style: solid;
   border-right-color: black;

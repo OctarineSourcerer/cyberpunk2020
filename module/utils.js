@@ -18,6 +18,10 @@ export function localize(str) {
 }
 
 export function shortLocalize(str) {
+    if(!game.i18n.translations.CYBERPUNK) {
+        console.error("There are no localizations; is the localization file (eg lang/en.json) properly formatted?");
+        return str;
+    }
     let makeShort = game.i18n.translations.CYBERPUNK[str + "Short"] !== undefined;
     let key = "CYBERPUNK."+(makeShort ? str + "Short" : str)
     return game.i18n.localize(key);
