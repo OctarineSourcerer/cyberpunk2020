@@ -51,6 +51,7 @@
         color: $text-colour-inverted;
         padding-left: calc(5px - #{$field-border-width});
         padding-right: 5px;
+        overflow: auto;
     }
     >input {
         @include reset-input;

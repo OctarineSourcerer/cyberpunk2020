@@ -44,6 +44,7 @@
 // This can be used elsewhere
 .cyberpunk .armor-display {
     max-height: 200px;
+    max-width: 25em;
     padding-left: 10%;
     padding-right: 10%;
     margin-bottom: 10px;
@@ -77,6 +78,9 @@
             flex-direction: column;
             justify-content: center;
             text-align: center;
+            padding-left: 0px;
+            padding-right: 0px;
+            width: 100%;
 
             background-color: transparent;
             color: $text-colour;

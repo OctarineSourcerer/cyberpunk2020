@@ -55,7 +55,7 @@ export class CyberpunkItemSheet extends ItemSheet {
   }
 
   _prepareArmor(data) {
-    data.areas = Object.keys(data.data.coverage).filter(key => data.data.coverage[key]?.stoppingPower > 0);
+    
   }
 
   /* -------------------------------------------- */

@@ -1,5 +1,4 @@
 {{!-- Actor sheet's combat tab --}}
-{{log this}}
 <div class="combat-tab">
     <section class="combat-rolls">
         <div class="flexrow flexwrap fillwidth">
@@ -27,7 +26,7 @@
                 <label class="name">{{name}}</label>
                 <span class="flex-pad"></span>
                 <span>
-                    <label class="inactive">{{displayArray data.coverage}}</label>
+                    <label class="inactive">{{armorSummary data.coverage}}</label>
                 </span>
             </div>
             {{/each}}

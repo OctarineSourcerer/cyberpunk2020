@@ -187,6 +187,7 @@ details[open] summary ~ * {
   color: whitesmoke;
   padding-left: calc(5px - 2px);
   padding-right: 5px;
+  overflow: auto;
 }
 .cyberpunk .field > input {
   border: 0 none;
@@ -578,6 +579,7 @@ div.statderive .value.rightborder {
 
 .cyberpunk .armor-display {
   max-height: 200px;
+  max-width: 25em;
   padding-left: 10%;
   padding-right: 10%;
   margin-bottom: 10px;
@@ -604,6 +606,9 @@ div.statderive .value.rightborder {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
   background-color: transparent;
   color: black;
 }

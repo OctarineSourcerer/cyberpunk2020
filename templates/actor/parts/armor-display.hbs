@@ -7,7 +7,11 @@
             {{/if}}
         </label>
         {{!-- Wow doing an input really breaks things --}}
+        {{#unless ../edit}}
         <div class="segment-sp" title="{{CPLocal "SPFull"}}">{{hitLoc.stoppingPower}}</div>
+        {{else}}
+        <input class="segment-sp" title="{{CPLocal "SPFull"}}" name="data.coverage.{{name}}.stoppingPower" value="{{hitLoc.stoppingPower}}">
+        {{/unless}}
         <label class="segment-name">{{shortCPLocal name}}</label>
     </div>
     {{/each}}

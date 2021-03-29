@@ -1,4 +1,4 @@
-import { properCase, replaceIn, shortLocalize } from "./utils.js"
+import { localize, properCase, replaceIn, shortLocalize } from "./utils.js"
 
 const templatePath = "systems/cyberpunk2020/templates/";
 export function registerHandlebarsHelpers() {
@@ -93,8 +93,11 @@ export function registerHandlebarsHelpers() {
     /** Display array of localizable strings, in short if possible
      * For each string, will look it up as a localization, with "Short" appended if possible, then join with "|"
     **/
-    Handlebars.registerHelper("displayArray", function(array) {
-        return array.map(shortLocalize).join("|");
+    Handlebars.registerHelper("armorSummary", function(armorCoverage) {
+        return Object.keys(armorCoverage)
+            .filter(key => armorCoverage[key].stoppingPower > 0)
+            .map(shortLocalize)
+            .join("|");
     });
 
     /**

@@ -705,7 +705,7 @@
 					"lArm": {
 						"location": [
 							6
-						],
+						]
 					},
 					"rArm": {
 						"location": [
@@ -722,7 +722,7 @@
 						"location": [
 							9,
 							10
-						],
+						]
 					}
 				}
 			},
