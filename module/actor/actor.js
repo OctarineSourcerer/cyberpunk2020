@@ -34,7 +34,7 @@ export class CyberpunkActor extends Actor {
       stat.total = stat.base + stat.tempMod;
     }
     for(const hitLoc in data.hitLocations) {
-      data.hitLocations[hitLoc].armor = 0;
+      data.hitLocations[hitLoc].stoppingPower = 0;
     }
 
     // Reflex is affected by encumbrance values too
