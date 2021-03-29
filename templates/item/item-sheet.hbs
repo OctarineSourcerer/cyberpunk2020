@@ -4,10 +4,9 @@
         settings tab contents
     {{/systems/cyberpunk2020/templates/item/item-sheet.hbs}}
  --}}
-{{log this}}
 <form class="cyberpunk {{cssClass}}" autocomplete="off">
     <header class="flexrow nowrap">
-        <div class="flexcol">
+        <div class="flexcol item-info">
             <span class="infoline">
                 <h1 class="title">
                     <input class="field-value fillwidth" name="name" type="text" value="{{item.name}}" placeholder="{{CPLocal 'ItemName'}}"/>
@@ -29,7 +28,7 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body">
         
-        {{!-- Description Tab --}}
+        {{!-- Notes Tab --}}
         <div class="tab" data-group="primary" data-tab="notes">
             {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
         </div>

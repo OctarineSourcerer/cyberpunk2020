@@ -252,5 +252,10 @@
     "CYBERPUNK.StunDeathSave": "Stun/Death Save",
     
     "CYBERPUNK.Description": "Description",
-    "CYBERPUNK.Settings": "Settings"
+    "CYBERPUNK.Settings": "Settings",
+
+    "CYBERPUNK.Yes": "Yes",
+    "CYBERPUNK.No": "No",
+    "CYBERPUNK.ItemDeleteConfirmTitle": "Delete Item?",
+    "CYBERPUNK.ItemDeleteConfirmText": "Are you sure you want to delete this item?"
 }

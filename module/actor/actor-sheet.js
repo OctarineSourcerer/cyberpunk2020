@@ -1,5 +1,6 @@
 import { DiceCyberpunk } from "../dice.js";
 import { weaponTypes } from "../lookups.js"
+import { localize } from "../utils.js"
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -150,22 +151,40 @@ export class CyberpunkActorSheet extends ActorSheet {
       let statName = ev.currentTarget.dataset.statName;
       this.actor.rollStat(statName);
     });
+    html.find(".skill-roll").click(ev => {
+      let skillName = ev.currentTarget.dataset.skillName;
+      this.actor.rollSkill(skillName);
+    });
+    html.find(".roll-initiative").click(ev => {
+      this.actor.rollInitiative();
+    });
+
     html.find('.item-roll').click(ev => {
       // Roll is often within child events, don't bubble please
       ev.stopPropagation();
       let item = getEventItem(this, ev);
       item.roll();
     });
-    html.find(".skill-roll").click(ev => {
-      let skillName = ev.currentTarget.dataset.skillName;
-      this.actor.rollSkill(skillName);
-    });
     html.find('.item-edit').click(ev => {
       let item = getEventItem(this, ev);
       item.sheet.render(true);
     });
-    html.find(".roll-initiative").click(ev => {
-      this.actor.rollInitiative();
+    html.find('.item-delete').click(ev => {
+      ev.stopPropagation();
+      let item = getEventItem(this, ev);
+      let confirmDialog = new Dialog({
+        title: localize("ItemDeleteConfirmTitle"),
+        content: `<p>${localize("ItemDeleteConfirmText")}</p>`,
+        buttons: {
+          yes: {
+            label: localize("Yes"),
+            callback: () => item.delete()
+          },
+          no: { label: localize("No") },
+        },
+        default:"no"
+      });
+      confirmDialog.render(true);
     });
   }
 }

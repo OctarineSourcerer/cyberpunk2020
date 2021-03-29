@@ -37,6 +37,8 @@ export class CyberpunkItemSheet extends ItemSheet {
         this._prepareWeapon(data);
         break;
     
+      case "armor":
+        this._prepareArmor(data);
       default:
         break;
     }
@@ -50,6 +52,10 @@ export class CyberpunkItemSheet extends ItemSheet {
     data.concealabilities = Object.values(concealability);
     data.availabilities = Object.values(availability);
     data.reliabilities = Object.values(reliability);
+  }
+
+  _prepareArmor(data) {
+    data.areas = Object.keys(data.data.coverage).filter(key => data.data.coverage[key]?.stoppingPower > 0);
   }
 
   /* -------------------------------------------- */

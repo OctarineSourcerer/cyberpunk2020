@@ -10,6 +10,7 @@
             <span>
                 <p class="inactive">{{type}}</p>
             </span>
+            <span class="item-delete " data-item-id="{{_id}}">X</span>
             {{!-- {{#with weapon.data}}
             {{#unless (equals type ../weaponTypes.melee)}}
                 <div class="field-label inactive">{{shotsLeft}}/{{shots}}</div>
@@ -31,6 +32,7 @@
             <span>
                 <label class="inactive">{{type}}</label>
             </span>
+            <span class="item-delete " data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
     {{#each data.gear.cyberware}}
@@ -41,6 +43,7 @@
             <span>
                 <label class="inactive">{{type}}</label>
             </span>
+            <span class="item-delete " data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
     {{#each data.gear.misc}}
@@ -51,6 +54,7 @@
             <span>
                 <label class="inactive">{{type}}</label>
             </span>
+            <span class="item-delete " data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
 </div>

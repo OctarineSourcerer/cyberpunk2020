@@ -1,0 +1,14 @@
+<div class="armor-display">
+    {{#each hitLocations as |hitLoc name|}}
+    <div class="armor-segment field" style="grid-area: {{name}}">
+        <label class="segment-loc" title="{{CPLocal "HitLoc"}}">
+            {{#if hitLoc.location}}
+            <p class="inactive">{{displayRange hitLoc.location}}</p>
+            {{/if}}
+        </label>
+        {{!-- Wow doing an input really breaks things --}}
+        <div class="segment-sp" title="{{CPLocal "SPFull"}}">{{hitLoc.stoppingPower}}</div>
+        <label class="segment-name">{{shortCPLocal name}}</label>
+    </div>
+    {{/each}}
+</div>

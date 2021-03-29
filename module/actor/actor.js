@@ -48,7 +48,7 @@ export class CyberpunkActor extends Actor {
       for(let coveredLoc in armor.coverage) {
         let location = data.hitLocations[coveredLoc];
         if(location !== undefined) {
-          location.armor += armor.stoppingPower;
+          location.stoppingPower += armor.stoppingPower;
         }
       }
     }

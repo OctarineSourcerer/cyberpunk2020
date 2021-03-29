@@ -9,6 +9,54 @@ import { localize } from "../utils.js"
 export class CyberpunkItem extends Item {
   // This also has preparedata, but we don't have to worry about that so far
 
+  prepareData() {
+    super.prepareData();
+
+    switch(this.data.type) {
+      case "armor":
+        this._prepareArmorData(this.data.data);
+    }
+  }
+
+  _prepareArmorData(data) {
+    // If new owner and armor covers this many areas or more, delete armor coverage areas the owner does not have
+    const COVERAGE_CLEANSE_THRESHOLD = 20;
+
+    let nowOwned = !data.lastOwnerId && this.actor;
+    let changedHands = data.lastOwnerId !== undefined && data.lastOwnerId != this.actor.id;
+    if(nowOwned || changedHands) {
+      data.lastOwnerId = this.actor.id;
+      let ownerLocs = this.actor.data.data.hitLocations;
+      
+      // Time to morph the armor to its new owner!
+      // I just want this here so people can armor up giant robotic snakes if they want, y'know? or mechs.
+      // ...I am fully aware this is overkill effort for most games.
+      let areasCovered = Object.keys(data.coverage).length;
+      let cleanseAreas = areasCovered > COVERAGE_CLEANSE_THRESHOLD;
+      if(cleanseAreas) {
+        // Remove any extra areas
+        // This is so that armors can't be made bigger indefinitely. No idea why players might do that, but hey.
+        for(let armorArea in data.coverage) {
+          if(!ownerLocs[armorArea]) {
+            console.warn(`ARMOR MORPH: The new owner of this armor (${this.actor.name}) does not have a ${armorArea}. Removing the area from the armor.`)
+            delete data.coverage.armorArea;
+          }
+        }
+      }
+      
+      // TODO: Strict bodytypes option?
+      // Add any areas the owner has but the armor doesn't.
+      for(let ownerLoc in ownerLocs) {
+        if(!data.coverage[ownerLoc]) {
+          data.coverage[ownerLoc] = {
+            stoppingPower: 0,
+            ablation: 0
+          }
+        }
+      }
+    }
+  }
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event

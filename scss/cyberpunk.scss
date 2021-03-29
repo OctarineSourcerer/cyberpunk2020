@@ -18,6 +18,19 @@ $field-border-width: 2px;
     font-weight: bold;
     overflow-y: scroll;
 }
+.cyberpunk {
+    *::-webkit-scrollbar {
+        width: 2px;
+    }
+    *::-webkit-scrollbar-track {
+        background-color: $text-colour;
+        border-radius: 0px;
+    }
+    *::-webkit-scrollbar-thumb {
+        border-width: 0px;
+        background-color: $inactive-colour;
+    }
+}
 
 /* Overall sheet structure */
 .sheet header.cyberheader {
@@ -78,6 +91,9 @@ $field-border-width: 2px;
 // !important cos this is used as an override
 .cyberpunk .flexwrap {
     flex-wrap: wrap !important;
+}
+.cyberpunk .nowrap {
+    flex-wrap: nowrap !important;
 }
 .cyberpunk .fillwidth {
     width: 100%!important;
