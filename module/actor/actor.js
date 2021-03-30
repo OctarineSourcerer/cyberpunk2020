@@ -161,11 +161,11 @@ export class CyberpunkActor extends Actor {
 
   rollInitiative() {
     // TODO: Get this actually working with the initiative tracker
-    let activeCombat = game.combats.active;
-    if(activeCombat !== undefined) {
-      activeCombat.rollInitiative(this.id);
-      return;
-    }
+    // let activeCombat = game.combats.active;
+    // if(activeCombat !== undefined) {
+    //   activeCombat.rollInitiative(this.id);
+    //   return;
+    // }
     DiceCyberpunk.d10Roll({
       title: "Initiative",
       terms: ["@stats.ref.total"],
