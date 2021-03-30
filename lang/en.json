@@ -216,6 +216,8 @@
     "CYBERPUNK.SP": "SP",
     "CYBERPUNK.SPFull": "Stopping Power",
     "CYBERPUNK.HitLoc": "Hit Location",
+    "CYBERPUNK.Ablate": "Ablate",
+    "CYBERPUNK.Repair": "Repair",
 
     "CYBERPUNK.Gear": "Gear",
     "CYBERPUNK.Weapon": "Weapon",

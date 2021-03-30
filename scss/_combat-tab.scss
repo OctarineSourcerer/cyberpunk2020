@@ -62,14 +62,15 @@
 
     .armor-segment {
         width:100%; 
-        border: $field-border-width solid $text-colour;
+        border: solid $text-colour;
+        border-width: 0px $field-border-width 0px $field-border-width;
         display: grid;
         grid-template-rows: auto auto 1fr;
-        grid-template-columns: auto;
+        grid-template-columns: 1fr 2fr 1fr;
         grid-template-areas: 
-            "loc"
-            "sp"
-            "name";
+            "loc loc loc"
+            "ablate sp repair"
+            "name name name";
 
         .segment-sp {
             grid-area: sp;
@@ -85,6 +86,19 @@
             color: $text-colour;
             // ExtraBold here just doesn't work
             font-family: $font-primary;
+        }
+        .segment-ablate { grid-area: ablate; }
+        .segment-repair { grid-area: repair; }
+        .segment-ablate, .segment-repair {
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            line-height: 100%;
+            // width: 15%;
+            display: none;
+        }
+        &:hover .segment-ablate, &:hover .segment-repair {
+            display: inline;
         }
 
         .segment-name {

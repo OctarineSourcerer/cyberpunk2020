@@ -1,45 +1,7 @@
 // A block of information on the sheet, consisting of a label and something to edit, sometimes with more info.
 
-@mixin field-label {
-    background-color: $text-colour;
-    color: $text-colour-inverted;
-    font-weight: bold;
-    font-variant: small-caps;
-    padding-left: calc(5px - #{$field-border-width});
-    padding-right: 5px;
-}
-
-@mixin field-input {
-    @include reset-input;
-    color: $text-colour;
-    font-family: $font-secondary;
-    padding-left: 5px;
-    padding-right: 0px;
-    flex-grow: 1;
-    flex-shrink: 1;
-
-    &[type=checkbox] {
-        // This is apparently non-standard. I'd like to find an alternate method
-        -webkit-appearance: checkbox;
-    }
-
-    &.number {
-        width: 2.5em;
-        // With center text, no padding needed
-        padding-left: 0px;
-        text-align: center;
-    }
-    &.smallnumber {
-        width: 1.5em;
-        padding-left: 0px;
-        text-align: center;
-    }
-    &.textsize {
-        width: 6em;
-        min-width: 2em;
-    }
-}
 /**
+* A convenience class to prevent boilerplate
 * Best used like so, in its basic form:
 * <div class="field"><label></label><input></div>
 * 
@@ -66,7 +28,12 @@
     }
     // If we need to wrap anything (eg selects, inactives) to get them to display properly, ensure they get styled right too
     >*, >span>*, >div>* {
-        @include field-label();
+        background-color: $text-colour;
+        color: $text-colour-inverted;
+        font-weight: bold;
+        font-variant: small-caps;
+        padding-left: calc(5px - #{$field-border-width});
+        padding-right: 5px;
     }
     // I'd have this as an img, but it turns out changing an img tag's source on rollover can't be done in CSS, sooo...
     .field-image {
@@ -82,12 +49,35 @@
         background-image: url("../../../icons/svg/d10-grey.svg") !important;
     }
 
-    >label,summary {
-        color: $text-colour-inverted;
-        
-    }
     >input {
-        @include field-input();
+        @include reset-input;
+        color: $text-colour;
+        font-family: $font-secondary;
+        padding-left: 5px;
+        padding-right: 0px;
+        flex-grow: 1;
+        flex-shrink: 1;
+
+        &[type=checkbox] {
+            // This is apparently non-standard. I'd like to find an alternate method
+            -webkit-appearance: checkbox;
+        }
+
+        &.number {
+            width: 2.5em;
+            // With center text, no padding needed
+            padding-left: 0px;
+            text-align: center;
+        }
+        &.smallnumber {
+            width: 1.5em;
+            padding-left: 0px;
+            text-align: center;
+        }
+        &.textsize {
+            width: 6em;
+            min-width: 2em;
+        }
     }
     // Apparently selects don't stretch in a flexbox, so best bet is to wrap child selects in a span
     // Trouble is, that means it doesn't get the >* rule, so we add that here.

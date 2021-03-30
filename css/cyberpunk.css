@@ -150,6 +150,7 @@ details[open] summary ~ * {
   }
 }
 /**
+* A convenience class to prevent boilerplate
 * Best used like so, in its basic form:
 * <div class="field"><label></label><input></div>
 * 
@@ -186,9 +187,6 @@ details[open] summary ~ * {
 }
 .cyberpunk .field:hover > .field-image.roll {
   background-image: url("../../../icons/svg/d10-grey.svg") !important;
-}
-.cyberpunk .field > label, .cyberpunk .field summary {
-  color: whitesmoke;
 }
 .cyberpunk .field > input {
   border: 0 none;
@@ -594,11 +592,12 @@ div.statderive .value.rightborder {
 }
 .cyberpunk .armor-display .armor-segment {
   width: 100%;
-  border: 2px solid black;
+  border: solid black;
+  border-width: 0px 2px 0px 2px;
   display: grid;
   grid-template-rows: auto auto 1fr;
-  grid-template-columns: auto;
-  grid-template-areas: "loc" "sp" "name";
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "loc loc loc" "ablate sp repair" "name name name";
 }
 .cyberpunk .armor-display .armor-segment .segment-sp {
   grid-area: sp;
@@ -612,6 +611,22 @@ div.statderive .value.rightborder {
   background-color: transparent;
   color: black;
   font-family: "Noto Sans", sans-serif;
+}
+.cyberpunk .armor-display .armor-segment .segment-ablate {
+  grid-area: ablate;
+}
+.cyberpunk .armor-display .armor-segment .segment-repair {
+  grid-area: repair;
+}
+.cyberpunk .armor-display .armor-segment .segment-ablate, .cyberpunk .armor-display .armor-segment .segment-repair {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  line-height: 100%;
+  display: none;
+}
+.cyberpunk .armor-display .armor-segment:hover .segment-ablate, .cyberpunk .armor-display .armor-segment:hover .segment-repair {
+  display: inline;
 }
 .cyberpunk .armor-display .armor-segment .segment-name {
   grid-area: name;
