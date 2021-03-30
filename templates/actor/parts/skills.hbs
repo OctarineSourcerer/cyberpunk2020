@@ -13,7 +13,7 @@
             <span class="flex-pad"></span>
             <span class="chip-toggle">
                 <label>
-                    <div class="field-label {{#if skill.chipped}}inactive{{/if}}">{{skill.stat}}</div>
+                    <div class="{{#if skill.chipped}}inactive{{/if}}">{{skill.stat}}</div>
                     <div class="chip-icon {{#unless skill.chipped}}inactive{{/unless}}"></div>
                     <input type="checkbox" name="data.skills.{{skillName}}.chipped" {{checked skill.chipped}}/>
                 </label>

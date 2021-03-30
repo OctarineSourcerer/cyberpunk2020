@@ -3,10 +3,10 @@
     <section class="combat-rolls">
         <div class="flexrow flexwrap fillwidth">
             <div class="field roll-initiative action">
-                <label class="field-label fillwidth">{{CPLocal "Initiative"}}</label>
+                <label class="fillwidth">{{CPLocal "Initiative"}}</label>
             </div>
             <div class="field stun-death">
-                <label class="field-label fillwidth">{{CPLocal "StunDeathSave"}}</label>
+                <label class="fillwidth">{{CPLocal "StunDeathSave"}}</label>
             </div>
         </div>
     </section>
@@ -40,19 +40,10 @@
         {{#each data.gear.weapons as |weapon|}}
             <div class="field item-edit" data-item-id="{{weapon._id}}">
                 <div class="field-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
-                <label class="field-label name">{{weapon.name}}</label>
-                {{!-- {{#with weapon.data}}
-                {{#unless (equals type ../weaponTypes.melee)}}
-                    <div class="field-label inactive">{{shotsLeft}}/{{shots}}</div>
-                    {{#if ap}}
-                        <div class="field-label inactive">{{localize "CYBERPUNK.AP"}}</div>
-                    {{/if}}
-                {{/unless}}
-                <div class="field-label inactive">{{damage}}</div>
-                <div class="field-label inactive">{{localize "CYBERPUNK.RoF"}}{{rof}}</div> --}}
+                <label class="name">{{weapon.name}}</label>
                 <span class="flex-pad"></span>
                 <span>
-                    <div class="field-label inactive">{{#if weapon.data.attackType}}{{weapon.data.attackType}}{{else}}{{weapon.data.weaponType}}{{/if}}</div>
+                    <div class="inactive">{{#if weapon.data.attackType}}{{weapon.data.attackType}}{{else}}{{weapon.data.weaponType}}{{/if}}</div>
                 </span>
                 {{!-- {{/with}} --}}
             </div>

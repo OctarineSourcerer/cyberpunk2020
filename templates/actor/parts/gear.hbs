@@ -11,17 +11,6 @@
                 <p class="inactive">{{type}}</p>
             </span>
             <span class="item-delete " data-item-id="{{_id}}">X</span>
-            {{!-- {{#with weapon.data}}
-            {{#unless (equals type ../weaponTypes.melee)}}
-                <div class="field-label inactive">{{shotsLeft}}/{{shots}}</div>
-                {{#if ap}}
-                    <div class="field-label inactive">{{localize "CYBERPUNK.AP"}}</div>
-                {{/if}}
-            {{/unless}}
-            <div class="field-label inactive">{{damage}}</div>
-            <div class="field-label inactive">{{localize "CYBERPUNK.RoF"}}{{rof}}</div> --}}
-            
-            {{!-- {{/with}} --}}
         </div>
     {{/each}}
     {{#each data.gear.armor}}
@@ -49,7 +38,7 @@
     {{#each data.gear.misc}}
         <div class="field gear item-edit" data-item-id="{{_id}}">
             <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
-            <label class="field-label name">{{name}}</label>
+            <label class="name">{{name}}</label>
             <span class="flex-pad"></span>
             <span>
                 <label class="inactive">{{type}}</label>
