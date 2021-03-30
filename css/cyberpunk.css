@@ -3,6 +3,9 @@
   font-weight: bold;
   overflow-y: scroll;
 }
+.cyberpunk section.window-content .editor-content {
+  font-weight: normal;
+}
 
 .cyberpunk *::-webkit-scrollbar {
   width: 2px;

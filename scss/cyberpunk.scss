@@ -17,6 +17,11 @@ $field-border-width: 2px;
     font-family: $font-primary;
     font-weight: bold;
     overflow-y: scroll;
+
+    // Notes editing, we want to at least have a distinction between bold and not
+    .editor-content {
+        font-weight: normal;
+    }
 }
 .cyberpunk {
     *::-webkit-scrollbar {
