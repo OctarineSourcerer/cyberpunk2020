@@ -83,7 +83,10 @@
 
             background-color: transparent;
             color: $text-colour;
+            // ExtraBold here just doesn't work
+            font-family: $font-primary;
         }
+
         .segment-name {
             grid-area: name;
             text-align: center;

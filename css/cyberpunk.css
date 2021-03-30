@@ -173,6 +173,8 @@ details[open] summary ~ * {
   color: whitesmoke;
   font-weight: bold;
   font-variant: small-caps;
+  padding-left: calc(5px - 2px);
+  padding-right: 5px;
 }
 .cyberpunk .field .field-image {
   background-position: center;
@@ -187,8 +189,6 @@ details[open] summary ~ * {
 }
 .cyberpunk .field > label, .cyberpunk .field summary {
   color: whitesmoke;
-  padding-left: calc(5px - 2px);
-  padding-right: 5px;
 }
 .cyberpunk .field > input {
   border: 0 none;
@@ -611,6 +611,7 @@ div.statderive .value.rightborder {
   width: 100%;
   background-color: transparent;
   color: black;
+  font-family: "Noto Sans", sans-serif;
 }
 .cyberpunk .armor-display .armor-segment .segment-name {
   grid-area: name;
