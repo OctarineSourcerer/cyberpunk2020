@@ -30,6 +30,10 @@ $field-border-width: 2px;
         border-width: 0px;
         background-color: $inactive-colour;
     }
+
+    .summary {
+        overflow: auto;
+    }
 }
 
 /* Overall sheet structure */

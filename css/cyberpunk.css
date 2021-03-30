@@ -15,6 +15,9 @@
   border-width: 0px;
   background-color: #5a5a5a;
 }
+.cyberpunk .summary {
+  overflow: auto;
+}
 
 /* Overall sheet structure */
 .sheet header.cyberheader {
