@@ -47,8 +47,8 @@ export class CyberpunkActor extends Actor {
       // While we're looping through armor, might as well modify hit locations' armor
       for(let armorArea in armor.data.coverage) {
         let location = data.hitLocations[armorArea];
-        armorArea = armor.data.coverage[armorArea];
         if(location !== undefined) {
+          armorArea = armor.data.coverage[armorArea];
           location.stoppingPower += armorArea.stoppingPower;
         }
       }

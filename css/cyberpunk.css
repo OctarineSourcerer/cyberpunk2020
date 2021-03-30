@@ -161,7 +161,6 @@ details[open] summary ~ * {
   border-width: 2px;
   border-style: solid;
   border-color: black;
-  overflow-x: auto;
 }
 .cyberpunk .field > * {
   padding: 2px 3px 2px 0px;
@@ -187,7 +186,6 @@ details[open] summary ~ * {
   color: whitesmoke;
   padding-left: calc(5px - 2px);
   padding-right: 5px;
-  overflow: auto;
 }
 .cyberpunk .field > input {
   border: 0 none;
