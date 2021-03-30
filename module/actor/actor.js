@@ -39,19 +39,20 @@ export class CyberpunkActor extends Actor {
 
     // Reflex is affected by encumbrance values too
     stats.ref.armorMod = 0;
-    for(const armor in data.armor) {
+    actorData.items.filter(i => i.type === "armor").forEach(armor => {
       if(armor.encumbrance != null) {
         stats.ref.armorMod -= armor.encumbrance;
       }
 
       // While we're looping through armor, might as well modify hit locations' armor
-      for(let coveredLoc in armor.coverage) {
-        let location = data.hitLocations[coveredLoc];
+      for(let armorArea in armor.data.coverage) {
+        let location = data.hitLocations[armorArea];
+        armorArea = armor.data.coverage[armorArea];
         if(location !== undefined) {
-          location.stoppingPower += armor.stoppingPower;
+          location.stoppingPower += armorArea.stoppingPower;
         }
       }
-    }
+    });
     stats.ref.total = stats.ref.base + stats.ref.tempMod + stats.ref.armorMod;
 
     const move = stats.ma;
