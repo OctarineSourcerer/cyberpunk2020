@@ -195,8 +195,8 @@ async function d10Roll({
 
     let executor = new Multiroll(title, flavor);
     executor.addRoll(roll, {
-        critThreshold = critical,
-        fumbleThreshold = fumble
+        critThreshold: critical,
+        fumbleThreshold: fumble
     });
     return executor.execute(speaker, chatTemplate, chatTemplateData);
 
