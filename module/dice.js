@@ -1,4 +1,5 @@
-export const BaseDie = "1d10x10"
+export const BaseDie = "1d10x10";
+export const DefaultRollTemplate = "systems/cyberpunk2020/templates/chat/default-roll.hbs";
 
 export const formulaHasDice = function (formula) {
     return formula.match(/[0-9)][dD]/) || formula.match(/[dD][0-9(]/);
@@ -48,84 +49,8 @@ export function classifyRollDice(roll) {
     return parts;
 }
 
-export class DiceCyberpunk {
-    /**
-     * A standardized helper function for managing core Cyberpunk d10 rolls. Initially taken from Pathfinder1 and 5e, and modified
-     *
-     * @param {Event} event           The triggering event which initiated the roll
-     * @param {Array} terms           The dice roll component parts, excluding the initial d10
-     * @param {String} dice           The initial d20
-     * @param {Actor} actor           The Actor making the d10 roll
-     * @param {Object} rollData           Actor or item data against which to parse the roll. eg can include skillBonus etc? for at skillbonus etc
-     * @param {String} title          The dice roll UI window title
-     * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
-     * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
-     * @param {Number} critical       The value of d10 result which represents a critical success
-     * @param {Number} fumble         The value of d10 result which represents a critical failure
-     * @param {Array} extraRolls      An array containing bonuses/penalties for extra rolls
-     */
-    static async d10Roll({
-        title,
-        speaker,
-        dice = BaseDie,
-        terms,
-        critical = 10,
-        fumble = 1,
-        flavor,
-        rollData,
-        chatTemplate,
-        chatTemplateData,
-    }) {
-        // Handle input arguments
-        flavor = flavor || title;
-
-        if(terms) {
-            terms = [dice, ...terms]
-        }
-        let roll = new Roll(terms.join(" + "), rollData).roll();
-
-        // Convert the roll to a chat message
-        if (chatTemplate) {
-            // Create roll template data
-            const d10 = roll.terms[0];
-            const fullTemplateData = mergeObject(
-                {
-                    user: game.user._id,
-                    formula: roll.formula,
-                    tooltip: await roll.getTooltip(),
-                    total: roll.total,
-                    isCrit: d10.total >= critical,
-                    isFumble: d10.total <= fumble,
-                    title: title,
-                    flavor: flavor,
-                },
-                chatTemplateData || {}
-            );
-
-            // Create chat data
-            let chatData = {
-                user: game.user._id,
-                speaker: speaker,
-                content: await renderTemplate(chatTemplate, fullTemplateData)
-            };
-
-            // Send message
-            chatData = mergeObject(roll.toMessage({}, { create: false }), chatData);
-
-            await ChatMessage.create(chatData);
-        } else {
-            await roll.toMessage({
-                speaker: speaker,
-                flavor: flavor
-            });
-        }
-
-        return roll;
-    }
-}
-
 /**
- * This class allows for making multiple rolls in a single action. For example, an attack roll and a damage roll.
+ * This class allows for making multiple rolls in a single card. For example, an attack roll and a damage roll.
  * The API is designed to make sure each roll WILL get an equivalent metadata, so users of Multiroll don't have to make sure to balance the number of rolls they add, and the metadata.
  * 
  * Example:
@@ -136,7 +61,7 @@ export class DiceCyberpunk {
  * 
  * Methods can be chained, e.g bigRoll.addRoll(...).addRoll(...)
  */
-export class Multiroll {
+ export class Multiroll {
     constructor(title, flavor="") {
         this.title = title;
         this.flavor = flavor;
@@ -149,7 +74,7 @@ export class Multiroll {
      * @param {Roll} roll A FoundryVTT roll 
      * @param {data} metaData Extra data about the roll (such as name, crit thresholds). Crit threshold applies to a roll's first (dice) term, default its max amount
      */
-    addRoll(roll, { name=undefined, flavor=undefined, critThreshold = undefined, fumbleThreshold = undefined }, extra={}) {
+    addRoll(roll, { name=undefined, flavor=undefined, critThreshold = undefined, fumbleThreshold = undefined } = {}, extra={}) {
         this.rolls.push(roll);
         // This should be fine if there are no dice - they'll end up as undefined, and that's dealt with in Multiroll
         if(critThreshold === undefined) {
@@ -219,4 +144,60 @@ export class Multiroll {
         await ChatMessage.create(chatData);
         return this;
     }
+
+    async defaultExecute(extraTemplateData={}) {
+        return this.execute(undefined, DefaultRollTemplate, extraTemplateData);
+    }
+}
+
+/**
+ * A standardized helper function for managing core Cyberpunk d10 rolls. Initially taken from Pathfinder1 and 5e, and modified
+ *
+ * @param {Event} event           The triggering event which initiated the roll
+ * @param {Array} terms           The dice roll component parts, excluding the initial d10
+ * @param {String} dice           The initial d20
+ * @param {Actor} actor           The Actor making the d10 roll
+ * @param {Object} rollData           Actor or item data against which to parse the roll. eg can include skillBonus etc? for at skillbonus etc
+ * @param {String} title          The dice roll UI window title
+ * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
+ * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
+ * @param {Number} critical       The value of d10 result which represents a critical success
+ * @param {Number} fumble         The value of d10 result which represents a critical failure
+ */
+async function d10Roll({
+    title,
+    speaker,
+    initialTerm = BaseDie,
+    terms,
+    critical = 10,
+    fumble = 1,
+    flavor,
+    rollData,
+    chatTemplate,
+    chatTemplateData,
+    useRollMessage = false
+}) {
+    // Handle input arguments
+    flavor = flavor || title;
+
+    if(terms) {
+        terms = [initialTerm, ...terms]
+    }
+    let roll = new Roll(terms.join(" + "), rollData).roll();
+
+    if(useRollMessage) {
+        await roll.toMessage({
+            speaker: speaker,
+            flavor: flavor
+        });
+        return roll;
+    }
+
+    let executor = new Multiroll(title, flavor);
+    executor.addRoll(roll, {
+        critThreshold = critical,
+        fumbleThreshold = fumble
+    });
+    return executor.execute(speaker, chatTemplate, chatTemplateData);
+
 }

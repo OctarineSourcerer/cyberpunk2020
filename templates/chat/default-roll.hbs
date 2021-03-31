@@ -1,7 +1,9 @@
 <div class="cyberpunk cyberpunk-card">
     <header>
         <div class="flexrow">
+            {{#if img}}
             <div class="roll-image" style="background-image: url({{img}})"></div>
+            {{/if}}
             <h2>{{title}}</h2>
         </div>
         <p class="flavor">{{flavor}}</p>
@@ -9,7 +11,9 @@
     <div class="dice-tooltip flexcol">
     {{#each rolls}}
         <header class="part-header flexrow">
-            <span class="part-formula">{{name}}:</span>
+            {{#if name}}
+                <span class="part-formula">{{name}}:</span>
+            {{/if}}
             <span class="part-flavor">{{roll._formula}}</span>
             <span class="part-total {{#if isCrit}}crit {{/if}}{{#if isFumble}}fumble {{/if}}">{{roll._total}}</span>
         </header>

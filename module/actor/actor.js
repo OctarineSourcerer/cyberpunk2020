@@ -1,4 +1,4 @@
-import { DiceCyberpunk } from "../dice.js";
+import { BaseDie, DiceCyberpunk, makeD10Roll, Multiroll } from "../dice.js";
 import { SortOrders, sortSkills } from "./skill-sort.js";
 import { properCase, localize } from "../utils.js"
 
@@ -143,20 +143,20 @@ export class CyberpunkActor extends Actor {
     if(skill.stat !== "special") {
       rollParts.push(`@stats.${skill.stat}.total`);
     }
-    DiceCyberpunk.d10Roll({
-      flavor: skillName,
-      rollData: this.data.data,
-      terms: rollParts
-    });
+    let roll = new Multiroll(localize("Skill"+skillName))
+      .addRoll(makeD10Roll(rollParts, this.data.data));
+
+    roll.defaultExecute();
   }
 
   rollStat(statName) {
-    let fullName = localize(properCase(statName) + "Full");
-    DiceCyberpunk.d10Roll({
-      flavor: fullName,
-      rollData: this.data.data,
-      terms: [`@stats.${statName}.total`]
-    });
+    let fullStatName = localize(properCase(statName) + "Full");
+    let roll = new Multiroll(fullStatName);
+    roll.addRoll(makeD10Roll(
+      [`@stats.${statName}.total`],
+      this.data.data
+    ));
+    roll.defaultExecute();
   }
 
   rollInitiative() {
@@ -166,12 +166,9 @@ export class CyberpunkActor extends Actor {
     //   activeCombat.rollInitiative(this.id);
     //   return;
     // }
-    DiceCyberpunk.d10Roll({
-      title: `${this.name} ${localize("Initiative")}`,
-      terms: ["@stats.ref.total"],
-      actor: this,
-      rollData: this.data.data
-    });
+    let roll = new Multiroll(`${this.name} ${localize("Initiative")}`)
+      .addRoll(makeD10Roll(["@stats.ref.total"], this.data.data));
+    roll.defaultExecute();
   }
 
 }
