@@ -1,4 +1,4 @@
-import { BaseDie, DiceCyberpunk, makeD10Roll, Multiroll } from "../dice.js";
+import { makeD10Roll, Multiroll } from "../dice.js";
 import { SortOrders, sortSkills } from "./skill-sort.js";
 import { properCase, localize } from "../utils.js"
 

@@ -1,4 +1,3 @@
-import { DiceCyberpunk } from "../dice.js";
 import { weaponTypes } from "../lookups.js"
 import { localize } from "../utils.js"
 

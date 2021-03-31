@@ -1,5 +1,5 @@
 import { weaponTypes } from "../lookups.js"
-import { DiceCyberpunk, Multiroll, makeD10Roll, DefaultRollTemplate }  from "../dice.js"
+import { Multiroll, makeD10Roll }  from "../dice.js"
 import { localize } from "../utils.js"
 
 /**
