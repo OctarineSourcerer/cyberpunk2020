@@ -3,7 +3,6 @@
     <span class="flex-pad"></span>
     <select name="{{path}}">
         {{!-- Any --}}
-        {{!-- <option value=" " title="Any non-auto regular weapon"></option> --}}
         {{#each choices as |choice|}}
             <option value="{{choice}}" {{#if (equals (deepLookup .. ../path) choice)}}selected{{/if}}>{{CPLocal choice}}</option>
         {{/each}}

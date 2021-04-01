@@ -93,11 +93,7 @@ export class CyberpunkItem extends Item {
   // Gas? Wind effect. Dear lord.
 
   // Let's just pretend the unusual ranged doesn't exist for now
-  /**
-   * 
-   * @param {Int} targetRange Range to target token, in meters.
-   */
-  __weaponRoll(targetRange) {
+  __weaponRoll() {
     let owner = this.actor;
     if (owner === null) {
       throw new Error("This item isn't owned by anyone.");

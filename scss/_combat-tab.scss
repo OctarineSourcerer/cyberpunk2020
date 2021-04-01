@@ -63,7 +63,7 @@
     .armor-segment {
         width:100%; 
         border: solid $text-colour;
-        border-width: 0px $field-border-width 0px $field-border-width;
+        border-width: $field-border-width $field-border-width 0px $field-border-width;
         display: grid;
         grid-template-rows: auto auto 1fr;
         grid-template-columns: 1fr 2fr 1fr;
@@ -113,6 +113,8 @@
             line-height: 100%;
             padding-left: 0px;
             padding-right: 0px;
+            border-top: 0px;
+            margin-top: -$field-border-width;
         }
     }
 }
