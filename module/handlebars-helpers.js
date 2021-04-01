@@ -13,6 +13,10 @@ export function registerHandlebarsHelpers() {
             return game.i18n.format(localizeKey, options.hash);
         };
     });
+    Handlebars.registerHelper("CPLocalParam", function(str, options) {
+        let localizeKey = "CYBERPUNK." + str;
+        return game.i18n.format(localizeKey, options);
+    });
     Handlebars.registerHelper("shortCPLocal", shortLocalize);
 
     Handlebars.registerHelper('localizeStat', function(str) {

@@ -164,6 +164,11 @@
     "CYBERPUNK.RoF": "RoF",
     "CYBERPUNK.Reliability": "Reliability",
     "CYBERPUNK.Range": "Range",
+    "CYBERPUNK.RangePB": "Point Blank (<1m)",
+    "CYBERPUNK.RangeClose": "Close (<{range}m)",
+    "CYBERPUNK.RangeMedium": "Medium (<{range}m)",
+    "CYBERPUNK.RangeLong": "Long (<{range}m)",
+    "CYBERPUNK.RangeExtreme": "Extreme (<{range}m)",
     "CYBERPUNK.AmmoType": "Ammo Type",
     "CYBERPUNK.Type": "Type",
     "CYBERPUNK.Concealability": "Concealability",
@@ -234,6 +239,8 @@
     "CYBERPUNK.Location": "Location",
     "CYBERPUNK.WeaponType": "Weapon Type",
     "CYBERPUNK.AttackType": "Attack Type",
+
+    "CYBERPUNK.Aiming": "Aiming",
 
     "CYBERPUNK.ConcealPocket": "Pocket/Pants Leg/Sleeve",
     "CYBERPUNK.ConcealJacket": "Jacket/Coat/Shoulder Rig",

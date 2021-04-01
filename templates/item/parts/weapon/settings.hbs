@@ -4,13 +4,13 @@
     {{> (template "fields/number") loc="Shots" path="data.shots"}}
     {{> (template "fields/boolean") loc="AP" path="data.ap"}}
     {{> (template "fields/number") loc="RoF" path="data.rof"}}
-    {{> (template "fields/select") loc="Reliability" path="data.reliability" choices=reliabilities}}
+    {{> (template "fields/select") label="Reliability" edit="data.reliability" choices=reliabilities}}
     {{> (template "fields/number") loc="Range" path="data.range"}}
     {{> (template "fields/text") loc="AmmoType" path="data.ammoType"}}
 
-    {{> (template "fields/select") loc="WeaponType" path="data.weaponType" choices=weaponTypes}}
-    {{> (template "fields/select") loc="AttackType" path="data.attackType" choices=attackTypes}}
-    {{> (template "fields/select") loc="Concealability" path="data.concealability" choices=concealabilities}}
+    {{> (template "fields/select") label="WeaponType" edit="data.weaponType" choices=weaponTypes}}
+    {{> (template "fields/select") label="AttackType" edit="data.attackType" choices=attackTypes}}
+    {{> (template "fields/select") label="Concealability" path="data.concealability" choices=concealabilities}}
 
-    {{> (template "fields/select") loc="Availability" path="data.availability" choices=availabilities}}
+    {{> (template "fields/select") label="Availability" edit="data.availability" choices=availabilities}}
 </div>

@@ -1,18 +1,24 @@
-<div class="field">
-    <label for="{{path}}">{{CPLocal loc}}</label>
+{{!-- extraClasses: extra classes to apply to the field
+      choices: options for select to choose from
+      localizeData: map from each choice to any localization data for that key --}}
+<div class="field{{#if extraClasses}} {{extraClasses}}{{/if}}">
+    <label for="{{edit}}">{{CPLocal label}}</label>
     <span class="flex-pad"></span>
-    <select name="{{path}}">
+    <select name="{{edit}}">
         {{!-- Any --}}
         {{#each choices as |choice|}}
-            <option value="{{choice}}" 
-            {{~#if (equals (deepLookup .. ../path) choice)}}
+            <option value="{{choice}}" {{!-- Select current value --}}
+            {{~#if (equals (deepLookup .. ../edit) choice)}}
              selected
             {{~/if}}>
-            {{~#unless noTranslateOptions}}
+
+            {{~#if noTranslateOptions}}
+            {{~choice}} 
+            {{~else if ../localizeData}} {{!-- If we have extra parameters for localization, use those --}}
+            {{~CPLocalParam choice (lookup ../localizeData choice)}}
+            {{~else}} {{!-- Regular localization - just a key --}}
             {{~CPLocal choice}}
-            {{~else}}
-            {{~choice}}
-            {{~/unless}}</option>
+            {{~/unless}}}</option>
         {{/each}}
     </select>
 </div>
