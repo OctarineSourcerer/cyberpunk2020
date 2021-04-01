@@ -4,7 +4,15 @@
     <select name="{{path}}">
         {{!-- Any --}}
         {{#each choices as |choice|}}
-            <option value="{{choice}}" {{#if (equals (deepLookup .. ../path) choice)}}selected{{/if}}>{{CPLocal choice}}</option>
+            <option value="{{choice}}" 
+            {{~#if (equals (deepLookup .. ../path) choice)}}
+             selected
+            {{~/if}}>
+            {{~#unless noTranslate}}
+            {{~CPLocal choice}}
+            {{~else}}
+            {{~choice}}
+            {{~/unless}}</option>
         {{/each}}
     </select>
 </div>
