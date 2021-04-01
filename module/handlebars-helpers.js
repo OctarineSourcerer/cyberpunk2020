@@ -4,8 +4,14 @@ const templatePath = "systems/cyberpunk2020/templates/";
 export function registerHandlebarsHelpers() {
     Handlebars.registerHelper('properCase', properCase);
     // Short for cyberpunk localize
-    Handlebars.registerHelper('CPLocal', function(str) {
-        return game.i18n.localize("CYBERPUNK." + str);
+    Handlebars.registerHelper('CPLocal', function(str, options) {
+        let localizeKey = "CYBERPUNK." + str;
+        if(!options || Object.keys(options.hash).length === 0) {
+            return game.i18n.localize(localizeKey);
+        }
+        else {
+            return game.i18n.format(localizeKey, options.hash);
+        };
     });
     Handlebars.registerHelper("shortCPLocal", shortLocalize);
 
