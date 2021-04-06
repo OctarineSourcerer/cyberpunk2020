@@ -1,0 +1,23 @@
+{{!-- Dialog content for when a ranged weapon is fired --}}
+{{!-- By this point, fire mode and range should be selected, and possibly target --}}
+<form class="cyberpunk weapon-modifiers">
+    {{!-- Custom selector here because we're using translation parameters --}}
+    {{!-- Select attack range --}}
+    {{>(template "fields/select") label="Range" edit="range" choices=ranges localizationData=locals.ranges}}
+</div>
+
+    {{!-- Modifiers depending on players' actions --}}
+    <ol class="field-list" style="grid-area: player;">
+        {{>(template "fields/select") label="Aiming" edit="aimRounds" choices=ranges localizationData=locals.rounds}}
+        {{>(template "fields/boolean") label="Ambush" edit="ambush"}}
+        {{>(template "fields/boolean") label="FastDraw" edit="fastDraw"}}
+        {{>(template "fields/boolean") label="Richochet" edit="ricochet"}}
+        {{>(template "fields/boolean") label="Blinded" edit="blinded"}}
+        {{>(template "fields/boolean") label="TurnFace" edit="turningToFace"}}
+        {{>(template "fields/boolean") label="DualWield" edit="dualWield"}}
+        {{>(template "fields/boolean") label="Running" edit="running"}}
+        {{>(template "fields/boolean") label="Hipfire" edit="hipfire"}}
+    </ol>
+
+    <button type="submit" name="submit" value="1">{{CPLocal "OK"}}</button>
+</form>
