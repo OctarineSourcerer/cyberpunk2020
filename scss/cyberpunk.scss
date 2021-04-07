@@ -135,6 +135,7 @@ $field-border-width: 2px;
 
     // Compensate for rightmost items having a 3px margin
     margin-right: -3px;
+    margin-bottom: 10px;
     flex-grow: 0;
 
     +.spacer {
@@ -148,6 +149,10 @@ $field-border-width: 2px;
         min-width: 185px;
         margin-right: 5px;
         margin-bottom: 3px;
+    }
+
+    &.full-item-width .field {
+        width: 100%;
     }
 }
 

@@ -189,7 +189,9 @@ export class CyberpunkActorSheet extends ActorSheet {
 
     html.find('.fire-weapon').click(ev => {
       let item = getEventItem(this, ev);
-      let dialog = new AttackModifiers();
+      let dialog = new AttackModifiers(this.actor, {
+        weapon: item
+      });
       dialog.render(true);
     });
   }

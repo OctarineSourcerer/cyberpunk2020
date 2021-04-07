@@ -114,6 +114,7 @@
   flex-wrap: wrap;
   width: 100%;
   margin-right: -3px;
+  margin-bottom: 10px;
   flex-grow: 0;
 }
 .field-list + .spacer {
@@ -125,6 +126,9 @@
   min-width: 185px;
   margin-right: 5px;
   margin-bottom: 3px;
+}
+.field-list.full-item-width .field {
+  width: 100%;
 }
 
 .roll-image {

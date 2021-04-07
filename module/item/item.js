@@ -1,4 +1,4 @@
-import { weaponTypes } from "../lookups.js"
+import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
 import { localize } from "../utils.js"
 
@@ -74,6 +74,74 @@ export class CyberpunkItem extends Item {
     }
   }
 
+  // TODO: For 0.8.1, we want to also add flavor text to the different modifiers
+  // Get the roll modifiers to add when given a certain set of modifiers
+  __shootModTerms({
+    aimRounds,
+    ambush,
+    blinded,
+    dualWield,
+    fastDraw,
+    hipfire,
+    ricochet,
+    running,
+    turningToFace,
+    range,
+    fireMode,
+    extraMod
+  }) {
+    let terms = []
+    // Man I want language macros here...
+    if(aimRounds && aimRounds > 0) {
+      terms.push(aimRounds);
+    }
+    if(ambush) {
+      terms.push(5);
+    }
+    if(blinded) {
+      terms.push(-3);
+    }
+    if(dualWield) {
+      terms.push(-3);
+    }
+    if(fastDraw) {
+      terms.push(-3);
+    }
+    if(hipfire) {
+      terms.push(-2);
+    }
+    if(ricochet) {
+      terms.push(-5);
+    }
+    if(running) {
+      terms.push(-3);
+    }
+    if(turningToFace) {
+      terms.push(-2);
+    }
+
+    // Range on its own doesn't actually apply a modifier - it only affects to-hit rolls. But it does affect certain fire modes.
+    // For now assume full auto = all bullets; spray and pray
+    // +1/-1 per 10 bullets fired. + if close, - otherwise.
+    if(fireMode === fireModes.fullAuto) {
+      let bullets = min(this.shotsLeft, this.rof);
+      // If close range, add, else subtract
+      let multiplier = (range === ranges.close) ? 1 : -1;
+      terms.push(multiplier * Math.floor(bullets/10))
+    }
+
+    // +3 mod for 3-round-burst at close or medium range
+    if(fireMode === fireModes.threeRoundBurst
+      && (range === ranges.close || range === ranges.medium)) {
+        terms.push(+3);
+    }
+
+    // We always want to push extraMod, making it explicit it's ALWAYS there even with 0
+    terms.push(extraMod || 0);
+
+    return terms;
+  }
+
   // Now, this is gonna have to ask the player for different things depending on the weapon
   // Apply modifiers first? p99 in book
   // Crit fail jam roll
@@ -93,7 +161,8 @@ export class CyberpunkItem extends Item {
   // Gas? Wind effect. Dear lord.
 
   // Let's just pretend the unusual ranged doesn't exist for now
-  __weaponRoll() {
+  // Look into `attack-modifiers.js` for the modifier obect
+  __weaponRoll(attackMods) {
     let owner = this.actor;
     if (owner === null) {
       throw new Error("This item isn't owned by anyone.");
@@ -105,6 +174,10 @@ export class CyberpunkItem extends Item {
     if(this.attackSkill) {
       attackTerms.push(`@skills.${this.attackSkill}.value`);
     }
+    if(isRanged) {
+      attackTerms.push(...(this.__shootModTerms(attackMods)));
+    }
+
     let attackRoll = makeD10Roll(attackTerms, owner.data.data);
     let damageRoll = new Roll(this.data.data.damage);
     let locationRoll = new Roll("1d10");
@@ -115,5 +188,16 @@ export class CyberpunkItem extends Item {
       .addRoll(locationRoll, {name: localize("Location")});
 
     bigRoll.defaultExecute({img:this.img});
+  }
+
+  __getFireModes() {
+    if(this.type !== "weapon") {
+      console.error(`${this.name} is not a weapon, and therefore has no fire modes`)
+      return [];
+    }
+    if(this.attackType === rangedAttackTypes.auto) {
+      return [fireModes.fullAuto, fireModes.suppressive, fireModes.threeRoundBurst];
+    }
+    return [fireModes.semiAuto];
   }
 }

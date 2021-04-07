@@ -1,4 +1,6 @@
 // This is where all the magic values go, because cyberpunk has SO many of those
+// Any given string value is the same as its key in the localization file, and will be used for translation
+
 export let weaponTypes = {
     pistol: "Pistol",
     submachinegun: "SMG",
@@ -67,4 +69,21 @@ export let reliability = {
     very: "VeryReliable",
     standard: "Standard",
     unreliable: "Unreliable"
+}
+
+export let fireModes = {
+    fullAuto: "FullAuto",
+    threeRoundBurst: "ThreeRoundBurst",
+    suppressive: "Suppressive",
+    // Really semi auto is any none auto with RoF with more than 1
+    semiAuto: "SemiAuto"
+}
+
+// Be warned that the localisations of these take a range parameter
+export let ranges = {
+    pointBlank: "RangePB",
+    close: "RangeClose",
+    medium: "RangeMedium",
+    long: "RangeLong",
+    extreme: "RangeExtreme"
 }

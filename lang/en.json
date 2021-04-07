@@ -240,6 +240,14 @@
     "CYBERPUNK.WeaponType": "Weapon Type",
     "CYBERPUNK.AttackType": "Attack Type",
 
+    "CYBERPUNK.FullAuto": "Full Auto",
+    "CYBERPUNK.ThreeRoundBurst": "Three Round Burst",
+    "CYBERPUNK.Suppressive": "Suppressive Fire",
+    "CYBERPUNK.SemiAuto": "Semi-Auto",
+
+    "CYBERPUNK.AttackModifiers": "Attack Modifiers",
+    "CYBERPUNK.ExtraModifiers": "Extra Modifiers",
+    "CYBERPUNK.FireMode": "Fire Mode",
     "CYBERPUNK.Aiming": "Aiming",
     "CYBERPUNK.Rounds": "{rounds} rounds",
     "CYBERPUNK.Ambush": "Ambush",
@@ -249,6 +257,7 @@
     "CYBERPUNK.DualWield": "Dual Wield",
     "CYBERPUNK.Running": "Running",
     "CYBERPUNK.Hipfire": "Hipfire",
+    "CYBERPUNK.Ricochet": "Ricochet",
 
     "CYBERPUNK.ConcealPocket": "Pocket/Pants Leg/Sleeve",
     "CYBERPUNK.ConcealJacket": "Jacket/Coat/Shoulder Rig",

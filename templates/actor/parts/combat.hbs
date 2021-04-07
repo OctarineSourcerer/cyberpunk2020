@@ -38,7 +38,7 @@
             <h2>{{CPLocal "Weapons"}}</h2>
         </header>
         {{#each data.gear.weapons as |weapon|}}
-            <div class="fire-weapon field item-edit" data-item-id="{{weapon._id}}">
+            <div class="fire-weapon field" data-item-id="{{weapon._id}}">
                 <div class="field-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
                 <label class="name">{{weapon.name}}</label>
                 <span class="flex-pad"></span>
