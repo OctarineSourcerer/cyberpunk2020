@@ -241,6 +241,14 @@
     "CYBERPUNK.AttackType": "Attack Type",
 
     "CYBERPUNK.Aiming": "Aiming",
+    "CYBERPUNK.Rounds": "{rounds} rounds",
+    "CYBERPUNK.Ambush": "Ambush",
+    "CYBERPUNK.FastDraw": "Fast Draw",
+    "CYBERPUNK.Blinded": "Blinded",
+    "CYBERPUNK.TurnFace": "Turning to Face",
+    "CYBERPUNK.DualWield": "Dual Wield",
+    "CYBERPUNK.Running": "Running",
+    "CYBERPUNK.Hipfire": "Hipfire",
 
     "CYBERPUNK.ConcealPocket": "Pocket/Pants Leg/Sleeve",
     "CYBERPUNK.ConcealJacket": "Jacket/Coat/Shoulder Rig",
@@ -265,6 +273,7 @@
 
     "CYBERPUNK.Yes": "Yes",
     "CYBERPUNK.No": "No",
+    "CYBERPUNK.OK": "OK",
     "CYBERPUNK.ItemDeleteConfirmTitle": "Delete Item?",
     "CYBERPUNK.ItemDeleteConfirmText": "Are you sure you want to delete this item?"
 }

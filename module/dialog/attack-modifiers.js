@@ -2,7 +2,7 @@
  * A specialized form used to select from a checklist of attributes, traits, or properties
  * @implements {FormApplication}
  */
- export default class WeaponModifiers extends FormApplication {
+ export class AttackModifiers extends FormApplication {
 
     /** @override */
       static get defaultOptions() {
@@ -47,27 +47,7 @@
   
     /** @override */
     _updateObject(event, formData) {
-      const updateData = {};
-  
-      // Obtain choices
-      const chosen = [];
-      for ( let [k, v] of Object.entries(formData) ) {
-        if ( (k !== "custom") && v ) chosen.push(k);
-      }
-      updateData[`${this.attribute}.value`] = chosen;
-  
-      // Validate the number chosen
-      if ( this.options.minimum && (chosen.length < this.options.minimum) ) {
-        return ui.notifications.error(`You must choose at least ${this.options.minimum} options`);
-      }
-      if ( this.options.maximum && (chosen.length > this.options.maximum) ) {
-        return ui.notifications.error(`You may choose no more than ${this.options.maximum} options`);
-      }
-  
-      // Include custom
-      if ( this.options.allowCustom ) {
-        updateData[`${this.attribute}.custom`] = formData.custom;
-      }
+      const updateData = formData;
   
       // Update the object
       this.object.update(updateData);

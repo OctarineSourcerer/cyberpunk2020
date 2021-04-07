@@ -30,7 +30,10 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/cyberpunk2020/templates/item/parts/weapon/settings.hbs",
         // Armor parts
         "systems/cyberpunk2020/templates/item/parts/armor/summary.hbs",
-        "systems/cyberpunk2020/templates/item/parts/armor/settings.hbs"
+        "systems/cyberpunk2020/templates/item/parts/armor/settings.hbs",
+
+        // Weapon settings dialog
+        "systems/cyberpunk2020/templates/dialog/attack-modifiers.hbs"
     ]);
   };
   

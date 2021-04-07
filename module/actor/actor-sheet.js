@@ -1,5 +1,6 @@
 import { weaponTypes } from "../lookups.js"
 import { localize } from "../utils.js"
+import { AttackModifiers } from "../dialog/attack-modifiers.js"
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -184,6 +185,12 @@ export class CyberpunkActorSheet extends ActorSheet {
         default:"no"
       });
       confirmDialog.render(true);
+    });
+
+    html.find('.fire-weapon').click(ev => {
+      let item = getEventItem(this, ev);
+      let dialog = new AttackModifiers();
+      dialog.render(true);
     });
   }
 }

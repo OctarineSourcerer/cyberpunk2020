@@ -6,9 +6,9 @@
             <h1 class="title">
                 <input type="text" class="field-value" name="name"  value="{{actor.name}}"/>
             </h1>
-            {{> (template "fields/text") loc="Role" path="data.role.value"}}
-            {{> (template "fields/number") loc="Age" path="data.age" isNum=true}}
-            {{> (template "fields/number") loc="Points" path="data.points"}}
+            {{> (template "fields/text") label="Role" edit="data.role.value"}}
+            {{> (template "fields/number") label="Age" edit="data.age" isNum=true}}
+            {{> (template "fields/number") label="Points" edit="data.points"}}
             </div>
         </div>
         
