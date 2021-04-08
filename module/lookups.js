@@ -87,3 +87,5 @@ export let ranges = {
     long: "RangeLong",
     extreme: "RangeExtreme"
 }
+
+export let defaultTargetLocations = ["Head", "Torso", "lArmShort", "rArmShort", "lLegShort", "rLegShort"]

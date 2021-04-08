@@ -77,6 +77,7 @@ export class CyberpunkItem extends Item {
   // TODO: For 0.8.1, we want to also add flavor text to the different modifiers
   // Get the roll modifiers to add when given a certain set of modifiers
   __shootModTerms({
+    aimingAt,
     aimRounds,
     ambush,
     blinded,
@@ -91,6 +92,9 @@ export class CyberpunkItem extends Item {
     extraMod
   }) {
     let terms = []
+    if(!!aimingAt) {
+      terms.push(-4);
+    }
     // Man I want language macros here...
     if(aimRounds && aimRounds > 0) {
       terms.push(aimRounds);

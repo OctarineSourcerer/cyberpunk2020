@@ -21,6 +21,7 @@
                 {{/each}}</option>
             </select>
         </div>
+        {{>(template "fields/select") label="AimingAt" edit="aimingAt" choices=choices.aimingAt blankDefault=true}}
         {{>(template "fields/boolean") label="Ambush" edit="ambush"}}
         {{>(template "fields/boolean") label="Blinded" edit="blinded"}}
         {{>(template "fields/boolean") label="DualWield" edit="dualWield"}}

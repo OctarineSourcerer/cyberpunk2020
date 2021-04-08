@@ -22,6 +22,9 @@ export function registerHandlebarsHelpers() {
     Handlebars.registerHelper('localizeStat', function(str) {
         return "CYBERPUNK." + properCase(str);
     });
+    Handlebars.registerHelper('and', function(x,y) {
+        return x && y;
+    });
     Handlebars.registerHelper('equals', function(x, y) {
         return x === y;
     });

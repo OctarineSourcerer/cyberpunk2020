@@ -5,11 +5,14 @@
     <label for="{{edit}}">{{CPLocal label}}</label>
     <span class="flex-pad"></span>
     <select name="{{edit}}">
+        {{#if blankDefault}}
+            <option value=" " selected></option>
+        {{/if}}
         {{!-- Any --}}
         {{#each choices as |choice|}}
             <option value="{{choice}}" {{!-- Select current value --}}
             {{~#if (equals (deepLookup .. ../edit) choice)}}
-             selected
+            {{#unless blankDefault}}selected{{/unless}}
             {{~/if}}>
 
             {{~#if noTranslateOptions}}

@@ -1,4 +1,5 @@
 import { localize } from "../utils.js"
+import { defaultTargetLocations } from "../lookups.js"
 
 /**
  * A specialized form used to select the modifiers for shooting with a weapon
@@ -50,6 +51,7 @@ import { localize } from "../utils.js"
       };
       return {
         extraMod: 0,
+        aimingAt: "",
         aimRounds: 0,
         ambush: false,
         blinded: false,
@@ -63,7 +65,9 @@ import { localize } from "../utils.js"
         choices: {
           ranges: Object.keys(rangeLocals),
           rounds: [0,1,2,3],
-          fireModes: fireModes
+          fireModes: fireModes,
+          // TODO: Choices dependent on target
+          aimingAt: defaultTargetLocations
         },
         locals: {
           ranges: rangeLocals,
