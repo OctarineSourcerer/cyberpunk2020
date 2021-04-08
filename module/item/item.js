@@ -1,6 +1,6 @@
-import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges } from "../lookups.js"
+import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
-import { localize } from "../utils.js"
+import { localize, rollLocation } from "../utils.js"
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -128,7 +128,7 @@ export class CyberpunkItem extends Item {
     // For now assume full auto = all bullets; spray and pray
     // +1/-1 per 10 bullets fired. + if close, - otherwise.
     if(fireMode === fireModes.fullAuto) {
-      let bullets = min(this.shotsLeft, this.rof);
+      let bullets = Math.min(this.data.data.shotsLeft, this.data.data.rof);
       // If close range, add, else subtract
       let multiplier = (range === ranges.close) ? 1 : -1;
       terms.push(multiplier * Math.floor(bullets/10))
@@ -168,6 +168,7 @@ export class CyberpunkItem extends Item {
   // Look into `attack-modifiers.js` for the modifier obect
   __weaponRoll(attackMods) {
     let owner = this.actor;
+    let data = this.data.data;
     if (owner === null) {
       throw new Error("This item isn't owned by anyone.");
     }
@@ -181,8 +182,42 @@ export class CyberpunkItem extends Item {
     if(isRanged) {
       attackTerms.push(...(this.__shootModTerms(attackMods)));
     }
+    if(data.accuracy) {
+      attackTerms.push(data.accuracy);
+    }
 
-    let attackRoll = makeD10Roll(attackTerms, owner.data.data);
+    let DC = rangeDCs[attackMods.range];
+    let attackRoll = makeD10Roll(attackTerms, owner.data.data).roll();
+
+    // Full auto
+    if(attackMods.fireMode === fireModes.fullAuto) {
+      let roundsFired = Math.min(data.shotsLeft, data.rof);
+      let roundsHit = Math.min(roundsFired, attackRoll.total - DC);
+      if(roundsHit < 0) {
+        roundsHit = 0;
+      }
+      let areaDamages = {};
+      for(let i = 0; i < roundsHit; i++) {
+        let damageRoll = new Roll(data.damage).roll();
+        let location = rollLocation(attackMods.target); 
+        if(!areaDamages[location]) {
+          areaDamages[location] = [];
+        }
+        areaDamages[location].push(damageRoll);
+      }
+      let templateData = {
+        range: attackMods.range,
+        toHit: DC,
+        attackRoll: attackRoll,
+        fired: roundsFired,
+        hit: roundsHit,
+        areaDamages: areaDamages
+      }
+      let roll = new Multiroll("Autofire");
+      roll.execute(undefined, "systems/cyberpunk2020/templates/chat/auto-fire.hbs", templateData);
+      return;
+    }
+
     let damageRoll = new Roll(this.data.data.damage);
     let locationRoll = new Roll("1d10");
 
@@ -199,7 +234,7 @@ export class CyberpunkItem extends Item {
       console.error(`${this.name} is not a weapon, and therefore has no fire modes`)
       return [];
     }
-    if(this.attackType === rangedAttackTypes.auto) {
+    if(this.data.data.attackType === rangedAttackTypes.auto) {
       return [fireModes.fullAuto, fireModes.suppressive, fireModes.threeRoundBurst];
     }
     return [fireModes.semiAuto];

@@ -160,6 +160,7 @@
     "CYBERPUNK.Accuracy": "Accuracy",
     "CYBERPUNK.Damage": "Damage",
     "CYBERPUNK.Shots": "Shots",
+    "CYBERPUNK.ShotsLeft": "Shots Left",
     "CYBERPUNK.AP": "AP",
     "CYBERPUNK.RoF": "RoF",
     "CYBERPUNK.Reliability": "Reliability",
@@ -234,7 +235,7 @@
     "CYBERPUNK.Details": "Details",
     "CYBERPUNK.Notes": "Notes",
     "CYBERPUNK.ItemName": "Item Name",
-    "CYBERPUNK.AttackSkill": "AttackSkill",
+    "CYBERPUNK.AttackSkill": "Attack Skill",
     "CYBERPUNK.Attack": "Attack",
     "CYBERPUNK.Location": "Location",
     "CYBERPUNK.WeaponType": "Weapon Type",
@@ -259,6 +260,11 @@
     "CYBERPUNK.Running": "Running",
     "CYBERPUNK.Hipfire": "Hipfire",
     "CYBERPUNK.Ricochet": "Ricochet",
+
+    "CYBERPUNK.Autofire": "Autofire",
+    "CYBERPUNK.ToHit": "To Hit",
+    "CYBERPUNK.AutofireHitTally": "{hit} hit",
+    "CYBERPUNK.AutofireFiredTally": "of {fired} fired",
 
     "CYBERPUNK.ConcealPocket": "Pocket/Pants Leg/Sleeve",
     "CYBERPUNK.ConcealJacket": "Jacket/Coat/Shoulder Rig",

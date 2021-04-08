@@ -46,12 +46,13 @@ export class CyberpunkItemSheet extends ItemSheet {
   }
 
   _prepareWeapon(data) {
-    // TODO: Add skills used for weapons, stats to choose from
     data.weaponTypes = Object.values(weaponTypes).sort();
     data.attackTypes = sortedAttackTypes;
     data.concealabilities = Object.values(concealability);
     data.availabilities = Object.values(availability);
     data.reliabilities = Object.values(reliability);
+    // TODO: Be not so inefficient for this
+    data.attackSkills = Object.keys(this.actor.data.data.skills).sort().map(e => "Skill" + e);
   }
 
   _prepareArmor(data) {

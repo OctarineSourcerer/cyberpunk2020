@@ -22,6 +22,7 @@ export const preloadHandlebarsTemplates = async function() {
         // Roll templates
         "systems/cyberpunk2020/templates/chat/default-roll.hbs",
         "systems/cyberpunk2020/templates/chat/weapon-roll.hbs",
+        "systems/cyberpunk2020/templates/chat/auto-fire.hbs",
 
         // Item sheet
         "systems/cyberpunk2020/templates/item/item-sheet.hbs",
@@ -33,7 +34,8 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/cyberpunk2020/templates/item/parts/armor/settings.hbs",
 
         // Weapon settings dialog
-        "systems/cyberpunk2020/templates/dialog/attack-modifiers.hbs"
+        "systems/cyberpunk2020/templates/dialog/attack-modifiers.hbs",
+        
     ]);
   };
   

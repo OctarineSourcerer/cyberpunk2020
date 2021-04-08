@@ -1,3 +1,4 @@
+import { defaultAreaLookup } from "./lookups.js"
 // Utility methods that don't really belong anywhere else
 
 export function properCase(str) {
@@ -25,4 +26,11 @@ export function shortLocalize(str) {
     let makeShort = game.i18n.translations.CYBERPUNK[str + "Short"] !== undefined;
     let key = "CYBERPUNK."+(makeShort ? str + "Short" : str)
     return game.i18n.localize(key);
+}
+
+export function rollLocation(target) {
+    let hitAreaLookup = (!!target && !!target.hitLocLookup) ? target.hitLocLookup : defaultAreaLookup;
+
+    let roll = new Roll("1d10").roll().total;
+    return hitAreaLookup[roll];
 }

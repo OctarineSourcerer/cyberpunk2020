@@ -33,8 +33,23 @@ export class CyberpunkActor extends Actor {
     for(const stat of Object.values(stats)) {
       stat.total = stat.base + stat.tempMod;
     }
+    // A lookup for translating hit rolls to names of hit locations
+    // I know that for ranges there are better data structures to lookup, but we're using d10s for hit locations, so it's no issue
+    data.hitLocLookup = {};
     for(const hitLoc in data.hitLocations) {
-      data.hitLocations[hitLoc].stoppingPower = 0;
+      let area = data.hitLocations[hitLoc]
+      area.stoppingPower = 0;
+      let [start, end] = area.location;
+      // Just one die number that'll hit the location
+      if(!end) {
+        data.hitLocLookup[start] = hitLoc;
+      }
+      // A range of die numbers that'll hit the location
+      else {
+        for(let i = start; i <= end; i++) {
+          data.hitLocLookup[i] = hitLoc;
+        }
+      }
     }
 
     // Reflex is affected by encumbrance values too

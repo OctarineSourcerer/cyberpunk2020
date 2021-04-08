@@ -87,5 +87,24 @@ export let ranges = {
     long: "RangeLong",
     extreme: "RangeExtreme"
 }
+let rangeDCs = {}
+rangeDCs[ranges.pointBlank] = 10;
+rangeDCs[ranges.close] = 15;
+rangeDCs[ranges.medium] = 20;
+rangeDCs[ranges.long] = 25;
+rangeDCs[ranges.extreme] = 30;
+export { rangeDCs }
 
 export let defaultTargetLocations = ["Head", "Torso", "lArmShort", "rArmShort", "lLegShort", "rLegShort"]
+export let defaultAreaLookup = {
+    1: "Head",
+    2: "Torso",
+    3: "Torso",
+    4: "Torso",
+    5: "rArm",
+    6: "lArm",
+    7: "lLeg",
+    8: "lLeg",
+    9: "rLeg",
+    10: "rLeg"
+}

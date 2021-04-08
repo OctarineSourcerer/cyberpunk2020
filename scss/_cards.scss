@@ -20,4 +20,10 @@ $fail-color: #d1502fb8;
     .part-total.fumble {
         background-color: $fail-color;
     }
+
+    &.autofire {
+        .damage-tally {
+            margin-left: 3em;
+        }
+    }
 }

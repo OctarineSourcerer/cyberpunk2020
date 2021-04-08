@@ -1,6 +1,8 @@
 <div class="field-list">
+    {{log this}}
     {{> (template "fields/number") label="Accuracy" edit="data.accuracy"}}
     {{> (template "fields/text") label="Damage" edit="data.damage"}}
+    {{> (template "fields/number") label="ShotsLeft" edit="data.shotsLeft"}}
     {{> (template "fields/number") label="Shots" edit="data.shots"}}
     {{> (template "fields/boolean") label="AP" edit="data.ap"}}
     {{> (template "fields/number") label="RoF" edit="data.rof"}}
@@ -9,7 +11,9 @@
     {{> (template "fields/text") label="AmmoType" edit="data.ammoType"}}
 
     {{> (template "fields/select") label="WeaponType" edit="data.weaponType" choices=weaponTypes}}
-    {{> (template "fields/select") label="AttackType" edit="data.attackType" choices=attackTypes}}
+    {{> (template "fields/select") label="AttackType" edit="data.attackType" choices=attackTypes blankDefault=true}}
+    {{!-- Does not currently actually apply - all the translate keys start with Skill, but they don't in the character --}}
+    {{!-- {{> (template "fields/select") label="AttackSkill" edit="data.attackSkill" choices=attackSkills}} --}}
     {{> (template "fields/select") label="Concealability" edit="data.concealability" choices=concealabilities}}
 
     {{> (template "fields/select") label="Availability" edit="data.availability" choices=availabilities}}
