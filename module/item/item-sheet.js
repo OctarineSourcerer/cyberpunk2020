@@ -52,7 +52,9 @@ export class CyberpunkItemSheet extends ItemSheet {
     data.availabilities = Object.values(availability);
     data.reliabilities = Object.values(reliability);
     // TODO: Be not so inefficient for this
-    data.attackSkills = Object.keys(this.actor.data.data.skills).sort().map(e => "Skill" + e);
+    if(this.actor) {
+      data.attackSkills = Object.keys(this.actor.data.data.skills).sort().map(e => "Skill" + e);
+    }
   }
 
   _prepareArmor(data) {
