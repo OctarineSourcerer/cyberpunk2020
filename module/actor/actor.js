@@ -194,7 +194,7 @@ export class CyberpunkActor extends Actor {
   }
 
   rollStunDeath() {
-    let rolls = new Multiroll(localize("StunDeathSave"));
+    let rolls = new Multiroll(localize("StunDeathSave"), localize("UnderThresholdMessage"));
     rolls.addRoll(new Roll("1d10"), {
       name: localize("Save")
     });
