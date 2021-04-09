@@ -22,6 +22,24 @@ $field-border-width: 2px;
     .editor-content {
         font-weight: normal;
         border: 2px solid $text-colour;
+        // With a border, we don't want content hitting the border so close
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    nav.tabs {
+        border-bottom: 2px solid $text-colour;
+        // Without these, tabs extend weirdly below the tab container itseld
+        box-sizing: content-box;
+
+        // A tab itself
+        > .item {
+            
+            &.active {
+                color: $text-colour-inverted;
+                background-color: $text-colour;
+            }
+        }
     }
 }
 .cyberpunk {

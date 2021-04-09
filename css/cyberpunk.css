@@ -6,6 +6,16 @@
 .cyberpunk section.window-content .editor-content {
   font-weight: normal;
   border: 2px solid black;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.cyberpunk section.window-content nav.tabs {
+  border-bottom: 2px solid black;
+  box-sizing: content-box;
+}
+.cyberpunk section.window-content nav.tabs > .item.active {
+  color: whitesmoke;
+  background-color: black;
 }
 
 .cyberpunk *::-webkit-scrollbar {
