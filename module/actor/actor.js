@@ -104,7 +104,6 @@ export class CyberpunkActor extends Actor {
     else if(woundState == 2) {
       woundStat(stats.ref, total => total - 2);
     }
-    console.log("Damage: " + this.data.data.damage);
   }
 
   /**
