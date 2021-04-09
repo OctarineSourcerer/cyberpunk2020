@@ -135,9 +135,15 @@ export class CyberpunkActor extends Actor {
   }
 
 
-  saveThreshold() {
+  stunThreshold() {
     const body = this.data.data.stats.bt.total;
-    return body - this.woundState();
+    // +1 as Light has no penalty, but is 1 from woundState()
+    return body - this.woundState() + 1; 
+  }
+
+  deathThreshold() {
+    // The first wound state to penalise is Mortal 1 instead of Serious.
+    return this.stunThreshold() + 3;
   }
 
   _realSkillValue(skill) {
@@ -188,10 +194,16 @@ export class CyberpunkActor extends Actor {
   }
 
   rollStunDeath() {
-    let roll = new Multiroll(localize("StunDeathSave"));
-    roll.addRoll(makeD10Roll(), {
+    let rolls = new Multiroll(localize("StunDeathSave"));
+    rolls.addRoll(new Roll("1d10"), {
       name: localize("Save")
     });
-    roll.addRoll(new Roll())
+    rolls.addRoll(new Roll(`${this.stunThreshold()}`), {
+      name: "Stun Threshold"
+    });
+    rolls.addRoll(new Roll(`${this.deathThreshold()}`), {
+      name: "Death Threshold"
+    });
+    rolls.defaultExecute();
   }
 }

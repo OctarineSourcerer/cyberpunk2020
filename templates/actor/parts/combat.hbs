@@ -2,11 +2,12 @@
 <div class="combat-tab">
     <section class="combat-rolls">
         <div class="flexrow flexwrap fillwidth">
-            <div class="field roll-initiative action">
-                <label class="fillwidth">{{CPLocal "Initiative"}}</label>
+            <div class="field roll-initiative">
+                <label class="fillwidth action">{{CPLocal "Initiative"}}</label>
             </div>
-            <div class="field stun-death">
-                <label class="fillwidth">{{CPLocal "StunDeathSave"}}</label>
+            <div class="field stun-death-save">
+                {{!-- Action on label to override pointer --}}
+                <label class="fillwidth action">{{CPLocal "StunDeathSave"}}</label>
             </div>
         </div>
     </section>
