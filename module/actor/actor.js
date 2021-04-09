@@ -104,6 +104,7 @@ export class CyberpunkActor extends Actor {
     else if(woundState == 2) {
       woundStat(stats.ref, total => total - 2);
     }
+    console.log("Damage: " + this.data.data.damage);
   }
 
   /**
@@ -134,8 +135,9 @@ export class CyberpunkActor extends Actor {
     return Math.ceil(damage/4);
   }
 
+
   saveThreshold() {
-    const body = this.data.data.stats.body.total;
+    const body = this.data.data.stats.bt.total;
     return body - this.woundState();
   }
 
@@ -186,4 +188,11 @@ export class CyberpunkActor extends Actor {
     roll.defaultExecute();
   }
 
+  rollStunDeath() {
+    let roll = new Multiroll(localize("StunDeathSave"));
+    roll.addRoll(makeD10Roll(), {
+      name: localize("Save")
+    });
+    roll.addRoll(new Roll())
+  }
 }

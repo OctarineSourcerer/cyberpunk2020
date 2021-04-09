@@ -158,6 +158,9 @@ export class CyberpunkActorSheet extends ActorSheet {
     html.find(".roll-initiative").click(ev => {
       this.actor.rollInitiative();
     });
+    html.find(".stun-death-save").click(ev => {
+      this.actor.rollStunDeath();
+    });
 
     html.find('.item-roll').click(ev => {
       // Roll is often within child events, don't bubble please

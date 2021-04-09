@@ -57,8 +57,10 @@ export function registerHandlebarsHelpers() {
         const woundsPerState = 4;
         const previousBoxes = woundState * woundsPerState;
         let ret = [];
+        // Per box in wound
         for(let boxNo = 1; boxNo <= woundsPerState; boxNo++) {
             let thisWound = previousBoxes + boxNo;
+            let isChecked = thisWound == damage;
             let classes = `damage dmg${thisWound}`;
             if(boxNo === 1) {
                 classes += " leftmost"
@@ -72,10 +74,14 @@ export function registerHandlebarsHelpers() {
             }
             else { classes += " unfilled" }
             // When the wound box is filled, make clicking it again essentially "deselect" that wound
-            if(damage == thisWound) {
+            if(damage === thisWound) {
                 thisWound -= 1;
             }
-            ret += options.fn({classes: classes, woundNo: thisWound});
+            ret += options.fn({
+                classes: classes, 
+                woundNo: thisWound, 
+                isChecked: isChecked
+            });
         }
         return ret;
     });

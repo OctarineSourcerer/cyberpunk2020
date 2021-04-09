@@ -1,4 +1,5 @@
 <div class="wound-tracker">
+    {{log this}}
     {{!-- 10 wound states - Light, Serious, Critical, Mortal0-6 --}}
     {{#each woundStates as |stateName stateNo|}}
     <div class="wound-state">
@@ -6,9 +7,9 @@
         <div class="damageholder">
             {{!-- damageBoxes gives context. WoundNo is which wound, classes dictate which are filled and which have left/right borders --}}
             {{#damageBoxes stateNo ../data.damage}}
-                <input type="radio" name="data.damage" value="{{woundNo}}" class="{{classes}}">
+                <input type="radio" name="data.damage" value={{woundNo}} class="{{classes}}" {{#if isChecked}}checked{{/if}}>
             {{/damageBoxes}}
         </div>
     </div>
     {{/each}}
-</div>
+</div>g
