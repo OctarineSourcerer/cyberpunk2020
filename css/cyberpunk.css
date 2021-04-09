@@ -5,6 +5,7 @@
 }
 .cyberpunk section.window-content .editor-content {
   font-weight: normal;
+  border: 2px solid black;
 }
 
 .cyberpunk *::-webkit-scrollbar {
@@ -546,6 +547,9 @@ div.statderive .value.rightborder {
 }
 .cyberpunk-card .part-total.fumble {
   background-color: #d1502fb8;
+}
+.cyberpunk-card.autofire .damage-tally {
+  margin-left: 3em;
 }
 
 .combat-tab {

@@ -1,4 +1,3 @@
-{{log this}}
 <form class="{{cssClass}} flexcol" autocomplete="off">
     {{!-- Sheet Header --}}
     <header class="cyberheader">
@@ -25,7 +24,6 @@
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="skills">{{localize 'CYBERPUNK.TabSkills'}}</a>
         <a class="item" data-tab="combat">{{localize 'CYBERPUNK.TabCombat'}}</a>
-        <a class="item" data-tab="cyberware">{{localize 'CYBERPUNK.TabCyber'}}</a>
         <a class="item" data-tab="gear">{{localize 'CYBERPUNK.TabGear'}}</a>
         <a class="item" data-tab="life">{{localize 'CYBERPUNK.Life'}}</a>
     </nav>
@@ -40,18 +38,12 @@
             {{> "systems/cyberpunk2020/templates/actor/parts/combat.hbs"}}
         </div>
 
-        {{!-- Not complete --}}
-        {{!-- <div class="tab cyberware flexcol" data-group="primary" data-tab="cyberware">
-            {{> "systems/cyberpunk2020/templates/actor/parts/skills.hbs"}}
-        </div> --}}
-
         <div class="tab gear flexcol" data-group="primary" data-tab="gear">
             {{> "systems/cyberpunk2020/templates/actor/parts/gear.hbs"}}
         </div>
 
         {{!-- Biography Tab --}}
         <div class="tab life flexcol" data-group="primary" data-tab="life">
-            Let's try this again!
             <div class="biography">
                 {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
             </div>

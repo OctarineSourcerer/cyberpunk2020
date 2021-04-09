@@ -21,6 +21,7 @@ $field-border-width: 2px;
     // Notes editing, we want to at least have a distinction between bold and not
     .editor-content {
         font-weight: normal;
+        border: 2px solid $text-colour;
     }
 }
 .cyberpunk {
