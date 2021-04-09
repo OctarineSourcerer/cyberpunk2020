@@ -93,7 +93,13 @@ rangeDCs[ranges.close] = 15;
 rangeDCs[ranges.medium] = 20;
 rangeDCs[ranges.long] = 25;
 rangeDCs[ranges.extreme] = 30;
-export { rangeDCs }
+let rangeResolve = {};
+rangeResolve[ranges.pointBlank] = range => 1;
+rangeResolve[ranges.close] = range => range/4;
+rangeResolve[ranges.medium] = range => range/2;
+rangeResolve[ranges.long] = range => range;
+rangeResolve[ranges.extreme] = range => range*2;
+export { rangeDCs, rangeResolve }
 
 export let defaultTargetLocations = ["Head", "Torso", "lArmShort", "rArmShort", "lLegShort", "rLegShort"]
 export let defaultAreaLookup = {

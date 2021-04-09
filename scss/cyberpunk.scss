@@ -34,10 +34,10 @@ $field-border-width: 2px;
 
         // A tab itself
         > .item {
-            
             &.active {
                 color: $text-colour-inverted;
                 background-color: $text-colour;
+                text-shadow: unset;
             }
         }
     }

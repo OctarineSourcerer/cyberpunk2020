@@ -1,4 +1,4 @@
-import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs } from "../lookups.js"
+import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
 import { localize, rollLocation } from "../utils.js"
 
@@ -173,7 +173,7 @@ export class CyberpunkItem extends Item {
       throw new Error("This item isn't owned by anyone.");
     }
     let isRanged = this.type !== weaponTypes.melee;
-    
+    let actualRangeBracket = rangeResolve[attackMods.range](data.range);
 
     let attackTerms = ["@stats.ref.total"];
     if(this.attackSkill) {
@@ -211,7 +211,10 @@ export class CyberpunkItem extends Item {
         attackRoll: attackRoll,
         fired: roundsFired,
         hit: roundsHit,
-        areaDamages: areaDamages
+        areaDamages: areaDamages,
+        locals: {
+          range: { range: actualRangeBracket }
+        }
       }
       let roll = new Multiroll("Autofire");
       roll.execute(undefined, "systems/cyberpunk2020/templates/chat/auto-fire.hbs", templateData);

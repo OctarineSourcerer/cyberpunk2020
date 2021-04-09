@@ -16,6 +16,7 @@
 .cyberpunk section.window-content nav.tabs > .item.active {
   color: whitesmoke;
   background-color: black;
+  text-shadow: unset;
 }
 
 .cyberpunk *::-webkit-scrollbar {
@@ -251,6 +252,13 @@ details[open] summary ~ * {
 
 .action {
   cursor: pointer;
+}
+.action > * {
+  cursor: pointer;
+}
+
+.no-action {
+  cursor: default;
 }
 
 .not-editable {

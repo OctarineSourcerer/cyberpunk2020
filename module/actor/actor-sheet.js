@@ -169,6 +169,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       item.roll();
     });
     html.find('.item-edit').click(ev => {
+      ev.stopPropagation();
       let item = getEventItem(this, ev);
       item.sheet.render(true);
     });
@@ -191,6 +192,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     });
 
     html.find('.fire-weapon').click(ev => {
+      ev.stopPropagation();
       let item = getEventItem(this, ev);
       let dialog = new AttackModifiers(this.actor, {
         weapon: item
