@@ -393,7 +393,7 @@ div.statderive .value.rightborder {
 .wound-tracker .damageholder {
   display: flex;
   flex-grow: 1;
-  height: 0.4em;
+  height: 0.5em;
 }
 .wound-tracker .damage {
   border: 0 none;
