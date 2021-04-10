@@ -421,8 +421,11 @@ div.statderive .value.rightborder {
 .wound-tracker .damage:checked {
   filter: none;
 }
-.wound-tracker .damage:hover {
-  background-color: rgba(178, 34, 34, 0.5);
+.wound-tracker .damage.filled:hover {
+  background-color: rgba(178, 34, 34, 0.7);
+}
+.wound-tracker .damage.unfilled:hover {
+  background-color: rgba(178, 34, 34, 0.3);
 }
 .wound-tracker .damage + .damage {
   border-left-width: 0px;
