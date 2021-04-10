@@ -1,3 +1,21 @@
+* {
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #5a5a5a;
+  border-radius: 0px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-width: 0px;
+  background-color: black;
+}
+
 .cyberpunk section.window-content {
   font-family: "Noto Sans", sans-serif;
   font-weight: bold;
@@ -19,18 +37,6 @@
   text-shadow: unset;
 }
 
-.cyberpunk *::-webkit-scrollbar {
-  width: 2px;
-}
-.cyberpunk *::-webkit-scrollbar-track {
-  background-color: black;
-  border-radius: 0px;
-}
-.cyberpunk *::-webkit-scrollbar-thumb {
-  border-width: 0px;
-  background-color: #5a5a5a;
-}
-
 /* Overall sheet structure */
 .sheet header.cyberheader {
   display: flex;
@@ -39,7 +45,7 @@
   flex-grow: 0;
 }
 .sheet header.cyberheader > div {
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 .cyberpunk h2 {
@@ -296,7 +302,7 @@ details[open] summary ~ * {
   text-align: center;
 }
 .statsrow > div.stat label {
-  padding: 5px 0px 5px 0px;
+  padding: 3px 0px 3px 0px;
   text-align: center;
 }
 .statsrow > div.stat .stat-total {

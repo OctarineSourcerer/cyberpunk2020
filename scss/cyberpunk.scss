@@ -12,6 +12,21 @@ $transition-period: 0.25s;
 
 $field-border-width: 2px;
 
+* {
+    scrollbar-width: thin;
+}
+*::-webkit-scrollbar {
+    width: 4px;
+}
+*::-webkit-scrollbar-track {
+    background-color: $inactive-colour;
+    border-radius: 0px;
+}
+*::-webkit-scrollbar-thumb {
+    border-width: 0px;
+    background-color: $text-colour;
+}
+
 // Make the regular font bold n primary
 .cyberpunk section.window-content {
     font-family: $font-primary;
@@ -42,19 +57,7 @@ $field-border-width: 2px;
         }
     }
 }
-.cyberpunk {
-    *::-webkit-scrollbar {
-        width: 2px;
-    }
-    *::-webkit-scrollbar-track {
-        background-color: $text-colour;
-        border-radius: 0px;
-    }
-    *::-webkit-scrollbar-thumb {
-        border-width: 0px;
-        background-color: $inactive-colour;
-    }
-}
+
 
 /* Overall sheet structure */
 .sheet header.cyberheader {
@@ -66,7 +69,7 @@ $field-border-width: 2px;
     flex-grow: 0;
 
     > div {
-        margin-bottom: 5px;
+        margin-bottom: 3px;
     }
 }
 
