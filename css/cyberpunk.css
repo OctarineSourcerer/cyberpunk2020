@@ -76,7 +76,6 @@
   padding: unset;
   height: unset;
   min-width: unset;
-  -webkit-appearance: unset;
   background-color: unset;
   font: inherit;
   color: black;
@@ -210,7 +209,6 @@ details[open] summary ~ * {
   padding: unset;
   height: unset;
   min-width: unset;
-  -webkit-appearance: unset;
   background-color: unset;
   font: inherit;
   color: black;
@@ -293,7 +291,6 @@ details[open] summary ~ * {
   padding: unset;
   height: unset;
   min-width: unset;
-  -webkit-appearance: unset;
   background-color: unset;
   font: inherit;
   text-align: center;
@@ -404,7 +401,6 @@ div.statderive .value.rightborder {
   padding: unset;
   height: unset;
   min-width: unset;
-  -webkit-appearance: unset;
   background-color: unset;
   font: inherit;
   position: unset;
@@ -457,7 +453,6 @@ div.statderive .value.rightborder {
   padding: unset;
   height: unset;
   min-width: unset;
-  -webkit-appearance: unset;
   background-color: unset;
   font: inherit;
   font-weight: bold;
