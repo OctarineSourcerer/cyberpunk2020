@@ -61,7 +61,7 @@ export function registerHandlebarsHelpers() {
         for(let boxNo = 1; boxNo <= woundsPerState; boxNo++) {
             let thisWound = previousBoxes + boxNo;
             let isChecked = thisWound == damage;
-            let classes = `damage dmg${thisWound}`;
+            let classes = "";
             if(boxNo === 1) {
                 classes += " leftmost"
             }
@@ -74,7 +74,7 @@ export function registerHandlebarsHelpers() {
             }
             else { classes += " unfilled" }
             // When the wound box is filled, make clicking it again essentially "deselect" that wound
-            if(damage === thisWound) {
+            if(damage == thisWound && damage > 0) {
                 thisWound -= 1;
             }
             ret += options.fn({

@@ -6,7 +6,8 @@
         <div class="damageholder">
             {{!-- damageBoxes gives context. WoundNo is which wound, classes dictate which are filled and which have left/right borders --}}
             {{#damageBoxes stateNo ../data.damage}}
-                <input type="radio" name="data.damage" value={{woundNo}} class="{{classes}}" {{#if isChecked}}checked{{/if}}>
+                {{!-- span instead of radio, because radio doesn't allow clicking of current wound to toggle --}}
+                <span data-damage={{woundNo}} class="damage {{classes}}"></span>
             {{/damageBoxes}}
         </div>
     </div>

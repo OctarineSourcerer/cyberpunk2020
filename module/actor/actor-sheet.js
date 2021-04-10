@@ -158,6 +158,12 @@ export class CyberpunkActorSheet extends ActorSheet {
     html.find(".roll-initiative").click(ev => {
       this.actor.rollInitiative();
     });
+    html.find(".damage").click(ev => {
+      let damage = ev.currentTarget.dataset.damage;
+      this.actor.update({
+        "data.damage": damage
+      });
+    });
     html.find(".stun-death-save").click(ev => {
       this.actor.rollStunDeath();
     });
