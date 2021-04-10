@@ -77,7 +77,6 @@ export class CyberpunkItem extends Item {
   // TODO: For 0.8.1, we want to also add flavor text to the different modifiers
   // Get the roll modifiers to add when given a certain set of modifiers
   __shootModTerms({
-    aimingAt,
     aimRounds,
     ambush,
     blinded,
@@ -86,13 +85,14 @@ export class CyberpunkItem extends Item {
     hipfire,
     ricochet,
     running,
+    targetArea,
     turningToFace,
     range,
     fireMode,
     extraMod
   }) {
     let terms = []
-    if(!!aimingAt) {
+    if(!!targetArea) {
       terms.push(-4);
     }
     // Man I want language macros here...
@@ -189,6 +189,7 @@ export class CyberpunkItem extends Item {
     let DC = rangeDCs[attackMods.range];
     let attackRoll = makeD10Roll(attackTerms, owner.data.data).roll();
 
+    // ---- Firemode-specific rolling. I may roll together some common aspects later ----
     // Full auto
     if(attackMods.fireMode === fireModes.fullAuto) {
       let roundsFired = Math.min(data.shotsLeft, data.rof);
@@ -199,7 +200,7 @@ export class CyberpunkItem extends Item {
       let areaDamages = {};
       for(let i = 0; i < roundsHit; i++) {
         let damageRoll = new Roll(data.damage).roll();
-        let location = rollLocation(attackMods.target); 
+        let location = rollLocation(attackMods.targetActor, attackMods.targetArea); 
         if(!areaDamages[location]) {
           areaDamages[location] = [];
         }
@@ -210,14 +211,49 @@ export class CyberpunkItem extends Item {
         toHit: DC,
         attackRoll: attackRoll,
         fired: roundsFired,
-        hit: roundsHit,
+        hits: roundsHit,
+        hit: roundsHit > 0,
         areaDamages: areaDamages,
         locals: {
           range: { range: actualRangeBracket }
         }
       }
-      let roll = new Multiroll("Autofire");
-      roll.execute(undefined, "systems/cyberpunk2020/templates/chat/auto-fire.hbs", templateData);
+      let roll = new Multiroll(localize("Autofire"));
+      roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
+      return;
+    }
+    // Three-round burst. Shares... a lot in common with full auto actually
+    if(attackMods.fireMode === fireModes.threeRoundBurst) {
+      let roundsFired = Math.min(data.shotsLeft, data.rof, 3);
+      let attackHits = attackRoll.total >= DC;
+      let areaDamages = {};
+      let roundsHit;
+      if(attackHits) {
+        // In RAW this is 1d6/2, but this is functionally the same
+        roundsHit = new Roll("1d3").roll();
+        for(let i = 0; i < roundsHit.total; i++) {
+          let damageRoll = new Roll(data.damage).roll();
+          let location = rollLocation(attackMods.targetActor, attackMods.targetArea);
+          if(!areaDamages[location]) {
+            areaDamages[location] = [];
+          }
+          areaDamages[location].push(damageRoll);
+        }
+      }
+      let templateData = {
+        range: attackMods.range,
+        toHit: DC,
+        attackRoll: attackRoll,
+        fired: roundsFired,
+        hits: attackHits ? roundsHit.total : 0,
+        hit: attackHits,
+        areaDamages: areaDamages,
+        locals: {
+          range: { range: actualRangeBracket }
+        }
+      }
+      let roll = new Multiroll(localize("ThreeRoundBurst"));
+      roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
       return;
     }
 

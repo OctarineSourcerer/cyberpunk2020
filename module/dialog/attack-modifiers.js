@@ -39,7 +39,7 @@ import { defaultTargetLocations } from "../lookups.js"
       // I will say this is an atrociously rigid implementation, a terrible prototype, and we shall see about making it more flexible.
 
       // Default range 50
-      let range = this.options.weapon.range || 50;
+      let range = this.options.weapon.data.data.range || 50;
       let fireModes = this.options.weapon.__getFireModes() || [];
       // Localisation data for ranges
       let rangeLocals = {
@@ -51,7 +51,6 @@ import { defaultTargetLocations } from "../lookups.js"
       };
       return {
         extraMod: 0,
-        aimingAt: "",
         aimRounds: 0,
         ambush: false,
         blinded: false,
@@ -60,6 +59,7 @@ import { defaultTargetLocations } from "../lookups.js"
         hipfire: false,
         ricochet: false,
         running: false,
+        targetArea: "",
         turningToFace: false,
         fireMode: fireModes[0] || "",
         choices: {
@@ -67,7 +67,7 @@ import { defaultTargetLocations } from "../lookups.js"
           rounds: [0,1,2,3],
           fireModes: fireModes,
           // TODO: Choices dependent on target
-          aimingAt: defaultTargetLocations
+          targetArea: defaultTargetLocations
         },
         locals: {
           ranges: rangeLocals,

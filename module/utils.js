@@ -28,8 +28,10 @@ export function shortLocalize(str) {
     return game.i18n.localize(key);
 }
 
-export function rollLocation(target) {
-    let hitAreaLookup = (!!target && !!target.hitLocLookup) ? target.hitLocLookup : defaultAreaLookup;
+export function rollLocation(targetActor, targetArea) {
+    if(targetArea) 
+        return targetArea;
+    let hitAreaLookup = (!!targetActor && !!targetActor.hitLocLookup) ? targetActor.hitLocLookup : defaultAreaLookup;
 
     let roll = new Roll("1d10").roll().total;
     return hitAreaLookup[roll];

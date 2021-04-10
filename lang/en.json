@@ -242,7 +242,7 @@
     "CYBERPUNK.AttackType": "Attack Type",
 
     "CYBERPUNK.FullAuto": "Full Auto",
-    "CYBERPUNK.ThreeRoundBurst": "Three Round Burst",
+    "CYBERPUNK.ThreeRoundBurst": "Three-round Burst",
     "CYBERPUNK.Suppressive": "Suppressive Fire",
     "CYBERPUNK.SemiAuto": "Semi-Auto",
 
@@ -263,8 +263,9 @@
 
     "CYBERPUNK.Autofire": "Autofire",
     "CYBERPUNK.ToHit": "To Hit",
-    "CYBERPUNK.AutofireHitTally": "{hit} hit",
+    "CYBERPUNK.AutofireHitTally": "{hits} hit",
     "CYBERPUNK.AutofireFiredTally": "of {fired} fired",
+    "CYBERPUNK.NoHits": "No Hits",
 
     "CYBERPUNK.ConcealPocket": "Pocket/Pants Leg/Sleeve",
     "CYBERPUNK.ConcealJacket": "Jacket/Coat/Shoulder Rig",
