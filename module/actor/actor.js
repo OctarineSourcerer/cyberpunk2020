@@ -122,7 +122,7 @@ export class CyberpunkActor extends Actor {
       case 8:
       case 9: return 3;
       case 10: return 4;
-      case body > 10: return 5;
+      default: return 5;
     }
   }
 
