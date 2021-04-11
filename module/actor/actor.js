@@ -80,10 +80,15 @@ export class CyberpunkActor extends Actor {
     body.modifier = CyberpunkActor.btm(body.total);
     // This is where the effect wounds would have to be calculated
 
-    // Only sort skills if we need to - sortSkills is essentially a dirty flag
-    if(this.getFlag('cyberpunk2020', 'sortSkills')) {
+    // Only sort skills if we need to - !skillsSorted is essentially a dirty flag
+    if(!this.getFlag('cyberpunk2020', 'skillsSorted')) {
+      console.log("sorting skills");
       let sortOrder = this.getFlag('cyberpunk2020', 'skillSortOrder') || Object.keys(SortOrders)[0];
-      actorData.data.skills = sortSkills(data.skills, SortOrders[sortOrder])
+      let sorted = sortSkills(data.skills, SortOrders[sortOrder]);
+      this.update({
+        "data.data.skills": sorted
+      });
+      this.setFlag('cyberpunk2020', 'skillsSorted', true);
     }
 
     // Apply wound effects
