@@ -126,11 +126,15 @@ export class CyberpunkItem extends Item {
 
     // Range on its own doesn't actually apply a modifier - it only affects to-hit rolls. But it does affect certain fire modes.
     // For now assume full auto = all bullets; spray and pray
-    // +1/-1 per 10 bullets fired. + if close, - otherwise.
+    // +1/-1 per 10 bullets fired. + if close, - if medium onwards.
+    // Friend's copy of the rulebook states penalties/bonus for all except point blank
     if(fireMode === fireModes.fullAuto) {
       let bullets = Math.min(this.data.data.shotsLeft, this.data.data.rof);
       // If close range, add, else subtract
-      let multiplier = (range === ranges.close) ? 1 : -1;
+      let multiplier = 
+          (range === ranges.close) ? 1 
+        : (range === ranges.pb) ? 0 
+        : -1;
       terms.push(multiplier * Math.floor(bullets/10))
     }
 
