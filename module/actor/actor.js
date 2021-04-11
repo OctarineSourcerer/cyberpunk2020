@@ -87,7 +87,7 @@ export class CyberpunkActor extends Actor {
       let sorted = sortSkills(data.skills, SortOrders[sortOrder]);
       this.update({
         "data.data.skills": sorted
-      });
+      }, {recursive: true});
       this.setFlag('cyberpunk2020', 'skillsSorted', true);
     }
 
@@ -193,8 +193,8 @@ export class CyberpunkActor extends Actor {
     //   activeCombat.rollInitiative(this.id);
     //   return;
     // }
-    let roll = new Multiroll(`${this.name} ${localize("Initiative")}`)
-      .addRoll(makeD10Roll(["@stats.ref.total"], this.data.data));
+    let roll = new Multiroll(`${this.name} ${localize("Initiative")}`, localize("InitiativeTrackerWarning"))
+      .addRoll(makeD10Roll(["@stats.ref.total","@skills.CombatSense.value"], this.data.data));
     roll.defaultExecute();
   }
 
