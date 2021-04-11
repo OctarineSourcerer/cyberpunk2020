@@ -170,6 +170,9 @@ export class CyberpunkActor extends Actor {
     if(skill.stat !== "special") {
       rollParts.push(`@stats.${skill.stat}.total`);
     }
+    if(skillName === "AwarenessNotice") {
+      rollParts.push("@skills.CombatSense.value");
+    }
     let roll = new Multiroll(localize("Skill"+skillName))
       .addRoll(makeD10Roll(rollParts, this.data.data));
 
