@@ -13,7 +13,6 @@ export class CyberpunkActor extends Actor {
    */
   prepareData() {
     super.prepareData();
-
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     switch ( this.data.type ) {
@@ -25,7 +24,7 @@ export class CyberpunkActor extends Actor {
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(actorData) {
+  async _prepareCharacterData(actorData) {
     const data = actorData.data;
     
     const stats = data.stats;
@@ -78,17 +77,26 @@ export class CyberpunkActor extends Actor {
     body.carry = body.total * 10;
     body.lift = body.total * 40;
     body.modifier = CyberpunkActor.btm(body.total);
-    // This is where the effect wounds would have to be calculated
+    actorData.data.carryWeight = 0;
+    actorData.items.forEach(item => {
+      let weight = item.weight || 0;
+      actorData.data.carryWeight += weight;
+    });
 
-    // Only sort skills if we need to - !skillsSorted is essentially a dirty flag
-    if(!this.getFlag('cyberpunk2020', 'skillsSorted')) {
-      console.log("sorting skills");
+    // Only sort skills if we need to - needSkillSort is essentially a dirty flag
+    if(this.getFlag('cyberpunk2020', 'needSkillSort')) {
       let sortOrder = this.getFlag('cyberpunk2020', 'skillSortOrder') || Object.keys(SortOrders)[0];
+      console.log(`sorting skills by ${sortOrder}`);
       let sorted = sortSkills(data.skills, SortOrders[sortOrder]);
-      this.update({
-        "data.data.skills": sorted
-      });
-      this.setFlag('cyberpunk2020', 'skillsSorted', true);
+      console.log(sorted);
+      this.setFlag('cyberpunk2020', 'needSkillSort', false).then(
+        this.update({
+          "data.skills": ""
+        }, {render: false})
+        .then(entity => {
+          this.update({"data.skills": sorted});
+        })
+      );
     }
 
     // Apply wound effects

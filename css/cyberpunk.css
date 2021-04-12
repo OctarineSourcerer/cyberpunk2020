@@ -80,7 +80,6 @@
   border: 0 none;
   border-radius: 0px;
   padding: unset;
-  height: unset;
   min-width: unset;
   background-color: unset;
   font: inherit;
@@ -213,7 +212,6 @@ details[open] summary ~ * {
   border: 0 none;
   border-radius: 0px;
   padding: unset;
-  height: unset;
   min-width: unset;
   background-color: unset;
   font: inherit;
@@ -295,7 +293,6 @@ details[open] summary ~ * {
   border: 0 none;
   border-radius: 0px;
   padding: unset;
-  height: unset;
   min-width: unset;
   background-color: unset;
   font: inherit;
@@ -405,7 +402,6 @@ div.statderive .value.rightborder {
   border: 0 none;
   border-radius: 0px;
   padding: unset;
-  height: unset;
   min-width: unset;
   background-color: unset;
   font: inherit;
@@ -457,7 +453,6 @@ div.statderive .value.rightborder {
   border: 0 none;
   border-radius: 0px;
   padding: unset;
-  height: unset;
   min-width: unset;
   background-color: unset;
   font: inherit;
