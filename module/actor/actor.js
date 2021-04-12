@@ -88,7 +88,6 @@ export class CyberpunkActor extends Actor {
       let sortOrder = this.getFlag('cyberpunk2020', 'skillSortOrder') || Object.keys(SortOrders)[0];
       console.log(`sorting skills by ${sortOrder}`);
       let sorted = sortSkills(data.skills, SortOrders[sortOrder]);
-      console.log(sorted);
       this.setFlag('cyberpunk2020', 'needSkillSort', false).then(
         this.update({
           "data.skills": ""
@@ -178,6 +177,9 @@ export class CyberpunkActor extends Actor {
     if(skill.stat !== "special") {
       rollParts.push(`@stats.${skill.stat}.total`);
     }
+    if(skillName === "AwarenessNotice") {
+      rollParts.push("@skills.CombatSense.value");
+    }
     let roll = new Multiroll(localize("Skill"+skillName))
       .addRoll(makeD10Roll(rollParts, this.data.data));
 
@@ -201,8 +203,8 @@ export class CyberpunkActor extends Actor {
     //   activeCombat.rollInitiative(this.id);
     //   return;
     // }
-    let roll = new Multiroll(`${this.name} ${localize("Initiative")}`)
-      .addRoll(makeD10Roll(["@stats.ref.total"], this.data.data));
+    let roll = new Multiroll(`${this.name} ${localize("Initiative")}`, localize("InitiativeTrackerWarning"))
+      .addRoll(makeD10Roll(["@stats.ref.total","@skills.CombatSense.value"], this.data.data));
     roll.defaultExecute();
   }
 
