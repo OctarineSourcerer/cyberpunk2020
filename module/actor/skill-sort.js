@@ -33,10 +33,6 @@ function byName([a_name, a_val], [b_name, b_val]) {
 function byStat([a_name, a_val], [b_name, b_val]) {
     let order_a = statOrder[a_val.stat] || -1;
     let order_b = statOrder[b_val.stat] || -1;
-    if(order_a == -1)
-        console.log(a_name);
-    if(order_b == -1)
-        console.log(b_name);
     if(order_a > order_b) {
         return 1;
     }
@@ -52,7 +48,6 @@ function sortSkills(skills, sortOrder) {
     let unsorted = Object.entries(skills);
     let sorted = unsorted.sort(sortOrder);
     return sorted.reduce(function (result, [key, value]) {
-        console.log(`Adding key: ${key}`)
         result[key] = value;
         return result;
     }, {}); 
