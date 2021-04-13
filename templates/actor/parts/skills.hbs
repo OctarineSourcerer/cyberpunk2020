@@ -18,7 +18,7 @@
         {{else}}
             <details class="field skill-group">
                 {{log this}}
-                <summary>{{skillName}}</summary>
+                <summary>{{CPLocal skillName}}</summary>
                 {{#each . as |childSkill childSkillName|}}
                     {{!-- Any object children of groups should be a skill. Don't make me go recursive with this. --}}
                     {{#if (isObject childSkill)}}
