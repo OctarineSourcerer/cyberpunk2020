@@ -801,7 +801,7 @@
 		"cyberware": {
 			"templates": ["common"],
 			"surgCode": "N",
-			"humanityCost": "1d6"
+			"humanityCost": 0
 		},
 		"misc": {
 			"templates": ["common"]

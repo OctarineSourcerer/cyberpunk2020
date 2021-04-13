@@ -237,7 +237,12 @@
 
     "CYBERPUNK.Details": "Details",
     "CYBERPUNK.Notes": "Notes",
+    "CYBERPUNK.Cost": "Cost",
     "CYBERPUNK.ItemName": "Item Name",
+    "CYBERPUNK.SurgeryCode": "Surgery Code",
+    "CYBERPUNK.HumanityCost": "Humanity Cost",
+    "CYBERPUNK.Weight": "Weight",
+
     "CYBERPUNK.AttackSkill": "Attack Skill",
     "CYBERPUNK.Attack": "Attack",
     "CYBERPUNK.Location": "Location",

@@ -34,6 +34,12 @@ export const preloadHandlebarsTemplates = async function() {
         // Armor parts
         "systems/cyberpunk2020/templates/item/parts/armor/summary.hbs",
         "systems/cyberpunk2020/templates/item/parts/armor/settings.hbs",
+        // Cyberware
+        "systems/cyberpunk2020/templates/item/parts/cyberware/summary.hbs",
+        "systems/cyberpunk2020/templates/item/parts/cyberware/settings.hbs",
+        // Misc
+        "systems/cyberpunk2020/templates/item/parts/misc/summary.hbs",
+        "systems/cyberpunk2020/templates/item/parts/misc/settings.hbs",
 
         // Weapon settings dialog
         "systems/cyberpunk2020/templates/dialog/attack-modifiers.hbs",
