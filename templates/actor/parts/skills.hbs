@@ -17,8 +17,7 @@
         {{> (template "actor/parts/skill") skill=skill name=skillName edit=skillName}}
         {{else}}
             <details class="field skill-group">
-                {{log this}}
-                <summary>{{CPLocal skillName}}</summary>
+                <summary>{{localize (skillRef skillName)}}</summary>
                 {{#each . as |childSkill childSkillName|}}
                     {{!-- Any object children of groups should be a skill. Don't make me go recursive with this. --}}
                     {{#if (isObject childSkill)}}

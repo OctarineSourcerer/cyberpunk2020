@@ -87,7 +87,6 @@ export function registerHandlebarsHelpers() {
     });
 
     Handlebars.registerHelper("isObject", function(foo) {
-        console.log(JSON.stringify(foo));
         return foo instanceof Object;
     });
 
