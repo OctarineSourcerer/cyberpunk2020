@@ -1,6 +1,7 @@
 import { weaponTypes } from "../lookups.js"
 import { localize } from "../utils.js"
 import { AttackModifiers } from "../dialog/attack-modifiers.js"
+import { SortOrders } from "./skill-sort.js";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -36,47 +37,40 @@ export class CyberpunkActorSheet extends ActorSheet {
       }
       this._prepareCharacterItems(data);
       this._addWoundTrack(data);
-      this._filterSkills(data);
+      data.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
+      data.skillsSortChoices = Object.keys(SortOrders);
+      data.skillDisplayList = this._filterSkills(data);
       data.weaponTypes = weaponTypes;
     }
 
     return data;
   }
 
+  // Handle searching skills
   _filterSkills(data) {
     if(data.data.transient.skillFilter == null) {
       data.data.transient.skillFilter = "";
     }
     let upperSearch = data.data.transient.skillFilter.toUpperCase();
-    const fullSkills = data.data.skills;
+    const fullList = data.data.sortedSkillView || Object.keys(data.data.skills);
 
-    // By default, we'll copy the whole list of skills, no filtering
-    let listToFilter = fullSkills;
-    let filterFn = (result, [k,v]) => {
-      result[k] = v;
-      return result;
-    };
+    let listToFilter = fullList;
 
-    // Only change those defaults if we actually need to filter
-    if(upperSearch !== "") {
-      // If we're searchin', we need to actually filter as we copy
-      filterFn = (result, [k,v]) => {
-        if(k.toUpperCase().includes(upperSearch)) {
-          result[k] = v;
-        }
-        return result;
-      }
+    // Only filter if we need to
+    if(upperSearch === "") {
+      return listToFilter;
+    }
+    else {
       // If we searched previously and the old search had results, we can filter those instead of the whole lot
       if(data.data.transient.oldSearch != null 
         && data.skillDisplayList != null
         && upperSearch.startsWith(oldSearch)) {
         listToFilter = data.skillDisplayList;
       }
+      return listToFilter.filter(skillName => {
+        return skillName.toUpperCase().includes(upperSearch);
+      });
     }
-    // Copy filtered skills to skillDisplayList.
-    data.skillDisplayList = Object
-        .entries(listToFilter)
-        .reduce(filterFn, {});
   }
 
   _addWoundTrack(sheetData) {
@@ -124,17 +118,14 @@ export class CyberpunkActorSheet extends ActorSheet {
     };
   }
 
-  /**
-   * Get an owned item from a click event, for any event trigger with a data-item-id property
-   * @param {*} ev 
-   */
-
-  /* -------------------------------------------- */
-
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
 
+    /**
+   * Get an owned item from a click event, for any event trigger with a data-item-id property
+   * @param {*} ev 
+   */
     function getEventItem(sheet, ev) {
       let itemId = ev.currentTarget.dataset.itemId;
       return sheet.actor.getOwnedItem(itemId);
@@ -150,6 +141,11 @@ export class CyberpunkActorSheet extends ActorSheet {
     html.find('.stat-roll').click(ev => {
       let statName = ev.currentTarget.dataset.statName;
       this.actor.rollStat(statName);
+    });
+    html.find(".skill-sort > select").change(ev => {
+      let sort = ev.currentTarget.value;
+      console.log(sort);
+      this.actor.sortSkills(sort);
     });
     html.find(".skill-roll").click(ev => {
       let skillName = ev.currentTarget.dataset.skillName;

@@ -41,7 +41,9 @@
     "CYBERPUNK.Mortal": "Mortal {mortality}",
 
     "CYBERPUNK.Life": "Life",
-    
+    "CYBERPUNK.SortBy": "Sort By",   
+    "CYBERPUNK.Name": "Name",
+    "CYBERPUNK.Stat": "Stat",
 
     "CYBERPUNK.SkillAuthority": "Authority",
     "CYBERPUNK.SkillCharismaticLeadership": "Charismatic Leadership",

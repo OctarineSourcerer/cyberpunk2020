@@ -1,25 +1,15 @@
 // Top bar above the list of skills itself
-.skill-utils {
-    border-style: solid;
-    border-width: 2px;
-    border-color: $text-colour;
-    margin-bottom: 3px;
-    flex-grow: 0;
-
+.skill-top-matter {
     display: flex;
-
-    .skill-search {
-        @include reset-input;
-        font-weight: bold;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-bottom: 5px;
+    flex-grow: 0;
+    > * {
         flex-grow: 1;
-        padding-left: 5px;
     }
-
+    
     div.search-icon {
-        @include image-bg;
-        height:1.5em;
-        width: 1.5em;
-        padding: 2px 5px;
         background-color: $text-colour;
         background-image: url(../img/search.png);
     }

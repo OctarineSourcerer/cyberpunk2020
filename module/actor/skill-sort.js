@@ -16,8 +16,8 @@ const statOrder = {
 }
 
 const SortOrders = {
-    alph: byName,
-    stat: byStat
+    Name: byName,
+    Stat: byStat
 }
 
 function byName([a_name, a_val], [b_name, b_val]) {
@@ -45,10 +45,11 @@ function byStat([a_name, a_val], [b_name, b_val]) {
 /* This would usually be in actor-sheet.js; sorting stats is mostly for UX purposes. But that'd mean creating a sorted version of stats EVERY time the sheet opens. And CP2020 has 89 stats by default; enough for me to not want to do that. So we sort in the actor itself */
 // Really just a fancy "sort object", but I've set this module up specifically for actor skills
 function sortSkills(skills, sortOrder) {
+    if(!sortOrder) {
+        console.warn("No sort order given. Returning original skill list");
+        return skills;
+    }
     let unsorted = Object.entries(skills);
     let sorted = unsorted.sort(sortOrder);
-    return sorted.reduce(function (result, [key, value]) {
-        result[key] = value;
-        return result;
-    }, {}); 
+    return sorted.map(([key, value]) => key);
 }

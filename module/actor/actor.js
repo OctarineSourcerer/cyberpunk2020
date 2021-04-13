@@ -24,7 +24,7 @@ export class CyberpunkActor extends Actor {
   /**
    * Prepare Character type specific data
    */
-  async _prepareCharacterData(actorData) {
+  _prepareCharacterData(actorData) {
     const data = actorData.data;
     
     const stats = data.stats;
@@ -83,21 +83,6 @@ export class CyberpunkActor extends Actor {
       actorData.data.carryWeight += weight;
     });
 
-    // Only sort skills if we need to - needSkillSort is essentially a dirty flag
-    if(this.getFlag('cyberpunk2020', 'needSkillSort')) {
-      let sortOrder = this.getFlag('cyberpunk2020', 'skillSortOrder') || Object.keys(SortOrders)[0];
-      console.log(`sorting skills by ${sortOrder}`);
-      let sorted = sortSkills(data.skills, SortOrders[sortOrder]);
-      this.setFlag('cyberpunk2020', 'needSkillSort', false).then(
-        this.update({
-          "data.skills": ""
-        }, {render: false})
-        .then(entity => {
-          this.update({"data.skills": sorted});
-        })
-      );
-    }
-
     // Apply wound effects
     // Change stat total, but leave a record of the difference in stats.[statName].woundMod
     // Modifies the very-end-total, idk if this'll need to change in the future
@@ -116,6 +101,22 @@ export class CyberpunkActor extends Actor {
     else if(woundState == 2) {
       woundStat(stats.ref, total => total - 2);
     }
+  }
+
+  /**
+   * 
+   * @param {string} sortOrder The order to sort skills by. Options are in skill-sort.js's SortOrders. "stat" or "alph". Default "alph".
+   */
+  sortSkills(sortOrder) {
+    sortOrder = sortOrder || Object.keys(SortOrders)[0];
+    console.log(`Sorting skills by ${sortOrder}`);
+    let sortedView = sortSkills(this.data.data.skills, SortOrders[sortOrder]);
+
+    // Technically UI info, but we don't wanna calc every time we open a sheet so store it in the actor.
+    this.update({
+      "data.sortedSkillView": sortedView,
+      "data.skillsSortedBy": sortOrder
+    });
   }
 
   /**

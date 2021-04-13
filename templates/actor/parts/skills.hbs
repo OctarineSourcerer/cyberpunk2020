@@ -1,13 +1,18 @@
 {{!-- Skills tab contents --}}
-{{!-- Search bar --}}
-<div class="skill-utils">
-    <div class="search-icon"></div>
-    <input class="skill-search" name="data.transient.skillFilter" value="{{data.transient.skillFilter}}"></input>
+<div class="skill-top-matter">
+    {{!-- Search bar --}}
+    <div class="field">
+        <div class="field-image search-icon"></div>
+        <input class="skill-search" name="data.transient.skillFilter" value="{{data.transient.skillFilter}}"></input>
+    </div>
+    {{!-- Sorting - NOT working yet --}}
+    {{> (template "fields/select") label="SortBy" edit="data.skillsSortedBy" choices=skillsSortChoices extraClasses="skill-sort"}}
 </div>
 
 {{!-- Actual skills --}}
 <div class="field-list">
-    {{#each skillDisplayList as |skill skillName|}}
+    {{#each skillDisplayList as |skillName|}}
+        {{#with (lookup ../data.skills skillName) as |skill|}}
         <div class="field skill">
             <label class="skill-roll action" data-skill-name="{{skillName}}">{{localize (skillRef skillName)}}</label>
             <span class="flex-pad"></span>
@@ -25,6 +30,7 @@
                 <input class="smallnumber nogrow" name="data.skills.{{skillName}}.value" value="{{skill.value}}"/>
             {{/if}}
         </div>
+        {{/with}}
     {{/each}}
 </div>
 
