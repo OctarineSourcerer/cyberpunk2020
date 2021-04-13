@@ -1,4 +1,4 @@
-import { localize, properCase, replaceIn, shortLocalize } from "./utils.js"
+import { deepLookup, localize, properCase, replaceIn, shortLocalize } from "./utils.js"
 
 const templatePath = "systems/cyberpunk2020/templates/";
 export function registerHandlebarsHelpers() {
@@ -86,6 +86,11 @@ export function registerHandlebarsHelpers() {
         return ret;
     });
 
+    Handlebars.registerHelper("isObject", function(foo) {
+        console.log(JSON.stringify(foo));
+        return foo instanceof Object;
+    });
+
     Handlebars.registerHelper("template", function(templateName) {
         return templatePath + templateName + ".hbs";
     });
@@ -102,11 +107,7 @@ export function registerHandlebarsHelpers() {
     });
 
     Handlebars.registerHelper("deepLookup", function(context, path) {
-        let current = context;
-        path.split(".").forEach(segment => {
-            current = current[segment];
-        });
-        return current;
+        return deepLookup(context, path);
     });
 
     /** Display array of localizable strings, in short if possible

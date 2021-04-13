@@ -5,32 +5,32 @@
         <div class="field-image search-icon"></div>
         <input class="skill-search" name="data.transient.skillFilter" value="{{data.transient.skillFilter}}"></input>
     </div>
-    {{!-- Sorting - NOT working yet --}}
+
     {{> (template "fields/select") label="SortBy" edit="data.skillsSortedBy" choices=skillsSortChoices extraClasses="skill-sort"}}
 </div>
 
 {{!-- Actual skills --}}
 <div class="field-list">
     {{#each skillDisplayList as |skillName|}}
-        {{#with (lookup ../data.skills skillName) as |skill|}}
-        <div class="field skill">
-            <label class="skill-roll action" data-skill-name="{{skillName}}">{{localize (skillRef skillName)}}</label>
-            <span class="flex-pad"></span>
-            <span class="chip-toggle">
-                <label>
-                    <div class="{{#if skill.chipped}}inactive{{/if}}">{{skill.stat}}</div>
-                    <div class="chip-icon {{#unless skill.chipped}}inactive{{/unless}}"></div>
-                    <input type="checkbox" name="data.skills.{{skillName}}.chipped" {{checked skill.chipped}}/>
-                </label>
-            </span>
-            
-            {{#if skill.chipped}}
-                <input class="smallnumber nogrow" name="data.skills.{{skillName}}.chipValue" value="{{#if skill.chipValue}}{{skill.chipValue}}{{else}}0{{/if}}"/>
-            {{else}}
-                <input class="smallnumber nogrow" name="data.skills.{{skillName}}.value" value="{{skill.value}}"/>
-            {{/if}}
-        </div>
-        {{/with}}
+    {{#with (lookup ../data.skills skillName) as |skill|}}
+        {{#unless skill.group}}
+        {{> (template "actor/parts/skill") skill=skill name=skillName edit=skillName}}
+        {{else}}
+            <details class="field skill-group">
+                {{log this}}
+                <summary>{{skillName}}</summary>
+                {{#each . as |childSkill childSkillName|}}
+                    {{!-- Any object children of groups should be a skill. Don't make me go recursive with this. --}}
+                    {{#if (isObject childSkill)}}
+                        {{> (template "actor/parts/skill") skill=childSkill 
+                        name=childSkillName 
+                        translatePrefix=skill.translationPrefix
+                        edit=(concat skillName "." childSkillName)}}
+                    {{/if}}
+                {{/each}}
+            </details>
+        {{/unless}}
+    {{/with}}
     {{/each}}
 </div>
 

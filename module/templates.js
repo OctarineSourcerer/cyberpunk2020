@@ -12,6 +12,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/cyberpunk2020/templates/actor/parts/gear.hbs",
         "systems/cyberpunk2020/templates/actor/parts/combat.hbs",
         "systems/cyberpunk2020/templates/actor/parts/armor-display.hbs",
+        "systems/cyberpunk2020/templates/actor/parts/skill.hbs",
 
         // Shared templates
         "systems/cyberpunk2020/templates/fields/text.hbs",
@@ -26,6 +27,7 @@ export const preloadHandlebarsTemplates = async function() {
 
         // Item sheet
         "systems/cyberpunk2020/templates/item/item-sheet.hbs",
+
         // Weapon parts
         "systems/cyberpunk2020/templates/item/parts/weapon/summary.hbs",
         "systems/cyberpunk2020/templates/item/parts/weapon/settings.hbs",

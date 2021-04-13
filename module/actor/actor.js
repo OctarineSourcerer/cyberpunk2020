@@ -1,6 +1,6 @@
 import { makeD10Roll, Multiroll } from "../dice.js";
 import { SortOrders, sortSkills } from "./skill-sort.js";
-import { properCase, localize } from "../utils.js"
+import { properCase, localize, deepLookup } from "../utils.js"
 
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
@@ -169,7 +169,8 @@ export class CyberpunkActor extends Actor {
 
   // TODO: This needs to be tested for nested skills eventually
   rollSkill(skillName) {
-    let skill = this.data.data.skills[skillName];
+    // Is a deep lookup as the nested skills are likely "Martial.Aikido" or along those lines
+    let skill = deepLookup(this.data.data.skills, skillName);
     let value = this._realSkillValue(skill);
 
     let rollParts = [];
@@ -181,7 +182,17 @@ export class CyberpunkActor extends Actor {
     if(skillName === "AwarenessNotice") {
       rollParts.push("@skills.CombatSense.value");
     }
-    let roll = new Multiroll(localize("Skill"+skillName))
+
+    // When rolling skill, we use something like MartialArts.Aikido. Dots and translation keys don't play nice, so instead each group uses a translation prefix
+    let [parentName, childName] = skillName.split(".");
+    let translationKey = "Skill";
+    if(childName && this.data.data.skills[parentName].translationPrefix) {
+      translationKey += this.data.data.skills[parentName].translationPrefix + childName;
+    }
+    else {
+      translationKey += parentName;
+    }
+    let roll = new Multiroll(localize(translationKey))
       .addRoll(makeD10Roll(rollParts, this.data.data));
 
     roll.defaultExecute();

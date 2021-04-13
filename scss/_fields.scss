@@ -35,6 +35,10 @@
         padding-left: calc(5px - #{$field-border-width});
         padding-right: 5px;
     }
+    >.field {
+        background-color: unset;
+        padding: unset;
+    }
     // I'd have this as an img, but it turns out changing an img tag's source on rollover can't be done in CSS, sooo...
     .field-image {
         background-position: center;

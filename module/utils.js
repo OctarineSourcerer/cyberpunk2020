@@ -39,3 +39,11 @@ export function rollLocation(targetActor, targetArea) {
     let roll = new Roll("1d10").roll().total;
     return hitAreaLookup[roll];
 }
+
+export function deepLookup(start, path) {
+    let current = start;
+    path.split(".").forEach(segment => {
+        current = current[segment];
+    });
+    return current;
+}

@@ -198,6 +198,10 @@ details[open] summary ~ * {
   padding-left: calc(5px - 2px);
   padding-right: 5px;
 }
+.cyberpunk .field > .field {
+  background-color: unset;
+  padding: unset;
+}
 .cyberpunk .field .field-image {
   background-position: center;
   background-repeat: no-repeat;
@@ -488,6 +492,10 @@ div.statderive .value.rightborder {
   height: 1.5em;
   width: 1.5em;
   background-image: url(../img/chip.png);
+}
+
+.skill-group .field.skill {
+  width: 100%;
 }
 
 .cyberpunk textarea.flavor {

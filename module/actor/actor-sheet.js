@@ -144,7 +144,6 @@ export class CyberpunkActorSheet extends ActorSheet {
     });
     html.find(".skill-sort > select").change(ev => {
       let sort = ev.currentTarget.value;
-      console.log(sort);
       this.actor.sortSkills(sort);
     });
     html.find(".skill-roll").click(ev => {
