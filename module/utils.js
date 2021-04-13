@@ -17,6 +17,9 @@ export function replaceIn(replaceIn, replaceWith) {
 export function localize(str) {
     return game.i18n.localize("CYBERPUNK." + str);
 }
+export function localizeParam(str, params) {
+    return game.i18n.format("CYBERPUNK."+ str, params);
+}
 
 export function shortLocalize(str) {
     if(!game.i18n.translations.CYBERPUNK) {

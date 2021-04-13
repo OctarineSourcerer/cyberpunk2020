@@ -225,7 +225,7 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "bt"
 					},
 					"Expert": {},
 					"Family": {
@@ -607,7 +607,7 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "bt"
 					},
 					"Submachinegun": {
 						"value": 0,
@@ -619,7 +619,7 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "body"
+						"stat": "bt"
 					},
 					"SystemKnowledge": {
 						"value": 0,
