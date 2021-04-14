@@ -3,16 +3,17 @@ export { SortOrders, sortSkills }
 // For now, these are arranged as they are in the book and on other sheets. But it seems a slightly arbitrary order, may change to match topstats, and have those in a sane order too.
 // Order to consider stats in for skills. Lower values come first.
 const statOrder = {
-    "special": 0,
-    "int": 1,
-    "ref": 2,
-    "tech": 3,
-    "cool": 4,
-    "attr": 5,
-    "luck": 6,
-    "ma": 7,
-    "bt": 8,
-    "emp": 9,
+    // Don't have one of these be 0, that's falsy
+    "special": 1,
+    "int": 2,
+    "ref": 3,
+    "tech": 4,
+    "cool": 5,
+    "attr": 6,
+    "luck": 7,
+    "ma": 8,
+    "bt": 9,
+    "emp": 10,
 }
 
 const SortOrders = {
