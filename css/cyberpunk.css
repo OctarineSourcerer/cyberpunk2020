@@ -186,6 +186,7 @@ details[open] summary ~ * {
   border-width: 2px;
   border-style: solid;
   border-color: black;
+  margin-bottom: 3px;
 }
 .cyberpunk .field > * {
   padding: 2px 3px 2px 0px;
@@ -453,7 +454,7 @@ div.statderive .value.rightborder {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   flex-grow: 0;
 }
 .skill-top-matter > * {

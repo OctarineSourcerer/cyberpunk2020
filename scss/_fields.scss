@@ -18,6 +18,7 @@
     border-width: $field-border-width;
     border-style: solid;
     border-color: $text-colour;
+    margin-bottom: 3px;
     
 
     // Only apply padding to direct children. Padding isn't on field itself, as it's the children that have the background color
