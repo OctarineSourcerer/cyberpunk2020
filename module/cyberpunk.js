@@ -12,8 +12,12 @@ Hooks.once('init', async function () {
 
     // Place classes in system namespace for later reference.
     game.cyberpunk = {
-        CyberpunkActor,
-        CyberpunkItem,
+        entities: {
+            CyberpunkActor,
+            CyberpunkItem,
+        },
+        // A manual migrateworld.
+        migrateWorld: migrations.migrateWorld
     };
 
     // Define custom Entity classes
@@ -38,7 +42,7 @@ Hooks.once('init', async function () {
 /**
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration (nabbed from Foundry's 5e module and adapted)
  */
- Hooks.once("ready", function() {
+Hooks.once("ready", function() {
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const lastMigrateVersion = game.settings.get("cyberpunk", "systemMigrationVersion");

@@ -21,6 +21,7 @@ const SortOrders = {
     Stat: byStat
 }
 
+// To sort hierarchically, break ties (0) with the return of another comparison function
 function byName([a_name, a_val], [b_name, b_val]) {
     if(a_name > b_name) {
         return 1;
