@@ -187,8 +187,8 @@ export class CyberpunkItem extends Item {
     let actualRangeBracket = rangeResolve[attackMods.range](data.range);
 
     let attackTerms = ["@stats.ref.total"];
-    if(this.attackSkill) {
-      attackTerms.push(`@skills.${this.attackSkill}.value`);
+    if(data.attackSkill) {
+      attackTerms.push(`@skills.${data.attackSkill}.value`);
     }
     if(isRanged) {
       attackTerms.push(...(this.__shootModTerms(attackMods)));
