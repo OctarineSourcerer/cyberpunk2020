@@ -1,4 +1,4 @@
-import { weaponTypes, sortedAttackTypes, concealability, availability, reliability } from "../lookups.js"
+import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills } from "../lookups.js"
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -51,9 +51,16 @@ export class CyberpunkItemSheet extends ItemSheet {
     data.concealabilities = Object.values(concealability);
     data.availabilities = Object.values(availability);
     data.reliabilities = Object.values(reliability);
+    data.attackSkills = attackSkills[this.item.data.data.weaponType];
+
     // TODO: Be not so inefficient for this
-    if(this.actor) {
-      data.attackSkills = Object.keys(this.actor.data.data.skills).sort().map(e => "Skill" + e);
+    if(!data.attackSkills.length) {
+      if(this.actor) {
+        data.attackSkills = Object.keys(this.actor.data.data.skills).sort();
+      }
+      else {
+        data.attackSkills = Object.keys(game.system.template.Actor.templates.skills.skills).sort();
+      }
     }
   }
 
@@ -82,6 +89,6 @@ export class CyberpunkItemSheet extends ItemSheet {
     if (!this.options.editable) return;
 
     // Roll handlers, click handlers, etc. would go here, same as actor sheet.
-    html.find(".item-roll").click(this.item.roll.bind(this))
+    html.find(".item-roll").click(this.item.roll.bind(this));
   }
 }

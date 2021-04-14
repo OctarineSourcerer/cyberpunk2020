@@ -1,4 +1,4 @@
-import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve } from "../lookups.js"
+import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve, attackSkills } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
 import { localize, rollLocation } from "../utils.js"
 
@@ -13,9 +13,16 @@ export class CyberpunkItem extends Item {
     super.prepareData();
 
     switch(this.data.type) {
+      case "weapon":
+        this._prepareWeaponData(this.data.data);
+        break;
       case "armor":
         this._prepareArmorData(this.data.data);
+        break;
     }
+  }
+
+  _prepareWeaponData(data) {
   }
 
   _prepareArmorData(data) {
