@@ -167,7 +167,6 @@ export class CyberpunkActor extends Actor {
     return value;
   }
 
-  // TODO: This needs to be tested for nested skills eventually
   rollSkill(skillName) {
     // Is a deep lookup as the nested skills are likely "Martial.Aikido" or along those lines
     let skill = deepLookup(this.data.data.skills, skillName);
@@ -175,8 +174,8 @@ export class CyberpunkActor extends Actor {
 
     let rollParts = [];
     rollParts.push(value);
-    // TODO: Check if there IS a stat that special skills use
-    if(skill.stat !== "special") {
+
+    if(skill.stat) {
       rollParts.push(`@stats.${skill.stat}.total`);
     }
     if(skillName === "AwarenessNotice") {

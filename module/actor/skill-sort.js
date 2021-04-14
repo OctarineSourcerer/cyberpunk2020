@@ -32,8 +32,8 @@ function byName([a_name, a_val], [b_name, b_val]) {
 }
 
 function byStat([a_name, a_val], [b_name, b_val]) {
-    let order_a = statOrder[a_val.stat] || -1;
-    let order_b = statOrder[b_val.stat] || -1;
+    let order_a = statOrder[a_val.isSpecial ? "special" : a_val.stat] || -1;
+    let order_b = statOrder[b_val.isSpecial ? "special" : b_val.stat] || -1;
     if(order_a > order_b) {
         return 1;
     }

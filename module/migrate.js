@@ -36,7 +36,15 @@ export function migrateActorData(actor) {
             console.log(`Changing ${skillName}'s stat from body to bt (is body type because cyberpunk)`);
             updateData[`data.skills.${skillName}.stat`] = "bt";
         }
+        // Check for skills that have their stat as special, then assign the new stat from the template
+        if(skill.stat == "special") {
+            let actualStat = game.system.template.Actor.templates.skills.skills[skillName].stat;
+            console.log(`Changing ${skillName}'s stat from special to ${actualStat}, and marking it as a special skill`);
+            updateData[`data.skills.${skillName}.stat`] = actualStat;
+            updateData[`data.skills.${skillName}.isSpecial`] = true;
+        }
     }
+
 
     return updateData;
 } 

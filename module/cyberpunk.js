@@ -44,11 +44,13 @@ Hooks.once('init', async function () {
     const lastMigrateVersion = game.settings.get("cyberpunk", "systemMigrationVersion");
     // First time we're readying, no migrate needed
     if(!lastMigrateVersion) {
+        console.log("CYBERPUNK: First run? No migration needed here");
         game.settings.set("cyberpunk", "systemMigrationVersion", game.system.data.version);
         return;
     }
     const NEEDS_MIGRATION_VERSION = "0.1.3";
+    console.log("CYBERPUNK: Last migrated in version: " + lastMigrateVersion);
     const needsMigration = lastMigrateVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, lastMigrateVersion);
     if ( !needsMigration ) return;
     migrations.migrateWorld();
-  });
+});

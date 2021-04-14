@@ -483,6 +483,9 @@ div.statderive .value.rightborder {
   align-items: center;
   padding-right: 3px;
 }
+.field.skill .chip-toggle label > * {
+  font-variant: all-small-caps;
+}
 .field.skill .chip-toggle input[type=checkbox] {
   display: none;
 }

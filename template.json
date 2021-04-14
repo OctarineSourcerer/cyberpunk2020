@@ -87,7 +87,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": "cool"
 					},
 					"AwarenessNotice": {
 						"value": 0,
@@ -123,7 +124,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": "cool"
 					},
 					"Chemistry": {
 						"value": 0,
@@ -135,7 +137,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": ""
 					},
 					"Composition": {
 						"value": 0,
@@ -147,7 +150,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": "int"
 					},
 					"CryotankOperation": {
 						"value": 0,
@@ -232,7 +236,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": "int"
 					},
 					"Fencing": {
 						"value": 0,
@@ -304,7 +309,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": "int"
 					},
 					"Interrogation": {
 						"value": 0,
@@ -328,7 +334,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": ""
 					},
 					"Language": {},
 					"Leadership": {
@@ -423,7 +430,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": ""
 					},
 					"Melee": {
 						"value": 0,
@@ -553,7 +561,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": "int"
 					},
 					"Rifle": {
 						"value": 0,
@@ -595,7 +604,8 @@
 						"value": 0,
 						"ip": 0,
 						"chipped": false,
-						"stat": "special"
+						"isSpecial": true,
+						"stat": "cool"
 					},
 					"Streetwise": {
 						"value": 0,
