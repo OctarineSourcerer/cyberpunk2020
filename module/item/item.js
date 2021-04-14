@@ -23,6 +23,7 @@ export class CyberpunkItem extends Item {
   }
 
   _prepareWeaponData(data) {
+    
   }
 
   _prepareArmorData(data) {
