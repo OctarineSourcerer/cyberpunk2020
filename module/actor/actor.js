@@ -54,8 +54,8 @@ export class CyberpunkActor extends Actor {
     // Reflex is affected by encumbrance values too
     stats.ref.armorMod = 0;
     actorData.items.filter(i => i.type === "armor").forEach(armor => {
-      if(armor.encumbrance != null) {
-        stats.ref.armorMod -= armor.encumbrance;
+      if(armor.data.encumbrance != null) {
+        stats.ref.armorMod -= armor.data.encumbrance;
       }
 
       // While we're looping through armor, might as well modify hit locations' armor
