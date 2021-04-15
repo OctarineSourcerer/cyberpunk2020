@@ -35,7 +35,12 @@
 
         {{!-- Attributes Tab --}}
         <div class="tab" data-group="primary" data-tab="settings">
-             {{> (varTemplate "item/parts/[VAR]/settings.hbs" item.type)}}
+            
+            {{#unless (equals item.type "misc")}}
+            {{> (varTemplate "item/parts/[VAR]/settings.hbs" item.type)}}
+            {{/unless}}
+            {{!-- All items have these settings --}}
+            {{> (varTemplate "item/parts/misc/settings.hbs" item.type)}}
         </div>
     </section>
 </form>

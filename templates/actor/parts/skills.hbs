@@ -18,6 +18,7 @@
         {{else}}
             <details class="field skill-group">
                 <summary>{{localize (skillRef skillName)}}</summary>
+                <div class="field-list one-col">
                 {{#each . as |childSkill childSkillName|}}
                     {{!-- Any object children of groups should be a skill. Don't make me go recursive with this. --}}
                     {{#if (isObject childSkill)}}
@@ -27,6 +28,7 @@
                         edit=(concat skillName "." childSkillName)}}
                     {{/if}}
                 {{/each}}
+                </div>
             </details>
         {{/unless}}
     {{/with}}

@@ -149,33 +149,34 @@ $field-border-width: 2px;
     flex-grow: 1;
     flex-shrink: 1;
 }
-
 .field-list {
-    display: flex;
-    flex-wrap: wrap;
+    // I'd have done flexbox here, but Foundry's electron doesn't support gap yet 
     width: 100%;
+    display: grid;
+    // grid-template-areas: "field field";
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    grid-auto-rows: auto;
 
-    // Compensate for rightmost items having a 3px margin
-    margin-right: -3px;
-    margin-bottom: 10px;
+    // Compensate for rightmost items having a 5px margin
+    // margin-right: -5px;
     flex-grow: 0;
 
     +.spacer {
         flex-grow: 1;
     }
 
-    .field {
-        flex-grow: 1;
-        // Lets the skills go to a single column when narrow enough
-        width: 40%;
-        min-width: 185px;
-        margin-right: 5px;
-        margin-bottom: 3px;
+    // If flexbox usable (aka if it had grid), wouldn't need this class
+    &.one-col {
+        grid-template-columns: 1fr;
     }
 
     &.full-item-width .field {
         width: 100%;
     }
+}
+.field-list + * {
+    margin-top: 7px;
 }
 
 .roll-image {

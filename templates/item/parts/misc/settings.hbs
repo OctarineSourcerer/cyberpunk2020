@@ -1,2 +1,5 @@
-{{> (template "fields/number") label="Cost" edit="data.cost"}}
-{{> (template "fields/number") label="Weight" edit="data.weight"}}
+<div class="field-list">
+    {{> (template "fields/boolean") label="Equipped" edit="data.equipped"}}
+    {{> (template "fields/number") label="Cost" edit="data.cost"}}
+    {{> (template "fields/number") label="Weight" edit="data.weight"}}
+</div>

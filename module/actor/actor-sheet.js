@@ -65,7 +65,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       if(data.data.transient.oldSearch != null 
         && data.skillDisplayList != null
         && upperSearch.startsWith(oldSearch)) {
-        listToFilter = data.skillDisplayList;
+        listToFilter = data.skillDisplayList; 
       }
       return listToFilter.filter(skillName => {
         return skillName.toUpperCase().includes(upperSearch);
@@ -103,18 +103,16 @@ export class CyberpunkActorSheet extends ActorSheet {
       "misc": misc
     };
 
-    let totalWeight = 0;
     actorData.items.forEach(item => {
       (targetLookup[item.type] || misc).push(item);
-      totalWeight += (item.weight || 0);
     });
 
     actorData.data.gear = {
-      carryWeight: totalWeight,
       weapons: weapons,
       armor: armor,
       cyberware: cyberware,
-      misc: misc
+      misc: misc,
+      all: [weapons]
     };
   }
 

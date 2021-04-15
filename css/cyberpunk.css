@@ -127,25 +127,25 @@
 }
 
 .field-list {
-  display: flex;
-  flex-wrap: wrap;
   width: 100%;
-  margin-right: -3px;
-  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  grid-auto-rows: auto;
   flex-grow: 0;
 }
 .field-list + .spacer {
   flex-grow: 1;
 }
-.field-list .field {
-  flex-grow: 1;
-  width: 40%;
-  min-width: 185px;
-  margin-right: 5px;
-  margin-bottom: 3px;
+.field-list.one-col {
+  grid-template-columns: 1fr;
 }
 .field-list.full-item-width .field {
   width: 100%;
+}
+
+.field-list + * {
+  margin-top: 7px;
 }
 
 .roll-image {
@@ -186,7 +186,6 @@ details[open] summary ~ * {
   border-width: 2px;
   border-style: solid;
   border-color: black;
-  margin-bottom: 3px;
 }
 .cyberpunk .field > * {
   padding: 2px 3px 2px 0px;
@@ -199,8 +198,9 @@ details[open] summary ~ * {
   padding-left: calc(5px - 2px);
   padding-right: 5px;
 }
-.cyberpunk .field > .field {
+.cyberpunk .field > * .field, .cyberpunk .field > *.field-list, .cyberpunk .field > span > * .field, .cyberpunk .field > span > *.field-list, .cyberpunk .field > div > * .field, .cyberpunk .field > div > *.field-list {
   background-color: unset;
+  color: black;
   padding: unset;
 }
 .cyberpunk .field .field-image {
@@ -222,6 +222,7 @@ details[open] summary ~ * {
   min-width: unset;
   background-color: unset;
   font: inherit;
+  background-color: unset;
   color: black;
   font-family: "Open Sans ExtraBold", sans-serif;
   padding-left: 5px;
@@ -465,9 +466,6 @@ div.statderive .value.rightborder {
   background-image: url(../img/search.png);
 }
 
-.field.skill {
-  width: 40%;
-}
 .field.skill > * {
   padding-top: 3px;
   padding-bottom: 3px;
