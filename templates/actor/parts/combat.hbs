@@ -19,7 +19,12 @@
         </header>
 
         {{> (template "actor/parts/armor-display") hitLocations = data.hitLocations}}
-
+        <div class="field margin-bottom">
+            <label for="data.stats.ref.armorMod">{{CPLocal "Encumbrance"}}</label>
+            <span class="flex-pad"></span>
+            <input type="number" name="data.stats.ref.armorMod" value="{{data.stats.ref.armorMod}}" class="number nogrow not-editable" readonly>
+        </div>
+        
         <div class="field-list one-col">
             {{#each data.gear.armor}}
             <div class="field item-edit" data-item-id="{{_id}}">

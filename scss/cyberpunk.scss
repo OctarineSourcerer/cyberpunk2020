@@ -175,8 +175,8 @@ $field-border-width: 2px;
         width: 100%;
     }
 }
-.field-list + * {
-    margin-top: 7px;
+.margin-bottom, .field-list + * {
+    margin-bottom: 7px;
 }
 
 .roll-image {
