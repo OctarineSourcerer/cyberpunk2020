@@ -50,10 +50,13 @@ export class CyberpunkActor extends Actor {
         }
       }
     }
+    
+    // Sort through this now so we don't have to later
+    data.equippedItems = this.items.filter(item => item.data.data.isEquipped);
 
     // Reflex is affected by encumbrance values too
     stats.ref.armorMod = 0;
-    actorData.items.filter(i => i.type === "armor").forEach(armor => {
+    data.equippedItems.filter(i => i.type === "armor").forEach(armor => {
       if(armor.data.encumbrance != null) {
         stats.ref.armorMod -= armor.data.encumbrance;
       }
@@ -78,11 +81,10 @@ export class CyberpunkActor extends Actor {
     body.lift = body.total * 40;
     body.modifier = CyberpunkActor.btm(body.total);
     actorData.data.carryWeight = 0;
-    this.items.forEach(item => {
+    data.equippedItems.forEach(item => {
       let weight = item.data.data.weight || 0;
       actorData.data.carryWeight += weight;
     });
-    // TODO: What happens if carryWeight is more than carry capacity?
 
     // Apply wound effects
     // Change stat total, but leave a record of the difference in stats.[statName].woundMod

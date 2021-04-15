@@ -175,7 +175,10 @@ $field-border-width: 2px;
         width: 100%;
     }
 }
-.margin-bottom, .field-list + * {
+.field-list + * {
+    margin-top: 7px;
+}
+.margin-bottom {
     margin-bottom: 7px;
 }
 
