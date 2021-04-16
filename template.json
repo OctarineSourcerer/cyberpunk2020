@@ -231,7 +231,9 @@
 						"chipped": false,
 						"stat": "bt"
 					},
-					"Expert": {},
+					"Expert": {
+						"group": true
+					},
 					"Family": {
 						"value": 0,
 						"ip": 0,
@@ -337,7 +339,9 @@
 						"isSpecial": true,
 						"stat": ""
 					},
-					"Language": {},
+					"Language": {
+						"group": true
+					},
 					"Leadership": {
 						"value": 0,
 						"ip": 0,

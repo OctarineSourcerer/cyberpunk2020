@@ -5,15 +5,16 @@ export { SortOrders, sortSkills }
 const statOrder = {
     // Don't have one of these be 0, that's falsy
     "special": 1,
-    "int": 2,
-    "ref": 3,
-    "tech": 4,
-    "cool": 5,
-    "attr": 6,
-    "luck": 7,
-    "ma": 8,
-    "bt": 9,
-    "emp": 10,
+    "group": 2,
+    "int": 3,
+    "ref": 4,
+    "tech": 5,
+    "cool": 6,
+    "attr": 7,
+    "luck": 8,
+    "ma": 9,
+    "bt": 10,
+    "emp": 11,
 }
 
 const SortOrders = {
@@ -33,8 +34,16 @@ function byName([a_name, a_val], [b_name, b_val]) {
 }
 
 function byStat([a_name, a_val], [b_name, b_val]) {
-    let order_a = statOrder[a_val.isSpecial ? "special" : a_val.stat] || -1;
-    let order_b = statOrder[b_val.isSpecial ? "special" : b_val.stat] || -1;
+    let searchRank = (skillValue) => {
+        if(skillValue.group) {
+            return statOrder["group"];
+        }
+        if(skillValue.isSpecial)
+            return statOrder["special"];
+        return statOrder[skillValue.stat];
+    };
+    let order_a = searchRank(a_val) || -1;
+    let order_b = searchRank(b_val) || -1;
     if(order_a > order_b) {
         return 1;
     }

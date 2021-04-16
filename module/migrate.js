@@ -43,6 +43,13 @@ export function migrateActorData(actor) {
             updateData[`data.skills.${skillName}.stat`] = actualStat;
             updateData[`data.skills.${skillName}.isSpecial`] = true;
         }
+        if(skillName == "Expert" || skillName == "Language") {
+            if(!skill.group) {
+                // No translation prefix as these will be custom entries
+                console.log(`Making Expert and Language into groups instead of empty entries.`);
+                updateData[`data.skills.${skillName}.group`] = true;
+            }
+        }
     }
 
 

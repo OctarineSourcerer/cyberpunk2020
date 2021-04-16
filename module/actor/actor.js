@@ -17,16 +17,14 @@ export class CyberpunkActor extends Actor {
     // things organized.
     switch ( this.data.type ) {
       case "character":
-        this._prepareCharacterData(this.data);
+        this._prepareCharacterData(this.data.data);
     }
   }
 
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(actorData) {
-    const data = actorData.data;
-    
+  _prepareCharacterData(data) {
     const stats = data.stats;
     // Calculate stat totals using base+temp
     for(const stat of Object.values(stats)) {
@@ -52,20 +50,23 @@ export class CyberpunkActor extends Actor {
     }
     
     // Sort through this now so we don't have to later
-    data.equippedItems = this.items.filter(item => item.data.data.isEquipped);
+    data.equippedItems = this.items.entries.filter(item => {
+      return item.data.data.equipped;
+    });
 
     // Reflex is affected by encumbrance values too
     stats.ref.armorMod = 0;
     data.equippedItems.filter(i => i.type === "armor").forEach(armor => {
-      if(armor.data.encumbrance != null) {
-        stats.ref.armorMod -= armor.data.encumbrance;
+      let armorData = armor.data.data;
+      if(armorData.encumbrance != null) {
+        stats.ref.armorMod -= armorData.encumbrance;
       }
 
       // While we're looping through armor, might as well modify hit locations' armor
-      for(let armorArea in armor.data.coverage) {
+      for(let armorArea in armorData.coverage) {
         let location = data.hitLocations[armorArea];
         if(location !== undefined) {
-          armorArea = armor.data.coverage[armorArea];
+          armorArea = armorData.coverage[armorArea];
           location.stoppingPower += armorArea.stoppingPower;
         }
       }
@@ -80,10 +81,10 @@ export class CyberpunkActor extends Actor {
     body.carry = body.total * 10;
     body.lift = body.total * 40;
     body.modifier = CyberpunkActor.btm(body.total);
-    actorData.data.carryWeight = 0;
+    data.carryWeight = 0;
     data.equippedItems.forEach(item => {
       let weight = item.data.data.weight || 0;
-      actorData.data.carryWeight += weight;
+      data.carryWeight += weight;
     });
 
     // Apply wound effects
