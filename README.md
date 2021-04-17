@@ -35,7 +35,6 @@ Current progress (not a full list, but what comes to mind as I write):
 * Skills: usable. swap between chipped and stat values, roll skill checks, search skills.
 * Stats: Visually there, editable, with both base and temp mod.
   * Yet to come: UI-consistent way of viewing what modifies them.
-* 
 
 
 Happy to take any feedback; feel free to add issues or to make a PR :)
