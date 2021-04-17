@@ -37,7 +37,7 @@ Please feel free to contribute! Whether by raising issues you find during play, 
 This project uses Sass - please edit the .scss files instead of the .css files.
 
 ### How to build
-At the moment, this project only requires running `sass --watch scss/cyberpunk.scss css/cyberpunk.css` in the project's folder as you develop - this will auto-compile the scss as you make edits.
+At the moment, this project only requires running `sass --watch scss/cyberpunk2020.scss css/cyberpunk2020.css` in the project's folder as you develop - this will auto-compile the scss as you make edits.
 
 ### Recent repo url change
 It used to be this repo was called `cyberpunk2020-foundry`, and you'd have to change the folder name after cloning. Not anymore! But due to the rename, if you had the repo, you'll likely want to run `git remote set-url origin git@github.com:OctarineSourcerer/cyberpunk2020.git` to make sure your repo points to the rename (I don't know how long old versions will link to it).
