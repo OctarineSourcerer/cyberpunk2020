@@ -1,6 +1,9 @@
 # cyberpunk2020 (for FoundryVTT)
 R. Talsorian Games' [Cyberpunk 2020](https://talsorianstore.com/products/cyberpunk-2020) system, but for FoundryVTT. Time to get chromed, and frag some slags.
 
+![image](https://user-images.githubusercontent.com/6842867/115111007-0f80f900-9f76-11eb-8b42-7f6b6682a6a3.png) ![image](https://user-images.githubusercontent.com/6842867/115111021-26bfe680-9f76-11eb-93ee-7cf42d44190f.png)
+
+
 I believe this is now ready to reasonably run games in without anything particularly fundamental missing (minus, at the moment, custom skills).
 Here's the gist of what's there so far:
 
@@ -27,23 +30,14 @@ Yet to come:
 
 All rights to Cyberpunk 2020 lie with R. Talsorian games. Under their [homebrew content policy](https://rtalsoriangames.com/homebrew-content-policy/), any compendium produced with this will likely only be the statistical summaries of items, equivalent to the rows in the weapon table, without R. Talsorian's descriptive text. There will not be any stat blocks for monsters, NPCs, or hazards.
 
-Sheet currently looks like this:
-
-![image](https://user-images.githubusercontent.com/6842867/106651313-e6161b00-658b-11eb-9595-d4469b425718.png)
-
-Current progress (not a full list, but what comes to mind as I write): 
-* Skills: usable. swap between chipped and stat values, roll skill checks, search skills.
-* Stats: Visually there, editable, with both base and temp mod.
-  * Yet to come: UI-consistent way of viewing what modifies them.
-
-
 Happy to take any feedback; feel free to add issues or to make a PR :)
 
 ## Development notes
+Please feel free to contribute! Whether by raising issues you find during play, requesting features, or contributing yourself, all is appreciated :) 
+This project uses Sass - please edit the .scss files instead of the .css files.
+
 ### How to build
 At the moment, this project only requires running `sass --watch scss/cyberpunk.scss css/cyberpunk.css` in the project's folder as you develop - this will auto-compile the scss as you make edits.
 
-### A note on cloning
-It's tempting to just run `git clone https://github.com/OctarineSourcerer/cyberpunk2020-foundry.git`, but FoundryVTT expects the folder to have the same name as the system, so you want to actually run `git clone https://github.com/OctarineSourcerer/cyberpunk2020-foundry.git cyberpunk2020`. If you've already cloned, just rename the system folder to `cyberpunk2020`.
-Otherwise you'll get this message: `Invalid package cyberpunk2020 detected in directory cyberpunk2020-foundry`.
-I have foundry in the repo name for discoverability purposes, but having foundry in the system name seems a bit redundant to me - if this ends up being an issue, I may edit the repo name.
+### Recent repo url change
+It used to be this repo was called `cyberpunk2020-foundry`, and you'd have to change the folder name after cloning. Not anymore! But due to the rename, if you had the repo, you'll likely want to run `git remote set-url origin git@github.com:OctarineSourcerer/cyberpunk2020.git` to make sure your repo points to the rename (I don't know how long old versions will link to it).
