@@ -12,7 +12,7 @@ import { defaultTargetLocations } from "../lookups.js"
       static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
         id: "weapon-modifier",
-        classes: ["cyberpunk"],
+        classes: ["cyberpunk2020"],
         title: localize("AttackModifiers"),
         template: "systems/cyberpunk2020/templates/dialog/attack-modifiers.hbs",
         width: 400,

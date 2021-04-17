@@ -1,4 +1,4 @@
-# cyberpunk2020-foundry
+# cyberpunk2020
 R. Talsorian Games' [Cyberpunk 2020](https://talsorianstore.com/products/cyberpunk-2020) system, but for FoundryVTT. Time to get chromed, and frag some slags.
 
 This is an early work, and so I warn you: please don't use this for games yet! Not everything is here yet, and what IS here is subject to rapid, unwarned, and unmigrating changes for now. Here's a glimpse of some things I hope to achieve with this:
