@@ -1,5 +1,6 @@
-import { DiceCyberpunk } from "../dice.js";
+import { makeD10Roll, Multiroll } from "../dice.js";
 import { SortOrders, sortSkills } from "./skill-sort.js";
+import { properCase, localize, deepLookup } from "../utils.js"
 
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
@@ -12,34 +13,64 @@ export class CyberpunkActor extends Actor {
    */
   prepareData() {
     super.prepareData();
-
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     switch ( this.data.type ) {
       case "character":
-        this._prepareCharacterData(this.data);
+        this._prepareCharacterData(this.data.data);
     }
   }
 
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(actorData) {
-    const data = actorData.data;
-    
+  _prepareCharacterData(data) {
     const stats = data.stats;
     // Calculate stat totals using base+temp
     for(const stat of Object.values(stats)) {
       stat.total = stat.base + stat.tempMod;
     }
+    // A lookup for translating hit rolls to names of hit locations
+    // I know that for ranges there are better data structures to lookup, but we're using d10s for hit locations, so it's no issue
+    data.hitLocLookup = {};
+    for(const hitLoc in data.hitLocations) {
+      let area = data.hitLocations[hitLoc]
+      area.stoppingPower = 0;
+      let [start, end] = area.location;
+      // Just one die number that'll hit the location
+      if(!end) {
+        data.hitLocLookup[start] = hitLoc;
+      }
+      // A range of die numbers that'll hit the location
+      else {
+        for(let i = start; i <= end; i++) {
+          data.hitLocLookup[i] = hitLoc;
+        }
+      }
+    }
+    
+    // Sort through this now so we don't have to later
+    data.equippedItems = this.items.entries.filter(item => {
+      return item.data.data.equipped;
+    });
 
     // Reflex is affected by encumbrance values too
     stats.ref.armorMod = 0;
-    for(const armor in data.armor) {
-      if(armor.encumbrance != null) {
-        stats.ref.armorMod -= armor.encumbrance;
+    data.equippedItems.filter(i => i.type === "armor").forEach(armor => {
+      let armorData = armor.data.data;
+      if(armorData.encumbrance != null) {
+        stats.ref.armorMod -= armorData.encumbrance;
       }
-    }
+
+      // While we're looping through armor, might as well modify hit locations' armor
+      for(let armorArea in armorData.coverage) {
+        let location = data.hitLocations[armorArea];
+        if(location !== undefined) {
+          armorArea = armorData.coverage[armorArea];
+          location.stoppingPower += armorArea.stoppingPower;
+        }
+      }
+    });
     stats.ref.total = stats.ref.base + stats.ref.tempMod + stats.ref.armorMod;
 
     const move = stats.ma;
@@ -50,13 +81,46 @@ export class CyberpunkActor extends Actor {
     body.carry = body.total * 10;
     body.lift = body.total * 40;
     body.modifier = CyberpunkActor.btm(body.total);
-    // This is where the effect wounds would have to be calculated
+    data.carryWeight = 0;
+    data.equippedItems.forEach(item => {
+      let weight = item.data.data.weight || 0;
+      data.carryWeight += weight;
+    });
 
-    // Only sort skills if we need to - sortSkills is essentially a dirty flag
-    if(this.getFlag('cyberpunk2020', 'sortSkills')) {
-      let sortOrder = this.getFlag('cyberpunk2020', 'skillSortOrder') || Object.keys(SortOrders)[0];
-      actorData.data.skills = sortSkills(data.skills, SortOrders[sortOrder])
+    // Apply wound effects
+    // Change stat total, but leave a record of the difference in stats.[statName].woundMod
+    // Modifies the very-end-total, idk if this'll need to change in the future
+    let woundState = this.woundState();
+    let woundStat = function(stat, totalChange) {
+        let newTotal = totalChange(stat.total)
+        stat.woundMod = -(stat.total - newTotal);
+        stat.total = newTotal;
     }
+    if(woundState >= 4) {
+      [stats.ref, stats.int, stats.cool].forEach(stat => woundStat(stat, total => Math.ceil(total/3)));
+    } 
+    else if(woundState == 3) {
+      [stats.ref, stats.int, stats.cool].forEach(stat => woundStat(stat, total => Math.ceil(total/2)));
+    }
+    else if(woundState == 2) {
+      woundStat(stats.ref, total => total - 2);
+    }
+  }
+
+  /**
+   * 
+   * @param {string} sortOrder The order to sort skills by. Options are in skill-sort.js's SortOrders. "stat" or "alph". Default "alph".
+   */
+  sortSkills(sortOrder) {
+    sortOrder = sortOrder || Object.keys(SortOrders)[0];
+    console.log(`Sorting skills by ${sortOrder}`);
+    let sortedView = sortSkills(this.data.data.skills, SortOrders[sortOrder]);
+
+    // Technically UI info, but we don't wanna calc every time we open a sheet so store it in the actor.
+    this.update({
+      "data.sortedSkillView": sortedView,
+      "data.skillsSortedBy": sortOrder
+    });
   }
 
   /**
@@ -75,21 +139,28 @@ export class CyberpunkActor extends Actor {
       case 8:
       case 9: return 3;
       case 10: return 4;
-      case body > 10: return 5;
+      default: return 5;
     }
   }
 
-  // Current wound state. 0 for uninjured, going up by 1 for each new one. 1 for Serious, 2 critical etc.
+  // Current wound state. 0 for uninjured, going up by 1 for each new one. 1 for Light, 2 Serious, 3 Critical etc.
   woundState() {
     const damage = this.data.data.damage;
     if(damage == 0) return 0;
-    // Wound slots are 4 wide, so divide by 4, floor the result
-    return Math.floor((damage-1)/4);
+    // Wound slots are 4 wide, so divide by 4, ceil the result
+    return Math.ceil(damage/4);
   }
 
-  saveThreshold() {
-    const body = this.data.data.stats.body.total;
-    return body - this.woundState();
+
+  stunThreshold() {
+    const body = this.data.data.stats.bt.total;
+    // +1 as Light has no penalty, but is 1 from woundState()
+    return body - this.woundState() + 1; 
+  }
+
+  deathThreshold() {
+    // The first wound state to penalise is Mortal 1 instead of Serious.
+    return this.stunThreshold() + 3;
   }
 
   _realSkillValue(skill) {
@@ -100,21 +171,69 @@ export class CyberpunkActor extends Actor {
     return value;
   }
 
-  // TODO: This needs to be tested for nested skills eventually
   rollSkill(skillName) {
-    let skill = this.data.data.skills[skillName];
+    // Is a deep lookup as the nested skills are likely "Martial.Aikido" or along those lines
+    let skill = deepLookup(this.data.data.skills, skillName);
     let value = this._realSkillValue(skill);
 
     let rollParts = [];
     rollParts.push(value);
-    if(skill.stat !== "special") {
+
+    if(skill.stat) {
       rollParts.push(`@stats.${skill.stat}.total`);
     }
-    DiceCyberpunk.d10Roll({
-      flavor: skillName,
-      data: this.data.data,
-      parts: rollParts
-    });
+    if(skillName === "AwarenessNotice") {
+      rollParts.push("@skills.CombatSense.value");
+    }
+
+    // When rolling skill, we use something like MartialArts.Aikido. Dots and translation keys don't play nice, so instead each group uses a translation prefix
+    let [parentName, childName] = skillName.split(".");
+    let translationKey = "Skill";
+    if(childName && this.data.data.skills[parentName].translationPrefix) {
+      translationKey += this.data.data.skills[parentName].translationPrefix + childName;
+    }
+    else {
+      translationKey += parentName;
+    }
+    let roll = new Multiroll(localize(translationKey))
+      .addRoll(makeD10Roll(rollParts, this.data.data));
+
+    roll.defaultExecute();
   }
 
+  rollStat(statName) {
+    let fullStatName = localize(properCase(statName) + "Full");
+    let roll = new Multiroll(fullStatName);
+    roll.addRoll(makeD10Roll(
+      [`@stats.${statName}.total`],
+      this.data.data
+    ));
+    roll.defaultExecute();
+  }
+
+  rollInitiative() {
+    // TODO: Get this actually working with the initiative tracker
+    // let activeCombat = game.combats.active;
+    // if(activeCombat !== undefined) {
+    //   activeCombat.rollInitiative(this.id);
+    //   return;
+    // }
+    let roll = new Multiroll(`${this.name} ${localize("Initiative")}`, localize("InitiativeTrackerWarning"))
+      .addRoll(makeD10Roll(["@stats.ref.total","@skills.CombatSense.value"], this.data.data));
+    roll.defaultExecute();
+  }
+
+  rollStunDeath() {
+    let rolls = new Multiroll(localize("StunDeathSave"), localize("UnderThresholdMessage"));
+    rolls.addRoll(new Roll("1d10"), {
+      name: localize("Save")
+    });
+    rolls.addRoll(new Roll(`${this.stunThreshold()}`), {
+      name: "Stun Threshold"
+    });
+    rolls.addRoll(new Roll(`${this.deathThreshold()}`), {
+      name: "Death Threshold"
+    });
+    rolls.defaultExecute();
+  }
 }

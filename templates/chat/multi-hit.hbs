@@ -1,0 +1,31 @@
+<div class="cyberpunk cyberpunk-card flexcol">
+    <h2>{{title}}</h2>
+    <div class="flexrow nowrap">
+        <span>{{CPLocal "Range"}}: {{CPLocalParam range locals.range}}</span>
+        <span>{{CPLocal "ToHit"}}: {{toHit}}</span>
+    </div>
+    <div>
+        <span>{{CPLocal "Attack"}}: </span>
+        <span>{{attackRoll._total}}</span>
+    </div>
+    <div>
+        {{!-- "X hit of y fired" Uses "hit" and "fired" fields respectively --}}
+        {{!-- They're separate so we can emphasise the hit --}}
+        <p><em>{{CPLocalParam "AutofireHitTally" this}}</em> {{CPLocalParam "AutofireFiredTally" this}}</p>
+    </div>
+    {{#if hit}}
+        <h3>{{CPLocal "Damage"}}</h3>
+        <div class="damage-tally">
+            {{#each areaDamages as |damages areaName|}}
+                <div>
+                    <label>{{CPLocal areaName}}</label>
+                    {{#each damages as |damage|}}
+                    <span>{{damage.total}}</span>
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <h3>{{CPLocal "NoHits"}}</h3>
+    {{/if}}
+</div>

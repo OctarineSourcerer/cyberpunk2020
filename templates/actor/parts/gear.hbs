@@ -1,20 +1,60 @@
-<div class="item-list">
+<div class="field-list no-wrap">
+    <div class="field">
+        <label for="data.eurobucks">{{CPLocal "Eurobucks"}}</label>
+        <input name="data.eurobucks" type="number" value="{{data.eurobucks}}">
+    </div>
+    <div class="field">
+        <label for="data.carryWeight">{{CPLocal "Weight"}}</label>
+        <input class="not-editable" name="data.carryWeight" type="number" value="{{data.carryWeight}}" readonly>
+    </div>
+</div>
+
+{{#if (equals items.length 0)}}
+    <div class="inactive">Drag items here to add (for now)</div>
+{{/if}}
+<div class="field-list">
     {{#each data.gear.weapons as |weapon|}}
-        <div class="list-item weapon item-edit" data-item-id="{{weapon._id}}">
-            <div class="item-image item-roll action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
-            <div class="field-label name">{{weapon.name}}</div>
-            {{!-- {{#with weapon.data}}
-            {{#unless (equals type ../weaponTypes.melee)}}
-                <div class="field-label inactive">{{shotsLeft}}/{{shots}}</div>
-                {{#if ap}}
-                    <div class="field-label inactive">{{localize "CYBERPUNK.AP"}}</div>
-                {{/if}}
-            {{/unless}}
-            <div class="field-label inactive">{{damage}}</div>
-            <div class="field-label inactive">{{localize "CYBERPUNK.RoF"}}{{rof}}</div> --}}
-            <div class="flex-pad"></div>
-            <div class="field-label inactive">{{type}}</div>
-            {{!-- {{/with}} --}}
+        <div class="field gear item-edit" data-item-id="{{weapon._id}}">
+            <div class="field-image roll fire-weapon action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
+            <label>{{weapon.name}}</label>
+            <span class="flex-pad"></span>
+            <span>
+                <p class="inactive">{{type}}</p>
+            </span>
+            <span class="item-delete" data-item-id="{{_id}}">X</span>
+        </div>
+    {{/each}}
+    {{#each data.gear.armor}}
+        <div class="field gear item-edit" data-item-id="{{_id}}">
+            <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <label class="name">{{name}}</label>
+            <span class="flex-pad"></span>
+            <span>
+                <label class="inactive">{{type}}</label>
+            </span>
+            <span class="item-delete" data-item-id="{{_id}}">X</span>
+        </div>
+    {{/each}}
+    {{#each data.gear.cyberware}}
+        <div class="field gear item-edit" data-item-id="{{_id}}">
+            <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <label class="name">{{name}}</label>
+            <span class="flex-pad"></span>
+            <span>
+                <label class="inactive">{{type}}</label>
+            </span>
+            <span class="item-delete " data-item-id="{{_id}}">X</span>
+        </div>
+    {{/each}}
+    {{#each data.gear.misc}}
+        <div class="field gear item-edit" data-item-id="{{_id}}">
+            <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <label class="name">{{name}}</label>
+            <span class="flex-pad"></span>
+            <span>
+                <label class="inactive">{{type}}</label>
+            </span>
+            <span class="item-delete " data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
 </div>

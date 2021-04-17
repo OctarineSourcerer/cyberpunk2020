@@ -1,51 +1,29 @@
-.skill-utils {
-    border-style: solid;
-    border-width: 2px;
-    border-color: $text-colour;
+// Top bar above the list of skills itself
+.skill-top-matter {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
     margin-bottom: 3px;
     flex-grow: 0;
-
-    display: flex;
-
-    .skill-search {
-        @include reset-input;
-        font-weight: bold;
+    > * {
         flex-grow: 1;
-        padding-left: 5px;
     }
-
+    
     div.search-icon {
-        @include image-bg;
-        height:1.5em;
-        width: 1.5em;
-        padding: 2px 5px;
         background-color: $text-colour;
         background-image: url(../img/search.png);
     }
 }
 
 // Each individual skill in the list
-.skill {
-    width: 40%;
-    // Background colour change is so that the editable part can have a transparent background
-    background-color: transparent;
-
-    // The rest, however, all background colour
-    // Usually this breaks inactive, which uses filter (and therefore washes out the background too), but the inactives in skills are ensconced in chip-toggle; a container whose background won't be affected by child filters
+.field.skill {
+    // Make them a little taller
     >* {
-        background-color: $text-colour;
+        padding-top:3px; 
+        padding-bottom: 3px;
     }
 
-    >.skill-value {
-        @include reset-input;
-
-        width: 1.5em;
-        color: $text-colour;
-        font-variant: small-caps;
-        text-align:center;
-    }
     .chip-toggle { 
-        // background-color: $text-colour;
         padding: 0px;
         display: contents;
 
@@ -55,6 +33,9 @@
             flex-direction: row;
             align-items: center;
             padding-right: 3px;
+            >* {
+                font-variant: all-small-caps;
+            }
         }
         
         input[type="checkbox"] {
@@ -69,4 +50,8 @@
         }
     }
     
+}
+
+.skill-group .field.skill {
+    width: 100%;
 }

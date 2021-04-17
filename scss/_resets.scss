@@ -4,9 +4,9 @@
     border: 0 none;
     border-radius: 0px;
     padding: unset;
+    // Without this line=, all of them get set to.. 23 pixels high?!
     height: unset;
     min-width: unset;
-    -webkit-appearance: unset;
     background-color: unset;
     font: inherit;
 }

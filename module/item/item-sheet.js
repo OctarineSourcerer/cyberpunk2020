@@ -1,3 +1,5 @@
+import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills } from "../lookups.js"
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -18,11 +20,11 @@ export class CyberpunkItemSheet extends ItemSheet {
   get template() {
     const path = "systems/cyberpunk2020/templates/item";
     // Return a single sheet for all item types.
-    // return `${path}/item-sheet.html`;
+    // return `${path}/item-sheet.hbs`;
 
     // Alternatively, you could use the following return statement to do a
-    // unique item sheet by type, like `weapon-sheet.html`.
-    return `${path}/${this.item.data.type}-sheet.html`;
+    // unique item sheet by type, like `weapon-sheet.hbs`.
+    return `${path}/item-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -35,6 +37,8 @@ export class CyberpunkItemSheet extends ItemSheet {
         this._prepareWeapon(data);
         break;
     
+      case "armor":
+        this._prepareArmor(data);
       default:
         break;
     }
@@ -42,15 +46,26 @@ export class CyberpunkItemSheet extends ItemSheet {
   }
 
   _prepareWeapon(data) {
-    const typeLookup = {
-      "P": "Pistol",
-      "SMG": "Submachinegun",
-      "SHG": "Shotgun",
-      "RIF": "Rifle",
-      "HVY": "Heavy",
-      "MELEE": "Melee",
-      "EX": "Exotic"
-    };
+    data.weaponTypes = Object.values(weaponTypes).sort();
+    data.attackTypes = sortedAttackTypes;
+    data.concealabilities = Object.values(concealability);
+    data.availabilities = Object.values(availability);
+    data.reliabilities = Object.values(reliability);
+    data.attackSkills = attackSkills[this.item.data.data.weaponType];
+
+    // TODO: Be not so inefficient for this
+    if(!data.attackSkills.length) {
+      if(this.actor) {
+        data.attackSkills = Object.keys(this.actor.data.data.skills).sort();
+      }
+      else {
+        data.attackSkills = Object.keys(game.system.template.Actor.templates.skills.skills).sort();
+      }
+    }
+  }
+
+  _prepareArmor(data) {
+    
   }
 
   /* -------------------------------------------- */
@@ -74,6 +89,6 @@ export class CyberpunkItemSheet extends ItemSheet {
     if (!this.options.editable) return;
 
     // Roll handlers, click handlers, etc. would go here, same as actor sheet.
-    html.find(".item-roll").click(this.item.roll.bind(this))
+    html.find(".item-roll").click(this.item.roll.bind(this));
   }
 }

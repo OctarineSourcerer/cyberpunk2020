@@ -1,0 +1,39 @@
+{{!-- Skills tab contents --}}
+<div class="skill-top-matter">
+    {{!-- Search bar --}}
+    <div class="field">
+        <div class="field-image search-icon"></div>
+        <input class="skill-search" name="data.transient.skillFilter" value="{{data.transient.skillFilter}}"></input>
+    </div>
+
+    {{> (template "fields/select") label="SortBy" edit="data.skillsSortedBy" choices=skillsSortChoices extraClasses="skill-sort"}}
+</div>
+
+{{!-- Actual skills --}}
+<div class="field-list">
+    {{#each skillDisplayList as |skillName|}}
+    {{#with (lookup ../data.skills skillName) as |skill|}}
+        {{#unless skill.group}}
+        {{> (template "actor/parts/skill") skill=skill name=skillName edit=skillName}}
+        {{else}}
+            <details class="field skill-group">
+                <summary>{{localize (skillRef skillName)}}</summary>
+                <div class="field-list one-col">
+                {{#each . as |childSkill childSkillName|}}
+                    {{!-- Any object children of groups should be a skill. Don't make me go recursive with this. --}}
+                    {{#if (isObject childSkill)}}
+                        {{> (template "actor/parts/skill") skill=childSkill 
+                        name=childSkillName 
+                        translatePrefix=skill.translationPrefix
+                        edit=(concat skillName "." childSkillName)}}
+                    {{/if}}
+                {{/each}}
+                </div>
+            </details>
+        {{/unless}}
+    {{/with}}
+    {{/each}}
+</div>
+
+{{!-- Stops the skills getting real tall when there's only one or two --}}
+<div class="spacer"></div>

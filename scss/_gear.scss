@@ -1,8 +1,15 @@
-.weapon {
+.gear {
     // width: 100%;
     
-    .name {
+    label {
         min-width: 128px;
         padding-right: 10px;
+    }
+
+    >span.item-delete {
+        display: none;
+    }
+    &:hover>span.item-delete {
+        display: inline;
     }
 }

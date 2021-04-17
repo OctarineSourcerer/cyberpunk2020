@@ -1,18 +1,13 @@
 $stats-divider-thickness: 1px;
 
 // The grid that lists player stats
-.statsgrid {
+.statsrow {
     display: flex;
     flex-direction: row;
     margin-bottom: 5px;
 }
 
-.mainstats {
-    display: flex;
-    flex-direction: column;
-}
-
-div.stat {
+.statsrow>div.stat {
     display: flex;
     flex-direction: column;
     width: 2em;
@@ -30,9 +25,9 @@ div.stat {
         @include reset-input;
         text-align: center;
     }
-    .field-label {
-        padding: 5px 0px 5px 0px;
-        background-color: $text-colour;
+    label {
+        padding: 3px 0px 3px 0px;
+        text-align: center;
     }
     .stat-total {
         border-color: $text-colour;
@@ -66,42 +61,47 @@ div.stat {
     }
 }
 
-.derivedrow {
+.stats>.derivedrow {
     margin-top: -3px;
     margin-bottom: 8px;
     display: flex;
+    font-size: smaller;
+
+    >.field {
+        * {
+            font-size: small;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+        input {
+            width: 3em;
+            flex-grow: 2;
+        }
+
+        &.ma {
+            align-self: flex-end;
+        }
+        // For gap between BT and MA-derived stats
+        +.statderive.liftstat {
+            margin-right: 3px;
+        }
+    }
 }
 
 div.statderive {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     height: 100%;
     flex-grow: 1;
+    font-size: smaller;
 
-    .label {
-        background-color: $text-colour;
-        color: $text-colour-inverted;
-        font-size: small;
-        padding: 2px 5px;
-    }
-    .value {
-        font-size: small;
-        border-width: 2px 0px 2px 0px;
-        border-style: solid;
-        border-color: black;
+    >input {
         padding-left: 3px;
         padding-right: 3px;
-        width: 3em;
-        flex-grow: 2;
     }
 
     // Used in the derived stats row - no right borders means consistent chaining, but the end ones do need to be given a border
     .value.rightborder {
         border-right-width: 2px;
-    }
-
-    // For gap between BT and MA-derived stats
-    +.statderive.liftstat {
-        padding-right: 5px;
     }
 }
