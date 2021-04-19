@@ -5,6 +5,11 @@
             <h1 class="title">
                 <input type="text" class="field-value" name="name"  value="{{actor.name}}"/>
             </h1>
+            {{#if (equals actor.type "npc")}}
+                <div class="field">
+                    <label>{{CPLocal "NPC"}}</label>
+                </div>
+            {{/if}}
             {{> (template "fields/text") label="Role" edit="data.role.value"}}
             {{> (template "fields/number") label="Age" edit="data.age" isNum=true}}
             {{> (template "fields/number") label="Points" edit="data.points"}}

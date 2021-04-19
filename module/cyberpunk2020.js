@@ -53,7 +53,7 @@ Hooks.once("ready", function() {
         return;
     }
     // The version migrations need to begin - if you make a change from 0.1 to 0.2, this should be 0.2
-    const NEEDS_MIGRATION_VERSION = "0.1.4";
+    const NEEDS_MIGRATION_VERSION = "0.2.2";
     console.log("CYBERPUNK: Last migrated in version: " + lastMigrateVersion);
     const needsMigration = lastMigrateVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, lastMigrateVersion);
     if ( !needsMigration ) return;

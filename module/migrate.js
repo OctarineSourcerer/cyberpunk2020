@@ -1,5 +1,9 @@
 // Handle migration of things. The shape of it nabbed from 5e
 export async function migrateWorld() {
+    if (!game.user.isGM) {
+        ui.notifications.error("Only the GM can migrate the world");
+        return;
+    }
     for(let actor of game.actors.entities) {
         try {
             const updateData = migrateActorData(actor.data);
@@ -20,16 +24,28 @@ export async function migrateWorld() {
 /**
  * Migrate a single Actor entity to incorporate latest data model changes
  * Return an Object of updateData to be applied
- * @param {object} actor    The actor data object to update
+ * @param {object} actorData    The actor data object to update
  * @return {Object}         The updateData to apply
  */
-export function migrateActorData(actor) {
-    console.log(`Migrating data of ${actor.name}`);
+export function migrateActorData(actorData) {
+    console.log(`Migrating data of ${actorData.name}`);
 
     // No need to migrate items currently
     let updateData = {}
-    let data = actor.data;
+    let data = actorData.data;
 
+    if(actorData.type == "character") {
+        if(!actorData.token.actorLink) {
+            console.log(`Making ${actorData.name}'s default token be linked to the actor, and be friendly`);
+            updateData[`token.actorLink`] = true;
+            updateData[`token.disposition`] = 1;
+        }
+        if(!actorData.token.vision) {
+            console.log(`Making ${actorData.name}'s default token actually have vision`);
+            updateData[`token.vision`] = true;
+            updateData[`token.dimSight`] = 30;
+        }
+    }
     for (const skillName in data.skills) {
         let skill = data.skills[skillName];
         if(skill.stat == "body") {

@@ -1,7 +1,7 @@
 {
 	"Actor": {
 		"types": [
-			"character"
+			"character", "npc"
 		],
 		"templates": {
 			"stats": {
@@ -742,6 +742,17 @@
 			}
 		},
 		"character": {
+			"templates": [
+				"info",
+				"lifepath",
+				"stats",
+				"skills",
+				"hitLocations",
+				"gear"
+			],
+			"damage": 0
+		},
+		"npc": {
 			"templates": [
 				"info",
 				"lifepath",

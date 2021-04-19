@@ -30,7 +30,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     const data = super.getData();
 
     // Prepare items.
-    if (this.actor.data.type == 'character') {
+    if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
       // Give space for temporary stuff. Delete on sheet close?
       if(data.data.transient == null) {
         data.data.transient = { skillFilter: "" };

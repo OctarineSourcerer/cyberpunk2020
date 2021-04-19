@@ -8,6 +8,21 @@ import { properCase, localize, deepLookup } from "../utils.js"
  */
 export class CyberpunkActor extends Actor {
 
+  /** @override */
+  static async create(data, options={}) {
+    data.token = data.token || {};
+    if ( data.type === "character" ) {
+      mergeObject(data.token, {
+        vision: true,
+        dimSight: 30,
+        brightSight: 0,
+        actorLink: true, // boy do characters need this
+        disposition: 1
+      }, {overwrite: false});
+    }
+    return super.create(data, options);
+  }
+
   /**
    * Augment the basic actor data with additional dynamic data - the stuff that's calculated from other data
    */
@@ -16,8 +31,11 @@ export class CyberpunkActor extends Actor {
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     switch ( this.data.type ) {
+      // NPCs are exactly the same as characters at the moment, but don't get vision or default actorlink
+      case "npc":
       case "character":
         this._prepareCharacterData(this.data.data);
+        break;
     }
   }
 
@@ -50,13 +68,13 @@ export class CyberpunkActor extends Actor {
     }
     
     // Sort through this now so we don't have to later
-    data.equippedItems = this.items.entries.filter(item => {
+    let equippedItems = this.items.entries.filter(item => {
       return item.data.data.equipped;
     });
 
     // Reflex is affected by encumbrance values too
     stats.ref.armorMod = 0;
-    data.equippedItems.filter(i => i.type === "armor").forEach(armor => {
+    equippedItems.filter(i => i.type === "armor").forEach(armor => {
       let armorData = armor.data.data;
       if(armorData.encumbrance != null) {
         stats.ref.armorMod -= armorData.encumbrance;
@@ -82,7 +100,7 @@ export class CyberpunkActor extends Actor {
     body.lift = body.total * 40;
     body.modifier = CyberpunkActor.btm(body.total);
     data.carryWeight = 0;
-    data.equippedItems.forEach(item => {
+    equippedItems.forEach(item => {
       let weight = item.data.data.weight || 0;
       data.carryWeight += weight;
     });
