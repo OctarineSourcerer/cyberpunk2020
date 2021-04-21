@@ -34,6 +34,10 @@ export function migrateActorData(actorData) {
     let updateData = {}
     let data = actorData.data;
 
+    if(typeof(data.damage) == "string") {
+        console.log("Making damage a number");
+        updateData[`data.damage`] = 0;
+    }
     if(actorData.type == "character") {
         if(!actorData.token.actorLink) {
             console.log(`Making ${actorData.name}'s default token be linked to the actor, and be friendly`);
