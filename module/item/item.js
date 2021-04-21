@@ -287,7 +287,7 @@ export class CyberpunkItem extends Item {
       return [];
     }
     if(this.data.data.attackType === rangedAttackTypes.auto) {
-      return [fireModes.fullAuto, fireModes.suppressive, fireModes.threeRoundBurst];
+      return [fireModes.fullAuto, fireModes.suppressive, fireModes.threeRoundBurst, fireModes.semiAuto];
     }
     return [fireModes.semiAuto];
   }
