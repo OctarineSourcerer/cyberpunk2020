@@ -36,6 +36,18 @@
   background-color: black;
   text-shadow: unset;
 }
+.cyberpunk section.window-content .meter-gauge {
+  height: 15px;
+  border: 2px solid black;
+}
+.cyberpunk section.window-content .meter-gauge > span {
+  display: block;
+  height: 100%;
+  background-color: green;
+}
+.cyberpunk section.window-content .meter-gauge > span.danger {
+  background-color: darkorange;
+}
 
 /* Overall sheet structure */
 .sheet header.cyberheader {

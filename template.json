@@ -765,7 +765,7 @@
 		}
 	},
 	"Item": {
-		"types": ["weapon", "armor", "cyberware", "misc"],
+		"types": ["weapon", "armor", "cyberware", "vehicle", "misc"],
 		"templates": {
 			"common": {
 				"name": "Common",
@@ -827,6 +827,31 @@
 			"templates": ["common"],
 			"surgCode": "N",
 			"humanityCost": 0
+		},
+		"vehicle": {
+			"templates": ["common"],
+			"sdp": {
+				"value": 50,
+				"max": 50
+			},
+			"sp": 10,
+			"passengers": 4,
+			"speed": {
+				"value": 0,
+				"max": 100,
+				"maneuver": 50,
+				"acceleration": 12
+			},
+			"maneuverability": {
+				"value": 1,
+				"condition": "allRolls"
+			},
+			"fuel": {
+				"type": "CHOO2",
+				"efficiency": 5,
+				"max": 50,
+				"value": 50
+			}
 		},
 		"misc": {
 			"templates": ["common"]

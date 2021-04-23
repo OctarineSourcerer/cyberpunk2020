@@ -1,0 +1,35 @@
+
+
+<div class="field-list">
+    <div class="field">
+        <label for="data.speed.value">Speed</label>
+        <span class="flexrow flex-pad">
+            <input type="number" name="data.speed.value" value="{{data.speed.value}}"> 
+            <span class="nogrow">/</span>
+            <input type="number" name="data.speed.max" value="{{data.speed.max}}">
+            <span class="nogrow">mph</span>
+        </span>
+    </div>
+    <div class="field">
+        <label for="data.speed.value">Safe</label>
+        <span class="flexrow flex-pad">
+            <input type="number" name="data.speed.maneuver" value="{{data.speed.maneuver}}"> 
+            <span class="nogrow">mph</span>
+        </span>
+    </div>
+    {{!-- There's a reason I don't use meter here - it's evil to style, and IE doesn't support it. If anyone playing this is using IE, they're already in the dystopia --}}
+    <div class="meter-gauge fillwidth" style="grid-column-end: span 2">
+        <span style="width: calc(100% * ({{data.speed.value}}/{{data.speed.max}}));" class="
+        {{#if (compare data.speed.value ">" data.speed.maneuver)}}
+        danger
+        {{/if}}"></span>
+    </div>
+
+    <div class="field">
+        <label for="data.speed.value">Accel</label>
+        <span class="flexrow flex-pad">
+            <input type="number" name="data.speed.acceleration" value="{{data.speed.acceleration}}"> 
+            <span class="nogrow">mph</span>
+        </span>
+    </div>
+</div>
