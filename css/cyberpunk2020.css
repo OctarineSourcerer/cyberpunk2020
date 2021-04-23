@@ -37,7 +37,7 @@
   text-shadow: unset;
 }
 .cyberpunk section.window-content .meter-gauge {
-  height: 15px;
+  height: 10px;
   border: 2px solid black;
 }
 .cyberpunk section.window-content .meter-gauge > span {
@@ -157,11 +157,11 @@
 }
 
 .field-list + * {
-  margin-top: 7px;
+  margin-top: 10px;
 }
 
 .margin-bottom {
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
 
 .roll-image {

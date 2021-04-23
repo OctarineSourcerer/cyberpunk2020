@@ -60,7 +60,7 @@ $field-border-width: 2px;
     }
 
     .meter-gauge {
-        height: 15px;
+        height: 10px;
         border: 2px solid $text-colour;
         > span {
             display: block;
@@ -191,10 +191,10 @@ $field-border-width: 2px;
     }
 }
 .field-list + * {
-    margin-top: 7px;
+    margin-top: 10px;
 }
 .margin-bottom {
-    margin-bottom: 7px;
+    margin-bottom: 10px;
 }
 
 .roll-image {

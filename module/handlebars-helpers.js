@@ -54,6 +54,20 @@ export function registerHandlebarsHelpers() {
                 break;
         }
     });
+    Handlebars.registerHelper('math', function(x, operator, y) {
+        switch (operator) {
+            case "*":
+                return x * y;
+            case "/":
+                return x / y;
+            case "-": 
+                return x - y;
+            case "+":
+                return x + y;
+            default:
+                break;
+        }
+    });
 
     // Repeat what's inside it X times. i starts at 1, ends at amount.
     // Useful for testing the damage track. Use as, for example, {{#repeat 4}}whatyouwanttorepeat{{/repeat}}
