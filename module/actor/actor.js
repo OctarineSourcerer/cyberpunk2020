@@ -68,7 +68,7 @@ export class CyberpunkActor extends Actor {
     }
     
     // Sort through this now so we don't have to later
-    let equippedItems = this.items.entries.filter(item => {
+    let equippedItems = this.items.contents.filter(item => {
       return item.data.data.equipped;
     });
 

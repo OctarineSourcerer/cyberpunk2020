@@ -27,32 +27,32 @@ export class CyberpunkActorSheet extends ActorSheet {
   /** @override */
   getData() {
     // the data THIS returns is only available in this class and the template
-    const data = super.getData();
+    const sheetData = super.getData();
 
     // Prepare items.
     if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
       // Give space for temporary stuff. Delete on sheet close?
-      if(data.data.transient == null) {
-        data.data.transient = { skillFilter: "" };
+      if(sheetData.data.transient == null) {
+        sheetData.data.transient = { skillFilter: "" };
       }
-      this._prepareCharacterItems(data);
-      this._addWoundTrack(data);
-      data.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
-      data.skillsSortChoices = Object.keys(SortOrders);
-      data.skillDisplayList = this._filterSkills(data);
-      data.weaponTypes = weaponTypes;
+      this._prepareCharacterItems(sheetData);
+      this._addWoundTrack(sheetData);
+      sheetData.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
+      sheetData.skillsSortChoices = Object.keys(SortOrders);
+      sheetData.skillDisplayList = this._filterSkills(sheetData);
+      sheetData.weaponTypes = weaponTypes;
     }
 
-    return data;
+    return sheetData;
   }
 
   // Handle searching skills
-  _filterSkills(data) {
-    if(data.data.transient.skillFilter == null) {
-      data.data.transient.skillFilter = "";
+  _filterSkills(sheetData) {
+    if(sheetData.data.transient.skillFilter == null) {
+      sheetData.data.transient.skillFilter = "";
     }
-    let upperSearch = data.data.transient.skillFilter.toUpperCase();
-    const fullList = data.data.sortedSkillView || Object.keys(data.data.skills);
+    let upperSearch = sheetData.data.transient.skillFilter.toUpperCase();
+    const fullList = sheetData.data.sortedSkillView || Object.keys(sheetData.data.data.skills);
 
     let listToFilter = fullList;
 
@@ -62,10 +62,10 @@ export class CyberpunkActorSheet extends ActorSheet {
     }
     else {
       // If we searched previously and the old search had results, we can filter those instead of the whole lot
-      if(data.data.transient.oldSearch != null 
-        && data.skillDisplayList != null
+      if(sheetData.data.transient.oldSearch != null 
+        && sheetData.skillDisplayList != null
         && upperSearch.startsWith(oldSearch)) {
-        listToFilter = data.skillDisplayList; 
+        listToFilter = sheetData.skillDisplayList; 
       }
       return listToFilter.filter(skillName => {
         return skillName.toUpperCase().includes(upperSearch);

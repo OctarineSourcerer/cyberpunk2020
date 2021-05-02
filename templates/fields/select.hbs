@@ -11,7 +11,7 @@
         {{!-- Any --}}
         {{#each choices as |choice|}}
             <option value="{{choice}}" {{!-- Select current value --}}
-            {{~#if (equals (deepLookup .. ../edit) choice)}}
+            {{~#if (equals (deepLookup .. (concat "data." ../edit)) choice)}}
             {{#unless blankDefault}}selected{{/unless}}
             {{~/if}}>
 

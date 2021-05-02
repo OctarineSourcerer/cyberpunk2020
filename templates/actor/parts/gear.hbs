@@ -1,11 +1,11 @@
 <div class="field-list no-wrap">
     <div class="field">
         <label for="data.eurobucks">{{CPLocal "Eurobucks"}}</label>
-        <input name="data.eurobucks" type="number" value="{{data.eurobucks}}">
+        <input name="data.eurobucks" type="number" value="{{data.data.eurobucks}}">
     </div>
     <div class="field">
         <label for="data.carryWeight">{{CPLocal "Weight"}}</label>
-        <input class="not-editable" name="data.carryWeight" type="number" value="{{data.carryWeight}}" readonly>
+        <input class="not-editable" name="data.carryWeight" type="number" value="{{data.data.carryWeight}}" readonly>
     </div>
 </div>
 
@@ -13,7 +13,7 @@
     <div class="inactive">Drag items here to add (for now)</div>
 {{/if}}
 <div class="field-list">
-    {{#each data.gear.weapons as |weapon|}}
+    {{#each data.data.gear.weapons as |weapon|}}
         <div class="field gear item-edit" data-item-id="{{weapon._id}}">
             <div class="field-image roll fire-weapon action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
             <label>{{weapon.name}}</label>
@@ -24,7 +24,7 @@
             <span class="item-delete" data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
-    {{#each data.gear.armor}}
+    {{#each data.data.gear.armor}}
         <div class="field gear item-edit" data-item-id="{{_id}}">
             <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
             <label class="name">{{name}}</label>
@@ -35,7 +35,7 @@
             <span class="item-delete" data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
-    {{#each data.gear.cyberware}}
+    {{#each data.data.gear.cyberware}}
         <div class="field gear item-edit" data-item-id="{{_id}}">
             <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
             <label class="name">{{name}}</label>
@@ -46,7 +46,7 @@
             <span class="item-delete " data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
-    {{#each data.gear.misc}}
+    {{#each data.data.gear.misc}}
         <div class="field gear item-edit" data-item-id="{{_id}}">
             <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
             <label class="name">{{name}}</label>

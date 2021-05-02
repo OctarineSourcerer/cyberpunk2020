@@ -1,4 +1,5 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
+    {{log this}}
     {{!-- Sheet Header --}}
     <header class="cyberheader">
         <div class="fieldrow">
@@ -50,7 +51,7 @@
         {{!-- Biography Tab --}}
         <div class="tab life flexcol" data-group="primary" data-tab="life">
             <div class="biography">
-                {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+                {{editor content=data.data.notes target="data.notes" button=true owner=owner editable=editable}}
             </div>
         </div>
     </section>

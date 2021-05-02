@@ -30,7 +30,7 @@ export function classifyRollDice(roll) {
             const isMax = r.result === d.faces;
             const isMin = r.result === 1;
             return {
-              result: cls.getResultLabel(r.result),
+              result: cls.getResultLabel(r),
               classes: [
                 cls.name.toLowerCase(),
                 "d" + d.faces,

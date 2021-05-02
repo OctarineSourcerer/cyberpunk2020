@@ -18,7 +18,7 @@
         <div class="flex-pad"></div>
         <select name="data.attackSkill">
             {{#each attackSkills as |skill|}}
-            <option value="{{skill}}" {{#if (equals ../data.attackSkill skill)}}selected{{/if}}>{{localize (skillRef skill)}}</option>
+            <option value="{{skill}}" {{#if (equals ../data.data.attackSkill skill)}}selected{{/if}}>{{localize (skillRef skill)}}</option>
             {{/each}}
         </select>
     </div>

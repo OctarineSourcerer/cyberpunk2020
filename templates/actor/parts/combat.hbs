@@ -18,15 +18,15 @@
             <h2>{{CPLocal "Armor"}}</h2>
         </header>
 
-        {{> (template "actor/parts/armor-display") hitLocations=data.hitLocations hitLocsName="hitLocations"}}
+        {{> (template "actor/parts/armor-display") hitLocations=data.daa.hitLocations hitLocsName="hitLocations"}}
         <div class="field margin-bottom">
             <label for="data.stats.ref.armorMod">{{CPLocal "Encumbrance"}}</label>
             <span class="flex-pad"></span>
-            <input type="number" name="data.stats.ref.armorMod" value="{{data.stats.ref.armorMod}}" class="number nogrow not-editable" readonly>
+            <input type="number" name="data.stats.ref.armorMod" value="{{data.data.stats.ref.armorMod}}" class="number nogrow not-editable" readonly>
         </div>
         
         <div class="field-list one-col">
-            {{#each data.gear.armor}}
+            {{#each data.data.gear.armor}}
             <div class="field item-edit" data-item-id="{{_id}}">
                 <div class="field-image" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
                 <label class="name">{{name}}</label>
@@ -43,7 +43,7 @@
         <header>
             <h2>{{CPLocal "Weapons"}}</h2>
         </header>
-        {{#each data.gear.weapons as |weapon|}}
+        {{#each data.data.gear.weapons as |weapon|}}
             <div class="fire-weapon field action" data-item-id="{{weapon._id}}">
                 <div class="no-action field-image item-edit" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
                 <label class="name">{{weapon.name}}</label>

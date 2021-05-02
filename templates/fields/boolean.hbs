@@ -2,5 +2,5 @@
     <label for="{{edit}}">{{CPLocal label}}</label>
     <span class="flex-pad"></span>
     <input class="nogrow" name="{{edit}}" 
-        type="checkbox" {{#if (deepLookup . edit)}}checked{{/if}}/>
+        type="checkbox" {{#if (deepLookup . (concat "data." edit))}}checked{{/if}}/>
 </div>

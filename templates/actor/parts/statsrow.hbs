@@ -1,7 +1,7 @@
 {{!-- Container for all the stats --}}
 <div class="stats flexcol">
     <div class="statsrow">
-        {{#each data.stats as |stat key|}}
+        {{#each data.data.stats as |stat key|}}
         <div class="field stat">
             <label>{{localize (localizeStat key)}}</label>
             <div class="flexrow">
@@ -17,26 +17,28 @@
     {{!-- Run, Leap etc. These are below, cos we're a lot less starved for vertical space than horizontal --}}
     {{!-- If I had horizontal space, I'd just slap these against their relevant stats --}}
     <div class="derivedrow">
+        {{#with data.data.stats}}
         <div class="field">
             <label>{{localize 'CYBERPUNK.BTmod'}}</label>
-            <input class="value not-editable" value="{{data.stats.bt.modifier}}" readonly>
+            <input class="value not-editable" value="{{bt.modifier}}" readonly>
         </div>
         <div class="field">
             <label>{{localize 'CYBERPUNK.Carry'}}</label>
-            <input class="value not-editable" value="{{data.stats.bt.carry}}" readonly>
+            <input class="value not-editable" value="{{bt.carry}}" readonly>
         </div>
         <div class="field liftstat">
             <label>{{localize 'CYBERPUNK.Lift'}}</label>
-            <input class="rightborder not-editable" value="{{data.stats.bt.lift}}" readonly>
+            <input class="rightborder not-editable" value="{{bt.lift}}" readonly>
         </div>
         <div class="flex-pad"></div>
         <div class="field">
             <label>{{localize 'CYBERPUNK.Leap'}}</label>
-            <input class="not-editable" value="{{data.stats.ma.leap}}" readonly>
+            <input class="not-editable" value="{{ma.leap}}" readonly>
         </div>
         <div class="field">
             <label>{{localize 'CYBERPUNK.Run'}}</label>
-            <input class="rightborder not-editable" value="{{data.stats.ma.run}}" readonly>
+            <input class="rightborder not-editable" value="{{ma.run}}" readonly>
         </div>
+        {{/with}}
     </div>
 </div>
