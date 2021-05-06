@@ -37,6 +37,10 @@ export const preloadHandlebarsTemplates = async function() {
         // Cyberware
         "systems/cyberpunk2020/templates/item/parts/cyberware/summary.hbs",
         "systems/cyberpunk2020/templates/item/parts/cyberware/settings.hbs",
+        // Vehicle
+        "systems/cyberpunk2020/templates/item/parts/vehicle/summary.hbs",
+        "systems/cyberpunk2020/templates/item/parts/vehicle/settings.hbs",
+
         // Misc
         "systems/cyberpunk2020/templates/item/parts/misc/summary.hbs",
         "systems/cyberpunk2020/templates/item/parts/misc/settings.hbs",

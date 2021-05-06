@@ -292,6 +292,15 @@
     "CYBERPUNK.Standard": "Standard",
     "CYBERPUNK.Unreliable": "Unreliable",
 
+    "CYBERPUNK.Speed": "Speed",
+    "CYBERPUNK.MPH": "mph",
+    "CYBERPUNK.Accel": "Accel",
+    "CYBERPUNK.Safe": "Safe",
+    "CYBERPUNK.Fuel": "Fuel",
+    "CYBERPUNK.Gallon": "gal",
+    "CYBERPUNK.Efficiency": "Efficiency",
+    "CYBERPUNK.MPG": "mpg",
+
     "CYBERPUNK.Rolls": "Rolls",
     "CYBERPUNK.Initiative": "Initiative",
     "CYBERPUNK.StunDeathSave": "Stun/Death Save",
