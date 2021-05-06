@@ -124,3 +124,53 @@ export let defaultAreaLookup = {
     9: "rLeg",
     10: "rLeg"
 }
+
+export function rangedModifiers(weapon) {
+    let range = weapon.data.data.range || 50;
+    let fireModes = weapon.__getFireModes() || [];
+    return [
+        [{
+            localKey: "FireMode",
+            dataPath: "fireMode",
+            choices: fireModes,
+            defaultValue: fireModes[0]
+        },
+        {
+            localKey: "Range", 
+            dataPath: "range", 
+            defaultValue: "RangeClose",
+            choices: [
+                {value:"RangePB", localData: {range: 1}},
+                {value:"RangeClose", localData: {range: range/4}},
+                {value:"RangeMedium", localData: {range: range/2}},
+                {value:"RangeLong", localData: {range: range}},
+                {value:"RangeExtreme", localData: {range: range*2}}
+            ]
+         }],
+
+         [{
+            localKey: "Aiming",
+            dataPath: "aimRounds",
+            defaultValue: 0,
+            choices: [0,1,2,3].map(x => {
+                return { value: x, localKey: "Rounds", localData: {rounds: x}}
+            }),
+            noTranslateChoices: false
+        },
+        {
+            localKey: "AimingAt",
+            dataPath: "targetArea",
+            defaultValue: "",
+            // TODO: Have this dependent on target
+            choices: defaultTargetLocations
+        },
+        {localKey:"Ambush", dataPath:"ambush",defaultValue: false},
+        {localKey:"Blinded", dataPath:"blinded",defaultValue: false},
+        {localKey:"DualWield", dataPath:"dualWield",defaultValue: false},
+        {localKey:"FastDraw", dataPath:"fastDraw",defaultValue: false},
+        {localKey:"Hipfire", dataPath:"hipfire",defaultValue: false},
+        {localKey:"Ricochet", dataPath:"ricochet",defaultValue: false},
+        {localKey:"Running", dataPath:"running",defaultValue: false},
+        {localKey:"TurnFace", dataPath:"turningToFace",defaultValue: false}]
+    ];
+}

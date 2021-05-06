@@ -177,7 +177,7 @@ export class CyberpunkItem extends Item {
   // Gas? Wind effect. Dear lord.
 
   // Let's just pretend the unusual ranged doesn't exist for now
-  // Look into `attack-modifiers.js` for the modifier obect
+  // Look into `modifiers.js` for the modifier obect
   __weaponRoll(attackMods) {
     let owner = this.actor;
     let data = this.data.data;

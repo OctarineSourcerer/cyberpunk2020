@@ -1,17 +1,17 @@
 <div class="field-list">
     {{> (template "fields/number") label="Accuracy" edit="data.accuracy"}}
-    {{> (template "fields/text") label="Damage" edit="data.damage"}}
+    {{> (template "fields/string") label="Damage" edit="data.damage"}}
     {{> (template "fields/number") label="ShotsLeft" edit="data.shotsLeft"}}
     {{> (template "fields/number") label="Shots" edit="data.shots"}}
     {{> (template "fields/boolean") label="AP" edit="data.ap"}}
     {{> (template "fields/number") label="RoF" edit="data.rof"}}
     {{> (template "fields/select") label="Reliability" edit="data.reliability" choices=reliabilities}}
     {{> (template "fields/number") label="Range" edit="data.range"}}
-    {{> (template "fields/text") label="AmmoType" edit="data.ammoType"}}
+    {{> (template "fields/string") label="AmmoType" edit="data.ammoType"}}
 
     {{!-- When changing weapon type, the weapon's attack type will not update correspondingly until the sheet is closed --}}
     {{> (template "fields/select") label="WeaponType" edit="data.weaponType" choices=weaponTypes}}
-    {{> (template "fields/select") label="AttackType" edit="data.attackType" choices=attackTypes blankDefault=true}}
+    {{> (template "fields/select") label="AttackType" edit="data.attackType" choices=attackTypes}}
     {{!-- Custom, as all the translate keys start with Skill, but they don't in the character --}}
     <div class="field">
         <label for="data.attackSkill">{{CPLocal "AttackSkill"}}</label>
