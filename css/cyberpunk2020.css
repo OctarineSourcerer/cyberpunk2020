@@ -256,8 +256,6 @@ details[open] summary ~ * {
 }
 .cyberpunk .field > input[type=number].smallnumber {
   width: 1.5em;
-  padding-left: 0px;
-  text-align: center;
 }
 .cyberpunk .field > input[type=text] {
   width: 6em;
