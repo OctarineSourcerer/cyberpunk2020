@@ -1,6 +1,6 @@
 import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve, attackSkills } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
-import { localize, rollLocation } from "../utils.js"
+import { clamp, localize, rollLocation } from "../utils.js"
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -290,5 +290,17 @@ export class CyberpunkItem extends Item {
       return [fireModes.fullAuto, fireModes.suppressive, fireModes.threeRoundBurst, fireModes.semiAuto];
     }
     return [fireModes.semiAuto];
+  }
+
+  accel(decelerate = false) {
+    if(this.type !== "vehicle")
+      return;
+    
+    let speed = this.data.data.speed;
+    let accelAdd = speed.acceleration * (decelerate ? -1 : 1);
+    let newSpeed = clamp(speed.value + accelAdd, 0, speed.max);
+    return this.update({
+      "data.speed.value": newSpeed
+    });
   }
 }

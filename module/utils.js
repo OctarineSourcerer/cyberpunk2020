@@ -47,3 +47,8 @@ export function deepLookup(start, path) {
     });
     return current;
 }
+
+// Clamp x to be between min and max inclusive
+export function clamp(x, min, max) {
+    return Math.min(Math.max(x, min), max);
+}

@@ -76,18 +76,18 @@
             -webkit-appearance: checkbox;
         }
 
-        &.number {
+        &[type=number] {
             width: 2.5em;
             // With center text, no padding needed
             padding-left: 0px;
             text-align: center;
         }
-        &.smallnumber {
+        &[type=number].smallnumber {
             width: 1.5em;
             padding-left: 0px;
             text-align: center;
         }
-        &.textsize {
+        &[type=text] {
             width: 6em;
             min-width: 2em;
         }
@@ -101,6 +101,11 @@
     }
     p {
         margin:0px 3px 0px 3px;
+    }
+
+    label.larger {
+        font-size: larger;
+        font-style: italic;
     }
     // Do I do a thing for divs here? when it's just displaying and isn't visible
 }
