@@ -155,14 +155,14 @@ export function rangedModifiers(weapon) {
             choices: [0,1,2,3].map(x => {
                 return { value: x, localKey: "Rounds", localData: {rounds: x}}
             }),
-            noTranslateChoices: false
         },
         {
             localKey: "AimingAt",
             dataPath: "targetArea",
             defaultValue: "",
             // TODO: Have this dependent on target
-            choices: defaultTargetLocations
+            choices: defaultTargetLocations,
+            allowBlank: true
         },
         {localKey:"Ambush", dataPath:"ambush",defaultValue: false},
         {localKey:"Blinded", dataPath:"blinded",defaultValue: false},
