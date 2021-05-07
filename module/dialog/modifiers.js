@@ -21,7 +21,9 @@ import { defaultTargetLocations } from "../lookups.js"
         // Use like [[mod1, mod2], [mod3, mod4, mod5]] etc to add groupings,
         modifierGroups: [],
         // Extra mod field for miscellaneous mod
-        extraMod: true
+        extraMod: true,
+
+        onConfirm: (results) => console.log(results)
       });
     }
   
@@ -74,12 +76,8 @@ import { defaultTargetLocations } from "../lookups.js"
       // Update the object
       this.object = updateData;
       this.submit().then((form) => {
-        let fireOptions = this.object;
-        // We don't need localisation or choices options anymore
-        delete fireOptions.locals;
-        delete fireOptions.choices;
-        console.log(fireOptions);
-        this.options.weapon.__weaponRoll(fireOptions);
+        let result = this.object.values;
+        this.options.onConfirm(result);
       });
     }
  }
