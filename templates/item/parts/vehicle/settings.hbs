@@ -1,5 +1,30 @@
+{{!-- Structural Damage Points (SDP is a terrible name) --}}
+<div class="field-list">
+    <div class="flexcol fillwidth" style="grid-column-end: span 2" title="{{CPLocal "SDPFull"}}">
+        <div class="meter-gauge fillwidth">
+            <span style="width: calc(100% * ({{data.sdp.value}}/{{data.sdp.max}}));" class="
+            {{#if (compare data.sdp.value "<=" (math data.sdp.max "/" 2))}}
+            danger
+            {{/if}}"></span>
+        </div>
+    </div>
 
+    <div class="field">
+        <label class="larger" for="data.sdp.value" title="{{CPLocal "SDPFull"}}">{{CPLocal "SDP"}}</label>
+        <span class="flexrow flex-pad">
+            <input type="number" name="data.sdp.value" value="{{data.sdp.value}}"> 
+            <span class="nogrow">/</span>
+            <input type="number" name="data.sdp.max" value="{{data.sdp.max}}">
+        </span>
+    </div>
 
+    <div class="field">
+        <label for="data.sp" title="{{CPLocal "SPFull"}}">{{CPLocal "SP"}}</label>
+        <span class="flex-pad"></span>
+        <input type="number" class="number nogrow" name="data.sp" value="{{data.sp}}">
+        </span>
+    </div>
+</div>
 <div class="field-list">
     {{!-- There's a reason I don't use meter here - it's evil to style, and IE doesn't support it. If anyone playing this is using IE, they're already in the dystopia --}}
     <div class="flexcol fillwidth" style="grid-column-end: span 2">
@@ -11,7 +36,8 @@
         </div>
     </div>
     <div class="field">
-        <label for="data.speed.value">{{CPLocal "Speed"}}</label>
+        {{!-- Make larger to indicate a kind of heading almost --}}
+        <label class="larger" for="data.speed.value">{{CPLocal "Speed"}}</label>
         <span class="flexrow flex-pad">
             <input type="number" name="data.speed.value" value="{{data.data.speed.value}}"> 
             <span class="nogrow">/</span>
@@ -27,9 +53,10 @@
         </span>
     </div>
 
+    {{!-- Accel/decel buttons --}}
     <div class="flexrow">
-        <div class="field"><label class="fillwidth" style="text-align: center; font-size: larger">-</label></div>
-        <div class="field"><label class="fillwidth" style="text-align: center; font-size: larger">+</label></div>
+        <div class="field decel"><label class="fillwidth" style="text-align: center; font-size: larger">-</label></div>
+        <div class="field accel"><label class="fillwidth" style="text-align: center; font-size: larger">+</label></div>
     </div>
    <div class="field">
        {{!-- This should I guess be maneuver? But safe works a lot better meaningwise --}}
@@ -52,7 +79,7 @@
         </div>
     </div>
     <div class="field">
-        <label for="data.speed.value">{{CPLocal "Fuel"}}</label>
+        <label class="larger" for="data.speed.value">{{CPLocal "Fuel"}}</label>
         <span class="flexrow flex-pad">
             <input type="number" name="data.fuel.value" value="{{data.data.fuel.value}}"> 
             <span class="nogrow">/</span>
@@ -70,10 +97,26 @@
     {{!-- There's a reason I don't use meter here - it's evil to style, and IE doesn't support it. If anyone playing this is using IE, they're already in the dystopia --}}
 
    <div class="field">
-        <label for="data.speed.value">{{CPLocal "Efficiency"}}</label>
+        <label for="data.fuel.efficiency">{{CPLocal "Efficiency"}}</label>
         <span class="flexrow flex-pad">
             <input type="number" name="data.fuel.efficiency" value="{{data.data.fuel.efficiency}}"> 
             <span class="nogrow">{{CPLocal "MPG"}}</span>
+        </span>
+    </div>
+</div>
+
+{{!-- Miscellaneous vehicle-only other --}}
+<div class="field-list">
+    <div class="field">
+        <label for="data.passengers">{{CPLocal "Passengers"}}</label>
+        <span class="flexrow flex-pad">
+            <input type="number" name="data.passengers" value="{{data.passengers}}"> 
+        </span>
+    </div>
+    <div class="field">
+        <label for="data.maneuverability.value">{{CPLocal "ManeuverabilityFull"}}</label>
+        <span class="flexrow flex-pad">
+            <input type="number" name="data.maneuverability.value" value="{{data.maneuverability.value}}"> 
         </span>
     </div>
 </div>

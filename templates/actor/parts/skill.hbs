@@ -23,8 +23,8 @@
     </span>
     
     {{#if skill.chipped}}
-        <input class="smallnumber nogrow" name="data.skills.{{edit}}.chipValue" value="{{#if skill.chipValue}}{{skill.chipValue}}{{else}}0{{/if}}"/>
+        <input type="number" class="smallnumber nogrow" name="data.skills.{{edit}}.chipValue" value="{{#if skill.chipValue}}{{skill.chipValue}}{{else}}0{{/if}}"/>
     {{else}}
-        <input class="smallnumber nogrow" name="data.skills.{{edit}}.value" value="{{skill.value}}"/>
+        <input type="number" class="smallnumber nogrow" name="data.skills.{{edit}}.value" value="{{skill.value}}"/>
     {{/if}}
 </div>
