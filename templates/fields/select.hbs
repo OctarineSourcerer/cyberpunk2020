@@ -4,8 +4,8 @@
     <label for="{{edit}}">{{CPLocal label}}</label>
     <span class="flex-pad"></span>
     <select name="{{edit}}">
-        {{#if (equals (deepLookup . edit) "")}}
-            <option value=" " selected></option>
+        {{#if allowBlank}}
+            <option value=" " {{#if (equals (deepLookup . edit) "")}}selected{{/if}}></option>
         {{/if}}
         {{!-- Any --}}
         {{#each choices as |choice|}}

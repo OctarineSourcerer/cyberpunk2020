@@ -47,7 +47,7 @@ import { defaultTargetLocations } from "../lookups.js"
       let data = {
         modifierGroups: this.options.modifierGroups,
         // You can't refer to indices in FormApplication form entries as far as I know, so let's give them a place to live
-        values: {}
+        defaultValues: {}
       };
       if(this.options.extraMod) {
         data.modifierGroups.push([{
@@ -60,7 +60,7 @@ import { defaultTargetLocations } from "../lookups.js"
       data.modifierGroups.forEach(group => {
         group.forEach(modifier => {
           modifier.fieldPath = `fields/${modifier.choices ? "select" : typeof(modifier.defaultValue)}`;
-          deepSet(data.values, modifier.dataPath, (modifier.defaultValue !== undefined ? modifier.defaultValue : ""));
+          deepSet(data.defaultValues, modifier.dataPath, (modifier.defaultValue !== undefined ? modifier.defaultValue : ""));
         })
       })
 
@@ -76,7 +76,8 @@ import { defaultTargetLocations } from "../lookups.js"
       // Update the object
       this.object = updateData;
       this.submit().then((form) => {
-        let result = this.object.values;
+        // We don't need to use .values
+        let result = this.object;
         this.options.onConfirm(result);
       });
     }

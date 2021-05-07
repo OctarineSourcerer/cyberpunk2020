@@ -11,7 +11,7 @@
 
     {{!-- When changing weapon type, the weapon's attack type will not update correspondingly until the sheet is closed --}}
     {{> (template "fields/select") label="WeaponType" edit="data.weaponType" choices=weaponTypes}}
-    {{> (template "fields/select") label="AttackType" edit="data.attackType" choices=attackTypes}}
+    {{> (template "fields/select") label="AttackType" edit="data.attackType" choices=attackTypes allowBlank=true}}
     {{!-- Custom, as all the translate keys start with Skill, but they don't in the character --}}
     <div class="field">
         <label for="data.attackSkill">{{CPLocal "AttackSkill"}}</label>
