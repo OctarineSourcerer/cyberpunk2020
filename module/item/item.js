@@ -1,6 +1,6 @@
 import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve, attackSkills } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
-import { clamp, localize, rollLocation } from "../utils.js"
+import { clamp, localize, localizeParam, rollLocation } from "../utils.js"
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -230,7 +230,7 @@ export class CyberpunkItem extends Item {
           range: { range: actualRangeBracket }
         }
       }
-      let roll = new Multiroll(localize("Autofire"));
+      let roll = new Multiroll(localize("Autofire"), `${localize("Range")}: ${localizeParam(attackMods.range, {range: actualRangeBracket})}`);
       roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
       return;
     }
