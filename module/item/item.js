@@ -141,7 +141,7 @@ export class CyberpunkItem extends Item {
       // If close range, add, else subtract
       let multiplier = 
           (range === ranges.close) ? 1 
-        : (range === ranges.pb) ? 0 
+        : (range === ranges.pointBlank) ? 0 
         : -1;
       terms.push(multiplier * Math.floor(bullets/10))
     }
