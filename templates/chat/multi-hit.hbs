@@ -1,13 +1,35 @@
 <div class="cyberpunk cyberpunk-card flexcol">
     <h2>{{title}}</h2>
-    <div class="flexrow nowrap">
-        <span>{{CPLocal "Range"}}: {{CPLocalParam range locals.range}}</span>
-        <span>{{CPLocal "ToHit"}}: {{toHit}}</span>
+    <div class="field-list one-col">
+        <div class="field">
+            <span>{{CPLocal "Range"}}: </span>
+            <span class="flex-pad">{{CPLocalParam range locals.range}}</span>
+        </div>
+        <div class="field">
+            <span>{{CPLocal "ToHit"}}: </span>
+            <span class="flex-pad">{{toHit}}</span>
+        </div>
     </div>
-    <div>
-        <span>{{CPLocal "Attack"}}: </span>
-        <span>{{attackRoll._total}}</span>
+    <div class="field-list one-col">
+        <div class="field" style="grid-column-end: span 1">
+            <span>{{CPLocal "Attack"}}: </span>
+            <span>{{attackRoll._total}}</span>
+            <span class="flex-pad"></span>
+            <span class="roll-results">
+                {{#each attackRoll.terms as |term|}}
+                    {{#if term.results}}
+                        {{#each term.results as |die|}}
+                            <span class="roll-result roll die d{{term.faces}}">{{die.result}}</span>
+                        {{/each}}
+                    {{else}}
+                        <span class="roll-result">{{term}}</span>
+                    {{/if}}
+                {{/each}}
+            </span>
+        </div>
     </div>
+    
+    
     <div>
         {{!-- "X hit of y fired" Uses "hit" and "fired" fields respectively --}}
         {{!-- They're separate so we can emphasise the hit --}}

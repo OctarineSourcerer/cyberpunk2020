@@ -205,6 +205,17 @@ $field-border-width: 2px;
     width: 32px;
 }
 
+.cyberpunk .field .roll-results {
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    >span.roll-result {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 // Only pull this animation when details is open
 // Do this to all elements after the *
 // Nabbed from https://stackoverflow.com/a/38215801/5708707
