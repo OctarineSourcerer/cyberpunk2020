@@ -6,6 +6,8 @@ export function registerHandlebarsHelpers() {
     // Short for cyberpunk localize
     Handlebars.registerHelper('CPLocal', function(str, options) {
         let localizeKey = "CYBERPUNK." + str;
+        if(!game.i18n.has(localizeKey)) 
+            return str;
         if(!options || Object.keys(options.hash).length === 0) {
             return game.i18n.localize(localizeKey);
         }

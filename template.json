@@ -784,6 +784,12 @@
 			"availability": "common",
 			"ammoType": "9mm",
 			"damage": "2d6+1",
+			"rangeDamages": {
+				"pointBlank": "",
+				"close": "",
+				"medium": "",
+				"far": ""
+			},
 			"ap": false,
 			"shotsLeft": 12,
 			"shots": 12,

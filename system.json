@@ -1,42 +1,38 @@
 {
-  "name": "cyberpunk2020",
-  "title": "Cyberpunk 2020",
-  "description": "R. Talsorian Games' Cyberpunk 2020 System",
-  "author": "OctarineSourcerer",
-  "authors": [],
-  "url": "https://github.com/OctarineSourcerer/cyberpunk2020",
-  "version": "0.2.4",
-  "minimumCoreVersion": "0.8.0",
-  "compatibleCoreVersion": "0.8.3",
-  "scripts": [],
-  "esmodules": [
-    "module/cyberpunk2020.js"
-  ],
-  "styles": [
-    "css/cyberpunk2020.css"
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    }
-  ],
-  "packs": [
-    {
-      "name": "roll-tables",
-      "label": "Roll Tables",
-      "path": "./packs/roll-tables.db",
-      "entity": "RollTable",
-      "system": "cyberpunk2020"
-    }
-  ],
-  "system": [],
-  "dependencies": [],
-  "socket": false,
-  "manifest": "https://raw.githubusercontent.com/OctarineSourcerer/cyberpunk2020/main/system.json",
-  "download": "https://github.com/OctarineSourcerer/cyberpunk2020/archive/v0.2.5.zip",
-  "protected": false,
-  "gridDistance": 5,
-  "gridUnits": "m"
-}
+    "name": "cyberpunk2020",
+    "title": "Cyberpunk 2020",
+    "description": "R. Talsorian Games' Cyberpunk 2020 System",
+    "version": "0.2.6",
+    "compatibleCoreVersion": "0.7.9",
+    "templateVersion": 2,
+    "author": "OctarineSourcerer",
+    "scripts": [],
+    "esmodules": ["module/cyberpunk2020.js"],
+    "styles": ["css/cyberpunk2020.css"],
+    "packs": [
+      {
+        "name": "roll-tables",
+        "label": "Roll Tables",
+        "system": "cyberpunk2020",
+        "path": "./packs/roll-tables.db",
+        "entity": "RollTable"
+      }
+    ],
+    "languages": [
+      {
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+      }
+    ],
+    "socket": false,
+    "initiative": "1d10x10 + @stats.ref.total + @skills.CombatSense.value",
+    "gridDistance": 5,
+    "gridUnits": "m",
+    "primaryTokenAttribute": null,
+    "secondaryTokenAttribute": null,
+    "url": "https://github.com/OctarineSourcerer/cyberpunk2020",
+    "manifest": "https://raw.githubusercontent.com/OctarineSourcerer/cyberpunk2020/main/system.json",
+    "download": "https://github.com/OctarineSourcerer/cyberpunk2020/archive/v0.2.5.zip"
+  }
+  
