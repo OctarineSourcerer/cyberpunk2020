@@ -5,13 +5,13 @@
     <span class="flex-pad"></span>
     <select name="{{edit}}">
         {{#if allowBlank}}
-            <option value=" " {{#if (equals (deepLookup . (concat "data." edit)) "")}}selected{{/if}}></option>
+            <option value=" " {{#if (equals (deepLookup . edit) "")}}selected{{/if}}></option>
         {{/if}}
         {{!-- Any --}}
         {{#each choices as |choice|}}
             {{#selectOption choice}}
                 <option value="{{value}}" {{!-- Select current value --}}
-                {{~#if (equals (deepLookup ../.. (concat "data."../../edit)) value)}}
+                {{~#if (equals (deepLookup ../.. ../../edit) value)}}
                 selected
                 {{~/if}}>
 

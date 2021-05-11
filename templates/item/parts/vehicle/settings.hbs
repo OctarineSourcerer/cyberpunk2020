@@ -1,7 +1,7 @@
 {{!-- Structural Damage Points (SDP is a terrible name) --}}
 <div class="field-list">
     {{log this}}
-    {{#with data.data.sdp}}
+    {{#with data.sdp}}
         <div class="flexcol fillwidth" style="grid-column-end: span 2" title="{{CPLocal "SDPFull"}}">
             <div class="meter-gauge fillwidth">
                 <span style="width: calc(100% * ({{value}}/{{max}}));" class="
@@ -24,13 +24,13 @@
     <div class="field">
         <label for="data.sp" title="{{CPLocal "SPFull"}}">{{CPLocal "SP"}}</label>
         <span class="flex-pad"></span>
-        <input type="number" class="number nogrow" name="data.sp" value="{{data.data.sp}}">
+        <input type="number" class="number nogrow" name="data.sp" value="{{data.sp}}">
         </span>
     </div>
 </div>
 <div class="field-list">
     {{!-- There's a reason I don't use meter here - it's evil to style, and IE doesn't support it. If anyone playing this is using IE, they're already in the dystopia --}}
-    {{#with data.data.speed}}
+    {{#with data.speed}}
     <div class="flexcol fillwidth" style="grid-column-end: span 2">
         <div class="meter-gauge fillwidth">
             <span style="width: calc(100% * ({{value}}/{{max}}));" class="
@@ -75,7 +75,7 @@
 
 {{!-- Fuel --}}
 <div class="field-list">
-    {{#with data.data.fuel}}
+    {{#with data.fuel}}
     <div class="flexcol fillwidth" style="grid-column-end: span 2">
         <div class="meter-gauge fillwidth">
             <span style="width: calc(100% * ({{value}}/{{max}}));" class="
@@ -117,13 +117,13 @@
     <div class="field">
         <label for="data.passengers">{{CPLocal "Passengers"}}</label>
         <span class="flexrow flex-pad">
-            <input type="number" name="data.passengers" value="{{data.data.passengers}}"> 
+            <input type="number" name="data.passengers" value="{{data.passengers}}"> 
         </span>
     </div>
     <div class="field">
         <label for="data.maneuverability.value">{{CPLocal "ManeuverabilityFull"}}</label>
         <span class="flexrow flex-pad">
-            <input type="number" name="data.maneuverability.value" value="{{data.data.maneuverability.value}}"> 
+            <input type="number" name="data.maneuverability.value" value="{{data.maneuverability.value}}"> 
         </span>
     </div>
 </div>

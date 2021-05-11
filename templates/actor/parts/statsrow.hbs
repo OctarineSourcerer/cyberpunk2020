@@ -1,7 +1,7 @@
 {{!-- Container for all the stats --}}
 <div class="stats flexcol">
     <div class="statsrow">
-        {{#each data.data.stats as |stat key|}}
+        {{#each data.stats as |stat key|}}
         <div class="field stat">
             <label>{{localize (localizeStat key)}}</label>
             <div class="flexrow">
@@ -17,7 +17,7 @@
     {{!-- Run, Leap etc. These are below, cos we're a lot less starved for vertical space than horizontal --}}
     {{!-- If I had horizontal space, I'd just slap these against their relevant stats --}}
     <div class="derivedrow">
-        {{#with data.data.stats}}
+        {{#with data.stats}}
         <div class="field">
             <label>{{localize 'CYBERPUNK.BTmod'}}</label>
             <input class="value not-editable" value="{{bt.modifier}}" readonly>

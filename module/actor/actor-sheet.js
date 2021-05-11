@@ -28,6 +28,9 @@ export class CyberpunkActorSheet extends ActorSheet {
   getData() {
     // the data THIS returns is only available in this class and the template
     const sheetData = super.getData();
+    const actorData = sheetData.data;
+    sheetData.actor = actorData;
+    sheetData.data = actorData.data;
 
     // Prepare items.
     if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
@@ -52,7 +55,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       sheetData.data.transient.skillFilter = "";
     }
     let upperSearch = sheetData.data.transient.skillFilter.toUpperCase();
-    const fullList = sheetData.data.sortedSkillView || Object.keys(sheetData.data.data.skills);
+    const fullList = sheetData.data.sortedSkillView || Object.keys(sheetData.data.skills);
 
     let listToFilter = fullList;
 

@@ -13,13 +13,12 @@
     {{> (template "fields/select") label="WeaponType" edit="data.weaponType" choices=weaponTypes}}
     {{> (template "fields/select") label="AttackType" edit="data.attackType" choices=attackTypes allowBlank=true}}
     {{!-- Custom, as all the translate keys start with Skill, but they don't in the character --}}
-    {{log this.data.data.weaponType}}
     <div class="field">
         <label for="data.attackSkill">{{CPLocal "AttackSkill"}}</label>
         <div class="flex-pad"></div>
         <select name="data.attackSkill">
             {{#each attackSkills as |skill|}}
-            <option value="{{skill}}" {{#if (equals ../data.data.attackSkill skill)}}selected{{/if}}>{{localize (skillRef skill)}}</option>
+            <option value="{{skill}}" {{#if (equals ../data.attackSkill skill)}}selected{{/if}}>{{localize (skillRef skill)}}</option>
             {{/each}}
         </select>
     </div>
