@@ -37,12 +37,11 @@
   text-shadow: unset;
 }
 .cyberpunk section.window-content .meter-gauge {
-  height: 10px;
   border: 2px solid black;
 }
 .cyberpunk section.window-content .meter-gauge > span {
   display: block;
-  height: 100%;
+  min-height: 6px;
   background-color: green;
 }
 .cyberpunk section.window-content .meter-gauge > span.danger {
