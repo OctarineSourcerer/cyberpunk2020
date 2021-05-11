@@ -286,7 +286,8 @@ export class CyberpunkItem extends Item {
       console.error(`${this.name} is not a weapon, and therefore has no fire modes`)
       return [];
     }
-    if(this.data.data.attackType === rangedAttackTypes.auto) {
+    if(this.data.data.attackType === rangedAttackTypes.auto
+      || this.data.data.attackType === rangedAttackTypes.autoshotgun) {
       return [fireModes.fullAuto, fireModes.suppressive, fireModes.threeRoundBurst, fireModes.semiAuto];
     }
     return [fireModes.semiAuto];
