@@ -172,6 +172,16 @@
   width: 32px;
 }
 
+.cyberpunk .field .roll-results {
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.cyberpunk .field .roll-results > span.roll-result {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
 }
@@ -249,17 +259,15 @@ details[open] summary ~ * {
 .cyberpunk .field > input[type=checkbox] {
   -webkit-appearance: checkbox;
 }
-.cyberpunk .field > input.number {
+.cyberpunk .field > input[type=number] {
   width: 2.5em;
   padding-left: 0px;
   text-align: center;
 }
-.cyberpunk .field > input.smallnumber {
+.cyberpunk .field > input[type=number].smallnumber {
   width: 1.5em;
-  padding-left: 0px;
-  text-align: center;
 }
-.cyberpunk .field > input.textsize {
+.cyberpunk .field > input[type=text] {
   width: 6em;
   min-width: 2em;
 }
@@ -270,6 +278,10 @@ details[open] summary ~ * {
 }
 .cyberpunk .field p {
   margin: 0px 3px 0px 3px;
+}
+.cyberpunk .field label.larger {
+  font-size: larger;
+  font-style: italic;
 }
 
 .inactive {
@@ -570,7 +582,6 @@ div.statderive .value.rightborder {
   font-variant: small-caps;
   font-weight: bold;
   border-bottom: 2px solid black;
-  margin: 0px;
 }
 .cyberpunk-card .roll-image {
   margin-right: 5px;

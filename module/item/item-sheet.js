@@ -31,7 +31,12 @@ export class CyberpunkItemSheet extends ItemSheet {
 
   /** @override */
   getData() {
+    // This means the handlebars data and the form edit data actually mirror each other
     const data = super.getData();
+    const actorData = data.data;
+    data.actor = actorData;
+    data.data = actorData.data;
+
     switch (this.item.data.type) {
       case "weapon":
         this._prepareWeapon(data);
@@ -90,5 +95,8 @@ export class CyberpunkItemSheet extends ItemSheet {
 
     // Roll handlers, click handlers, etc. would go here, same as actor sheet.
     html.find(".item-roll").click(this.item.roll.bind(this));
+
+    html.find(".accel").click(() => this.item.accel());
+    html.find(".decel").click(() => this.item.accel(true));
   }
 }

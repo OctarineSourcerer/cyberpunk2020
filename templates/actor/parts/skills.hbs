@@ -12,7 +12,7 @@
 {{!-- Actual skills --}}
 <div class="field-list">
     {{#each skillDisplayList as |skillName|}}
-    {{#with (lookup ../data.data.skills skillName) as |skill|}}
+    {{#with (lookup ../data.skills skillName) as |skill|}}
         {{#unless skill.group}}
         {{> (template "actor/parts/skill") skill=skill name=skillName edit=skillName}}
         {{else}}

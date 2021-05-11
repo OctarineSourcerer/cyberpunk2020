@@ -5,6 +5,7 @@
     {{/systems/cyberpunk2020/templates/item/item-sheet.hbs}}
  --}}
 <form class="cyberpunk {{cssClass}}" autocomplete="off">
+    {{log this}}
     <header class="flexrow nowrap">
         <div class="flexcol item-info">
             <span class="infoline">
@@ -30,7 +31,7 @@
         
         {{!-- Notes Tab --}}
         <div class="tab" data-group="primary" data-tab="notes">
-            {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+            {{editor content=data.notes target="data.notes" button=true owner=owner editable=options.editable}}
         </div>
 
         {{!-- Attributes Tab --}}

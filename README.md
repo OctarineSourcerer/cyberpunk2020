@@ -1,4 +1,6 @@
 # cyberpunk2020 (for FoundryVTT)
+*A note about Foundry 0.8.x. I do plan to migrate this system to it, and have made some progress doing so, but there are (last I tried) some bugs in 0.8.2 that make it impossible for for me to do that work for items. So bear with me when 0.8.3 releases :)*
+
 R. Talsorian Games' [Cyberpunk 2020](https://talsorianstore.com/products/cyberpunk-2020) system, but for FoundryVTT. Time to get chromed, and frag some slags.
 
 ![image](https://user-images.githubusercontent.com/6842867/115111007-0f80f900-9f76-11eb-8b42-7f6b6682a6a3.png) ![image](https://user-images.githubusercontent.com/6842867/115111021-26bfe680-9f76-11eb-93ee-7cf42d44190f.png)
