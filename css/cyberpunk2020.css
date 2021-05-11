@@ -172,6 +172,16 @@
   width: 32px;
 }
 
+.cyberpunk .field .roll-results {
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.cyberpunk .field .roll-results > span.roll-result {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
 }
@@ -572,7 +582,6 @@ div.statderive .value.rightborder {
   font-variant: small-caps;
   font-weight: bold;
   border-bottom: 2px solid black;
-  margin: 0px;
 }
 .cyberpunk-card .roll-image {
   margin-right: 5px;

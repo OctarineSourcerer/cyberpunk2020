@@ -40,12 +40,32 @@ export function rollLocation(targetActor, targetArea) {
     return hitAreaLookup[roll];
 }
 
-export function deepLookup(start, path) {
-    let current = start;
+export function deepLookup(startObject, path) {
+    let current = startObject;
     path.split(".").forEach(segment => {
         current = current[segment];
     });
     return current;
+}
+
+// Like deep-lookup, but... setting instead
+export function deepSet(startObject, path, value, overwrite=true) {
+    let current = startObject;
+    let pathArray = path.split(".");
+    let lastPath = pathArray.pop();
+    pathArray.forEach(segment => {
+        let alreadyThere = current[segment];
+        if(alreadyThere === undefined) {
+            current[segment] = {};
+        }
+        current = current[segment];
+    });
+    let alreadyThere = current[lastPath];
+    if(alreadyThere === undefined || overwrite) {
+        current[lastPath] = value;
+    }
+
+    return startObject;
 }
 
 // Clamp x to be between min and max inclusive

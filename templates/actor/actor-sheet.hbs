@@ -11,7 +11,7 @@
                     <label>{{CPLocal "NPC"}}</label>
                 </div>
             {{/if}}
-            {{> (template "fields/text") label="Role" edit="data.role.value"}}
+            {{> (template "fields/string") label="Role" edit="data.role.value"}}
             {{> (template "fields/number") label="Age" edit="data.age" isNum=true}}
             {{> (template "fields/number") label="Points" edit="data.points"}}
             </div>

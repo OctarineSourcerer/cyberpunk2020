@@ -1,6 +1,6 @@
-import { weaponTypes } from "../lookups.js"
+import { rangedModifiers, weaponTypes } from "../lookups.js"
 import { localize } from "../utils.js"
-import { AttackModifiers } from "../dialog/attack-modifiers.js"
+import { ModifiersDialog } from "../dialog/modifiers.js"
 import { SortOrders } from "./skill-sort.js";
 
 /**
@@ -193,8 +193,10 @@ export class CyberpunkActorSheet extends ActorSheet {
     html.find('.fire-weapon').click(ev => {
       ev.stopPropagation();
       let item = getEventItem(this, ev);
-      let dialog = new AttackModifiers(this.actor, {
-        weapon: item
+      let dialog = new ModifiersDialog(this.actor, {
+        weapon: item,
+        modifierGroups: rangedModifiers(item),
+        onConfirm: (fireOptions) => item.__weaponRoll(fireOptions)
       });
       dialog.render(true);
     });

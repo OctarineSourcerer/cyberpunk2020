@@ -1,27 +1,28 @@
 {{!-- extraClasses: extra classes to apply to the field
-      choices: options for select to choose from
-      localizeData: map from each choice to any localization data for that key --}}
+      choices: [{value: "aaa", localData: {foo: "bar"}, localKey: "A Different Key"}] --}}
 <div class="field{{#if extraClasses}} {{extraClasses}}{{/if}}">
     <label for="{{edit}}">{{CPLocal label}}</label>
     <span class="flex-pad"></span>
     <select name="{{edit}}">
-        {{#if blankDefault}}
-            <option value=" " selected></option>
+        {{#if allowBlank}}
+            <option value=" " {{#if (equals (deepLookup . edit) "")}}selected{{/if}}></option>
         {{/if}}
         {{!-- Any --}}
         {{#each choices as |choice|}}
-            <option value="{{choice}}" {{!-- Select current value --}}
-            {{~#if (equals (deepLookup .. (concat "data." ../edit)) choice)}}
-            {{#unless blankDefault}}selected{{/unless}}
-            {{~/if}}>
+            {{#selectOption choice}}
+                <option value="{{value}}" {{!-- Select current value --}}
+                {{~#if (equals (deepLookup ../.. ../../edit) value)}}
+                selected
+                {{~/if}}>
 
-            {{~#if noTranslateOptions}}
-            {{~choice}} 
-            {{~else if ../localizeData}} {{!-- If we have extra parameters for localization, use those --}}
-            {{~CPLocalParam choice (lookup ../localizeData choice)}}
-            {{~else}} {{!-- Regular localization - just a key --}}
-            {{~CPLocal choice}}
-            {{~/if}}</option>
+                {{~#if ../noTranslateOptions}}
+                    {{~value}} 
+                {{~else if localData}} {{!-- If we have extra parameters for localization, use those --}}
+                    {{~CPLocalParam localKey localData}}
+                {{~else}} {{!-- Regular localization - just a key --}}
+                    {{~CPLocal localKey}}
+                {{~/if}}</option>
+            {{/selectOption}}
         {{/each}}
     </select>
 </div>

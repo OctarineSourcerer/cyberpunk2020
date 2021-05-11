@@ -89,6 +89,32 @@ export function registerHandlebarsHelpers() {
     Handlebars.registerHelper("skillRef", function(skill) {
         return "CYBERPUNK.Skill" + skill;
     });
+
+    // Allows you to use simple ["one", "two"] options for a select, or something like
+    // [{value:"close", localKey:"RangeClose", localData: {range: 50}}, ...]
+    // Translates the simple into the more complex one, really
+    // Both extremes of ease-of-use and granularity :)
+    Handlebars.registerHelper("selectOption", function(choice, options) {
+        let context = {};
+        // We're using the more complex layout of choices. Almost no real translation needed (except for choosing local key)
+        if(choice.value !== undefined) {
+            context = {
+                value: choice.value,
+                localKey: choice.localKey || choice.value,
+                localData: choice.localData
+            }
+        }
+        // Just ["one", "two"] etc
+        else {
+            context = {
+                value: choice,
+                localKey: choice,
+                localData: undefined
+            }
+        }
+
+        return options.fn(context);
+    });
     // Woundstate: 0 for light, 1 for serious, etc
     // It's a little unintuitive, but handlebars loops start at 0, and that's our first would state
     // Damage: How much damage the character has taken. Actor.data.data.damage.

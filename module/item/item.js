@@ -1,6 +1,6 @@
 import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve, attackSkills } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
-import { clamp, localize, rollLocation } from "../utils.js"
+import { clamp, localize, localizeParam, rollLocation } from "../utils.js"
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -141,7 +141,7 @@ export class CyberpunkItem extends Item {
       // If close range, add, else subtract
       let multiplier = 
           (range === ranges.close) ? 1 
-        : (range === ranges.pb) ? 0 
+        : (range === ranges.pointBlank) ? 0 
         : -1;
       terms.push(multiplier * Math.floor(bullets/10))
     }
@@ -177,7 +177,7 @@ export class CyberpunkItem extends Item {
   // Gas? Wind effect. Dear lord.
 
   // Let's just pretend the unusual ranged doesn't exist for now
-  // Look into `attack-modifiers.js` for the modifier obect
+  // Look into `modifiers.js` for the modifier obect
   __weaponRoll(attackMods) {
     let owner = this.actor;
     let data = this.data.data;
@@ -230,7 +230,7 @@ export class CyberpunkItem extends Item {
           range: { range: actualRangeBracket }
         }
       }
-      let roll = new Multiroll(localize("Autofire"));
+      let roll = new Multiroll(localize("Autofire"), `${localize("Range")}: ${localizeParam(attackMods.range, {range: actualRangeBracket})}`);
       roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
       return;
     }
