@@ -7,7 +7,7 @@
   "url": "https://github.com/OctarineSourcerer/cyberpunk2020",
   "version": "0.2.4",
   "minimumCoreVersion": "0.8.0",
-  "compatibleCoreVersion": "0.8.2",
+  "compatibleCoreVersion": "0.8.3",
   "scripts": [],
   "esmodules": [
     "module/cyberpunk2020.js"
@@ -35,7 +35,7 @@
   "dependencies": [],
   "socket": false,
   "manifest": "https://raw.githubusercontent.com/OctarineSourcerer/cyberpunk2020/main/system.json",
-  "download": "https://github.com/OctarineSourcerer/cyberpunk2020/archive/v0.2.4.zip",
+  "download": "https://github.com/OctarineSourcerer/cyberpunk2020/archive/v0.2.5.zip",
   "protected": false,
   "gridDistance": 5,
   "gridUnits": "m"
