@@ -1,7 +1,6 @@
 {{!-- extraClasses: extra classes to apply to the field
       choices: [{value: "aaa", localData: {foo: "bar"}, localKey: "A Different Key"}] --}}
 <div class="field{{#if extraClasses}} {{extraClasses}}{{/if}}">
-    {{log edit}}
     <label for="{{edit}}">{{CPLocal label}}</label>
     <span class="flex-pad"></span>
     <select name="{{edit}}">
@@ -12,7 +11,6 @@
         {{#each choices as |choice|}}
             {{#selectOption choice}}
                 <option value="{{value}}" {{!-- Select current value --}}
-                {{log ../..}}
                 {{~#if (equals (deepLookup ../.. (concat "data."../../edit)) value)}}
                 selected
                 {{~/if}}>
