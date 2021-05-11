@@ -91,7 +91,7 @@ export let fireModes = {
 
 // Be warned that the localisations of these take a range parameter
 export let ranges = {
-    pointBlank: "RangePB",
+    pointBlank: "RangePointBlank",
     close: "RangeClose",
     medium: "RangeMedium",
     long: "RangeLong",
@@ -140,7 +140,7 @@ export function rangedModifiers(weapon) {
             dataPath: "range", 
             defaultValue: "RangeClose",
             choices: [
-                {value:"RangePB", localData: {range: 1}},
+                {value:"RangePointBlank", localData: {range: 1}},
                 {value:"RangeClose", localData: {range: range/4}},
                 {value:"RangeMedium", localData: {range: range/2}},
                 {value:"RangeLong", localData: {range: range}},

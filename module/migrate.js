@@ -16,6 +16,18 @@ export async function migrateWorld() {
             return;
         }
     }
+    for(let item of game.items.entities) {
+        try {
+            const updateData = migrateItemData(item.data);
+            if (!isObjectEmpty(updateData)) {
+                await item.update(updateData);
+            }
+            } catch(err) {
+            err.message = `Failed cyberpunk system migration for Item ${item.name}: ${err.message}`;
+            console.error(err);
+            return;
+        }
+    }
     game.settings.set("cyberpunk", "systemMigrationVersion", game.system.data.version);
     ui.notifications.info(`Cyberpunk2020 System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 }
@@ -76,3 +88,18 @@ export function migrateActorData(actorData) {
     return updateData;
 } 
 
+export function migrateItemData(itemData) {
+    console.log(`Migrating data of ${itemData.name}`);
+
+    // No need to migrate items currently
+    let updateData = {}
+    let data = itemData.data;
+
+    if(itemData.type == "weapon") {
+        if(!itemData.rangeDamages) {
+            console.log(`${itemData.name} has no place to put damages per range. Instantiating those.`);
+            updateData["data.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
+        }
+    }
+    return updateData;
+}

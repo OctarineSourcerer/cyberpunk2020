@@ -1,6 +1,6 @@
 {{!-- Structural Damage Points (SDP is a terrible name) --}}
 <div class="field-list">
-    <div class="flexcol fillwidth" style="grid-column-end: span 2" title="{{CPLocal "SDPFull"}}">
+    <div class="flexcol fillwidth span-two-cells"  title="{{CPLocal "SDPFull"}}">
         <div class="meter-gauge fillwidth">
             <span style="width: calc(100% * ({{data.sdp.value}}/{{data.sdp.max}}));" class="
             {{#if (compare data.sdp.value "<=" (math data.sdp.max "/" 2))}}
@@ -27,7 +27,7 @@
 </div>
 <div class="field-list">
     {{!-- There's a reason I don't use meter here - it's evil to style, and IE doesn't support it. If anyone playing this is using IE, they're already in the dystopia --}}
-    <div class="flexcol fillwidth" style="grid-column-end: span 2">
+    <div class="flexcol fillwidth span-two-cells">
         <div class="meter-gauge fillwidth">
             <span style="width: calc(100% * ({{data.speed.value}}/{{data.speed.max}}));" class="
             {{#if (compare data.speed.value ">" data.speed.maneuver)}}
@@ -70,7 +70,7 @@
 
 {{!-- Fuel --}}
 <div class="field-list">
-    <div class="flexcol fillwidth" style="grid-column-end: span 2">
+    <div class="flexcol fillwidth span-two-cells">
         <div class="meter-gauge fillwidth">
             <span style="width: calc(100% * ({{data.fuel.value}}/{{data.fuel.max}}));" class="
             {{#if (compare data.fuel.value "<" (math data.fuel.max "/" 3))}}
