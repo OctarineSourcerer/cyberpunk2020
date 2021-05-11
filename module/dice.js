@@ -30,7 +30,7 @@ export function classifyRollDice(roll) {
             const isMax = r.result === d.faces;
             const isMin = r.result === 1;
             return {
-              result: cls.getResultLabel(r),
+              result: d.getResultLabel(r),
               classes: [
                 cls.name.toLowerCase(),
                 "d" + d.faces,
@@ -116,13 +116,13 @@ export function classifyRollDice(roll) {
      */
     async execute(speaker, templatePath, extraTemplateData={}) {
         this.rolls.forEach(r => {
-            if (!r._rolled) {
-                r.roll();
+            if (!r.evaluated) {
+                r.evaluate();
             }
         });
         
         const fullTemplateData = mergeObject({
-            user: game.user._id,
+            user: game.user.id,
             title: this.title,
             flavor: this.flavor,
             rolls: this.rolls.map((roll, i) => {
@@ -139,7 +139,7 @@ export function classifyRollDice(roll) {
         }, extraTemplateData || {});
 
         let chatData = {
-            user: game.user._id,
+            user: game.user.id,
             speaker: speaker,
             sound: "sounds/dice.wav",
             content: await renderTemplate(templatePath, fullTemplateData)
