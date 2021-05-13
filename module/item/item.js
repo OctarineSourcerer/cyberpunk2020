@@ -212,7 +212,7 @@ export class CyberpunkItem extends Item {
       let areaDamages = {};
       for(let i = 0; i < roundsHit; i++) {
         let damageRoll = new Roll(data.damage).roll();
-        let location = rollLocation(attackMods.targetActor, attackMods.targetArea); 
+        let location = rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit; 
         if(!areaDamages[location]) {
           areaDamages[location] = [];
         }
@@ -245,7 +245,7 @@ export class CyberpunkItem extends Item {
         roundsHit = new Roll("1d3").roll();
         for(let i = 0; i < roundsHit.total; i++) {
           let damageRoll = new Roll(data.damage).roll();
-          let location = rollLocation(attackMods.targetActor, attackMods.targetArea);
+          let location = rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit;
           if(!areaDamages[location]) {
             areaDamages[location] = [];
           }
@@ -270,13 +270,13 @@ export class CyberpunkItem extends Item {
     }
 
     let damageRoll = new Roll(this.data.data.damage);
-    let locationRoll = new Roll("1d10");
+    let locationRoll = rollLocation(attackMods.targetActor, attackMods.targetArea);
 
     let bigRoll = new Multiroll(this.name, this.data.data.flavor)
       .addRoll(new Roll(`${DC}`), {name: localize("ToHit")})
       .addRoll(attackRoll, {name: localize("Attack")})
       .addRoll(damageRoll, {name: localize("Damage")})
-      .addRoll(locationRoll, {name: localize("Location")});
+      .addRoll(locationRoll.roll, {name: localize("Location"), flavor: locationRoll.areaHit });
 
     bigRoll.defaultExecute({img:this.img});
   }

@@ -1,4 +1,4 @@
-import { defaultAreaLookup } from "./lookups.js"
+import { defaultAreaLookup, defaultHitLocations } from "./lookups.js"
 // Utility methods that don't really belong anywhere else
 
 export function properCase(str) {
@@ -30,14 +30,30 @@ export function shortLocalize(str) {
     let key = "CYBERPUNK."+(makeShort ? str + "Short" : str)
     return game.i18n.localize(key);
 }
-
+/**
+ * 
+ * @param {CyberpunkActor} The actor you're targeting a location on
+ * @param {*} targetArea If you're aiming at a specific area, this is the NAME of that area - eg "Head"
+ * @returns {*} {roll: The rolled diceroll when aiming, areaHit: where actually hit}
+ */
 export function rollLocation(targetActor, targetArea) {
-    if(targetArea) 
-        return targetArea;
+    if(targetArea) {
+        // Area name to number lookup
+        const hitLocs = (!!targetActor) ? targetActor.hitLocations : defaultHitLocations();
+        const targetNum = hitLocs[targetArea].location[0];
+        return {
+            roll: new Roll(`${targetNum}`).roll(),
+            areaHit: targetArea
+        };
+    }
+    // Number to area name lookup
     let hitAreaLookup = (!!targetActor && !!targetActor.hitLocLookup) ? targetActor.hitLocLookup : defaultAreaLookup;
 
-    let roll = new Roll("1d10").roll().total;
-    return hitAreaLookup[roll];
+    let roll = new Roll("1d10").roll();
+    return {
+        roll: roll,
+        areaHit: hitAreaLookup[roll.total]
+    };
 }
 
 export function deepLookup(startObject, path) {

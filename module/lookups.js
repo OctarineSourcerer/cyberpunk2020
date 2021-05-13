@@ -124,6 +124,7 @@ export let defaultAreaLookup = {
     9: "rLeg",
     10: "rLeg"
 }
+export function defaultHitLocations() { return game.system.template.Actor.templates.hitLocations.hitLocations; }
 
 export function rangedModifiers(weapon) {
     let range = weapon.data.data.range || 50;
