@@ -16,7 +16,7 @@ export let attackSkills = {
     "Shotgun": ["Rifle"],
     "Rifle": ["Rifle"],
     "Heavy": ["HeavyWeapons"],
-    "Melee": ["Fencing", "Melee"],
+    "Melee": ["Fencing", "Melee", "Brawling"],
     // No limitations for exotic, go nuts
     "Exotic": []
 }
