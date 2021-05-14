@@ -16,7 +16,8 @@ export let attackSkills = {
     "Shotgun": ["Rifle"],
     "Rifle": ["Rifle"],
     "Heavy": ["HeavyWeapons"],
-    "Melee": ["Fencing", "Melee"],
+    // Trained martial arts get added in item-sheet for now
+    "Melee": ["Fencing", "Melee", "Brawling"],
     // No limitations for exotic, go nuts
     "Exotic": []
 }
@@ -50,10 +51,10 @@ export let rangedAttackTypes = {
     explosiveCharge: "Explocharge"
 }
 
-// This lot's a bit weird, because this is for storing an *item's* attack type, so it doesn't include martial
 export let meleeAttackTypes = {
-    martial: "Martial",
+    melee: "Melee", // Regular melee bonk
     mono: "Mono", // Monokatanas, etc
+    martial: "Martial", // Martial arts! Here, the chosen attack skill does not matter
     cyberbeast: "Beast"
 }
 
@@ -89,6 +90,20 @@ export let fireModes = {
     semiAuto: "SemiAuto"
 }
 
+export let martialActions = {
+    dodge: "Dodge",
+    blockParry: "BlockParry",
+    strike: "Strike",
+    kick: "Kick",
+    disarm: "Disarm",
+    sweepTrip: "SweepTrip",
+    grapple: "Grapple",
+    hold: "Hold",
+    choke: "Choke",
+    throw: "Throw",
+    escape: "Escape"
+}
+
 // Be warned that the localisations of these take a range parameter
 export let ranges = {
     pointBlank: "RangePointBlank",
@@ -111,7 +126,7 @@ rangeResolve[ranges.long] = range => range;
 rangeResolve[ranges.extreme] = range => range*2;
 export { rangeDCs, rangeResolve }
 
-export let defaultTargetLocations = ["Head", "Torso", "lArmShort", "rArmShort", "lLegShort", "rLegShort"]
+export let defaultTargetLocations = ["Head", "Torso", "lArm", "rArm", "lLeg", "rLeg"]
 export let defaultAreaLookup = {
     1: "Head",
     2: "Torso",
@@ -124,6 +139,7 @@ export let defaultAreaLookup = {
     9: "rLeg",
     10: "rLeg"
 }
+export function defaultHitLocations() { return game.system.template.Actor.templates.hitLocations.hitLocations; }
 
 export function rangedModifiers(weapon) {
     let range = weapon.data.data.range || 50;
@@ -173,4 +189,53 @@ export function rangedModifiers(weapon) {
         {localKey:"Running", dataPath:"running",defaultValue: false},
         {localKey:"TurnFace", dataPath:"turningToFace",defaultValue: false}]
     ];
+}
+
+export function martialOptions(actor) {
+    return [
+        [{
+            localKey: "Action",
+            dataPath: "action",
+            choices: [
+                {groupName: "Defensive", choices: [
+                    "Dodge",
+                    "BlockParry"
+                ]},
+                {groupName: "Attacks", choices: [
+                    "Strike",
+                    "Kick",
+                    "Disarm",
+                    "SweepTrip"
+                ]},
+                {groupName: "Grapple", choices: [
+                    "Grapple",
+                    "Hold",
+                    "Choke",
+                    "Throw",
+                    "Escape"
+                ]}
+            ]
+        },
+        {
+            localKey: "MartialArt",
+            dataPath: "martialArt",
+            choices: [{value: "Brawling", localKey: "SkillBrawling"}, ...(actor.trainedMartials().map(martialName => {
+                return {value: martialName, localKey: "Skill"+martialName}
+            }))]
+        }
+    ]]
+}
+
+// Needs to be a function, or every time the modifiers dialog is launched, it'll add "extra mods" on
+export function meleeBonkOptions() {
+    return [[
+        {
+            localKey: "AimingAt",
+            dataPath: "targetArea",
+            defaultValue: "",
+            // TODO: Have this dependent on target
+            choices: defaultTargetLocations,
+            allowBlank: true
+        }
+    ]]
 }

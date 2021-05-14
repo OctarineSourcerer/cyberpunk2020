@@ -1,11 +1,6 @@
 <div class="field skill">
     <label class="skill-roll action" data-skill-name="{{edit}}">
-    {{!-- For groups that specify a translation prefix, eg MartialAikido --}}
-    {{~#if translatePrefix~}}
-        {{localize (skillRef (concat translatePrefix name))}}
-    {{~else~}}
-        {{localize (skillRef name)}}
-    {{~/if~}}
+    {{localize (skillRef name)}}
     </label>
     <span class="flex-pad"></span>
     <span class="chip-toggle">

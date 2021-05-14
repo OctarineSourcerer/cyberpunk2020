@@ -89,7 +89,7 @@ export function registerHandlebarsHelpers() {
         return result;
     });
     Handlebars.registerHelper("skillRef", function(skill) {
-        return "CYBERPUNK.Skill" + skill;
+        return "CYBERPUNK.Skill" + skill.split(".").pop();
     });
 
     // Allows you to use simple ["one", "two"] options for a select, or something like
