@@ -185,7 +185,8 @@ export class CyberpunkActor extends Actor {
     return Object.entries(this.data.data.skills.MartialArts).filter(([_, art]) => art.value > 0).map(([name, _]) => name);
   }
 
-  _realSkillValue(skill) {
+  // TODO: Make this doable with just skill name
+  realSkillValue(skill) {
     let value = skill.value;
     if(skill.chipped && (skill.chipValue != undefined)) {
       value = skill.chipValue;
@@ -196,7 +197,7 @@ export class CyberpunkActor extends Actor {
   rollSkill(skillName) {
     // Is a deep lookup as the nested skills are likely "Martial.Aikido" or along those lines
     let skill = deepLookup(this.data.data.skills, skillName);
-    let value = this._realSkillValue(skill);
+    let value = this.realSkillValue(skill);
 
     let rollParts = [];
     rollParts.push(value);

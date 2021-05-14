@@ -90,6 +90,20 @@ export let fireModes = {
     semiAuto: "SemiAuto"
 }
 
+export let martialActions = {
+    dodge: "Dodge",
+    blockParry: "BlockParry",
+    strike: "Strike",
+    kick: "Kick",
+    disarm: "Disarm",
+    sweepTrip: "SweepTrip",
+    grapple: "Grapple",
+    hold: "Hold",
+    choke: "Choke",
+    throw: "Throw",
+    escape: "Escape"
+}
+
 // Be warned that the localisations of these take a range parameter
 export let ranges = {
     pointBlank: "RangePointBlank",
@@ -205,7 +219,9 @@ export function martialOptions(actor) {
         {
             localKey: "MartialArt",
             dataPath: "martialArt",
-            choices: ["Brawling", ...(actor.trainedMartials())]
+            choices: [{value: "Brawling", localKey: "SkillBrawling"}, ...(actor.trainedMartials().map(martialName => {
+                return {value: martialName, localKey: "Skill"+martialName}
+            }))]
         }
     ]]
 }

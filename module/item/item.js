@@ -1,6 +1,6 @@
-import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve, attackSkills } from "../lookups.js"
+import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve, attackSkills, martialActions } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
-import { clamp, localize, localizeParam, rollLocation } from "../utils.js"
+import { clamp, deepLookup, localize, localizeParam, rollLocation } from "../utils.js"
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -197,10 +197,11 @@ export class CyberpunkItem extends Item {
     let isRanged = this.isRanged();
     if(!isRanged) {
       if(data.attackType === meleeAttackTypes.martial) {
-        ui.notifications.error("The module doesn't quite support martial arts moves yet, but it's close :)");
-        return;
+        return this.__martialBonk(attackMods);
       }
-      return this.__meleeBonk(attackMods);
+      else {
+        return this.__meleeBonk(attackMods);
+      }
     }
 
     // ---- Firemode-specific rolling. I may roll together some common aspects later ----
@@ -236,7 +237,7 @@ export class CyberpunkItem extends Item {
 
     let attackTerms = ["@stats.ref.total"];
     if(data.attackSkill) {
-      attackTerms.push(`@skills.${data.attackSkill}.value`);
+      attackTerms.push(`@attackSkill`);
     }
     if(isRanged) {
       attackTerms.push(...(this.__shootModTerms(attackMods)));
@@ -248,7 +249,10 @@ export class CyberpunkItem extends Item {
       attackTerms.push(data.accuracy);
     }
 
-    return makeD10Roll(attackTerms, this.actor?.data.data).roll();
+    return makeD10Roll(attackTerms, {
+      stats: this.actor.data.data.stats,
+      attackSkill: this.actor.realSkillValue(deepLookup(this.actor.data.data.skills, this.data.data.attackSkill))
+    }).roll();
   }
 
   /**
@@ -361,6 +365,50 @@ export class CyberpunkItem extends Item {
       .addRoll(locationRoll.roll, {name: localize("Location"), flavor: locationRoll.areaHit });
     bigRoll.defaultExecute({img:this.img});
     return bigRoll;
+  }
+  __martialBonk(attackMods) {
+    let actor = this.actor;
+    let action = attackMods.action;
+    let martialArt = attackMods.martialArt;
+
+    // Will be something this line once I add the martial arts bonuses. None for brawling, remember
+    // let martialBonus = this.actor?.data.data.skills.MartialArts[martialArt].bonuses[action];
+    let martialBonus = 0;
+    let attackBonus = actor.realSkillValue(martialArt === "Brawling" ? actor.data.data.skills.Brawling : actor.data.data.skills.MartialArts[martialArt]);
+    let flavor = game.i18n.has(`CYBERPUNK.${action + "Text"}`) ? localize(action + "Text") : "";
+
+    let results = new Multiroll(localizeParam("MartialTitle", {action: localize(action), martialArt: localize("Skill" + martialArt)}), flavor);
+
+    // All martial arts are contested
+    let attackRoll = new Roll(`1d10x10+@attackBonus+@stats.ref.total+@martialBonus`, {
+      stats: this.actor.data.data.stats,
+      attackBonus: attackBonus,
+      martialBonus: martialBonus
+    });
+    results.addRoll(attackRoll, {name: "Attack"});
+    let damageFormula = "";
+
+    // Directly damaging things
+    if(action == martialActions.strike) {
+      damageFormula = "1d3+@martialBonus";
+    }
+    else if(action == martialActions.kick) {
+      damageFormula = "1d6+@martialBonus"; // Seriously, WHY is kicking objectively better?!
+    }
+    else if(action == martialActions.throw){
+      damageFormula = "1d6+@martialBonus";
+    }
+    else if(action == martialActions.choke) {
+      damageFormula = "1d6";
+    }
+
+    if(damageFormula !== "") {
+      let loc = rollLocation(attackMods.targetArea);
+      results.addRoll(loc.roll, {name: localize("Location"), flavor: loc.areaHit});
+      results.addRoll(new Roll(damageFormula, {martialBonus: martialBonus}), {name: localize("Damage")});
+    }
+    results.defaultExecute({img: this.img});
+    return results;
   }
 
   /**
