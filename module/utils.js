@@ -28,7 +28,10 @@ export function shortLocalize(str) {
     }
     let makeShort = game.i18n.translations.CYBERPUNK[str + "Short"] !== undefined;
     let key = "CYBERPUNK."+(makeShort ? str + "Short" : str)
-    return game.i18n.localize(key);
+    if(!game.i18n.has(key))
+        return str;
+    else
+        return game.i18n.localize(key);
 }
 /**
  * 

@@ -112,7 +112,7 @@ rangeResolve[ranges.long] = range => range;
 rangeResolve[ranges.extreme] = range => range*2;
 export { rangeDCs, rangeResolve }
 
-export let defaultTargetLocations = ["Head", "Torso", "lArmShort", "rArmShort", "lLegShort", "rLegShort"]
+export let defaultTargetLocations = ["Head", "Torso", "lArm", "rArm", "lLeg", "rLeg"]
 export let defaultAreaLookup = {
     1: "Head",
     2: "Torso",
