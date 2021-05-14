@@ -56,7 +56,7 @@ export class CyberpunkItemSheet extends ItemSheet {
     data.concealabilities = Object.values(concealability);
     data.availabilities = Object.values(availability);
     data.reliabilities = Object.values(reliability);
-    data.attackSkills = attackSkills[this.item.data.data.weaponType];
+    data.attackSkills = [...attackSkills[this.item.data.data.weaponType], ...(this.actor.trainedMartials().map((name, _) => "MartialArts." + name))];
 
     // TODO: Be not so inefficient for this
     if(!data.attackSkills.length) {

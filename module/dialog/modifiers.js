@@ -49,7 +49,7 @@ import { defaultTargetLocations } from "../lookups.js"
         // You can't refer to indices in FormApplication form entries as far as I know, so let's give them a place to live
         defaultValues: {}
       };
-      if(this.options.extraMod) {
+      if(this.options.extraMod && !this.options.extraModAdded) {
         data.modifierGroups.push([{
           localKey: "ExtraModifiers",
           dataPath: "extraMod",
@@ -59,6 +59,7 @@ import { defaultTargetLocations } from "../lookups.js"
 
       data.modifierGroups.forEach(group => {
         group.forEach(modifier => {
+          // path towards modifier's field template
           modifier.fieldPath = `fields/${modifier.choices ? "select" : typeof(modifier.defaultValue)}`;
           deepSet(data.defaultValues, modifier.dataPath, (modifier.defaultValue !== undefined ? modifier.defaultValue : ""));
         })
@@ -69,7 +70,6 @@ import { defaultTargetLocations } from "../lookups.js"
   
     /* -------------------------------------------- */
   
-    // TODO: Make this use a callback in options instead
     /** @override */
     _updateObject(event, formData) {
       const updateData = formData;

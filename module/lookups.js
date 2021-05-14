@@ -16,6 +16,7 @@ export let attackSkills = {
     "Shotgun": ["Rifle"],
     "Rifle": ["Rifle"],
     "Heavy": ["HeavyWeapons"],
+    // Trained martial arts get added in item-sheet for now
     "Melee": ["Fencing", "Melee", "Brawling"],
     // No limitations for exotic, go nuts
     "Exotic": []
@@ -52,8 +53,9 @@ export let rangedAttackTypes = {
 
 // This lot's a bit weird, because this is for storing an *item's* attack type, so it doesn't include martial
 export let meleeAttackTypes = {
-    martial: "Martial",
+    melee: "Melee", // Regular melee bonk
     mono: "Mono", // Monokatanas, etc
+    martial: "Martial", // Martial arts! Here, the chosen attack skill does not matter
     cyberbeast: "Beast"
 }
 
@@ -174,4 +176,51 @@ export function rangedModifiers(weapon) {
         {localKey:"Running", dataPath:"running",defaultValue: false},
         {localKey:"TurnFace", dataPath:"turningToFace",defaultValue: false}]
     ];
+}
+
+export function martialOptions(actor) {
+    return [
+        [{
+            localKey: "Action",
+            dataPath: "action",
+            choices: [
+                {groupName: "Defensive", choices: [
+                    "Dodge",
+                    "BlockParry"
+                ]},
+                {groupName: "Attacks", choices: [
+                    "Strike",
+                    "Kick",
+                    "Disarm",
+                    "SweepTrip"
+                ]},
+                {groupName: "Grapple", choices: [
+                    "Grapple",
+                    "Hold",
+                    "Choke",
+                    "Throw",
+                    "Escape"
+                ]}
+            ]
+        },
+        {
+            localKey: "MartialArt",
+            dataPath: "martialArt",
+            choices: ["Brawling", ...(actor.trainedMartials().map((name, _) => "Martial" + name))]
+        }
+    ]]
+}
+
+// Needs to be a function, or every time the modifiers dialog is launched, it'll add "extra mods" on
+export function meleeBonkOptions() {
+    return [[
+        {
+            localKey: "AimingAt",
+            dataPath: "targetArea",
+            defaultValue: "",
+            // TODO: Have this dependent on target
+            choices: defaultTargetLocations,
+            allowBlank: true
+        }
+    ]]
 }

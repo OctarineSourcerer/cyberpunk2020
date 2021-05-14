@@ -181,6 +181,10 @@ export class CyberpunkActor extends Actor {
     return this.stunThreshold() + 3;
   }
 
+  trainedMartials() {
+    return Object.entries(this.data.data.skills.MartialArts).filter(([_, art]) => art.value > 0).map(([name, _]) =>  name);
+  }
+
   _realSkillValue(skill) {
     let value = skill.value;
     if(skill.chipped && (skill.chipValue != undefined)) {

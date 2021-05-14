@@ -22,6 +22,11 @@ export class CyberpunkItem extends Item {
     }
   }
 
+  isRanged() {
+    let data = this.data.data;
+    return !(data.weaponType === "Melee" || data.weaponType === "Exotic" && Object.keys(meleeAttackTypes).includes(data.attackType));
+  }
+  
   _prepareWeaponData(data) {
     
   }
@@ -158,6 +163,11 @@ export class CyberpunkItem extends Item {
     return terms;
   }
 
+  // Melee mods are a lot...simpler? I could maybe add swept or something, or opponent dodging. That'll be best once choosing targets is done
+  __meleeModTerms({extraMod}) {
+    return [extraMod];
+  }
+
   // Now, this is gonna have to ask the player for different things depending on the weapon
   // Apply modifiers first? p99 in book
   // Crit fail jam roll
@@ -184,101 +194,27 @@ export class CyberpunkItem extends Item {
     if (owner === null) {
       throw new Error("This item isn't owned by anyone.");
     }
-    let isRanged = this.type !== weaponTypes.melee;
-    let actualRangeBracket = rangeResolve[attackMods.range](data.range);
-
-    let attackTerms = ["@stats.ref.total"];
-    if(data.attackSkill) {
-      attackTerms.push(`@skills.${data.attackSkill}.value`);
+    let isRanged = this.isRanged();
+    if(!isRanged) {
+      if(data.attackType === meleeAttackTypes.martial) {
+        ui.notifications.error("The module doesn't quite support martial arts moves yet, but it's close :)");
+        return;
+      }
+      return this.__meleeBonk(attackMods);
     }
-    if(isRanged) {
-      attackTerms.push(...(this.__shootModTerms(attackMods)));
-    }
-    if(data.accuracy) {
-      attackTerms.push(data.accuracy);
-    }
-
-    let DC = rangeDCs[attackMods.range];
-    let attackRoll = makeD10Roll(attackTerms, owner.data.data).roll();
 
     // ---- Firemode-specific rolling. I may roll together some common aspects later ----
     // Full auto
     if(attackMods.fireMode === fireModes.fullAuto) {
-      let roundsFired = Math.min(data.shotsLeft, data.rof);
-      let roundsHit = Math.min(roundsFired, attackRoll.total - DC);
-      if(roundsHit < 0) {
-        roundsHit = 0;
-      }
-      let areaDamages = {};
-      for(let i = 0; i < roundsHit; i++) {
-        let damageRoll = new Roll(data.damage).roll();
-        let location = rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit; 
-        if(!areaDamages[location]) {
-          areaDamages[location] = [];
-        }
-        areaDamages[location].push(damageRoll);
-      }
-      let templateData = {
-        range: attackMods.range,
-        toHit: DC,
-        attackRoll: attackRoll,
-        fired: roundsFired,
-        hits: roundsHit,
-        hit: roundsHit > 0,
-        areaDamages: areaDamages,
-        locals: {
-          range: { range: actualRangeBracket }
-        }
-      }
-      let roll = new Multiroll(localize("Autofire"), `${localize("Range")}: ${localizeParam(attackMods.range, {range: actualRangeBracket})}`);
-      roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
-      return;
+      return this.__fullAuto(attackMods);
     }
     // Three-round burst. Shares... a lot in common with full auto actually
-    if(attackMods.fireMode === fireModes.threeRoundBurst) {
-      let roundsFired = Math.min(data.shotsLeft, data.rof, 3);
-      let attackHits = attackRoll.total >= DC;
-      let areaDamages = {};
-      let roundsHit;
-      if(attackHits) {
-        // In RAW this is 1d6/2, but this is functionally the same
-        roundsHit = new Roll("1d3").roll();
-        for(let i = 0; i < roundsHit.total; i++) {
-          let damageRoll = new Roll(data.damage).roll();
-          let location = rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit;
-          if(!areaDamages[location]) {
-            areaDamages[location] = [];
-          }
-          areaDamages[location].push(damageRoll);
-        }
-      }
-      let templateData = {
-        range: attackMods.range,
-        toHit: DC,
-        attackRoll: attackRoll,
-        fired: roundsFired,
-        hits: attackHits ? roundsHit.total : 0,
-        hit: attackHits,
-        areaDamages: areaDamages,
-        locals: {
-          range: { range: actualRangeBracket }
-        }
-      }
-      let roll = new Multiroll(localize("ThreeRoundBurst"));
-      roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
-      return;
+    else if(attackMods.fireMode === fireModes.threeRoundBurst) {
+      return this.__threeRoundBurst(attackMods);
     }
-
-    let damageRoll = new Roll(this.data.data.damage);
-    let locationRoll = rollLocation(attackMods.targetActor, attackMods.targetArea);
-
-    let bigRoll = new Multiroll(this.name, this.data.data.flavor)
-      .addRoll(new Roll(`${DC}`), {name: localize("ToHit")})
-      .addRoll(attackRoll, {name: localize("Attack")})
-      .addRoll(damageRoll, {name: localize("Damage")})
-      .addRoll(locationRoll.roll, {name: localize("Location"), flavor: locationRoll.areaHit });
-
-    bigRoll.defaultExecute({img:this.img});
+    else if(attackMods.fireMode === fireModes.semiAuto) {
+      return this.__semiAuto(attackMods);
+    }
   }
 
   __getFireModes() {
@@ -293,6 +229,145 @@ export class CyberpunkItem extends Item {
     return [fireModes.semiAuto];
   }
 
+  // Roll just the attack roll of a weapon, return it
+  attackRoll(attackMods) {
+    let data = this.data.data;
+    let isRanged = this.isRanged();
+
+    let attackTerms = ["@stats.ref.total"];
+    if(data.attackSkill) {
+      attackTerms.push(`@skills.${data.attackSkill}.value`);
+    }
+    if(isRanged) {
+      attackTerms.push(...(this.__shootModTerms(attackMods)));
+    }
+    else {
+      attackTerms.push(...(this.__meleeModTerms(attackMods)));
+    }
+    if(data.accuracy) {
+      attackTerms.push(data.accuracy);
+    }
+
+    return makeD10Roll(attackTerms, this.actor?.data.data).roll();
+  }
+
+  /**
+   * Fire an automatic weapon at full auto
+   * @param {*} attackMods The modifiers for an attack. fireMode, ambush, etc - look in lookups.js for the specification of these
+   * @returns 
+   */
+  __fullAuto(attackMods) {
+    let data = this.data.data;
+    // The kind of distance we're attacking at, so we can display Close: <50m or something like that
+    let actualRangeBracket = rangeResolve[attackMods.range](data.range);
+    let DC = rangeDCs[attackMods.range];
+    let attackRoll = this.attackRoll(attackMods);
+
+    let roundsFired = Math.min(data.shotsLeft, data.rof);
+    let roundsHit = Math.min(roundsFired, attackRoll.total - DC);
+    if(roundsHit < 0) {
+      roundsHit = 0;
+    }
+    let areaDamages = {};
+    // Roll damage for each of the bullets that hit
+    for(let i = 0; i < roundsHit; i++) {
+      let damageRoll = new Roll(data.damage).roll();
+      let location = rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit; 
+      if(!areaDamages[location]) {
+        areaDamages[location] = [];
+      }
+      areaDamages[location].push(damageRoll);
+    }
+    let templateData = {
+      range: attackMods.range,
+      toHit: DC,
+      attackRoll: attackRoll,
+      fired: roundsFired,
+      hits: roundsHit,
+      hit: roundsHit > 0,
+      areaDamages: areaDamages,
+      locals: {
+        range: { range: actualRangeBracket }
+      }
+    }
+    let roll = new Multiroll(localize("Autofire"), `${localize("Range")}: ${localizeParam(attackMods.range, {range: actualRangeBracket})}`);
+    roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
+    return roll;
+  }
+
+  __threeRoundBurst(attackMods) {
+    let data = this.data.data;
+    // The kind of distance we're attacking at, so we can display Close: <50m or something like that
+    let actualRangeBracket = rangeResolve[attackMods.range](data.range);
+    let DC = rangeDCs[attackMods.range];
+    let attackRoll = this.attackRoll(attackMods);
+
+    let roundsFired = Math.min(data.shotsLeft, data.rof, 3);
+    let attackHits = attackRoll.total >= DC;
+    let areaDamages = {};
+    let roundsHit;
+    if(attackHits) {
+      // In RAW this is 1d6/2, but this is functionally the same
+      roundsHit = new Roll("1d3").roll();
+      for(let i = 0; i < roundsHit.total; i++) {
+        let damageRoll = new Roll(data.damage).roll();
+        let location = rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit;
+        if(!areaDamages[location]) {
+          areaDamages[location] = [];
+        }
+        areaDamages[location].push(damageRoll);
+      }
+    }
+    let templateData = {
+      range: attackMods.range,
+      toHit: DC,
+      attackRoll: attackRoll,
+      fired: roundsFired,
+      hits: attackHits ? roundsHit.total : 0,
+      hit: attackHits,
+      areaDamages: areaDamages,
+      locals: {
+        range: { range: actualRangeBracket }
+      }
+    }
+    let roll = new Multiroll(localize("ThreeRoundBurst"));
+    roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
+  }
+
+  __semiAuto(attackMods) {
+    // The range we're shooting at
+    let DC = rangeDCs[attackMods.range];
+    let attackRoll = this.attackRoll(attackMods);
+    let damageRoll = new Roll(this.data.data.damage);
+    let locationRoll = rollLocation(attackMods.targetActor, attackMods.targetArea);
+
+    let bigRoll = new Multiroll(this.name, this.data.data.flavor)
+      .addRoll(new Roll(`${DC}`), {name: localize("ToHit")})
+      .addRoll(attackRoll, {name: localize("Attack")})
+      .addRoll(damageRoll, {name: localize("Damage")})
+      .addRoll(locationRoll.roll, {name: localize("Location"), flavor: locationRoll.areaHit });
+    bigRoll.defaultExecute({img:this.img});
+    return bigRoll;
+  }
+  __meleeBonk(attackMods) {
+    // Just doesn't have a DC - is contested instead
+    let attackRoll = this.attackRoll(attackMods);
+    let damageRoll = new Roll(this.data.data.damage);
+    let locationRoll = rollLocation(attackMods.targetActor, attackMods.targetArea);
+
+    let bigRoll = new Multiroll(this.name, this.data.data.flavor)
+      .addRoll(attackRoll, {name: localize("Attack")})
+      .addRoll(damageRoll, {name: localize("Damage")})
+      .addRoll(locationRoll.roll, {name: localize("Location"), flavor: locationRoll.areaHit });
+    bigRoll.defaultExecute({img:this.img});
+    return bigRoll;
+  }
+
+  /**
+   * Accelerate a vehicle
+   * @param {boolean} decelerate: Are we decelerating instead of accelerating?
+   * @returns 
+   */
   accel(decelerate = false) {
     if(this.type !== "vehicle")
       return;

@@ -1,4 +1,4 @@
-import { rangedModifiers, weaponTypes } from "../lookups.js"
+import { martialOptions, meleeAttackTypes, meleeBonkOptions, rangedModifiers, weaponTypes } from "../lookups.js"
 import { localize } from "../utils.js"
 import { ModifiersDialog } from "../dialog/modifiers.js"
 import { SortOrders } from "./skill-sort.js";
@@ -193,9 +193,23 @@ export class CyberpunkActorSheet extends ActorSheet {
     html.find('.fire-weapon').click(ev => {
       ev.stopPropagation();
       let item = getEventItem(this, ev);
+      let isRanged = item.isRanged();
+
+      let modifierGroups = undefined;
+      let onConfirm = undefined;
+      if(isRanged) {
+        modifierGroups = rangedModifiers(item);
+      }
+      else if (item.data.data.attackType === meleeAttackTypes.martial){
+        modifierGroups = martialOptions(this.actor);
+      }
+      else {
+        modifierGroups = meleeBonkOptions();
+      }
+      
       let dialog = new ModifiersDialog(this.actor, {
         weapon: item,
-        modifierGroups: rangedModifiers(item),
+        modifierGroups: modifierGroups,
         onConfirm: (fireOptions) => item.__weaponRoll(fireOptions)
       });
       dialog.render(true);
