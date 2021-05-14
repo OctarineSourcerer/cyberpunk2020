@@ -49,7 +49,7 @@ import { defaultTargetLocations } from "../lookups.js"
         // You can't refer to indices in FormApplication form entries as far as I know, so let's give them a place to live
         defaultValues: {}
       };
-      if(this.options.extraMod && !this.options.extraModAdded) {
+      if(this.options.extraMod) {
         data.modifierGroups.push([{
           localKey: "ExtraModifiers",
           dataPath: "extraMod",
