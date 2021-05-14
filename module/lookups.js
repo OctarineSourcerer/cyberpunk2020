@@ -51,7 +51,6 @@ export let rangedAttackTypes = {
     explosiveCharge: "Explocharge"
 }
 
-// This lot's a bit weird, because this is for storing an *item's* attack type, so it doesn't include martial
 export let meleeAttackTypes = {
     melee: "Melee", // Regular melee bonk
     mono: "Mono", // Monokatanas, etc
@@ -206,7 +205,7 @@ export function martialOptions(actor) {
         {
             localKey: "MartialArt",
             dataPath: "martialArt",
-            choices: ["Brawling", ...(actor.trainedMartials().map((name, _) => "Martial" + name))]
+            choices: ["Brawling", ...(actor.trainedMartials())]
         }
     ]]
 }

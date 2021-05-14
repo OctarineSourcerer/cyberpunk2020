@@ -182,7 +182,7 @@ export class CyberpunkActor extends Actor {
   }
 
   trainedMartials() {
-    return Object.entries(this.data.data.skills.MartialArts).filter(([_, art]) => art.value > 0).map(([name, _]) =>  name);
+    return Object.entries(this.data.data.skills.MartialArts).filter(([_, art]) => art.value > 0).map(([name, _]) => name);
   }
 
   _realSkillValue(skill) {
@@ -210,13 +210,7 @@ export class CyberpunkActor extends Actor {
 
     // When rolling skill, we use something like MartialArts.Aikido. Dots and translation keys don't play nice, so instead each group uses a translation prefix
     let [parentName, childName] = skillName.split(".");
-    let translationKey = "Skill";
-    if(childName && this.data.data.skills[parentName].translationPrefix) {
-      translationKey += this.data.data.skills[parentName].translationPrefix + childName;
-    }
-    else {
-      translationKey += parentName;
-    }
+    let translationKey = "Skill" + parentName;
     let roll = new Multiroll(localize(translationKey))
       .addRoll(makeD10Roll(rollParts, this.data.data));
 
