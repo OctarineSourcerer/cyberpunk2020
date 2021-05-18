@@ -16,6 +16,13 @@
         "system": "cyberpunk2020",
         "path": "./packs/roll-tables.db",
         "entity": "RollTable"
+      },
+      {
+        "name": "pistols",
+        "label": "Pistols",
+        "path": "./packs/pistols.db",
+        "system": "cyberpunk2020",
+        "entity": "Item"
       }
     ],
     "languages": [
