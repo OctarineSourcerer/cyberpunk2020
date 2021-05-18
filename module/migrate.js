@@ -5,19 +5,27 @@ export async function migrateWorld() {
         return;
     }
     for(let actor of game.actors.entities) {
-        try {
-            const updateData = migrateActorData(actor.data);
-            if (!isObjectEmpty(updateData)) {
-                await actor.update(updateData);
-            }
-            } catch(err) {
-            err.message = `Failed cyberpunk system migration for Actor ${actor.name}: ${err.message}`;
-            console.error(err);
-            return;
-        }
+        migrateEntity(actor, migrateActorData);
+        actor.items.forEach(item => migrateEntity(item, migrateItemData));
+    }
+    for(let item of game.items.entities) {
+        migrateEntity(item, migrateItemData);
     }
     game.settings.set("cyberpunk", "systemMigrationVersion", game.system.data.version);
     ui.notifications.info(`Cyberpunk2020 System Migration to version ${game.system.data.version} completed!`, {permanent: true});
+}
+
+async function migrateEntity(entity, migrateDataFunc) {
+    try {
+        const updateData = migrateDataFunc(entity.data);
+        if (!isObjectEmpty(updateData)) {
+            await entity.update(updateData);
+        }
+    } catch(err) {
+        err.message = `Failed cyberpunk system migration for ${entity.data.type} ${entity.name}: ${err.message}`;
+        console.error(err);
+        return;
+    }
 }
 
 // For now, actors. We can do migrate world as a total of them all. Nabbed framework of code from 5e
@@ -76,3 +84,18 @@ export function migrateActorData(actorData) {
     return updateData;
 } 
 
+export function migrateItemData(itemData) {
+    console.log(`Migrating data of ${itemData.name}`);
+
+    // No need to migrate items currently
+    let updateData = {}
+    let data = itemData.data;
+
+    if(itemData.type == "weapon") {
+        if(!itemData.rangeDamages) {
+            console.log(`${itemData.name} has no place to put damages per range. Instantiating those.`);
+            updateData["data.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
+        }
+    }
+    return updateData;
+}

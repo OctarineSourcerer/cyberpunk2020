@@ -24,7 +24,6 @@
                     {{#if (isObject childSkill)}}
                         {{> (template "actor/parts/skill") skill=childSkill 
                         name=childSkillName 
-                        translatePrefix=skill.translationPrefix
                         edit=(concat skillName "." childSkillName)}}
                     {{/if}}
                 {{/each}}

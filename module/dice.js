@@ -79,12 +79,12 @@ export function classifyRollDice(roll) {
         this.rolls.push(roll);
         // This should be fine if there are no dice - they'll end up as undefined, and that's dealt with in Multiroll
         if(critThreshold === undefined) {
-            let firstDie = roll.terms.find(term => term instanceof Die);
+            let firstDie = roll.terms?.find(term => term instanceof Die);
             if(!!firstDie)
                 critThreshold = (firstDie.number * firstDie.faces);
         }
         if(fumbleThreshold === undefined) {
-            let firstDie = roll.terms.find(term => term instanceof Die);
+            let firstDie = roll.terms?.find(term => term instanceof Die);
             if(!!firstDie)
                 fumbleThreshold = firstDie.number;
         }

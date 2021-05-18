@@ -155,6 +155,10 @@
   width: 100%;
 }
 
+.span-two-cells {
+  grid-column-end: span 2;
+}
+
 .field-list + * {
   margin-top: 10px;
 }
