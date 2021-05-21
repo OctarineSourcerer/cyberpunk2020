@@ -7,6 +7,47 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 import { registerHandlebarsHelpers } from "./handlebars-helpers.js"
 import * as migrations from "./migrate.js";
 import { registerSystemSettings } from "./settings.js"
+import { localize } from "./utils.js";
+
+// TODO: The skills as embedded entities will change in 0.8.x, should write for that
+function makeSkillsCompendium(compendiumName) {
+    const pack = game.packs.get(compendiumName);
+    const templateSkills = Object.entries(game.system.template.Actor.templates.skills.skills);
+
+    // Get newskill data from template entry
+    function skillData(name, skill) {
+        return {name: name, type: "skill", data: {
+            flavor: "",
+            notes: "",
+            value: skill.value || 0,
+            chipValue: skill.chipValue || 0,
+            chipped: skill.chipped,
+            ip: skill.ip,
+            ipMult: 1, // No skills have those currently.
+            isRoleSkill: skill.isSpecial || false,
+        }};
+    }
+
+    templateSkills.forEach(([name, skill]) => {
+        if(!skill.group) {
+            let itemName = localize("Skill"+name);
+            console.log(`Adding ${itemName}`);
+            let data = skillData(itemName, skill);
+            let item = new Item(data);
+            pack.importEntity(item);
+        }
+        else {
+            let parentName = localize("Skill"+name);
+            Object.entries(skill).filter(([name, _]) => name != "group").forEach(([name, skill]) => {
+                let newName = `${parentName}: ${localize("Skill"+name)}`;
+                console.log(`Adding ${newName}`);
+                let data = skillData(newName, skill);
+                let item = new Item(data);
+                pack.importEntity(item);
+            });
+        }
+    });
+}
 
 Hooks.once('init', async function () {
 
@@ -17,7 +58,8 @@ Hooks.once('init', async function () {
             CyberpunkItem,
         },
         // A manual migrateworld.
-        migrateWorld: migrations.migrateWorld
+        migrateWorld: migrations.migrateWorld,
+        makeSkillsPack: makeSkillsCompendium
     };
 
     // Define custom Entity classes
