@@ -129,8 +129,11 @@ export class CyberpunkActor extends Actor {
     // calculate total HL from cyberware
     let hl = 0;
     equippedItems.filter(i => i.type === "cyberware").forEach(cyberware => {
-      hl += (cyberware.humanityLoss) ? cyberware.humanityLoss : 0;
+      const cyber = cyberware.data.data;
+      console.log(cyber);
+      hl += (cyber.humanityLoss) ? cyber.humanityLoss : 0;
     });
+    console.log(equippedItems);
 
     emp.humanity.loss = hl;
     // calculate current Humanity and current EMP
