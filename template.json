@@ -826,7 +826,8 @@
 		"cyberware": {
 			"templates": ["common"],
 			"surgCode": "N",
-			"humanityCost": 0
+			"humanityCost": "1d6",
+			"humanityLoss": 0
 		},
 		"vehicle": {
 			"templates": ["common"],
