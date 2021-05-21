@@ -11,7 +11,7 @@ export class CyberpunkActor extends Actor {
   /** @override */
   static async create(data, options={}) {
     data.token = data.token || {};
-    if ( data.type === "character" ) {
+    if (data.type === "character" ) {
       mergeObject(data.token, {
         vision: true,
         dimSight: 30,
@@ -19,6 +19,11 @@ export class CyberpunkActor extends Actor {
         actorLink: true, // boy do characters need this
         disposition: 1
       }, {overwrite: false});
+    }
+    const createData = data;
+    if (typeof data.data === "undefined") {
+      createData.items = [];
+      createData.items = data.items.concat(await SystemUtils.GetCoreSkills(), await SystemUtils.GetCoreCyberware());
     }
     return super.create(data, options);
   }
