@@ -120,7 +120,7 @@
   max-height: 170px;
   max-width: 20%;
   flex-shrink: 2;
-  width: 20%;
+  width: 15%;
   margin-right: 4px;
 }
 
@@ -378,14 +378,18 @@ details[open] summary ~ * {
   display: flex;
   font-size: smaller;
 }
+.stats > .derivedrow > .field {
+  flex-grow: 1;
+}
 .stats > .derivedrow > .field * {
   font-size: small;
   padding-top: 0px;
   padding-bottom: 0px;
 }
 .stats > .derivedrow > .field input {
-  width: 3em;
+  width: 2em;
   flex-grow: 2;
+  flex-shrink: 2;
 }
 .stats > .derivedrow > .field.ma {
   align-self: flex-end;

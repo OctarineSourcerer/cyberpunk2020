@@ -25,7 +25,8 @@
             <label>{{localize 'CYBERPUNK.Carry'}}</label>
             <input class="value not-editable" value="{{data.stats.bt.carry}}" readonly>
         </div>
-        <div class="field liftstat">
+        {{!-- Tends to be a bigger number than most others --}}
+        <div class="field liftstat" style="flex-grow: 4;">
             <label>{{localize 'CYBERPUNK.Lift'}}</label>
             <input class="rightborder not-editable" value="{{data.stats.bt.lift}}" readonly>
         </div>
@@ -37,8 +38,10 @@
             <label>{{localize 'CYBERPUNK.Run'}}</label>
             <input class="rightborder not-editable" value="{{data.stats.ma.run}}" readonly>
         </div>
-        <div class="field">
-            <label>{{localize 'CYBERPUNK.Humanity'}}</label>
+        {{!-- Humanity is a whole X/Y value, so needs more of the extra space --}}
+        <div class="field" style="flex-grow: 6;">
+            {{!-- This is only short so the sheet isn't distorted --}}
+            <label title={{CPLocal "Humanity"}}>{{CPLocal "HumanityShort"}}</label>
             <input type="text" class="rightborder not-editable" value="{{data.stats.emp.humanity.total}}/{{data.stats.emp.humanity.base}}" readonly>
         </div>
     </div>

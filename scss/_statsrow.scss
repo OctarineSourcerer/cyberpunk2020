@@ -68,14 +68,17 @@ $stats-divider-thickness: 1px;
     font-size: smaller;
 
     >.field {
+        flex-grow: 1;
         * {
             font-size: small;
             padding-top: 0px;
             padding-bottom: 0px;
         }
         input {
-            width: 3em;
+            // We grow from here
+            width: 2em;
             flex-grow: 2;
+            flex-shrink: 2;
         }
 
         &.ma {
