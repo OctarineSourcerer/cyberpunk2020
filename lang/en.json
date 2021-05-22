@@ -252,7 +252,7 @@
     "CYBERPUNK.Cost": "Cost",
     "CYBERPUNK.ItemName": "Item Name",
     "CYBERPUNK.SurgeryCode": "Surgery Code",
-    "CYBERPUNK.HumanityCost": "Humanity Cost",
+    "CYBERPUNK.HumanityCostRoll": "Humanity Cost Roll",
     "CYBERPUNK.HumanityLoss": "Humanity Loss",
     "CYBERPUNK.Weight": "Weight",
     "CYBERPUNK.Encumbrance": "Encumbrance",
