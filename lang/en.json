@@ -29,11 +29,14 @@
     "CYBERPUNK.EmpFull": "Empathy",
     "CYBERPUNK.Special": "Special",
 
-    "CYBERPUNK.BTmod": "BTM",
+    "CYBERPUNK.BTM": "Body Type Modifier",
+    "CYBERPUNK.BTMShort": "BTM",
     "CYBERPUNK.Carry": "Carry",
     "CYBERPUNK.Lift": "Lift",
     "CYBERPUNK.Run": "Run",
     "CYBERPUNK.Leap": "Leap",
+    "CYBERPUNK.Humanity": "Humanity",
+    "CYBERPUNK.HumanityShort": "Hum.",
 
     "CYBERPUNK.Uninjured": "Uninjured",
     "CYBERPUNK.Light": "Light",
@@ -249,7 +252,8 @@
     "CYBERPUNK.Cost": "Cost",
     "CYBERPUNK.ItemName": "Item Name",
     "CYBERPUNK.SurgeryCode": "Surgery Code",
-    "CYBERPUNK.HumanityCost": "Humanity Cost",
+    "CYBERPUNK.HumanityCostRoll": "Humanity Cost Roll",
+    "CYBERPUNK.HumanityLoss": "Humanity Loss",
     "CYBERPUNK.Weight": "Weight",
     "CYBERPUNK.Encumbrance": "Encumbrance",
 
