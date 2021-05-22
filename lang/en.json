@@ -29,7 +29,8 @@
     "CYBERPUNK.EmpFull": "Empathy",
     "CYBERPUNK.Special": "Special",
 
-    "CYBERPUNK.BTmod": "BTM",
+    "CYBERPUNK.BTM": "Body Type Modifier",
+    "CYBERPUNK.BTMShort": "BTM",
     "CYBERPUNK.Carry": "Carry",
     "CYBERPUNK.Lift": "Lift",
     "CYBERPUNK.Run": "Run",
