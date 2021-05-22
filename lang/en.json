@@ -34,6 +34,7 @@
     "CYBERPUNK.Lift": "Lift",
     "CYBERPUNK.Run": "Run",
     "CYBERPUNK.Leap": "Leap",
+    "CYBERPUNK.Humanity": "Humanity",
 
     "CYBERPUNK.Uninjured": "Uninjured",
     "CYBERPUNK.Light": "Light",
@@ -250,6 +251,7 @@
     "CYBERPUNK.ItemName": "Item Name",
     "CYBERPUNK.SurgeryCode": "Surgery Code",
     "CYBERPUNK.HumanityCost": "Humanity Cost",
+    "CYBERPUNK.HumanityLoss": "Humanity Loss",
     "CYBERPUNK.Weight": "Weight",
     "CYBERPUNK.Encumbrance": "Encumbrance",
 
