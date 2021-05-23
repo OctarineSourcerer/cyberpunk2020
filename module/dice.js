@@ -116,7 +116,7 @@ export function classifyRollDice(roll) {
      */
     async execute(speaker, templatePath, extraTemplateData={}) {
         this.rolls.forEach(r => {
-            if (!r.evaluated) {
+            if (!r._evaluated) {
                 r.evaluate();
             }
         });
