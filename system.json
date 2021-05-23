@@ -23,6 +23,13 @@
         "path": "./packs/pistols.db",
         "system": "cyberpunk2020",
         "entity": "Item"
+      },
+      {
+        "name": "rifles",
+        "label": "Rifles",
+        "path": "./packs/rifles.db",
+        "system": "cyberpunk2020",
+        "entity": "Item"
       }
     ],
     "languages": [
