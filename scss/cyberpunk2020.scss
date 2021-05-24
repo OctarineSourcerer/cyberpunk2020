@@ -60,11 +60,10 @@ $field-border-width: 2px;
     }
 
     .meter-gauge {
-        height: 10px;
         border: 2px solid $text-colour;
         > span {
             display: block;
-            height: 100%;
+            min-height: 6px;
             background-color: $meter-colour;
             &.danger {
                 background-color: $meter-danger-colour;
@@ -190,6 +189,10 @@ $field-border-width: 2px;
         width: 100%;
     }
 }
+.span-two-cells {
+    grid-column-end: span 2;
+}
+
 .field-list + * {
     margin-top: 10px;
 }

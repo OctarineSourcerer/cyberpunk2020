@@ -6,6 +6,8 @@ export function registerHandlebarsHelpers() {
     // Short for cyberpunk localize
     Handlebars.registerHelper('CPLocal', function(str, options) {
         let localizeKey = "CYBERPUNK." + str;
+        if(!game.i18n.has(localizeKey)) 
+            return str;
         if(!options || Object.keys(options.hash).length === 0) {
             return game.i18n.localize(localizeKey);
         }
@@ -87,7 +89,7 @@ export function registerHandlebarsHelpers() {
         return result;
     });
     Handlebars.registerHelper("skillRef", function(skill) {
-        return "CYBERPUNK.Skill" + skill;
+        return "CYBERPUNK.Skill" + skill.split(".").pop();
     });
 
     // Allows you to use simple ["one", "two"] options for a select, or something like

@@ -356,7 +356,6 @@
 					},
 					"MartialArts": {
 						"group": true,
-						"translationPrefix": "Martial",
 						"Aikido": {
 							"value": 0,
 							"ip": 0,
@@ -517,7 +516,6 @@
 					},
 					"Pilot": {
 						"group": true,
-						"translationPrefix": "Pilot",
 						"Gyro": {
 							"value": 0,
 							"ip": 0,
@@ -784,6 +782,12 @@
 			"availability": "common",
 			"ammoType": "9mm",
 			"damage": "2d6+1",
+			"rangeDamages": {
+				"pointBlank": "",
+				"close": "",
+				"medium": "",
+				"far": ""
+			},
 			"ap": false,
 			"shotsLeft": 12,
 			"shots": 12,

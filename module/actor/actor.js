@@ -197,7 +197,12 @@ export class CyberpunkActor extends Actor {
     return this.stunThreshold() + 3;
   }
 
-  _realSkillValue(skill) {
+  trainedMartials() {
+    return Object.entries(this.data.data.skills.MartialArts).filter(([_, art]) => art.value > 0).map(([name, _]) => name);
+  }
+
+  // TODO: Make this doable with just skill name
+  realSkillValue(skill) {
     let value = skill.value;
     if(skill.chipped && (skill.chipValue != undefined)) {
       value = skill.chipValue;
@@ -208,7 +213,7 @@ export class CyberpunkActor extends Actor {
   rollSkill(skillName) {
     // Is a deep lookup as the nested skills are likely "Martial.Aikido" or along those lines
     let skill = deepLookup(this.data.data.skills, skillName);
-    let value = this._realSkillValue(skill);
+    let value = this.realSkillValue(skill);
 
     let rollParts = [];
     rollParts.push(value);
@@ -222,13 +227,7 @@ export class CyberpunkActor extends Actor {
 
     // When rolling skill, we use something like MartialArts.Aikido. Dots and translation keys don't play nice, so instead each group uses a translation prefix
     let [parentName, childName] = skillName.split(".");
-    let translationKey = "Skill";
-    if(childName && this.data.data.skills[parentName].translationPrefix) {
-      translationKey += this.data.data.skills[parentName].translationPrefix + childName;
-    }
-    else {
-      translationKey += parentName;
-    }
+    let translationKey = "Skill" + parentName;
     let roll = new Multiroll(localize(translationKey))
       .addRoll(makeD10Roll(rollParts, this.data.data));
 
