@@ -834,6 +834,8 @@
 			"humanityCost": "1d6",
 			"cyberwareType": "",
 			"cyberwareSubtype": "",
+			"numOption": 0,
+			"abbrev": "",
 			"humanityLoss": 0
 		},
 		"vehicle": {
