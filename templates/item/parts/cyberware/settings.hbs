@@ -1,5 +1,10 @@
 <div class="field-list">
+    {{> (template "fields/string") label="CyberwareType" edit="data.cyberwareType"}}
+    {{> (template "fields/string") label="CyberwareSubtype" edit="data.cyberwareSubtype"}}
     {{> (template "fields/string") label="SurgeryCode" edit="data.surgCode"}}
     {{> (template "fields/string") label="HumanityCostRoll" edit="data.humanityCost"}}
     {{> (template "fields/number") label="HumanityLoss" edit="data.humanityLoss"}}
+    {{> (template "fields/string") label="Abbrev" edit="data.abbrev"}}
+    {{> (template "fields/number") label="Slots" edit="data.slots"}}
+    {{> (template "fields/number") label="Spaces" edit="data.spaces"}}
 </div>
