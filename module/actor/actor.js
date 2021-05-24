@@ -130,10 +130,8 @@ export class CyberpunkActor extends Actor {
     let hl = 0;
     equippedItems.filter(i => i.type === "cyberware").forEach(cyberware => {
       const cyber = cyberware.data.data;
-      console.log(cyber);
       hl += (cyber.humanityLoss) ? cyber.humanityLoss : 0;
     });
-    console.log(equippedItems);
 
     emp.humanity.loss = hl;
     // calculate current Humanity and current EMP
