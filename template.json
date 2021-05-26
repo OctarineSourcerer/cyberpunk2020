@@ -778,12 +778,12 @@
 			"name": "New Skill",
 			"flavor": "",
 			"notes": "",
-			"value": 0,
-			"chipValue": 0,
+			"level": 0,
+			"chipLevel": 0,
 			"ip": 0,
-			"ipMult": 1,
-			"chipped": false,
-			"isSpecial": true,
+			"diffMod": 1,
+			"isChipped": false,
+			"isRoleSkill": false,
 			"stat": "cool"
 		},
 		"weapon": {

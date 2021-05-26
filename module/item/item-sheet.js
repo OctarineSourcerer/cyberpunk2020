@@ -1,4 +1,4 @@
-import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills, meleeAttackTypes } from "../lookups.js"
+import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills, meleeAttackTypes, getStatNames } from "../lookups.js"
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -39,10 +39,18 @@ export class CyberpunkItemSheet extends ItemSheet {
     
       case "armor":
         this._prepareArmor(data);
+
+      case "skill":
+        this._prepareSkill(data);
+
       default:
         break;
     }
     return data;
+  }
+
+  _prepareSkill(data) {
+    data.stats = getStatNames();
   }
 
   _prepareWeapon(data) {

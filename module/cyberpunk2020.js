@@ -19,11 +19,11 @@ function makeSkillsCompendium(compendiumName) {
         return {name: name, type: "skill", data: {
             flavor: "",
             notes: "",
-            value: skill.value || 0,
-            chipValue: skill.chipValue || 0,
-            chipped: skill.chipped,
+            level: skill.value || 0,
+            chipLevel: skill.chipValue || 0,
+            isChipped: skill.chipped,
             ip: skill.ip,
-            ipMult: 1, // No skills have those currently.
+            diffMod: 1, // No skills have those currently.
             isRoleSkill: skill.isSpecial || false,
         }};
     }
