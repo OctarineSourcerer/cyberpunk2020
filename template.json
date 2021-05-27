@@ -771,7 +771,8 @@
 				"notes": "",
 				"cost": 0,
 				"weight": 0,
-				"equipped": true
+				"equipped": true,
+				"source": ""
 			}
 		},
 		"weapon": {
@@ -830,7 +831,13 @@
 		"cyberware": {
 			"templates": ["common"],
 			"surgCode": "N",
-			"humanityCost": 0
+			"humanityCost": "1d6",
+			"cyberwareType": "",
+			"cyberwareSubtype": "",
+			"slots": 0,
+			"spaces": 0,
+			"abbrev": "",
+			"humanityLoss": 0
 		},
 		"vehicle": {
 			"templates": ["common"],

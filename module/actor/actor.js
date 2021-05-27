@@ -123,6 +123,20 @@ export class CyberpunkActor extends Actor {
     else if(woundState == 2) {
       woundStat(stats.ref, total => total - 2);
     }
+    // calculate and configure the humanity
+    const emp = stats.emp;
+    emp.humanity = {base: emp.base * 10};
+    // calculate total HL from cyberware
+    let hl = 0;
+    equippedItems.filter(i => i.type === "cyberware").forEach(cyberware => {
+      const cyber = cyberware.data.data;
+      hl += (cyber.humanityLoss) ? cyber.humanityLoss : 0;
+    });
+
+    emp.humanity.loss = hl;
+    // calculate current Humanity and current EMP
+    emp.humanity.total = emp.humanity.base - emp.humanity.loss;
+    emp.total = emp.base + emp.tempMod - Math.floor(emp.humanity.loss/10);
   }
 
   /**

@@ -23,6 +23,27 @@
         "path": "./packs/pistols.db",
         "system": "cyberpunk2020",
         "entity": "Item"
+      },
+      {
+        "name": "rifles",
+        "label": "Rifles",
+        "path": "./packs/rifles.db",
+        "system": "cyberpunk2020",
+        "entity": "Item"
+      },
+      {
+        "name": "cyberware",
+        "label": "Cyberware",
+        "path": "./packs/cyberware.db",
+        "system": "cyberpunk2020",
+        "entity": "Item"
+      },
+      {
+        "name": "chipware",
+        "label": "Chipware",
+        "path": "./packs/chipware.db",
+        "system": "cyberpunk2020",
+        "entity": "Item"
       }
     ],
     "languages": [

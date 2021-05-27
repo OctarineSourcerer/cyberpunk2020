@@ -18,16 +18,8 @@ export async function migrateWorld() {
     for(let item of game.items.entities) {
         migrateEntity(item);
     }
-    for(let compendium of game.packs.entries.filter(pack => !pack.locked)) {
-        console.log(`Updating entities in compendium ${compendium.metadata.label}`);
-        let entityIds = compendium.index.map(e => e._id);
-        entityIds.forEach(async (id) => {
-            let entity = await compendium.getEntity(id);
-            migrateEntity(entity, async (entity, updateData) => {
-                updateData._id = id;
-                await compendium.updateEntity(updateData);
-            });
-        });
+    for(let compendium of game.packs.entries) {
+        migrateCompendium(compendium);
     }
     game.settings.set("cyberpunk", "systemMigrationVersion", game.system.data.version);
     ui.notifications.info(`Cyberpunk2020 System Migration to version ${game.system.data.version} completed!`, {permanent: true});
@@ -115,12 +107,33 @@ export function migrateItemData(itemData) {
     // No need to migrate items currently
     let updateData = {}
     let data = itemData.data;
+    let itemTemplates = game.system.template.Item[itemData.type].templates;
 
+    if(itemTemplates.includes("common") && data.source === undefined) {
+        console.log(`${itemData.name} has no source field. Giving it one.`)
+        updateData["data.source"] = "";
+    }
     if(itemData.type == "weapon") {
-        if(!itemData.rangeDamages) {
+        if(!data.rangeDamages) {
             console.log(`${itemData.name} has no place to put damages per range. Instantiating those.`);
             updateData["data.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
         }
     }
     return updateData;
+}
+
+export function migrateCompendium(compendium) {
+    if(compendium.locked) {
+        console.log(`Not migrating compendium ${compendium.metadata.label}, as it is locked`);
+        return
+    }
+    console.log(`Updating entities in compendium ${compendium.metadata.label}`);
+    let entityIds = compendium.index.map(e => e._id);
+    entityIds.forEach(async (id) => {
+        let entity = await compendium.getEntity(id);
+        migrateEntity(entity, async (entity, updateData) => {
+            updateData._id = id;
+            await compendium.updateEntity(updateData);
+        });
+    });
 }
