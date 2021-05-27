@@ -766,7 +766,6 @@
 		"types": ["skill", "weapon", "armor", "cyberware", "vehicle", "misc"],
 		"templates": {
 			"common": {
-				"name": "Common",
 				"flavor": "",
 				"notes": "",
 				"cost": 0,
@@ -775,7 +774,6 @@
 			}
 		},
 		"skill": {
-			"name": "New Skill",
 			"flavor": "",
 			"notes": "",
 			"level": 0,

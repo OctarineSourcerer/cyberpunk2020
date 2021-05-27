@@ -33,14 +33,18 @@
             {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
         </div>
 
+{{log item}}
         {{!-- Attributes Tab --}}
         <div class="tab" data-group="primary" data-tab="settings">
             
             {{#unless (equals item.type "misc")}}
             {{> (varTemplate "item/parts/[VAR]/settings.hbs" item.type)}}
             {{/unless}}
-            {{!-- All items have these settings --}}
+            {{!-- Not all items have common settings --}}
+            {{!-- May be worth instead other settings things just including the template on their own --}}
+            {{#if (hasProperty item.data "equipped")}}
             {{> (varTemplate "item/parts/misc/settings.hbs" item.type)}}
+            {{/if}}
         </div>
     </section>
 </form>

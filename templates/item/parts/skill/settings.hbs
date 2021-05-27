@@ -8,8 +8,8 @@
     {{>(template "fields/boolean") label="Chipped" edit="data.chipped"}}
     {{>(template "fields/number") label="LevelChipped" edit="data.chipLevel"}}
 </div>
-
+{{log this}}
 <div class="field-list">
-    {{>(template "fields/select" label="Stat" edit="data.stat" choices=stats noTranslateOptions=true)}}
-    {{>(template "fields/boolean" label="IsRoleSkill" edit="data.isRoleSkill")}}
+    {{>(template "fields/select") label="Stat" edit="data.stat" choices=stats noTranslateOptions=true}}
+    {{>(template "fields/boolean") label="IsRoleSkill" edit="data.isRoleSkill"}}
 </div>
