@@ -8,7 +8,7 @@
     "CYBERPUNK.TabCombat": "Combat",
     "CYBERPUNK.TabCyber": "Cyberware",
     "CYBERPUNK.TabGear": "Gear",
-    "CYBERPUNK.TotalCost": "Total Cost",
+    "CYBERPUNK.TotalEBVal": "Total EB Value",
 
     "CYBERPUNK.Int": "INT",
     "CYBERPUNK.IntFull": "Intelligence",
@@ -258,7 +258,7 @@
     "CYBERPUNK.HumanityCostRoll": "Humanity Cost Roll",
     "CYBERPUNK.HumanityLoss": "Humanity Loss",
     "CYBERPUNK.HumanityLossAbbrev": "HL",
-    "CYBERPUNK.HumanityLossTotalAbbrev": "Total HL",
+    "CYBERPUNK.HumanityLossTotalAbbrev": "Total Hum. Loss",
     "CYBERPUNK.Abbrev": "Abbrev.",
     "CYBERPUNK.Slots": "Number of slots",
     "CYBERPUNK.Spaces": "Spaces",
