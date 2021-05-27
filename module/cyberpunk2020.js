@@ -25,6 +25,7 @@ function makeSkillsCompendium(compendiumName) {
             ip: skill.ip,
             diffMod: 1, // No skills have those currently.
             isRoleSkill: skill.isSpecial || false,
+            stat: skill.stat
         }};
     }
 
