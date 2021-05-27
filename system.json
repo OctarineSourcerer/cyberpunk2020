@@ -114,6 +114,20 @@
         "path": "./packs/tools.db",
         "system": "cyberpunk2020",
         "entity": "Item"
+      },
+      {
+        "name": "rentalandservices",
+        "label": "Rental&Services",
+        "path": "./packs/rentalandservices.db",
+        "system": "cyberpunk2020",
+        "entity": "Item"
+      },
+      {
+        "name": "sellthedead",
+        "label": "SellTheDead",
+        "path": "./packs/sellthedead.db",
+        "system": "cyberpunk2020",
+        "entity": "Item"
       }
     ],
     "languages": [
