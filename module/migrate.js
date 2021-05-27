@@ -116,8 +116,11 @@ export function migrateItemData(itemData) {
     let updateData = {}
     let data = itemData.data;
 
+    if(data.source === undefined) {
+        updateData["data.source"] = "";
+    }
     if(itemData.type == "weapon") {
-        if(!itemData.rangeDamages) {
+        if(!data.rangeDamages) {
             console.log(`${itemData.name} has no place to put damages per range. Instantiating those.`);
             updateData["data.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
         }
