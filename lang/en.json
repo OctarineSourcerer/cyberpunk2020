@@ -49,6 +49,13 @@
     "CYBERPUNK.Name": "Name",
     "CYBERPUNK.Stat": "Stat",
 
+    "CYBERPUNK.Level": "Value",
+    "CYBERPUNK.LevelChipped": "Value (chipped)",
+    "CYBERPUNK.ImprovementPoints": "Improvement Points",
+    "CYBERPUNK.DifficultyMod": "Difficulty Mod",
+    "CYBERPUNK.ImprovementPointsShort": "IP",
+    "CYBERPUNK.IsRoleSkill": "Is Role Skill",
+    "CYBERPUNK.Chipped": "Chipped",
     "CYBERPUNK.SkillAuthority": "Authority",
     "CYBERPUNK.SkillCharismaticLeadership": "Charismatic Leadership",
     "CYBERPUNK.SkillCombatSense": "Combat Sense",

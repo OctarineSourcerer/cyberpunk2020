@@ -1,6 +1,6 @@
 import { makeD10Roll, Multiroll } from "../dice.js";
 import { SortOrders, sortSkills } from "./skill-sort.js";
-import { properCase, localize, deepLookup } from "../utils.js"
+import { properCase, localize, deepLookup, getDefaultSkills } from "../utils.js"
 
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
@@ -20,10 +20,12 @@ export class CyberpunkActor extends Actor {
         disposition: 1
       }, {overwrite: false});
     }
+
+    // Thanks to cpRED for showing me how to sort this out!
     const createData = data;
     if (typeof data.data === "undefined") {
       createData.items = [];
-      createData.items = data.items.concat(await SystemUtils.GetCoreSkills(), await SystemUtils.GetCoreCyberware());
+      createData.items = data.items.concat(await getDefaultSkills());
     }
     return super.create(data, options);
   }
