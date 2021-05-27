@@ -18,7 +18,7 @@
             <div class="field-image" style="background-image: url({{cyber.img}})" data-item-id="{{cyber._id}}"></div>
             <label>{{cyber.name}}</label>
             <span class="flex-pad"></span>
-            <span>HL: {{cyber.data.humanityLoss}}</span>
+            <span>{{CPLocal "HumanityLossAbbrev"}}: {{cyber.data.humanityLoss}}</span>
             {{#if cyber.data.cyberwareType}}
             <span>
                 <p class="inactive">{{cyber.data.cyberwareType}}
