@@ -98,3 +98,22 @@ export async function getDefaultSkills() {
     const content = await pack.getContent();
     return content;
 }
+
+// Yet to be fully tested
+async function changePackItems(packName, dataDeltaF) {
+    let pack = game.packs.get(packName);
+    let ids = pack.index.map(e => e._id);
+    ids.forEach(async id => {
+        let entity = await pack.getEntity(id);
+        let oldData = entity.data;
+        let dataChange = dataDeltaF(oldData);
+        dataChange._id = id;
+        console.log(`update data: ${dataChange}`);
+        await pack.updateEntity(dataChange); 
+    });
+}
+
+async function exampleCompendiumData(packName) {
+    let pack = game.packs.get(packName);
+    return await pack.getEntity(pack.index[0].data);
+}
