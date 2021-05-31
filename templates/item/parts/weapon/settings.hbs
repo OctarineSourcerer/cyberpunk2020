@@ -26,7 +26,8 @@
 
     {{> (template "fields/select") label="Availability" edit="data.availability" choices=availabilities}}
 
-    <details class="field span-two-cells">
+    {{!-- Something like this will end up being in there, but it's not currently ready for release --}}
+    {{!-- <details class="field span-two-cells">
         <summary>{{localize "Advanced"}}</summary>
         <div class="field-list">
             {{> (template "fields/string") label=(concat (localize "DamageShort") "(" (localize "PointBlank") ")")  edit="data.rangeDamages.pointBlank"}}
@@ -35,5 +36,5 @@
             {{> (template "fields/string") label=(concat (localize "DamageShort") "(" (localize "Far") ")")  edit="data.rangeDamages.far"}}
             {{> (template "fields/string") label=(concat (localize "DamageShort") "(" (localize "Extreme") ")")  edit="data.rangeDamages.extreme"}}
         </div>
-    </details>
+    </details> --}}
 </div>
