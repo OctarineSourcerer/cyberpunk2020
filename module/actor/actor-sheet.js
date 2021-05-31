@@ -88,32 +88,18 @@ export class CyberpunkActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareCharacterItems(sheetData) {
-    const actorData = sheetData.actor;
+    // We have to look the actor up, because the sheet's actor doesn't have itemTypes on, and I'd rather not reclassify all the skills etc when there's literally 100 of them
+    let id = sheetData.actor._id;
+    let sortedItems = game.actors.get(id).itemTypes;
 
-    // Initialize containers.
-    const misc = [];
-    const weapons = [];
-    const armor = [];
-    const cyberware = [];
-
-    const targetLookup = {
-      "weapon": weapons,
-      "armor": armor,
-      "cyberware": cyberware,
-      "misc": misc
-    };
-
-    actorData.items.forEach(item => {
-      (targetLookup[item.type] || misc).push(item);
-    });
-
-    actorData.data.gear = {
-      weapons: weapons,
-      armor: armor,
-      cyberware: cyberware,
-      misc: misc,
-      all: [weapons],
-      cyberCost: cyberware.reduce((a,b) => a + b.data.cost, 0)
+    // Does this copy need to be done with itemTypes being a thing?
+    sheetData.gear = {
+      weapons: sortedItems.weapon,
+      armor: sortedItems.armor,
+      cyberware: sortedItems.cyberware,
+      misc: sortedItems.misc,
+      all: [sortedItems.weapons],
+      cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.data.cost, 0)
     };
 
   }

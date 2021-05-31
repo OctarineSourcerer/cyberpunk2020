@@ -13,7 +13,7 @@
     <div class="inactive">Drag items here to add (for now)</div>
 {{/if}}
 <div class="field-list">
-    {{#each data.gear.weapons as |weapon|}}
+    {{#each gear.weapons as |weapon|}}
         <div class="field gear item-edit" data-item-id="{{weapon._id}}">
             <div class="field-image roll fire-weapon action" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
             <label>{{weapon.name}}</label>
@@ -24,7 +24,7 @@
             <span class="item-delete" data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
-    {{#each data.gear.armor}}
+    {{#each gear.armor}}
         <div class="field gear item-edit" data-item-id="{{_id}}">
             <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
             <label class="name">{{name}}</label>
@@ -35,7 +35,7 @@
             <span class="item-delete" data-item-id="{{_id}}">X</span>
         </div>
     {{/each}}
-    {{#each data.gear.misc}}
+    {{#each gear.misc}}
         <div class="field gear item-edit" data-item-id="{{_id}}">
             <div class="field-image item-roll action" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
             <label class="name">{{name}}</label>
