@@ -1,0 +1,33 @@
+<div class="field-list no-wrap">
+    <div class="field">
+        <label for="totalCyberCost">{{CPLocal "TotalEBVal"}}</label>
+        <input name="totalCyberCost" type="number" value="{{data.gear.cyberCost}}">
+    </div>
+    <div class="field">
+        <label for="data.stats.emp.humanity.loss">{{CPLocal "HumanityLoss"}}</label>
+        <input class="not-editable" name="data.stats.emp.humanity.loss" type="number" value="{{data.stats.emp.humanity.loss}}" readonly>
+    </div>
+</div>
+
+{{#if (equals items.length 0)}}
+    <div class="inactive">Drag items here to add (for now)</div>
+{{/if}}
+<div class="field-list">
+    {{#each data.gear.cyberware as |cyber|}}
+        <div class="field gear item-edit full-width" data-item-id="{{cyber._id}}">
+            <div class="field-image" style="background-image: url({{cyber.img}})" data-item-id="{{cyber._id}}"></div>
+            <label>{{cyber.name}}</label>
+            <span class="flex-pad"></span>
+            <span>{{CPLocal "HumanityLossAbbrev"}}: {{cyber.data.humanityLoss}}</span>
+            {{#if cyber.data.cyberwareType}}
+            <span>
+                <p class="inactive">{{cyber.data.cyberwareType}}
+                    {{~#if cyber.data.cyberwareSubtype~}}
+                    ({{cyber.data.cyberwareSubtype}})
+                    {{~/if}}</p>
+            </span>
+            {{/if}}
+            <span class="item-delete" data-item-id="{{_id}}">X</span>
+        </div>
+    {{/each}}
+</div>

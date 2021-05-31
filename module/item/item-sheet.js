@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills, meleeAttackTypes, getStatNames } from "../lookups.js"
+=======
+import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills, meleeAttackTypes } from "../lookups.js";
+import { formulaHasDice } from "../dice.js";
+>>>>>>> develop
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -106,5 +111,26 @@ export class CyberpunkItemSheet extends ItemSheet {
 
     html.find(".accel").click(() => this.item.accel());
     html.find(".decel").click(() => this.item.accel(true));
+    
+    // roll for humanity loss on cyberware 
+    html.find('.humanity-cost-roll').click( ev => {
+      ev.stopPropagation();
+      let itemId = this.object.data._id;
+      const cyber = this.actor.getOwnedItem(itemId);
+      const hc = cyber.data.data.humanityCost;
+      let loss = 0;
+      // determine if humanity cost is a number or dice
+      if (formulaHasDice(hc)) {
+        // roll the humanity cost
+        let r = new Roll(hc).roll();
+        loss = r.total ? r.total : 0;
+      } else {
+        const num = Number(hc);
+        loss = (isNaN(num)) ? 0 : num;
+      }
+      cyber.data.data.humanityLoss = loss;
+      cyber.sheet.render(true);
+    });
   }
+  
 }

@@ -770,7 +770,8 @@
 				"notes": "",
 				"cost": 0,
 				"weight": 0,
-				"equipped": true
+				"equipped": true,
+				"source": ""
 			}
 		},
 		"skill": {
@@ -841,6 +842,11 @@
 			"templates": ["common"],
 			"surgCode": "N",
 			"humanityCost": "1d6",
+			"cyberwareType": "",
+			"cyberwareSubtype": "",
+			"slots": 0,
+			"spaces": 0,
+			"abbrev": "",
 			"humanityLoss": 0
 		},
 		"vehicle": {
