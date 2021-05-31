@@ -99,7 +99,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       cyberware: sortedItems.cyberware,
       misc: sortedItems.misc,
       all: [sortedItems.weapons],
-      cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.data.cost, 0)
+      cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.data.data.cost, 0)
     };
 
   }
