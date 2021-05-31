@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills, meleeAttackTypes, getStatNames } from "../lookups.js"
-=======
-import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills, meleeAttackTypes } from "../lookups.js";
+import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills, meleeAttackTypes, getStatNames } from "../lookups.js";
 import { formulaHasDice } from "../dice.js";
->>>>>>> develop
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
