@@ -10,8 +10,9 @@ import { registerSystemSettings } from "./settings.js"
 import { localize } from "./utils.js";
 
 // TODO: The skills as embedded entities will change in 0.8.x, should write for that
-function makeSkillsCompendium(compendiumName) {
-    const pack = game.packs.get(compendiumName);
+function makeSkillsCompendium(skillsName, roleName) {
+    const defaultSkills = game.packs.get(skillsName);
+    const roleSkills = game.packs.get(roleName);
     const templateSkills = Object.entries(game.system.template.Actor.templates.skills.skills);
 
     // Get newskill data from template entry
@@ -30,12 +31,13 @@ function makeSkillsCompendium(compendiumName) {
     }
 
     templateSkills.forEach(([name, skill]) => {
+        let destPack = skill?.isSpecial ? roleSkills : defaultSkills;
         if(!skill.group) {
             let itemName = localize("Skill"+name);
             console.log(`Adding ${itemName}`);
             let data = skillData(itemName, skill);
             let item = new Item(data);
-            pack.importEntity(item);
+            destPack.importEntity(item);
         }
         else {
             let parentName = localize("Skill"+name);
@@ -44,7 +46,7 @@ function makeSkillsCompendium(compendiumName) {
                 console.log(`Adding ${newName}`);
                 let data = skillData(newName, skill);
                 let item = new Item(data);
-                pack.importEntity(item);
+                destPack.importEntity(item);
             });
         }
     });

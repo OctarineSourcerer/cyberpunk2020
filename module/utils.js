@@ -93,7 +93,7 @@ export function clamp(x, min, max) {
 }
 
 export async function getDefaultSkills() {
-    const pack = game.packs.get("cyberpunk2020.skills");
+    const pack = game.packs.get("cyberpunk2020.defaultskills");
     // put into basickSkills array
     const content = await pack.getContent();
     return content;
