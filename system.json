@@ -18,6 +18,20 @@
         "entity": "RollTable"
       },
       {
+        "name": "default-skills",
+        "label": "Default Skills",
+        "system": "cyberpunk2020",
+        "path": "./packs/default-skills.db",
+        "entity": "Item"
+      },
+      {
+        "name": "role-skills",
+        "label": "Role Skills",
+        "system": "cyberpunk2020",
+        "path": "./packs/role-skills.db",
+        "entity": "Item"
+      },
+      {
         "name": "pistols",
         "label": "Pistols",
         "path": "./packs/pistols.db",
