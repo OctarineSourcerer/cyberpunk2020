@@ -2,7 +2,8 @@
     <label class="skill-roll action" data-skill-name="{{edit}}">
     {{localize (skillRef name)}}
     </label>
-    <span class="flex-pad"></span>
+    {{!-- TODO: Add data-item-id for this to work --}}
+    <span class="flex-pad item-edit"></span>
     <span class="chip-toggle">
         <label>
             <div class="{{#if skill.chipped}}inactive{{/if}}">

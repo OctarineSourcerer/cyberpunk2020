@@ -46,6 +46,12 @@ export class CyberpunkActorSheet extends ActorSheet {
     return data;
   }
 
+  // These are technically items, but are in their own method as they should be more easily referable
+  // Data is TOP-level data
+  _prepareSkills(data) {
+    // I'm essentially debating whether to make a Skills block in data or what we give to rolls
+  }
+
   // Handle searching skills
   _filterSkills(data) {
     if(data.data.transient.skillFilter == null) {
