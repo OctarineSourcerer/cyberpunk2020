@@ -27,14 +27,18 @@ export class CyberpunkActorSheet extends ActorSheet {
   /** @override */
   getData() {
     // the data THIS returns is only available in this class and the template
-    const data = super.getData();
+    const sheetData = super.getData();
+    const actorData = sheetData.data;
+    sheetData.actor = actorData;
+    sheetData.data = actorData.data;
 
     // Prepare items.
     if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
       // Give space for temporary stuff. Delete on sheet close?
-      if(data.data.transient == null) {
-        data.data.transient = { skillFilter: "" };
+      if(sheetData.data.transient == null) {
+        sheetData.data.transient = { skillFilter: "" };
       }
+<<<<<<< HEAD
       this._prepareCharacterItems(data);
       this._addWoundTrack(data);
       data.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
@@ -42,9 +46,17 @@ export class CyberpunkActorSheet extends ActorSheet {
       // Sorted list of all skill items, only searches when needed
       data.skillDisplayList = this._filterSkills(data);
       data.weaponTypes = weaponTypes;
+=======
+      this._prepareCharacterItems(sheetData);
+      this._addWoundTrack(sheetData);
+      sheetData.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
+      sheetData.skillsSortChoices = Object.keys(SortOrders);
+      sheetData.skillDisplayList = this._filterSkills(sheetData);
+      sheetData.weaponTypes = weaponTypes;
+>>>>>>> foundry0.8
     }
 
-    return data;
+    return sheetData;
   }
 
   // These are technically items, but are in their own method as they should be more easily referable
