@@ -66,8 +66,8 @@ Hooks.once('init', async function () {
     };
 
     // Define custom Entity classes
-    CONFIG.Actor.entityClass = CyberpunkActor;
-    CONFIG.Item.entityClass = CyberpunkItem;
+    CONFIG.Actor.documentClass = CyberpunkActor;
+    CONFIG.Item.documentClass = CyberpunkItem;
 
     // Register sheets, unregister original core sheets
     Actors.unregisterSheet("core", ActorSheet);

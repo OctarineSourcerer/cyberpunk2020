@@ -1,9 +1,9 @@
 <div class="field skill">
-    <label class="skill-roll action" data-skill-id="{{skill._id}}">{{skill.name}}</label>
+    <label class="skill-roll action" data-skill-id="{{skill.id}}">{{skill.name}}</label>
     {{!-- TODO: Add data-item-id for this to work --}}
-    <span class="flex-pad item-edit" data-item-id="{{skill._id}}"></span>
+    <span class="flex-pad item-edit" data-item-id="{{skill.id}}"></span>
     {{#with skill.data.data}}
-        <span class="chip-toggle" data-skill-id="{{../skill._id}}">
+        <span class="chip-toggle" data-skill-id="{{../skill.id}}">
             <label>
                 <div>
                     {{~#if isRoleSkill~}}
@@ -14,10 +14,10 @@
                     {{~/if~}}
                 </div>
                 <div class="chip-icon {{#unless isChipped}}inactive{{/unless}}"></div>
-                <input type="checkbox" data-skill-id="{{../skill._id}}" {{checked isChipped}}/>
+                <input type="checkbox" data-skill-id="{{../skill.id}}" {{checked isChipped}}/>
             </label>
         </span>
 
-        <input type="number" data-skill-id="{{../skill._id}}" class="skill-level smallnumber nogrow" value="{{#if isChipped}}{{chipLevel}}{{else}}{{level}}{{/if}}"/>
+        <input type="number" data-skill-id="{{../skill.id}}" class="skill-level smallnumber nogrow" value="{{#if isChipped}}{{chipLevel}}{{else}}{{level}}{{/if}}"/>
     {{/with}}
 </div>

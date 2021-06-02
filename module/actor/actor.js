@@ -9,7 +9,7 @@ import { properCase, localize, deepLookup, getDefaultSkills } from "../utils.js"
 export class CyberpunkActor extends Actor {
 
   /** @override */
-  static async create(data, options={}) {
+  async _preCreate(data, options={}) {
     data.token = data.token || {};
     if (data.type === "character" ) {
       mergeObject(data.token, {
@@ -20,14 +20,15 @@ export class CyberpunkActor extends Actor {
         disposition: 1
       }, {overwrite: false});
     }
-
-    // Thanks to cpRED for showing me how to sort this out!
+    
     const createData = data;
+    // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
+    const skillsData = (await getDefaultSkills()).map(item => item.toObject());
     if (typeof data.data === "undefined") {
       createData.items = [];
-      createData.items = data.items.concat(await getDefaultSkills());
+      createData.items = data.items.concat(skillsData);
     }
-    return super.create(data, options);
+    this.data.update(createData);
   }
 
   /**

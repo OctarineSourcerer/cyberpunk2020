@@ -128,11 +128,11 @@ export function migrateCompendium(compendium) {
         return
     }
     console.log(`Updating entities in compendium ${compendium.metadata.label}`);
-    let entityIds = compendium.index.map(e => e._id);
+    let entityIds = compendium.index.map(e => e.id);
     entityIds.forEach(async (id) => {
         let entity = await compendium.getEntity(id);
         migrateEntity(entity, async (entity, updateData) => {
-            updateData._id = id;
+            updateData.id = id;
             await compendium.updateEntity(updateData);
         });
     });
