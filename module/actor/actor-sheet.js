@@ -38,22 +38,12 @@ export class CyberpunkActorSheet extends ActorSheet {
       if(sheetData.data.transient == null) {
         sheetData.data.transient = { skillFilter: "" };
       }
-<<<<<<< HEAD
-      this._prepareCharacterItems(data);
-      this._addWoundTrack(data);
-      data.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
-      data.skillsSortChoices = Object.keys(SortOrders);
-      // Sorted list of all skill items, only searches when needed
-      data.skillDisplayList = this._filterSkills(data);
-      data.weaponTypes = weaponTypes;
-=======
       this._prepareCharacterItems(sheetData);
       this._addWoundTrack(sheetData);
       sheetData.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
       sheetData.skillsSortChoices = Object.keys(SortOrders);
       sheetData.skillDisplayList = this._filterSkills(sheetData);
       sheetData.weaponTypes = weaponTypes;
->>>>>>> foundry0.8
     }
 
     return sheetData;
