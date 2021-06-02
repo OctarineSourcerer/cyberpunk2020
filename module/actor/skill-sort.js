@@ -4,8 +4,7 @@ export { SortOrders, sortSkills }
 // Order to consider stats in for skills. Lower values come first.
 const statOrder = {
     // Don't have one of these be 0, that's falsy
-    "special": 1,
-    "group": 2,
+    "role": 1,
     "int": 3,
     "ref": 4,
     "tech": 5,
@@ -23,27 +22,24 @@ const SortOrders = {
 }
 
 // To sort hierarchically, break ties (0) with the return of another comparison function
-function byName([a_name, a_val], [b_name, b_val]) {
-    if(a_name > b_name) {
+function byName(skillA, skillB) {
+    if(skillA.name > skillB.name) {
         return 1;
     }
-    else if(a_name === b_name) {
+    else if(skillA.name === skillB.name) {
         return 0;
     }
     return -1;
 }
 
-function byStat([a_name, a_val], [b_name, b_val]) {
-    let searchRank = (skillValue) => {
-        if(skillValue.group) {
-            return statOrder["group"];
-        }
-        if(skillValue.isSpecial)
-            return statOrder["special"];
-        return statOrder[skillValue.stat];
+function byStat(skillA, skillB) {
+    let searchRank = (skill) => {
+        if(skill.data.data.isRoleSkill)
+            return statOrder["role"];
+        return statOrder[skill.data.data.stat];
     };
-    let order_a = searchRank(a_val) || -1;
-    let order_b = searchRank(b_val) || -1;
+    let order_a = searchRank(skillA) || -1;
+    let order_b = searchRank(skillB) || -1;
     if(order_a > order_b) {
         return 1;
     }
@@ -60,7 +56,6 @@ function sortSkills(skills, sortOrder) {
         console.warn("No sort order given. Returning original skill list");
         return skills;
     }
-    let unsorted = Object.entries(skills);
-    let sorted = unsorted.sort(sortOrder);
-    return sorted.map(([key, value]) => key);
+    let unsorted = skills.slice();
+    return unsorted.sort(sortOrder);
 }

@@ -151,10 +151,12 @@ export class CyberpunkActor extends Actor {
    * @param {string} sortOrder The order to sort skills by. Options are in skill-sort.js's SortOrders. "stat" or "alph". Default "alph".
    */
   sortSkills(sortOrder) {
+    let allSkills = game.actors.get(this.id).itemTypes.skill;
     sortOrder = sortOrder || Object.keys(SortOrders)[0];
     console.log(`Sorting skills by ${sortOrder}`);
-    let sortedView = sortSkills(this.data.data.skills, SortOrders[sortOrder]);
+    let sortedView = sortSkills(allSkills, SortOrders[sortOrder]);
 
+    console.log(sortedView);
     // Technically UI info, but we don't wanna calc every time we open a sheet so store it in the actor.
     this.update({
       "data.sortedSkillView": sortedView,
@@ -208,32 +210,31 @@ export class CyberpunkActor extends Actor {
 
   // TODO: Make this doable with just skill name
   realSkillValue(skill) {
-    let value = skill.value;
-    if(skill.chipped && (skill.chipValue != undefined)) {
-      value = skill.chipValue;
+    let data = skill.data.data;
+    let value = data.level;
+    if(data.isChipped) {
+      value = skill.chipValue || 0;
     }
     return value;
   }
 
-  rollSkill(skillName) {
-    // Is a deep lookup as the nested skills are likely "Martial.Aikido" or along those lines
-    let skill = deepLookup(this.data.data.skills, skillName);
+  rollSkill(skillId) {
+    let skill = this.items.get(skillId);
+    let skillData = skill.data.data;
     let value = this.realSkillValue(skill);
 
     let rollParts = [];
     rollParts.push(value);
 
-    if(skill.stat) {
-      rollParts.push(`@stats.${skill.stat}.total`);
+    if(skillData.stat) {
+      rollParts.push(`@stats.${skillData.stat}.total`);
     }
-    if(skillName === "AwarenessNotice") {
+    // TODO: When using localized names for skills, this will not work
+    if(skill.name === "Awareness/Notice") {
       rollParts.push("@skills.CombatSense.value");
     }
 
-    // When rolling skill, we use something like MartialArts.Aikido. Dots and translation keys don't play nice, so instead each group uses a translation prefix
-    let [parentName, childName] = skillName.split(".");
-    let translationKey = "Skill" + parentName;
-    let roll = new Multiroll(localize(translationKey))
+    let roll = new Multiroll(skill.name)
       .addRoll(makeD10Roll(rollParts, this.data.data));
 
     roll.defaultExecute();

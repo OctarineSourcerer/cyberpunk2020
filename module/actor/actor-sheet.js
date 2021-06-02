@@ -39,6 +39,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       this._addWoundTrack(data);
       data.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
       data.skillsSortChoices = Object.keys(SortOrders);
+      // Sorted list of all skill items, only searches when needed
       data.skillDisplayList = this._filterSkills(data);
       data.weaponTypes = weaponTypes;
     }
@@ -53,12 +54,14 @@ export class CyberpunkActorSheet extends ActorSheet {
   }
 
   // Handle searching skills
-  _filterSkills(data) {
-    if(data.data.transient.skillFilter == null) {
-      data.data.transient.skillFilter = "";
+  _filterSkills(sheetData) {
+    let id = sheetData.actor._id;
+
+    if(sheetData.data.transient.skillFilter == null) {
+      sheetData.data.transient.skillFilter = "";
     }
-    let upperSearch = data.data.transient.skillFilter.toUpperCase();
-    const fullList = data.data.sortedSkillView || Object.keys(data.data.skills);
+    let upperSearch = sheetData.data.transient.skillFilter.toUpperCase();
+    const fullList = sheetData.data.sortedSkillView || game.actors.get(id).itemTypes.skill;
 
     let listToFilter = fullList;
 
@@ -68,12 +71,13 @@ export class CyberpunkActorSheet extends ActorSheet {
     }
     else {
       // If we searched previously and the old search had results, we can filter those instead of the whole lot
-      if(data.data.transient.oldSearch != null 
-        && data.skillDisplayList != null
+      if(sheetData.data.transient.oldSearch != null 
+        && sheetData.skillDisplayList != null
         && upperSearch.startsWith(oldSearch)) {
-        listToFilter = data.skillDisplayList; 
+        listToFilter = sheetData.skillDisplayList; 
       }
-      return listToFilter.filter(skillName => {
+      return listToFilter.filter(skill => {
+        let skillName = skill.name;
         return skillName.toUpperCase().includes(upperSearch);
       });
     }
@@ -134,13 +138,29 @@ export class CyberpunkActorSheet extends ActorSheet {
       let statName = ev.currentTarget.dataset.statName;
       this.actor.rollStat(statName);
     });
+    // TODO: Refactor these skill interactivity stuff into their own methods
+    html.find(".skill-level").click((event) => event.target.select()).change((event) => {
+      let skill = this.actor.items.get(event.currentTarget.dataset.skillId);
+      let target = skill.data.data.isChipped ? "data.chipLevel" : "data.level";
+      let updateData = {_id: skill.id};
+      updateData[target] = parseInt(event.target.value, 10);
+      this.actor.updateOwnedItem(updateData);
+    });
+    html.find(".chip-toggle").click(ev => {
+      let skill = this.actor.items.get(ev.currentTarget.dataset.skillId);
+      this.actor.updateOwnedItem({
+        _id: skill.id,
+        "data.isChipped": !skill.data.data.isChipped
+      });
+    });
+
     html.find(".skill-sort > select").change(ev => {
       let sort = ev.currentTarget.value;
       this.actor.sortSkills(sort);
     });
     html.find(".skill-roll").click(ev => {
-      let skillName = ev.currentTarget.dataset.skillName;
-      this.actor.rollSkill(skillName);
+      let id = ev.currentTarget.dataset.skillId;
+      this.actor.rollSkill(id);
     });
     html.find(".roll-initiative").click(ev => {
       this.actor.rollInitiative();
