@@ -73,12 +73,9 @@ export class CyberpunkItemSheet extends ItemSheet {
     data.attackSkills = [...attackSkills[this.item.data.data.weaponType], ...(this.actor?.trainedMartials() || [])];
 
     // TODO: Be not so inefficient for this
-    if(!data.attackSkills.length) {
+    if(!data.attackSkills.length && this.actor) {
       if(this.actor) {
-        data.attackSkills = Object.keys(this.actor.data.data.skills).sort();
-      }
-      else {
-        data.attackSkills = Object.keys(game.system.template.Actor.templates.skills.skills).sort();
+        data.attackSkills = this.actor.itemTypes.skill.map(skill => skill.name).sort();
       }
     }
   }

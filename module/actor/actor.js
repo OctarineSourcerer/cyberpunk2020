@@ -1,5 +1,5 @@
 import { makeD10Roll, Multiroll } from "../dice.js";
-import { SortOrders, sortSkills } from "./skill-sort.js";
+import { SortOrders, sortSkills, byName } from "./skill-sort.js";
 import { properCase, localize, deepLookup, getDefaultSkills } from "../utils.js"
 
 /**
@@ -23,10 +23,11 @@ export class CyberpunkActor extends Actor {
     
     const createData = data;
     // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
-    const skillsData = (await getDefaultSkills()).map(item => item.toObject());
+    const skillsData = (await getDefaultSkills()).sort(byName).map(item => item.toObject());
     if (typeof data.data === "undefined") {
       createData.items = [];
       createData.items = data.items.concat(skillsData);
+      createData["data.skillsSortedBy"] = "Name";
     }
     this.data.update(createData);
   }
@@ -149,18 +150,18 @@ export class CyberpunkActor extends Actor {
 
   /**
    * 
-   * @param {string} sortOrder The order to sort skills by. Options are in skill-sort.js's SortOrders. "stat" or "alph". Default "alph".
+   * @param {string} sortOrder The order to sort skills by. Options are in skill-sort.js's SortOrders. "Name" or "Stat". Default "Name".
    */
-  sortSkills(sortOrder = "alph") {
-    let allSkills = game.actors.get(this.id).itemTypes.skill;
+  sortSkills(sortOrder = "Name") {
+    let allSkills = this.itemTypes.skill;
     sortOrder = sortOrder || Object.keys(SortOrders)[0];
     console.log(`Sorting skills by ${sortOrder}`);
-    let sortedView = sortSkills(allSkills, SortOrders[sortOrder]);
+    let sortedView = sortSkills(allSkills, SortOrders[sortOrder]).map(skill => skill.id);
 
-    console.log(sortedView);
     // Technically UI info, but we don't wanna calc every time we open a sheet so store it in the actor.
-    this.data.update({
-      "data.sortedSkillView": sortedView,
+    this.update({
+      // Why is it that when storing Item: {data: {data: {innerdata}}}, it comes out as {data: {innerdata}}
+      "data.sortedSkillIDs": sortedView,
       "data.skillsSortedBy": sortOrder
     });
   }
@@ -205,12 +206,13 @@ export class CyberpunkActor extends Actor {
     return this.stunThreshold() + 3;
   }
 
+  // TODO: Again, will not work if skill names localized
   trainedMartials() {
-    return Object.entries(this.data.data.skills.MartialArts).filter(([_, art]) => art.value > 0).map(([name, _]) => name);
+    return this.itemTypes.skill.filter(skill => skill.name.startsWith("Martial")).filter(([_, art]) => art.value > 0).map(([name, _]) => name);
   }
 
   // TODO: Make this doable with just skill name
-  realSkillValue(skill) {
+  static realSkillValue(skill) {
     let data = skill.data.data;
     let value = data.level;
     if(data.isChipped) {
@@ -219,10 +221,14 @@ export class CyberpunkActor extends Actor {
     return value;
   }
 
+  getSkillVal(skillName) {
+    return CyberpunkActor.realSkillValue(this.itemTypes.skill.find(skill => skill.name === skillName));
+  }
+
   rollSkill(skillId) {
     let skill = this.items.get(skillId);
     let skillData = skill.data.data;
-    let value = this.realSkillValue(skill);
+    let value = CyberpunkActor.realSkillValue(skill);
 
     let rollParts = [];
     rollParts.push(value);

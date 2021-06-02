@@ -90,11 +90,11 @@ Hooks.once('init', async function () {
 Hooks.once("ready", function() {
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
-    const lastMigrateVersion = game.settings.get("cyberpunk", "systemMigrationVersion");
+    const lastMigrateVersion = game.settings.get("cyberpunk2020", "systemMigrationVersion");
     // First time we're readying, no migrate needed
     if(!lastMigrateVersion) {
         console.log("CYBERPUNK: First run? No migration needed here");
-        game.settings.set("cyberpunk", "systemMigrationVersion", game.system.data.version);
+        game.settings.set("cyberpunk2020", "systemMigrationVersion", game.system.data.version);
         return;
     }
     // The version migrations need to begin - if you make a change from 0.1 to 0.2, this should be 0.2

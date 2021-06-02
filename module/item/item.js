@@ -1,6 +1,7 @@
 import { weaponTypes, rangedAttackTypes, meleeAttackTypes, fireModes, ranges, rangeDCs, rangeResolve, attackSkills, martialActions } from "../lookups.js"
 import { Multiroll, makeD10Roll }  from "../dice.js"
 import { clamp, deepLookup, localize, localizeParam, rollLocation } from "../utils.js"
+import { CyberpunkActor } from "../actor/actor.js";
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -251,7 +252,7 @@ export class CyberpunkItem extends Item {
 
     return makeD10Roll(attackTerms, {
       stats: this.actor.data.data.stats,
-      attackSkill: this.actor.realSkillValue(deepLookup(this.actor.data.data.skills, this.data.data.attackSkill))
+      attackSkill: this.actor.getSkillVal(deepLookup(this.data.data.attackSkill))
     }).roll();
   }
 
@@ -372,9 +373,9 @@ export class CyberpunkItem extends Item {
     let martialArt = attackMods.martialArt;
 
     // Will be something this line once I add the martial arts bonuses. None for brawling, remember
-    // let martialBonus = this.actor?.data.data.skills.MartialArts[martialArt].bonuses[action];
+    // let martialBonus = this.actor?.skills.MartialArts[martialArt].bonuses[action];
     let martialBonus = 0;
-    let attackBonus = actor.realSkillValue(martialArt === "Brawling" ? actor.data.data.skills.Brawling : actor.data.data.skills.MartialArts[martialArt]);
+    let attackBonus = actor.getSkillVal(martialArt);
     let flavor = game.i18n.has(`CYBERPUNK.${action + "Text"}`) ? localize(action + "Text") : "";
 
     let results = new Multiroll(localizeParam("MartialTitle", {action: localize(action), martialArt: localize("Skill" + martialArt)}), flavor);

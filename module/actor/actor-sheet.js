@@ -34,37 +34,24 @@ export class CyberpunkActorSheet extends ActorSheet {
 
     // Prepare items.
     if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
-      // Give space for temporary stuff. Delete on sheet close?
+      this._prepareCharacterItems(sheetData);
+      this._addWoundTrack(sheetData);
+      // Reset search text if it's null or we just rendered for the first time
       if(sheetData.data.transient == null) {
         sheetData.data.transient = { skillFilter: "" };
       }
-      this._prepareCharacterItems(sheetData);
-      this._addWoundTrack(sheetData);
-      sheetData.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
-      sheetData.skillsSortChoices = Object.keys(SortOrders);
-      sheetData.skillDisplayList = this._filterSkills(sheetData);
+      this._prepareSkills(sheetData);
+      // All this extra lookup is cos we can't store a list of entities in data :(
       sheetData.weaponTypes = weaponTypes;
     }
-
     return sheetData;
   }
 
-  /**
-   * 
-   * @param {string} sortOrder The order to sort skills by. Options are in skill-sort.js's SortOrders. "stat" or "alph". Default "alph".
-   */
-   _sortSkills(sortOrder) {
-    let allSkills = game.actors.get(this.id).itemTypes.skill;
-    sortOrder = sortOrder || Object.keys(SortOrders)[0];
-    console.log(`Sorting skills by ${sortOrder}`);
-    let sortedView = sortSkills(allSkills, SortOrders[sortOrder]);
-
-    console.log(sortedView);
-    // Technically UI info, but we don't wanna calc every time we open a sheet so store it in the actor.
-    this.update({
-      "data.sortedSkillView": sortedView,
-      "data.skillsSortedBy": sortOrder
-    });
+  _prepareSkills(sheetData) {
+    sheetData.skillsSort = this.actor.data.skillsSortedBy || "Name";
+    sheetData.skillsSortChoices = Object.keys(SortOrders);
+    sheetData.filteredSkillIDs = this._filterSkills(sheetData);
+    sheetData.skillDisplayList = sheetData.filteredSkillIDs.map(id => this.actor.items.get(id));
   }
 
   // Handle searching skills
@@ -75,9 +62,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       sheetData.data.transient.skillFilter = "";
     }
     let upperSearch = sheetData.data.transient.skillFilter.toUpperCase();
-    const fullList = sheetData.data.sortedSkillView || game.actors.get(id).itemTypes.skill;
-
-    let listToFilter = fullList;
+    let listToFilter = sheetData.data.sortedSkillIDs || game.actors.get(id).itemTypes.skill.map(skill => skill.id);
 
     // Only filter if we need to
     if(upperSearch === "") {
@@ -86,12 +71,12 @@ export class CyberpunkActorSheet extends ActorSheet {
     else {
       // If we searched previously and the old search had results, we can filter those instead of the whole lot
       if(sheetData.data.transient.oldSearch != null 
-        && sheetData.skillDisplayList != null
+        && sheetData.filteredSkillIDs != null
         && upperSearch.startsWith(oldSearch)) {
-        listToFilter = sheetData.skillDisplayList; 
+        listToFilter = sheetData.filteredSkillIDs; 
       }
-      return listToFilter.filter(skill => {
-        let skillName = skill.name;
+      return listToFilter.filter(id => {
+        let skillName = this.actor.items.get(id).name;
         return skillName.toUpperCase().includes(upperSearch);
       });
     }
@@ -158,14 +143,15 @@ export class CyberpunkActorSheet extends ActorSheet {
       let target = skill.data.data.isChipped ? "data.chipLevel" : "data.level";
       let updateData = {_id: skill.id};
       updateData[target] = parseInt(event.target.value, 10);
-      this.actor.updateOwnedItem(updateData);
+      this.actor.updateEmbeddedDocuments("Item", [updateData]);
+      // Mild hack to make sheet refresh and re-sort: the ability to do that should just be put in 
     });
     html.find(".chip-toggle").click(ev => {
       let skill = this.actor.items.get(ev.currentTarget.dataset.skillId);
-      this.actor.updateOwnedItem({
+      this.actor.updateEmbeddedDocuments("Item", [{
         _id: skill.id,
         "data.isChipped": !skill.data.data.isChipped
-      });
+      }]);
     });
 
     html.find(".skill-sort > select").change(ev => {
