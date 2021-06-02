@@ -151,7 +151,7 @@ export class CyberpunkActor extends Actor {
    * 
    * @param {string} sortOrder The order to sort skills by. Options are in skill-sort.js's SortOrders. "stat" or "alph". Default "alph".
    */
-  sortSkills(sortOrder) {
+  sortSkills(sortOrder = "alph") {
     let allSkills = game.actors.get(this.id).itemTypes.skill;
     sortOrder = sortOrder || Object.keys(SortOrders)[0];
     console.log(`Sorting skills by ${sortOrder}`);
@@ -159,7 +159,7 @@ export class CyberpunkActor extends Actor {
 
     console.log(sortedView);
     // Technically UI info, but we don't wanna calc every time we open a sheet so store it in the actor.
-    this.update({
+    this.data.update({
       "data.sortedSkillView": sortedView,
       "data.skillsSortedBy": sortOrder
     });

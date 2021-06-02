@@ -49,10 +49,22 @@ export class CyberpunkActorSheet extends ActorSheet {
     return sheetData;
   }
 
-  // These are technically items, but are in their own method as they should be more easily referable
-  // Data is TOP-level data
-  _prepareSkills(data) {
-    // I'm essentially debating whether to make a Skills block in data or what we give to rolls
+  /**
+   * 
+   * @param {string} sortOrder The order to sort skills by. Options are in skill-sort.js's SortOrders. "stat" or "alph". Default "alph".
+   */
+   _sortSkills(sortOrder) {
+    let allSkills = game.actors.get(this.id).itemTypes.skill;
+    sortOrder = sortOrder || Object.keys(SortOrders)[0];
+    console.log(`Sorting skills by ${sortOrder}`);
+    let sortedView = sortSkills(allSkills, SortOrders[sortOrder]);
+
+    console.log(sortedView);
+    // Technically UI info, but we don't wanna calc every time we open a sheet so store it in the actor.
+    this.update({
+      "data.sortedSkillView": sortedView,
+      "data.skillsSortedBy": sortOrder
+    });
   }
 
   // Handle searching skills
