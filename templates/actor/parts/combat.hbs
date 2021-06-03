@@ -32,7 +32,8 @@
                 <label class="name">{{name}}</label>
                 <span class="flex-pad"></span>
                 <span>
-                    <label class="inactive">{{armorSummary data.coverage}}</label>
+                    {{log this}}
+                    <label class="inactive">{{armorSummary data.data.coverage}}</label>
                 </span>
             </div>
             {{/each}}

@@ -36,9 +36,18 @@ export class CyberpunkItem extends Item {
     // If new owner and armor covers this many areas or more, delete armor coverage areas the owner does not have
     const COVERAGE_CLEANSE_THRESHOLD = 20;
 
+    let skipReform = false;
+    // Sometimes this just BREAKS
+    try {
+      let idCheck = this.actor.id;
+    }
+    catch {
+      skipReform = true;
+    }
+
     let nowOwned = !data.lastOwnerId && this.actor;
     let changedHands = data.lastOwnerId !== undefined && data.lastOwnerId != this.actor.id;
-    if(nowOwned || changedHands) {
+    if(!skipReform && (nowOwned || changedHands)) {
       data.lastOwnerId = this.actor.id;
       let ownerLocs = this.actor.data.data.hitLocations;
       

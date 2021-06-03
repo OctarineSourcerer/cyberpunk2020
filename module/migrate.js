@@ -20,10 +20,10 @@ export async function migrateWorld() {
     for(let item of game.items.entities) {
         migrateEntity(item);
     }
-    for(let compendium of game.packs.entries) {
+    for(let compendium of game.packs.contents) {
         migrateCompendium(compendium);
     }
-    game.settings.set("cyberpunk", "systemMigrationVersion", game.system.data.version);
+    game.settings.set("cyberpunk2020", "systemMigrationVersion", game.system.data.version);
     ui.notifications.info(`Cyberpunk2020 System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 }
 
@@ -89,12 +89,14 @@ export async function migrateActorData(actorData) {
             .filter((name, skillData) => skillData.isSpecial && (skillData.value > 0 || skillData.chipValue > 0))
             .map(convertOldSkill);
     }
-    if(!actorData.itemTypes.skill) {
+    let skills = actorData.items.filter(item => item.type === "skill");
+    if(skills.length === 0) {
         console.log(`${actorData.name} does not have item skills. Adding the core ones!`);
         console.log(`Also adding any role skills you had points in: ${roleSkills.join(", ") || "None"}`);
         const skillsData = (await getDefaultSkills()).map(item => item.toObject());
-        const currentItems = actorData.items;
+        const currentItems = Array.from(actorData.items).map(item => item.toObject());
         updateData["items"] = currentItems.concat(skillsData, roleSkills);
+        console.log(updateData["items"]);
     }
 
     return updateData;
