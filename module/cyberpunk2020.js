@@ -16,26 +16,14 @@ function makeSkillsCompendium(skillsName, roleName) {
     const templateSkills = Object.entries(game.system.template.Actor.templates.skills.skills);
 
     // Get newskill data from template entry
-    function skillData(name, skill) {
-        return {name: name, type: "skill", data: {
-            flavor: "",
-            notes: "",
-            level: skill.value || 0,
-            chipLevel: skill.chipValue || 0,
-            isChipped: skill.chipped,
-            ip: skill.ip,
-            diffMod: 1, // No skills have those currently.
-            isRoleSkill: skill.isSpecial || false,
-            stat: skill.stat
-        }};
-    }
+    
 
     templateSkills.forEach(([name, skill]) => {
         let destPack = skill?.isSpecial ? roleSkills : defaultSkills;
         if(!skill.group) {
             let itemName = localize("Skill"+name);
             console.log(`Adding ${itemName}`);
-            let data = skillData(itemName, skill);
+            let data = migrations.convertOldSkill(itemName, skill);
             let item = new Item(data);
             destPack.importEntity(item);
         }

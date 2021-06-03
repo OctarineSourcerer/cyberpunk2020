@@ -1,3 +1,5 @@
+import { getDefaultSkills } from "./utils.js";
+
 const updateFuncs = {
     "Actor": migrateActorData,
     "Item": migrateItemData
@@ -52,7 +54,7 @@ async function migrateEntity(entity, withUpdataData = defaultDataUse) {
  * @param {object} actorData    The actor data object to update
  * @return {Object}         The updateData to apply
  */
-export function migrateActorData(actorData) {
+export async function migrateActorData(actorData) {
     console.log(`Migrating data of ${actorData.name}`);
 
     // No need to migrate items currently
@@ -75,28 +77,25 @@ export function migrateActorData(actorData) {
             updateData[`token.dimSight`] = 30;
         }
     }
-    for (const skillName in data.skills) {
-        let skill = data.skills[skillName];
-        if(skill.stat == "body") {
-            console.log(`Changing ${skillName}'s stat from body to bt (is body type because cyberpunk)`);
-            updateData[`data.skills.${skillName}.stat`] = "bt";
-        }
-        // Check for skills that have their stat as special, then assign the new stat from the template
-        if(skill.stat == "special") {
-            let actualStat = game.system.template.Actor.templates.skills.skills[skillName].stat;
-            console.log(`Changing ${skillName}'s stat from special to ${actualStat}, and marking it as a special skill`);
-            updateData[`data.skills.${skillName}.stat`] = actualStat;
-            updateData[`data.skills.${skillName}.isSpecial`] = true;
-        }
-        if(skillName == "Expert" || skillName == "Language") {
-            if(!skill.group) {
-                // No translation prefix as these will be custom entries
-                console.log(`Making Expert and Language into groups instead of empty entries.`);
-                updateData[`data.skills.${skillName}.group`] = true;
-            }
-        }
-    }
+    
+    // role skills that we keep
+    let roleSkills = [];
+    if(data.skills) {
+        console.log(`${actorData.name} still uses non-item skills. Removing.`);
+        updateData["data.skills"] = undefined;
 
+        // Catalogue role skills with points in them to 
+        roleSkills = Object.entries(data.skills)
+            .filter((name, skillData) => skillData.isSpecial && (skillData.value > 0 || skillData.chipValue > 0))
+            .map(convertOldSkill);
+    }
+    if(!actorData.itemTypes.skill) {
+        console.log(`${actorData.name} does not have item skills. Adding the core ones!`);
+        console.log(`Also adding any role skills you had points in: ${roleSkills.join(", ") || "None"}`);
+        const skillsData = (await getDefaultSkills()).map(item => item.toObject());
+        const currentItems = actorData.items;
+        updateData["items"] = currentItems.concat(skillsData, roleSkills);
+    }
 
     return updateData;
 } 
@@ -136,4 +135,19 @@ export function migrateCompendium(compendium) {
             await compendium.updateEntity(updateData);
         });
     });
+}
+
+// Take an old hardcoded skill and translate it into data for a skill item
+export function convertOldSkill(name, skillData) {
+    return {name: name, type: "skill", data: {
+        flavor: "",
+        notes: "",
+        level: skillData.value || 0,
+        chipLevel: skillData.chipValue || 0,
+        isChipped: skillData.chipped,
+        ip: skillData.ip,
+        diffMod: 1, // No skills have those currently.
+        isRoleSkill: skillData.isSpecial || false,
+        stat: skillData.stat
+    }};
 }
