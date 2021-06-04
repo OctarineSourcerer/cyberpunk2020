@@ -1,5 +1,5 @@
 import { martialOptions, meleeAttackTypes, meleeBonkOptions, rangedModifiers, weaponTypes } from "../lookups.js"
-import { localize } from "../utils.js"
+import { localize, localizeParam } from "../utils.js"
 import { ModifiersDialog } from "../dialog/modifiers.js"
 import { SortOrders } from "./skill-sort.js";
 
@@ -125,7 +125,25 @@ export class CyberpunkActorSheet extends ActorSheet {
       let itemId = ev.currentTarget.dataset.itemId;
       return sheet.actor.items.get(itemId);
     }
-    
+    // TODO: Check if shift is held to skip dialog?
+    function deleteItemDialog(ev) {
+      ev.stopPropagation();
+      let item = getEventItem(this, ev);
+      let confirmDialog = new Dialog({
+        title: localize("ItemDeleteConfirmTitle"),
+        content: `<p>${localizeParam("ItemDeleteConfirmText", {itemName: item.name})}</p>`,
+        buttons: {
+          yes: {
+            label: localize("Yes"),
+            callback: () => item.delete()
+          },
+          no: { label: localize("No") },
+        },
+        default:"no"
+      });
+      confirmDialog.render(true);
+    }
+
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
     
@@ -186,23 +204,8 @@ export class CyberpunkActorSheet extends ActorSheet {
       let item = getEventItem(this, ev);
       item.sheet.render(true);
     });
-    html.find('.item-delete').click(ev => {
-      ev.stopPropagation();
-      let item = getEventItem(this, ev);
-      let confirmDialog = new Dialog({
-        title: localize("ItemDeleteConfirmTitle"),
-        content: `<p>${localize("ItemDeleteConfirmText")}</p>`,
-        buttons: {
-          yes: {
-            label: localize("Yes"),
-            callback: () => item.delete()
-          },
-          no: { label: localize("No") },
-        },
-        default:"no"
-      });
-      confirmDialog.render(true);
-    });
+    html.find('.item-delete').click(deleteItemDialog.bind(this));
+    html.find('.rc-item-delete').bind("contextmenu", deleteItemDialog.bind(this)); 
 
     html.find('.fire-weapon').click(ev => {
       ev.stopPropagation();

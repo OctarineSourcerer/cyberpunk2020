@@ -369,7 +369,7 @@
     "CYBERPUNK.No": "No",
     "CYBERPUNK.OK": "OK",
     "CYBERPUNK.ItemDeleteConfirmTitle": "Delete Item?",
-    "CYBERPUNK.ItemDeleteConfirmText": "Are you sure you want to delete this item?",
+    "CYBERPUNK.ItemDeleteConfirmText": "Are you sure you want to delete {itemName}?",
 
     "CYBERPUNK.InitiativeTrackerWarning": "At the moment, rolling initiative from the sheet doesn't add to the encounter's combat tracker.",
     "CYBERPUNK.MigrateMessage": "Migrating data of {target}",
