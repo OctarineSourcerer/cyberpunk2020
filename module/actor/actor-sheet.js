@@ -115,8 +115,10 @@ export class CyberpunkActorSheet extends ActorSheet {
       armor: armor,
       cyberware: cyberware,
       misc: misc,
-      all: [weapons]
+      all: [weapons],
+      cyberCost: cyberware.reduce((a,b) => a + b.data.cost, 0)
     };
+
   }
 
   /** @override */
@@ -192,6 +194,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       });
       confirmDialog.render(true);
     });
+
 
     html.find('.fire-weapon').click(ev => {
       ev.stopPropagation();
