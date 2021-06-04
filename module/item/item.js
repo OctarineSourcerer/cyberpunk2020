@@ -261,7 +261,7 @@ export class CyberpunkItem extends Item {
 
     return makeD10Roll(attackTerms, {
       stats: this.actor.data.data.stats,
-      attackSkill: this.actor.getSkillVal(deepLookup(this.data.data.attackSkill))
+      attackSkill: this.actor.getSkillVal(this.data.data.attackSkill)
     }).roll();
   }
 
