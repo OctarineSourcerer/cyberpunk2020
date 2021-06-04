@@ -91,3 +91,29 @@ export function deepSet(startObject, path, value, overwrite=true) {
 export function clamp(x, min, max) {
     return Math.min(Math.max(x, min), max);
 }
+
+export async function getDefaultSkills() {
+    const pack = game.packs.get("cyberpunk2020.default-skills");
+    // put into basickSkills array
+    const content = await pack.getDocuments();
+    return content;
+}
+
+// Yet to be fully tested, but should let editing of compendiums go pretty easily
+async function changePackItems(packName, dataDeltaF) {
+    let pack = game.packs.get(packName);
+    let ids = pack.index.map(e => e._id);
+    ids.forEach(async id => {
+        let entity = await pack.getEntity(id);
+        let oldData = entity.data;
+        let dataChange = dataDeltaF(oldData);
+        dataChange._id = id;
+        console.log(`update data: ${dataChange}`);
+        await pack.updateEntity(dataChange); 
+    });
+}
+
+async function exampleCompendiumData(packName) {
+    let pack = game.packs.get(packName);
+    return await pack.getEntity(pack.index[0].data);
+}

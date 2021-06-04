@@ -15,12 +15,10 @@
                 <span class="part-formula">{{name}}:</span>
             {{/if}}
             <span class="part-flavor">{{roll._formula}}</span>
-            <span class="part-total {{#if isCrit}}crit {{/if}}{{#if isFumble}}fumble {{/if}}">{{roll._total}}</span>
+            <span class="part-total {{#if isCrit}}crit {{/if}}{{#if isFumble}}fumble {{/if}}">{{roll.total}}</span>
         </header>
         <div class="dice-tooltip">
         {{#each diceInfo}}
-            {{log "diceinfo"}}
-            {{log this}}
             <section class="tooltip-part">
                 <div class="dice">
                     <ol class="dice-rolls">

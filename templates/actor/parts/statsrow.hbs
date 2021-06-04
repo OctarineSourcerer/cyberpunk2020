@@ -19,15 +19,16 @@
     <div class="derivedrow">
         {{#with data.stats}}
         <div class="field">
-            <label>{{CPLocal 'BTmod'}}</label>
+            <label title="{{CPLocal "BTM"}}">{{CPLocal 'BTMShort'}}</label>
             <input class="value not-editable" value="{{bt.modifier}}" readonly>
         </div>
         <div class="field">
-            <label>{{CPLocal 'Carry'}}</label>
+            <label>{{CPLocal "Carry"}}</label>
             <input class="value not-editable" value="{{bt.carry}}" readonly>
         </div>
-        <div class="field liftstat">
-            <label>{{CPLocal 'Lift'}}</label>
+        {{!-- Tends to be a bigger number than most others --}}
+        <div class="field liftstat" style="flex-grow: 4;">
+            <label>{{CPLocal "Lift"}}</label>
             <input class="rightborder not-editable" value="{{bt.lift}}" readonly>
         </div>
         <div class="field">
