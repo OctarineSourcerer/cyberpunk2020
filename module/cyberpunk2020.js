@@ -79,16 +79,12 @@ Hooks.once("ready", function() {
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const lastMigrateVersion = game.settings.get("cyberpunk2020", "systemMigrationVersion");
-    // First time we're readying, no migrate needed
-    if(!lastMigrateVersion) {
-        console.log("CYBERPUNK: First run? No migration needed here");
-        game.settings.set("cyberpunk2020", "systemMigrationVersion", game.system.data.version);
-        return;
-    }
+    // We do need to try migrating if we haven't run before - as it stands, previous worlds didn't use this setting, or by default had it set to current version
+
     // The version migrations need to begin - if you make a change from 0.1 to 0.2, this should be 0.2
     const NEEDS_MIGRATION_VERSION = "0.3.0";
     console.log("CYBERPUNK: Last migrated in version: " + lastMigrateVersion);
-    const needsMigration = lastMigrateVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, lastMigrateVersion);
+    const needsMigration = isNewerVersion(NEEDS_MIGRATION_VERSION, lastMigrateVersion);
     if ( !needsMigration ) return;
     migrations.migrateWorld();
 });

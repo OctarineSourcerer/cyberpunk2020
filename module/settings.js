@@ -7,8 +7,7 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: String,
-    // TODO: Check if, when game version is changed, this changes. It should not.
-    default: game.system.data.version
+    default: ""
   });
 
   game.settings.register("cyberpunk2020", "trainedSkillsFirst", {
