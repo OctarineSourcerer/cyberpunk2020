@@ -1,5 +1,5 @@
 import { sortSkills, SortOrders } from "./actor/skill-sort.js";
-import { getDefaultSkills } from "./utils.js";
+import { getDefaultSkills, localize } from "./utils.js";
 
 const updateFuncs = {
     "Actor": migrateActorData,
@@ -7,6 +7,7 @@ const updateFuncs = {
 }
 // I know there's a lot of await in here, and I think it might be possible to not wait for the results of updating entities. But I also don't know if it would blow foundry up to get so many update requests so far.
 
+let migrationSuccess = true;
 // Handle migration of things. The shape of it nabbed from 5e
 export async function migrateWorld() {
     if (!game.user.isGM) {
@@ -24,8 +25,13 @@ export async function migrateWorld() {
     for(let compendium of game.packs.contents) {
         migrateCompendium(compendium);
     }
-    game.settings.set("cyberpunk2020", "systemMigrationVersion", game.system.data.version);
-    ui.notifications.info(`Cyberpunk2020 System Migration to version ${game.system.data.version} completed!`, {permanent: true});
+    if(migrationSuccess) {
+        game.settings.set("cyberpunk2020", "systemMigrationVersion", game.system.data.version);
+        ui.notifications.info(`Cyberpunk2020 System Migration to version ${game.system.data.version} completed!`, {permanent: true});
+    }
+    else {
+        ui.notifications.error(`Cyberpunk2020 System Migration failed :( Please see console log for details`);
+    }
 }
 
 const defaultDataUse = async (document, updateData) => {
@@ -44,6 +50,7 @@ async function migrateDocument(document, withUpdataData = defaultDataUse) {
         const updateData = await migrateDataFunc(document.data);
         withUpdataData(document, updateData);
     } catch(err) {
+        migrationSuccess = false;
         err.message = `Failed cyberpunk system migration for ${document.data.type} ${document.name}: ${err.message}`;
         console.error(err);
         return;
@@ -89,9 +96,11 @@ export async function migrateActorData(actorData) {
 
         // Catalogue skills with points in them to keep
         trainedSkills = Object.entries(data.skills)
-            .filter((_, skillData) => skillData.value > 0 || skillData.chipValue > 0)
-            .map(convertOldSkill);
+            .filter(([_, skillData]) => skillData.value > 0 || skillData.chipValue > 0)
+            .map(([name, skillData]) => convertOldSkill(name, skillData));
     }
+    console.log("Trained skills:");
+    console.log(trainedSkills);
     let skills = actorData.items.filter(item => item.type === "skill");
 
     // Migrate from pre-item times
@@ -100,20 +109,22 @@ export async function migrateActorData(actorData) {
         console.log(`Keeping any skills you had points in: ${trainedSkills.join(", ") || "None"}`);
 
         // Key core skills by name so they may be overridden
-        const skillsToAdd = (await getDefaultSkills()).reduce((acc, item) => {
+        let skillsToAdd = (await getDefaultSkills()).reduce((acc, item) => {
             acc[item.name] = item.toObject();
             return acc;
         }, {});
         // Override core skills with any trained skill by the same name
         for(const trainedSkill of trainedSkills) {
-            skillsToAdd[trainedSkill.name] = trainedSkill;
+            // Old skills had localization keys as names - translate these before overriding
+            skillsToAdd[localize(trainedSkill.name)] = trainedSkill;
         }
+        skillsToAdd = sortSkills(Object.values(skillsToAdd), SortOrders.Name);
+        updateData["data.skillsSortedBy"] = "Name";
+
         // Keep current items
         const currentItems = Array.from(actorData.items).map(item => item.toObject());
-
         // TODO: This is repeated in a few places - centralise/refactor
-        updateData.items = currentItems.concat(Object.values(skillsToAdd));
-        updateData["data.skillsSortedBy"] = "Name";
+        updateData.items = currentItems.concat(currentItems, skillsToAdd);
     }
 
     return updateData;
