@@ -1,3 +1,4 @@
+import { sortSkills, SortOrders } from "./actor/skill-sort.js";
 import { getDefaultSkills } from "./utils.js";
 
 const updateFuncs = {
@@ -94,12 +95,13 @@ export async function migrateActorData(actorData) {
     let skills = actorData.items.filter(item => item.type === "skill");
     const coreSkillsCount = 78;
     if(skills.length < coreSkillsCount) { // Easier way of checking no core skills
-        console.log(`${actorData.name} does not have item skills. Adding the core ones!`);
+        console.log(`${actorData.name} does not have item skills. Adding aaaall 78 core ones`);
         console.log(`Also adding any role skills you had points in: ${roleSkills.join(", ") || "None"}`);
-        const skillsData = (await getDefaultSkills()).map(item => item.toObject());
+        const skillsData =  sortSkills(await getDefaultSkills(), SortOrders.Name).map(item => item.toObject());
         const currentItems = Array.from(actorData.items).map(item => item.toObject());
+        // TODO: This is repeated in a few places - centralise/refactor
         updateData.items = currentItems.concat(skillsData, roleSkills);
-        console.log(updateData["items"]);
+        updateData["data.skillsSortedBy"] = "Name";
     }
 
     return updateData;
