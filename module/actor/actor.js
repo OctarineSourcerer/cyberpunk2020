@@ -209,7 +209,7 @@ export class CyberpunkActor extends Actor {
 
   // TODO: Again, will not work if skill names localized
   trainedMartials() {
-    return this.itemTypes.skill.filter(skill => skill.name.startsWith("Martial")).filter(([_, art]) => art.value > 0).map(([name, _]) => name);
+    return this.itemTypes.skill.filter(skill => skill.name.startsWith("Martial")).filter(martial => martial.data.data.level > 0).map(martial => martial.name);
   }
 
   // TODO: Make this doable with just skill name
