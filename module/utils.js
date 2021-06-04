@@ -99,7 +99,7 @@ export async function getDefaultSkills() {
     return content;
 }
 
-// Yet to be fully tested
+// Yet to be fully tested, but should let editing of compendiums go pretty easily
 async function changePackItems(packName, dataDeltaF) {
     let pack = game.packs.get(packName);
     let ids = pack.index.map(e => e._id);
