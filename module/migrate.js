@@ -81,26 +81,26 @@ export async function migrateActorData(actorData) {
         }
     }
     
-    // role skills that we keep
-    let roleSkills = [];
+    // Traied skills that we keep
+    let trainedSkills = [];
     if(data.skills) {
         console.log(`${actorData.name} still uses non-item skills. Removing.`);
         updateData["data.skills"] = undefined;
 
-        // Catalogue role skills with points in them to 
-        roleSkills = Object.entries(data.skills)
-            .filter((name, skillData) => skillData.isSpecial && (skillData.value > 0 || skillData.chipValue > 0))
+        // Catalogue skills with points in them to keep
+        trainedSkills = Object.entries(data.skills)
+            .filter((_, skillData) => skillData.value > 0 || skillData.chipValue > 0)
             .map(convertOldSkill);
     }
     let skills = actorData.items.filter(item => item.type === "skill");
     const coreSkillsCount = 78;
     if(skills.length < coreSkillsCount) { // Easier way of checking no core skills
         console.log(`${actorData.name} does not have item skills. Adding aaaall 78 core ones`);
-        console.log(`Also adding any role skills you had points in: ${roleSkills.join(", ") || "None"}`);
+        console.log(`Also adding any role skills you had points in: ${trainedSkills.join(", ") || "None"}`);
         const skillsData =  sortSkills(await getDefaultSkills(), SortOrders.Name).map(item => item.toObject());
         const currentItems = Array.from(actorData.items).map(item => item.toObject());
         // TODO: This is repeated in a few places - centralise/refactor
-        updateData.items = currentItems.concat(skillsData, roleSkills);
+        updateData.items = currentItems.concat(skillsData, trainedSkills);
         updateData["data.skillsSortedBy"] = "Name";
     }
 
