@@ -1,5 +1,5 @@
 import { sortSkills, SortOrders } from "./actor/skill-sort.js";
-import { getDefaultSkills, localize } from "./utils.js";
+import { getDefaultSkills, localize, tryLocalize } from "./utils.js";
 
 const updateFuncs = {
     "Actor": migrateActorData,
@@ -94,15 +94,25 @@ export async function migrateActorData(actorData) {
         console.log(`${actorData.name} still uses non-item skills. Removing.`);
         updateData["data.skills"] = undefined;
 
+        let trained = (skillData) => skillData.value > 0 || skillData.chipValue > 0;
         // Catalogue skills with points in them to keep
         trainedSkills = Object.entries(data.skills)
-            .reduce((acc, [name, skillData]) => {
-                if(skillData.value > 0 || skillData.chipValue > 0) {
-                    acc.push([name, skillData])
+            .reduce((acc, [name, skill]) => {
+                if(trained(skill)) {
+                    acc.push([name, skill]);
                 }
-                else if(skillData.group) {
-                    acc.push(...Object.entries(skillData).filter(([name, _]) => name !== "group"));
+                // Grouped skills and the pain that comes with them
+                else if(skill.group) {
+                    let parentName = name;
+                    acc.push(...Object.entries(skill)
+                        .filter(([name, subskill]) => name !== "group" && trained(subskill))
+                        .map(([name, subskill]) => {
+                            // Martial arts has a space in the new skills :(
+                            let prefix = parentName === "MartialArts" ? "Martial Arts" : parentName;
+                            return [`${prefix}: ${name}`, subskill]
+                        }));
                 }
+                return acc;
             }, []);
 
         trainedSkills = trainedSkills.map(([name, skillData]) => convertOldSkill(name, skillData))
@@ -123,9 +133,13 @@ export async function migrateActorData(actorData) {
         }, {});
         // Override core skills with any trained skill by the same name
         for(const trainedSkill of trainedSkills) {
-            // Old skills had localization keys as names - translate these before overriding
-            skillsToAdd[localize("Skill" + trainedSkill.name)] = trainedSkill;
+            // Old skills had localization keys as names - translate these before overriding. Martial arts specifically don't have keys though, so don't prepend Skill to this
+            // This is what happens when you migrate legacy, kids, it hurts
+            let key = "Skill" + trainedSkill.name;
+            let nameOfOverride = game.i18n.has(key) ? localize(key) : trainedSkill.name
+            skillsToAdd[nameOfOverride] = trainedSkill;
         }
+        console.log(skillsToAdd);
         skillsToAdd = sortSkills(Object.values(skillsToAdd), SortOrders.Name);
         updateData["data.skillsSortedBy"] = "Name";
 
