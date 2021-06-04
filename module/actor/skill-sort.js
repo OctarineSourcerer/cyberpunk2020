@@ -19,8 +19,8 @@ const statOrder = {
 }
 
 const SortOrders = {
-    Name: byName,
-    Stat: byStat
+    Name: [byName],
+    Stat: [byStat, byName]
 }
 
 // To sort hierarchically, break ties (0) with the return of another comparison function
@@ -77,14 +77,19 @@ function hierarchical(functions) {
 }
 
 /* This would usually be in actor-sheet.js; sorting stats is mostly for UX purposes. But that'd mean creating a sorted version of stats EVERY time the sheet opens. And CP2020 has 89 stats by default; enough for me to not want to do that. So we sort in the actor itself */
-// Really just a fancy "sort object", but I've set this module up specifically for actor skills
-function sortSkills(skills, sortOrder) {
-    if(!sortOrder) {
+/**
+ * 
+ * @param {*} skills 
+ * @param {*} compareFs Compare functions - sort by the first, then the second for any ties, third for any ties there etc. Some pre-made ones in SortOrders
+ * @returns 
+ */
+function sortSkills(skills, compareFs) {
+    if(!compareFs) {
         console.warn("No sort order given. Returning original skill list");
         return skills;
     }
     let unsorted = skills.slice();
     let firstFilter = game.settings.get("cyberpunk2020", "trainedSkillsFirst") ? [hasPoints] : [];
 
-    return unsorted.sort(hierarchical(firstFilter.concat(sortOrder)));
+    return unsorted.sort(hierarchical(firstFilter.concat(compareFs)));
 }
