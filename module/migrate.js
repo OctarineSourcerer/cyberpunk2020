@@ -93,14 +93,26 @@ export async function migrateActorData(actorData) {
             .map(convertOldSkill);
     }
     let skills = actorData.items.filter(item => item.type === "skill");
-    const coreSkillsCount = 78;
-    if(skills.length < coreSkillsCount) { // Easier way of checking no core skills
+
+    // Migrate from pre-item times
+    if(skills.length === 0) {
         console.log(`${actorData.name} does not have item skills. Adding aaaall 78 core ones`);
-        console.log(`Also adding any role skills you had points in: ${trainedSkills.join(", ") || "None"}`);
-        const skillsData =  sortSkills(await getDefaultSkills(), SortOrders.Name).map(item => item.toObject());
+        console.log(`Keeping any skills you had points in: ${trainedSkills.join(", ") || "None"}`);
+
+        // Key core skills by name so they may be overridden
+        const skillsToAdd = (await getDefaultSkills()).reduce((acc, item) => {
+            acc[item.name] = item.toObject();
+            return acc;
+        }, {});
+        // Override core skills with any trained skill by the same name
+        for(const trainedSkill of trainedSkills) {
+            skillsToAdd[trainedSkill.name] = trainedSkill;
+        }
+        // Keep current items
         const currentItems = Array.from(actorData.items).map(item => item.toObject());
+
         // TODO: This is repeated in a few places - centralise/refactor
-        updateData.items = currentItems.concat(skillsData, trainedSkills);
+        updateData.items = currentItems.concat(Object.values(skillsToAdd));
         updateData["data.skillsSortedBy"] = "Name";
     }
 
