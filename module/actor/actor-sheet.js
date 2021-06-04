@@ -27,34 +27,42 @@ export class CyberpunkActorSheet extends ActorSheet {
   /** @override */
   getData() {
     // the data THIS returns is only available in this class and the template
-    const data = super.getData();
+    const sheetData = super.getData();
+    const actorData = sheetData.data;
+    sheetData.actor = actorData;
+    sheetData.data = actorData.data;
 
     // Prepare items.
     if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
-      // Give space for temporary stuff. Delete on sheet close?
-      if(data.data.transient == null) {
-        data.data.transient = { skillFilter: "" };
+      this._prepareCharacterItems(sheetData);
+      this._addWoundTrack(sheetData);
+      // Reset search text if it's null or we just rendered for the first time
+      if(sheetData.data.transient == null) {
+        sheetData.data.transient = { skillFilter: "" };
       }
-      this._prepareCharacterItems(data);
-      this._addWoundTrack(data);
-      data.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
-      data.skillsSortChoices = Object.keys(SortOrders);
-      data.skillDisplayList = this._filterSkills(data);
-      data.weaponTypes = weaponTypes;
+      this._prepareSkills(sheetData);
+      // All this extra lookup is cos we can't store a list of entities in data :(
+      sheetData.weaponTypes = weaponTypes;
     }
+    return sheetData;
+  }
 
-    return data;
+  _prepareSkills(sheetData) {
+    sheetData.skillsSort = this.actor.data.skillsSortedBy || "Name";
+    sheetData.skillsSortChoices = Object.keys(SortOrders);
+    sheetData.filteredSkillIDs = this._filterSkills(sheetData);
+    sheetData.skillDisplayList = sheetData.filteredSkillIDs.map(id => this.actor.items.get(id));
   }
 
   // Handle searching skills
-  _filterSkills(data) {
-    if(data.data.transient.skillFilter == null) {
-      data.data.transient.skillFilter = "";
-    }
-    let upperSearch = data.data.transient.skillFilter.toUpperCase();
-    const fullList = data.data.sortedSkillView || Object.keys(data.data.skills);
+  _filterSkills(sheetData) {
+    let id = sheetData.actor._id;
 
-    let listToFilter = fullList;
+    if(sheetData.data.transient.skillFilter == null) {
+      sheetData.data.transient.skillFilter = "";
+    }
+    let upperSearch = sheetData.data.transient.skillFilter.toUpperCase();
+    let listToFilter = sheetData.data.sortedSkillIDs || game.actors.get(id).itemTypes.skill.map(skill => skill.id);
 
     // Only filter if we need to
     if(upperSearch === "") {
@@ -62,12 +70,13 @@ export class CyberpunkActorSheet extends ActorSheet {
     }
     else {
       // If we searched previously and the old search had results, we can filter those instead of the whole lot
-      if(data.data.transient.oldSearch != null 
-        && data.skillDisplayList != null
+      if(sheetData.data.transient.oldSearch != null 
+        && sheetData.filteredSkillIDs != null
         && upperSearch.startsWith(oldSearch)) {
-        listToFilter = data.skillDisplayList; 
+        listToFilter = sheetData.filteredSkillIDs; 
       }
-      return listToFilter.filter(skillName => {
+      return listToFilter.filter(id => {
+        let skillName = this.actor.items.get(id).name;
         return skillName.toUpperCase().includes(upperSearch);
       });
     }
@@ -128,13 +137,30 @@ export class CyberpunkActorSheet extends ActorSheet {
       let statName = ev.currentTarget.dataset.statName;
       this.actor.rollStat(statName);
     });
+    // TODO: Refactor these skill interactivity stuff into their own methods
+    html.find(".skill-level").click((event) => event.target.select()).change((event) => {
+      let skill = this.actor.items.get(event.currentTarget.dataset.skillId);
+      let target = skill.data.data.isChipped ? "data.chipLevel" : "data.level";
+      let updateData = {_id: skill.id};
+      updateData[target] = parseInt(event.target.value, 10);
+      this.actor.updateEmbeddedDocuments("Item", [updateData]);
+      // Mild hack to make sheet refresh and re-sort: the ability to do that should just be put in 
+    });
+    html.find(".chip-toggle").click(ev => {
+      let skill = this.actor.items.get(ev.currentTarget.dataset.skillId);
+      this.actor.updateEmbeddedDocuments("Item", [{
+        _id: skill.id,
+        "data.isChipped": !skill.data.data.isChipped
+      }]);
+    });
+
     html.find(".skill-sort > select").change(ev => {
       let sort = ev.currentTarget.value;
       this.actor.sortSkills(sort);
     });
     html.find(".skill-roll").click(ev => {
-      let skillName = ev.currentTarget.dataset.skillName;
-      this.actor.rollSkill(skillName);
+      let id = ev.currentTarget.dataset.skillId;
+      this.actor.rollSkill(id);
     });
     html.find(".roll-initiative").click(ev => {
       this.actor.rollInitiative();

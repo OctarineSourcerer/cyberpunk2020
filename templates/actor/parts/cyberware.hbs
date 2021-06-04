@@ -14,8 +14,8 @@
 {{/if}}
 <div class="field-list">
     {{#each gear.cyberware as |cyber|}}
-        <div class="field gear item-edit full-width" data-item-id="{{cyber._id}}">
-            <div class="field-image" style="background-image: url({{cyber.img}})" data-item-id="{{cyber._id}}"></div>
+        <div class="field gear item-edit full-width" data-item-id="{{cyber.id}}">
+            <div class="field-image" style="background-image: url({{cyber.img}})" data-item-id="{{cyber.id}}"></div>
             <label>{{cyber.name}}</label>
             <span class="flex-pad"></span>
             {{#with cyber.data.data}}
@@ -29,7 +29,7 @@
                 </span>
                 {{/if}}
             {{/with}}
-            <span class="item-delete" data-item-id="{{_id}}">X</span>
+            <span class="item-delete" data-item-id="{{id}}">X</span>
         </div>
     {{/each}}
 </div>

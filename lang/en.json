@@ -374,5 +374,9 @@
     "CYBERPUNK.InitiativeTrackerWarning": "At the moment, rolling initiative from the sheet doesn't add to the encounter's combat tracker.",
     "CYBERPUNK.MigrateMessage": "Migrating data of {target}",
 
-    "CYBERPUNK.NPC": "NPC"
+    "CYBERPUNK.NPC": "NPC",
+
+    "SETTINGS.SysMigration": "System Migration Version",
+    "SETTINGS.TrainedSkillsFirst": "Trained Skills First",
+    "SETTINGS.TrainedSkillsFirstHint": "Whether trained skills always come first in the skills list"
 }

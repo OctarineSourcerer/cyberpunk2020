@@ -10,32 +10,22 @@ import { registerSystemSettings } from "./settings.js"
 import { localize } from "./utils.js";
 
 // TODO: The skills as embedded entities will change in 0.8.x, should write for that
-function makeSkillsCompendium(compendiumName) {
-    const pack = game.packs.get(compendiumName);
+function makeSkillsCompendium(skillsName, roleName) {
+    const defaultSkills = game.packs.get(skillsName);
+    const roleSkills = game.packs.get(roleName);
     const templateSkills = Object.entries(game.system.template.Actor.templates.skills.skills);
 
     // Get newskill data from template entry
-    function skillData(name, skill) {
-        return {name: name, type: "skill", data: {
-            flavor: "",
-            notes: "",
-            level: skill.value || 0,
-            chipLevel: skill.chipValue || 0,
-            isChipped: skill.chipped,
-            ip: skill.ip,
-            diffMod: 1, // No skills have those currently.
-            isRoleSkill: skill.isSpecial || false,
-            stat: skill.stat
-        }};
-    }
+    
 
     templateSkills.forEach(([name, skill]) => {
+        let destPack = skill?.isSpecial ? roleSkills : defaultSkills;
         if(!skill.group) {
             let itemName = localize("Skill"+name);
             console.log(`Adding ${itemName}`);
-            let data = skillData(itemName, skill);
+            let data = migrations.convertOldSkill(itemName, skill);
             let item = new Item(data);
-            pack.importEntity(item);
+            destPack.importEntity(item);
         }
         else {
             let parentName = localize("Skill"+name);
@@ -44,7 +34,7 @@ function makeSkillsCompendium(compendiumName) {
                 console.log(`Adding ${newName}`);
                 let data = skillData(newName, skill);
                 let item = new Item(data);
-                pack.importEntity(item);
+                destPack.importEntity(item);
             });
         }
     });
@@ -64,14 +54,14 @@ Hooks.once('init', async function () {
     };
 
     // Define custom Entity classes
-    CONFIG.Actor.entityClass = CyberpunkActor;
-    CONFIG.Item.entityClass = CyberpunkItem;
+    CONFIG.Actor.documentClass = CyberpunkActor;
+    CONFIG.Item.documentClass = CyberpunkItem;
 
     // Register sheets, unregister original core sheets
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("cyberpunk", CyberpunkActorSheet, { makeDefault: true });
+    Actors.registerSheet("cyberpunk2020", CyberpunkActorSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("cyberpunk", CyberpunkItemSheet, { makeDefault: true });
+    Items.registerSheet("cyberpunk2020", CyberpunkItemSheet, { makeDefault: true });
 
     // Register System Settings
     registerSystemSettings();
@@ -88,15 +78,15 @@ Hooks.once('init', async function () {
 Hooks.once("ready", function() {
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
-    const lastMigrateVersion = game.settings.get("cyberpunk", "systemMigrationVersion");
+    const lastMigrateVersion = game.settings.get("cyberpunk2020", "systemMigrationVersion");
     // First time we're readying, no migrate needed
     if(!lastMigrateVersion) {
         console.log("CYBERPUNK: First run? No migration needed here");
-        game.settings.set("cyberpunk", "systemMigrationVersion", game.system.data.version);
+        game.settings.set("cyberpunk2020", "systemMigrationVersion", game.system.data.version);
         return;
     }
     // The version migrations need to begin - if you make a change from 0.1 to 0.2, this should be 0.2
-    const NEEDS_MIGRATION_VERSION = "0.2.6";
+    const NEEDS_MIGRATION_VERSION = "0.3.0";
     console.log("CYBERPUNK: Last migrated in version: " + lastMigrateVersion);
     const needsMigration = lastMigrateVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, lastMigrateVersion);
     if ( !needsMigration ) return;

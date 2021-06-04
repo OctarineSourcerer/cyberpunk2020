@@ -32,7 +32,12 @@ export class CyberpunkItemSheet extends ItemSheet {
 
   /** @override */
   getData() {
+    // This means the handlebars data and the form edit data actually mirror each other
     const data = super.getData();
+    const actorData = data.data;
+    data.actor = actorData;
+    data.data = actorData.data;
+
     switch (this.item.data.type) {
       case "weapon":
         this._prepareWeapon(data);
@@ -68,12 +73,9 @@ export class CyberpunkItemSheet extends ItemSheet {
     data.attackSkills = [...attackSkills[this.item.data.data.weaponType], ...(this.actor?.trainedMartials() || [])];
 
     // TODO: Be not so inefficient for this
-    if(!data.attackSkills.length) {
+    if(!data.attackSkills.length && this.actor) {
       if(this.actor) {
-        data.attackSkills = Object.keys(this.actor.data.data.skills).sort();
-      }
-      else {
-        data.attackSkills = Object.keys(game.system.template.Actor.templates.skills.skills).sort();
+        data.attackSkills = this.actor.itemTypes.skill.map(skill => skill.name).sort();
       }
     }
   }
@@ -111,7 +113,7 @@ export class CyberpunkItemSheet extends ItemSheet {
     // roll for humanity loss on cyberware 
     html.find('.humanity-cost-roll').click( ev => {
       ev.stopPropagation();
-      let itemId = this.object.data._id;
+      let itemId = this.object.data.id;
       const cyber = this.actor.getOwnedItem(itemId);
       const hc = cyber.data.data.humanityCost;
       let loss = 0;

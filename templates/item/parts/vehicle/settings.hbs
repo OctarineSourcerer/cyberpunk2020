@@ -1,22 +1,24 @@
 {{!-- Structural Damage Points (SDP is a terrible name) --}}
 <div class="field-list">
-    <div class="flexcol fillwidth span-two-cells"  title="{{CPLocal "SDPFull"}}">
-        <div class="meter-gauge fillwidth">
-            <span style="width: calc(100% * ({{data.sdp.value}}/{{data.sdp.max}}));" class="
-            {{#if (compare data.sdp.value "<=" (math data.sdp.max "/" 2))}}
-            danger
-            {{/if}}"></span>
+    {{#with data.sdp}}
+        <div class="flexcol fillwidth" style="grid-column-end: span 2" title="{{CPLocal "SDPFull"}}">
+            <div class="meter-gauge fillwidth">
+                <span style="width: calc(100% * ({{value}}/{{max}}));" class="
+                {{#if (compare sdp.value "<=" (math max "/" 2))}}
+                danger
+                {{/if}}"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="field">
-        <label class="larger" for="data.sdp.value" title="{{CPLocal "SDPFull"}}">{{CPLocal "SDP"}}</label>
-        <span class="flexrow flex-pad">
-            <input type="number" name="data.sdp.value" value="{{data.sdp.value}}"> 
-            <span class="nogrow">/</span>
-            <input type="number" name="data.sdp.max" value="{{data.sdp.max}}">
-        </span>
-    </div>
+        <div class="field">
+            <label class="larger" for="data.sdp.value" title="{{CPLocal "SDPFull"}}">{{CPLocal "SDP"}}</label>
+            <span class="flexrow flex-pad">
+                <input type="number" name="data.sdp.value" value="{{value}}"> 
+                <span class="nogrow">/</span>
+                <input type="number" name="data.sdp.max" value="{{max}}">
+            </span>
+        </div>
+    {{/with}}
 
     <div class="field">
         <label for="data.sp" title="{{CPLocal "SPFull"}}">{{CPLocal "SP"}}</label>
@@ -27,10 +29,11 @@
 </div>
 <div class="field-list">
     {{!-- There's a reason I don't use meter here - it's evil to style, and IE doesn't support it. If anyone playing this is using IE, they're already in the dystopia --}}
-    <div class="flexcol fillwidth span-two-cells">
+    {{#with data.speed}}
+    <div class="flexcol fillwidth" style="grid-column-end: span 2">
         <div class="meter-gauge fillwidth">
-            <span style="width: calc(100% * ({{data.speed.value}}/{{data.speed.max}}));" class="
-            {{#if (compare data.speed.value ">" data.speed.maneuver)}}
+            <span style="width: calc(100% * ({{value}}/{{max}}));" class="
+            {{#if (compare value ">" maneuver)}}
             danger
             {{/if}}"></span>
         </div>
@@ -39,16 +42,16 @@
         {{!-- Make larger to indicate a kind of heading almost --}}
         <label class="larger" for="data.speed.value">{{CPLocal "Speed"}}</label>
         <span class="flexrow flex-pad">
-            <input type="number" name="data.speed.value" value="{{data.speed.value}}"> 
+            <input type="number" name="data.speed.value" value="{{value}}"> 
             <span class="nogrow">/</span>
-            <input type="number" name="data.speed.max" value="{{data.speed.max}}">
+            <input type="number" name="data.speed.max" value="{{max}}">
             <span class="nogrow">mph</span>
         </span>
     </div>
      <div class="field">
         <label for="data.speed.value">{{CPLocal "Accel"}}</label>
         <span class="flexrow flex-pad">
-            <input type="number" name="data.speed.acceleration" value="{{data.speed.acceleration}}"> 
+            <input type="number" name="data.speed.acceleration" value="{{acceleration}}"> 
             <span class="nogrow">{{CPLocal "MPH"}}</span>
         </span>
     </div>
@@ -62,18 +65,20 @@
        {{!-- This should I guess be maneuver? But safe works a lot better meaningwise --}}
         <label for="data.speed.value">{{CPLocal "Safe"}}</label>
         <span class="flexrow flex-pad">
-            <input type="number" name="data.speed.maneuver" value="{{data.speed.maneuver}}"> 
+            <input type="number" name="data.speed.maneuver" value="{{maneuver}}"> 
             <span class="nogrow">{{CPLocal "MPH"}}</span>
         </span>
     </div>
+    {{/with}}
 </div>
 
 {{!-- Fuel --}}
 <div class="field-list">
-    <div class="flexcol fillwidth span-two-cells">
+    {{#with data.fuel}}
+    <div class="flexcol fillwidth" style="grid-column-end: span 2">
         <div class="meter-gauge fillwidth">
-            <span style="width: calc(100% * ({{data.fuel.value}}/{{data.fuel.max}}));" class="
-            {{#if (compare data.fuel.value "<" (math data.fuel.max "/" 3))}}
+            <span style="width: calc(100% * ({{value}}/{{max}}));" class="
+            {{#if (compare value "<" (math max "/" 3))}}
             danger
             {{/if}}"></span>
         </div>
@@ -81,9 +86,9 @@
     <div class="field">
         <label class="larger" for="data.speed.value">{{CPLocal "Fuel"}}</label>
         <span class="flexrow flex-pad">
-            <input type="number" name="data.fuel.value" value="{{data.fuel.value}}"> 
+            <input type="number" name="data.fuel.value" value="{{value}}"> 
             <span class="nogrow">/</span>
-            <input type="number" name="data.fuel.max" value="{{data.fuel.max}}">
+            <input type="number" name="data.fuel.max" value="{{max}}">
             <span class="nogrow">{{CPLocal "Gallon"}}</span>
         </span>
     </div>
@@ -91,7 +96,7 @@
      <div class="field">
         <label for="data.speed.value">{{CPLocal "Type"}}</label>
         <span class="flexrow flex-pad">
-            <input type="text" name="data.fuel.type" value="{{data.fuel.type}}"> 
+            <input type="text" name="data.fuel.type" value="{{type}}"> 
         </span>
     </div>
     {{!-- There's a reason I don't use meter here - it's evil to style, and IE doesn't support it. If anyone playing this is using IE, they're already in the dystopia --}}
@@ -99,10 +104,11 @@
    <div class="field">
         <label for="data.fuel.efficiency">{{CPLocal "Efficiency"}}</label>
         <span class="flexrow flex-pad">
-            <input type="number" name="data.fuel.efficiency" value="{{data.fuel.efficiency}}"> 
+            <input type="number" name="data.fuel.efficiency" value="{{efficiency}}"> 
             <span class="nogrow">{{CPLocal "MPG"}}</span>
         </span>
     </div>
+    {{/with}}
 </div>
 
 {{!-- Miscellaneous vehicle-only other --}}

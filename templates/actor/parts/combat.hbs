@@ -27,12 +27,13 @@
         
         <div class="field-list one-col">
             {{#each gear.armor}}
-            <div class="field item-edit" data-item-id="{{_id}}">
-                <div class="field-image" style="background-image: url({{img}})" data-item-id="{{_id}}"></div>
+            <div class="field item-edit" data-item-id="{{id}}">
+                <div class="field-image" style="background-image: url({{img}})" data-item-id="{{id}}"></div>
                 <label class="name">{{name}}</label>
                 <span class="flex-pad"></span>
                 <span>
-                    <label class="inactive">{{armorSummary data.coverage}}</label>
+                    {{log this}}
+                    <label class="inactive">{{armorSummary data.data.coverage}}</label>
                 </span>
             </div>
             {{/each}}
@@ -44,8 +45,8 @@
             <h2>{{CPLocal "Weapons"}}</h2>
         </header>
         {{#each gear.weapons as |weapon|}}
-            <div class="fire-weapon field action" data-item-id="{{weapon._id}}">
-                <div class="no-action field-image item-edit" style="background-image: url({{weapon.img}})" data-item-id="{{weapon._id}}"></div>
+            <div class="fire-weapon field action" data-item-id="{{weapon.id}}">
+                <div class="no-action field-image item-edit" style="background-image: url({{weapon.img}})" data-item-id="{{weapon.id}}"></div>
                 <label class="name">{{weapon.name}}</label>
                 <span class="flex-pad"></span>
                 <span>
