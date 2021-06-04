@@ -24,7 +24,9 @@ export class CyberpunkActor extends Actor {
     
     const createData = data;
     // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
-    const skillsData = (await getDefaultSkills()).map(item => item.toObject());
+    const skillsData = 
+      sortSkills(await getDefaultSkills(), SortOrders.Name)
+      .map(item => item.toObject());
     if (typeof data.data === "undefined") {
       createData.items = [];
       createData.items = data.items.concat(skillsData);

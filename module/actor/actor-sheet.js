@@ -204,7 +204,6 @@ export class CyberpunkActorSheet extends ActorSheet {
       confirmDialog.render(true);
     });
 
-
     html.find('.fire-weapon').click(ev => {
       ev.stopPropagation();
       let item = getEventItem(this, ev);
