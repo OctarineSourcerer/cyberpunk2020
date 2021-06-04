@@ -38,7 +38,7 @@ async function migrateEntity(entity, withUpdataData = defaultDataUse) {
         if(migrateDataFunc === undefined) {
             console.log(`No migrate function for entity with entity field "${entity.entity}"`);
         }
-        const updateData = migrateDataFunc(entity.data);
+        const updateData = await migrateDataFunc(entity.data);
         withUpdataData(entity, updateData);
     } catch(err) {
         err.message = `Failed cyberpunk system migration for ${entity.data.type} ${entity.name}: ${err.message}`;
@@ -90,12 +90,13 @@ export async function migrateActorData(actorData) {
             .map(convertOldSkill);
     }
     let skills = actorData.items.filter(item => item.type === "skill");
-    if(skills.length === 0) {
+    const coreSkillsCount = 78;
+    if(skills.length < coreSkillsCount) { // Easier way of checking no core skills
         console.log(`${actorData.name} does not have item skills. Adding the core ones!`);
         console.log(`Also adding any role skills you had points in: ${roleSkills.join(", ") || "None"}`);
         const skillsData = (await getDefaultSkills()).map(item => item.toObject());
         const currentItems = Array.from(actorData.items).map(item => item.toObject());
-        updateData["items"] = currentItems.concat(skillsData, roleSkills);
+        updateData.items = currentItems.concat(skillsData, roleSkills);
         console.log(updateData["items"]);
     }
 
@@ -110,7 +111,7 @@ export function migrateItemData(itemData) {
     let data = itemData.data;
     let itemTemplates = game.system.template.Item[itemData.type].templates;
 
-    if(itemTemplates.includes("common") && data.source === undefined) {
+    if(itemTemplates?.includes("common") && data.source === undefined) {
         console.log(`${itemData.name} has no source field. Giving it one.`)
         updateData["data.source"] = "";
     }
