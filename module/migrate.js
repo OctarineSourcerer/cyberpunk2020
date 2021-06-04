@@ -13,12 +13,12 @@ export async function migrateWorld() {
         return;
     }
 
-    for(let actor of game.actors.entities) {
-        migrateEntity(actor);
-        actor.items.forEach(item => migrateEntity(item));
+    for(let actor of game.actors.contents) {
+        migrateDocument(actor);
+        actor.items.forEach(item => migrateDocument(item));
     }
-    for(let item of game.items.entities) {
-        migrateEntity(item);
+    for(let item of game.items.contents) {
+        migrateDocument(item);
     }
     for(let compendium of game.packs.contents) {
         migrateCompendium(compendium);
@@ -27,21 +27,23 @@ export async function migrateWorld() {
     ui.notifications.info(`Cyberpunk2020 System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 }
 
-const defaultDataUse = async (entity, updateData) => {
+const defaultDataUse = async (document, updateData) => {
     if (!isObjectEmpty(updateData)) {
-        await entity.update(updateData);
+        console.log(`Total update data for document ${document.name}:`);
+        console.log(updateData);
+        await document.update(updateData);
     }
 }
-async function migrateEntity(entity, withUpdataData = defaultDataUse) {
+async function migrateDocument(document, withUpdataData = defaultDataUse) {
     try {
-        let migrateDataFunc = updateFuncs[entity.entity];
+        let migrateDataFunc = updateFuncs[document.documentName];
         if(migrateDataFunc === undefined) {
-            console.log(`No migrate function for entity with entity field "${entity.entity}"`);
+            console.log(`No migrate function for entity with documentName field "${document.documentName}"`);
         }
-        const updateData = await migrateDataFunc(entity.data);
-        withUpdataData(entity, updateData);
+        const updateData = await migrateDataFunc(document.data);
+        withUpdataData(document, updateData);
     } catch(err) {
-        err.message = `Failed cyberpunk system migration for ${entity.data.type} ${entity.name}: ${err.message}`;
+        err.message = `Failed cyberpunk system migration for ${document.data.type} ${document.name}: ${err.message}`;
         console.error(err);
         return;
     }
@@ -133,7 +135,7 @@ export function migrateCompendium(compendium) {
     let entityIds = compendium.index.map(e => e.id);
     entityIds.forEach(async (id) => {
         let entity = await compendium.getEntity(id);
-        migrateEntity(entity, async (entity, updateData) => {
+        migrateDocument(entity, async (entity, updateData) => {
             updateData.id = id;
             await compendium.updateEntity(updateData);
         });
