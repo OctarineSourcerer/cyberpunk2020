@@ -40,7 +40,7 @@
             {{/unless}}
             {{!-- Not all items have common settings --}}
             {{!-- May be worth instead other settings things just including the template on their own --}}
-            {{#if (hasProperty item.data "equipped")}}
+            {{#if (hasProperty item.data.data "equipped")}}
             {{> (varTemplate "item/parts/misc/settings.hbs" item.type)}}
             {{/if}}
         </div>

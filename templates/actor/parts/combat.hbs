@@ -32,7 +32,6 @@
                 <label class="name">{{name}}</label>
                 <span class="flex-pad"></span>
                 <span>
-                    {{log this}}
                     <label class="inactive">{{armorSummary data.data.coverage}}</label>
                 </span>
             </div>
@@ -50,7 +49,9 @@
                 <label class="name">{{weapon.name}}</label>
                 <span class="flex-pad"></span>
                 <span>
-                    <div class="field-label inactive">{{#if weapon.data.attackType}}{{weapon.data.attackType}}{{else}}{{weapon.data.weaponType}}{{/if}}</div>
+                    {{#with weapon.data.data}}
+                    <div class="field-label inactive">{{#if attackType}}{{attackType}}{{else}}{{weaponType}}{{/if}}</div>
+                    {{/with}}
                 </span>
             </div>
         {{/each}}
