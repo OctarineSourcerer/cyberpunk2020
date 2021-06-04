@@ -123,7 +123,7 @@ export class CyberpunkActorSheet extends ActorSheet {
    */
     function getEventItem(sheet, ev) {
       let itemId = ev.currentTarget.dataset.itemId;
-      return sheet.actor.getOwnedItem(itemId);
+      return sheet.actor.items.get(itemId);
     }
     
     // Everything below here is only needed if the sheet is editable
