@@ -96,8 +96,16 @@ export async function migrateActorData(actorData) {
 
         // Catalogue skills with points in them to keep
         trainedSkills = Object.entries(data.skills)
-            .filter(([_, skillData]) => skillData.value > 0 || skillData.chipValue > 0)
-            .map(([name, skillData]) => convertOldSkill(name, skillData));
+            .reduce((acc, [name, skillData]) => {
+                if(skillData.value > 0 || skillData.chipValue > 0) {
+                    acc.push([name, skillData])
+                }
+                else if(skillData.group) {
+                    acc.push(...Object.entries(skillData).filter(([name, _]) => name !== "group"));
+                }
+            }, []);
+
+        trainedSkills = trainedSkills.map(([name, skillData]) => convertOldSkill(name, skillData))
     }
     console.log("Trained skills:");
     console.log(trainedSkills);
@@ -116,7 +124,7 @@ export async function migrateActorData(actorData) {
         // Override core skills with any trained skill by the same name
         for(const trainedSkill of trainedSkills) {
             // Old skills had localization keys as names - translate these before overriding
-            skillsToAdd[localize(trainedSkill.name)] = trainedSkill;
+            skillsToAdd[localize("Skill" + trainedSkill.name)] = trainedSkill;
         }
         skillsToAdd = sortSkills(Object.values(skillsToAdd), SortOrders.Name);
         updateData["data.skillsSortedBy"] = "Name";
