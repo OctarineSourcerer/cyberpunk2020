@@ -107,7 +107,8 @@ async function changePackItems(packName, dataDeltaF) {
         let oldData = entity.data;
         let dataChange = dataDeltaF(oldData);
         dataChange._id = id;
-        console.log(`update data: ${dataChange}`);
+        console.log(`update data:`);
+        console.log(dataChange);
         await pack.updateEntity(dataChange); 
     });
 }
