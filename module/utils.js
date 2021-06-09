@@ -99,7 +99,7 @@ export async function getDefaultSkills() {
 }
 
 // Yet to be fully tested, but should let editing of compendiums go pretty easily
-async function changePackItems(packName, dataDeltaF) {
+async function changePackItems(packName, dataDeltaF, dryRun = false) {
     let pack = game.packs.get(packName);
     let ids = pack.index.map(e => e._id);
     ids.forEach(async id => {
@@ -109,7 +109,8 @@ async function changePackItems(packName, dataDeltaF) {
         dataChange._id = id;
         console.log(`update data:`);
         console.log(dataChange);
-        await pack.updateEntity(dataChange); 
+        if(!dryRun)
+            await pack.updateEntity(dataChange); 
     });
 }
 
