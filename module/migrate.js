@@ -191,7 +191,11 @@ export function migrateCompendium(compendium) {
 
 // Take an old hardcoded skill and translate it into data for a skill item
 export function convertOldSkill(name, skillData) {
-    return {name: name, type: "skill", data: {
+    let newName = name;
+    if(game.i18n.has("Skill"+name))
+        newName = game.i18n.localize("Skill"+name)
+
+    return {name: newName, type: "skill", data: {
         flavor: "",
         notes: "",
         level: skillData.value || 0,
