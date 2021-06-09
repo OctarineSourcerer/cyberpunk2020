@@ -174,7 +174,9 @@ export class CyberpunkActor extends Actor {
    * I couldn't figure out a single formula that'd work for it (cos of the weird widths of BT values)
    */
   static btm(body) {
-    if(body < 2) throw "Body type cannot be below 2."
+    if(body <= 2) {
+      return 0;
+    }
     switch(body) {
       case 2: return 0
       case 3: 
