@@ -109,7 +109,8 @@ export async function migrateActorData(actorData) {
                         .map(([name, subskill]) => {
                             // Martial arts has a space in the new skills :(
                             let prefix = parentName === "MartialArts" ? "Martial Arts" : parentName;
-                            return [`${prefix}: ${name}`, subskill]
+                            // We'll be having a different name than before, so localize here
+                            return [`${prefix}: ${localize("Skill"+name)}`, subskill]
                         }));
                 }
                 return acc;
