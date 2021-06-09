@@ -17,10 +17,10 @@ export function replaceIn(replaceIn, replaceWith) {
 export function localize(str) {
     return game.i18n.localize("CYBERPUNK." + str);
 }
-export function tryLocalize(str) {
+export function tryLocalize(str, defaultResult=str) {
     let key = "CYBERPUNK." + str;
     if(!game.i18n.has(key))
-        return str;
+        return defaultResult;
     else
         return game.i18n.localize(key);
 }
