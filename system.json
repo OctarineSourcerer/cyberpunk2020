@@ -88,9 +88,9 @@
         "entity": "Item"
       },
       {  
-        "name": "netrunnersstuff",
-        "label": "NetrunnersStuff",
-        "path": "./packs/netrunnersstuff.db",
+        "name": "netrunningEquipment",
+        "label": "Netrunning Equipment",
+        "path": "./packs/netrunningEquipment.db",
         "system": "cyberpunk2020",
         "entity": "Item"
       },
@@ -124,8 +124,8 @@
       },
       {
         "name": "sellthedead",
-        "label": "SellTheDead",
-        "path": "./packs/sellthedead.db",
+        "label": "Sell the Dead",
+        "path": "./packs/sellTheDead.db",
         "system": "cyberpunk2020",
         "entity": "Item"
       },
