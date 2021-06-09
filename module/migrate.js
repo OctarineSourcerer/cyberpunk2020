@@ -107,7 +107,8 @@ export async function migrateActorData(actorData) {
                     acc.push(...Object.entries(skill)
                         .filter(([name, subskill]) => name !== "group" && trained(subskill))
                         .map(([name, subskill]) => {
-                            // Martial arts has a space in the new skills :(
+                            // Groups with subskills don't exist anymore - they introduced a lot of complexity and heck.
+                            // We're including in the new name the 
                             let prefix = parentName === "MartialArts" ? "Martial Arts" : parentName;
                             // We'll be having a different name than before, so localize here
                             return [`${prefix}: ${localize("Skill"+name)}`, subskill]
@@ -134,11 +135,11 @@ export async function migrateActorData(actorData) {
         }, {});
         // Override core skills with any trained skill by the same name
         for(const trainedSkill of trainedSkills) {
-            // Old skills had localization keys as names - translate these before overriding. Martial arts specifically don't have keys though, so don't prepend Skill to this
+            // Old skills had localization keys as names, so we'll translate these
+            // Subskills have already been translated though, as we can only tell they're subskills while we were looping through them
             // This is what happens when you migrate legacy, kids, it hurts
-            let key = "Skill" + trainedSkill.name;
-            let nameOfOverride = game.i18n.has(key) ? localize(key) : trainedSkill.name
-            skillsToAdd[nameOfOverride] = trainedSkill;
+            let localizedName = tryLocalize("Skill"+trainedSkill.name, trainedSkill.name);
+            skillsToAdd[localizedName] = trainedSkill;
         }
         console.log(skillsToAdd);
         skillsToAdd = sortSkills(Object.values(skillsToAdd), SortOrders.Name);
