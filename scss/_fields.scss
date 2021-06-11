@@ -101,6 +101,17 @@
         margin:0px 3px 0px 3px;
     }
 
+    i.fas {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: small;
+        color: $fa-colour;
+
+        +.fas {
+            padding-left: 2px;
+        }
+    }
+
     label.larger {
         font-size: larger;
         font-style: italic;

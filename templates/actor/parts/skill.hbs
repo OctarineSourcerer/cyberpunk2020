@@ -1,23 +1,25 @@
 {{!-- Really I want there to be the same kind of deleting for items and skills, but there's not enough real estate to add the Xs, and too much interactivity to move things around. May need some UI thinking --}}
-<div class="field skill rc-item-delete" data-item-id="{{skill.id}}">
-    <label class="skill-roll action" data-skill-id="{{skill.id}}">{{skill.name}}</label>
+<div class="field skill" data-item-id="{{skill.id}}">
+    <label class="skill-roll action" data-skill-id="{{skill.id}}" style="flex: 4;">{{skill.name}}</label>
     {{!-- TODO: Add data-item-id for this to work --}}
-    <span class="flex-pad item-edit" data-item-id="{{skill.id}}"></span>
     {{#with skill.data.data}}
-        <span class="chip-toggle" data-skill-id="{{../skill.id}}">
-            <label>
-                <div>
-                    {{~#if isRoleSkill~}}
-                        {{CPLocal (properCase stat)}} [{{CPLocal "Role"}}]
-                    {{~else}}
-                        {{CPLocal (properCase stat)}}
-                    {{~/if~}}
-                </div>
-                <div class="chip-icon {{#unless isChipped}}inactive{{/unless}}"></div>
-                <input type="checkbox" data-skill-id="{{../skill.id}}" {{checked isChipped}}/>
-            </label>
-        </span>
+        <label class="chip-toggle" data-skill-id="{{../skill.id}}" style="flex: 1;">
+            <div>
+                {{~#if isRoleSkill~}}
+                    {{CPLocal (properCase stat)}} [{{CPLocal "Role"}}]
+                {{~else}}
+                    {{CPLocal (properCase stat)}}
+                {{~/if~}}
+            </div>
+            <div class="chip-icon {{#unless isChipped}}inactive{{/unless}}"></div>
+            <input type="checkbox" data-skill-id="{{../skill.id}}" {{checked isChipped}}/>
+        </label>
 
-        <input type="number" data-skill-id="{{../skill.id}}" class="skill-level smallnumber nogrow" value="{{#if isChipped}}{{chipLevel}}{{else}}{{level}}{{/if}}"/>
+    <span>
+        <i class="fas fa-trash item-delete" data-item-id="{{../skill.id}}"></i>
+        <i class="fas fa-edit item-edit" data-item-id="{{../skill.id}}"></i>
+    </span>
+
+    <input type="number" data-skill-id="{{../skill.id}}" class="skill-level smallnumber nogrow" value="{{#if isChipped}}{{chipLevel}}{{else}}{{level}}{{/if}}"/>
     {{/with}}
 </div>

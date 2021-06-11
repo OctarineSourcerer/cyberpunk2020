@@ -282,6 +282,15 @@ details[open] summary ~ * {
 .cyberpunk .field p {
   margin: 0px 3px 0px 3px;
 }
+.cyberpunk .field i.fas {
+  padding-left: 0;
+  padding-right: 0;
+  font-size: small;
+  color: rgba(255, 255, 255, 0.7);
+}
+.cyberpunk .field i.fas + .fas {
+  padding-left: 2px;
+}
 .cyberpunk .field label.larger {
   font-size: larger;
   font-style: italic;
@@ -505,24 +514,20 @@ div.statderive .value.rightborder {
   padding-top: 3px;
   padding-bottom: 3px;
 }
-.field.skill .chip-toggle {
-  padding: 0px;
-  display: contents;
-}
-.field.skill .chip-toggle label {
+.field.skill label.chip-toggle {
   background-color: black;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-right: 3px;
 }
-.field.skill .chip-toggle label > * {
+.field.skill label.chip-toggle > * {
   font-variant: all-small-caps;
 }
-.field.skill .chip-toggle input[type=checkbox] {
+.field.skill input[type=checkbox] {
   display: none;
 }
-.field.skill .chip-toggle .chip-icon {
+.field.skill .chip-icon {
   border: 0px;
   border-radius: 0px;
   background-size: cover;
