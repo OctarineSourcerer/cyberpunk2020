@@ -29,7 +29,7 @@ export function localizeParam(str, params) {
 }
 
 export function shortLocalize(str) {
-    let makeShort = game.i18n.has["CYBERPUNK." + str + "Short"] !== undefined;
+    let makeShort = !!game.i18n.has("CYBERPUNK." + str + "Short");
     return tryLocalize(makeShort ? str + "Short" : str);
 }
 /**
