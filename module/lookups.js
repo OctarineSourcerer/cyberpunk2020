@@ -239,3 +239,44 @@ export function meleeBonkOptions() {
         }
     ]]
 }
+
+/**
+ * Get a body type modifier from the body type stat (body)
+ * I couldn't figure out a single formula that'd work for it (cos of the weird widths of BT values)
+ */
+export function btmFromBT(body) {
+    if(body <= 2) {
+        return 0;
+      }
+      switch(body) {
+        // Very weak
+        case 2: return 0
+        // Weak
+        case 3: 
+        case 4: return 1
+        // Average
+        case 5:
+        case 6:
+        case 7: return 2;
+        // Strong
+        case 8:
+        case 9: return 3;
+        // Very strong
+        case 10: return 4;
+        default: return 5;
+      }
+}
+
+export function strengthDamageBonus(bt) {
+    let btm = btmFromBT(bt);
+    if(btm < 5)
+        return btm - 2;
+
+    switch(bt) {
+        case 11:
+        case 12: return 4 
+        case 13:
+        case 14: return 5
+        default: return 8
+    }
+}

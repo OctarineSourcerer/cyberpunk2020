@@ -365,6 +365,7 @@
     "CYBERPUNK.ItemDeleteConfirmText": "Are you sure you want to delete this item?",
 
     "CYBERPUNK.InitiativeTrackerWarning": "At the moment, rolling initiative from the sheet doesn't add to the encounter's combat tracker.",
+    "CYBERPUNK.KeyTechniqueWarning": "Key technique bonuses for martial arts aren't implemented yet",
     "CYBERPUNK.MigrateMessage": "Migrating data of {target}",
 
     "CYBERPUNK.NPC": "NPC"

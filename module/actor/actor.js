@@ -1,6 +1,7 @@
 import { makeD10Roll, Multiroll } from "../dice.js";
 import { SortOrders, sortSkills } from "./skill-sort.js";
 import { properCase, localize, deepLookup } from "../utils.js"
+import { btmFromBT } from "../lookups.js";
 
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
@@ -98,7 +99,7 @@ export class CyberpunkActor extends Actor {
     const body = stats.bt;
     body.carry = body.total * 10;
     body.lift = body.total * 40;
-    body.modifier = CyberpunkActor.btm(body.total);
+    body.modifier = btmFromBT(body.total);
     data.carryWeight = 0;
     equippedItems.forEach(item => {
       let weight = item.data.data.weight || 0;
@@ -160,21 +161,7 @@ export class CyberpunkActor extends Actor {
    * I couldn't figure out a single formula that'd work for it (cos of the weird widths of BT values)
    */
   static btm(body) {
-    if(body <= 2) {
-      return 0;
-    }
-    switch(body) {
-      case 2: return 0
-      case 3: 
-      case 4: return 1
-      case 5:
-      case 6:
-      case 7: return 2;
-      case 8:
-      case 9: return 3;
-      case 10: return 4;
-      default: return 5;
-    }
+    
   }
 
   // Current wound state. 0 for uninjured, going up by 1 for each new one. 1 for Light, 2 Serious, 3 Critical etc.
