@@ -74,7 +74,7 @@
     "primaryTokenAttribute": null,
     "secondaryTokenAttribute": null,
     "url": "https://github.com/OctarineSourcerer/cyberpunk2020",
-    "manifest": "https://raw.githubusercontent.com/OctarineSourcerer/cyberpunk2020/main/system.json",
-    "download": "https://github.com/OctarineSourcerer/cyberpunk2020/archive/v0.2.5.zip"
+    "manifest": "https://raw.githubusercontent.com/OctarineSourcerer/cyberpunk2020/foundry0.8/system.json",
+    "download": "https://github.com/OctarineSourcerer/cyberpunk2020/archive/v0.3.0-alpha.zip"
   }
   
