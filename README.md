@@ -1,5 +1,5 @@
 # cyberpunk2020 (for FoundryVTT)
-*A note about Foundry 0.8.x. Migration's in process, and mostly done, but there are some evasive bugs with migration and using items-as-skills that are making it take longer than usual*
+*A note about Foundry 0.8.x. Migration's in process, and mostly done, but there are some evasive bugs with migration and using items-as-skills that I want to be **sure** are ironed out first, and that's taking some testing*
 
 R. Talsorian Games' [Cyberpunk 2020](https://talsorianstore.com/products/cyberpunk-2020) system, but for FoundryVTT. Time to get chromed, and frag some slags.
 
