@@ -1,5 +1,6 @@
 import { weaponTypes, sortedAttackTypes, concealability, availability, reliability, attackSkills, meleeAttackTypes, getStatNames } from "../lookups.js";
 import { formulaHasDice } from "../dice.js";
+import { localize } from "../utils.js";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -70,7 +71,7 @@ export class CyberpunkItemSheet extends ItemSheet {
     data.concealabilities = Object.values(concealability);
     data.availabilities = Object.values(availability);
     data.reliabilities = Object.values(reliability);
-    data.attackSkills = [...attackSkills[this.item.data.data.weaponType], ...(this.actor?.trainedMartials() || [])];
+    data.attackSkills = [...attackSkills[this.item.data.data.weaponType].map(x => localize("Skill"+x)), ...(this.actor?.trainedMartials() || [])];
 
     // TODO: Be not so inefficient for this
     if(!data.attackSkills.length && this.actor) {
