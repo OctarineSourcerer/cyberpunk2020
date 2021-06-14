@@ -1,5 +1,5 @@
 # cyberpunk2020 (for FoundryVTT)
-*A note about Foundry 0.8.x. Migration's in process, and mostly done, but there are some evasive bugs with migration and using items-as-skills that I want to be **sure** are ironed out first, and that's taking some testing*
+*Finally on 0.8.6!*
 
 R. Talsorian Games' [Cyberpunk 2020](https://talsorianstore.com/products/cyberpunk-2020) system, but for FoundryVTT. Time to get chromed, and frag some slags.
 
@@ -11,9 +11,10 @@ Here's the gist of what's there so far:
 * A character sheet with stats, damage tracking, gear, combat tab, searchable skills, and cyberware.
   * Cyberware does not currently affect stats - it will probably involve working with Active Effects, but no promises, as I have no idea how to implement that framework yet.
 * Consistent design reminiscent of the Core Rulebook, with UI design and user experience taken into heavy consideration.
-* Skills sortable by either name or stat. You can swap between chipped and not, with both being stored independently (so you can chip/unchip). Rollable.
+* Skills as items, sortable by either name or stat. Full tracking of chipped/unchipped, IP, etc. Rollable.
+  * Skills with points are shown first
 * Stopping power and encumbrance tracked for armor.
-  * SP is currently just added together for each equipped piece of armor. Proportional armor will possibly come later.
+  * SP is currently just added together for each equipped piece of armor. Proportional armor will come later.
 * Ranged attacks for single shots, as well as three-round burst and autofire for automatic weapons.
 * Easy modifier selection when making ranged attacks.
 * A start of cyberpunk's melee system
@@ -23,9 +24,6 @@ Yet to come:
 * Attack hit roll automatically translating to the name of the hit location.
 * Target selection for attacks.
 * Martial arts key moves
-* Non-0-point skills to be shown first.
-* In progress: Improvement points for skills, custom skills. 
-  * The biggest thing here is figuring out a non-cluttered UI for these.
 * Template area selection for area attacks
 * Netrunning: Please dear gods, I've not used it in a campaign so it's a little far down my list
 * Mech sheet: Yes this will come Ste, likely after Okay Weapon Rolls and the combat tab.
