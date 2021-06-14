@@ -16,12 +16,13 @@ Here's the gist of what's there so far:
   * SP is currently just added together for each equipped piece of armor. Proportional armor will possibly come later.
 * Ranged attacks for single shots, as well as three-round burst and autofire for automatic weapons.
 * Easy modifier selection when making ranged attacks.
+* A start of cyberpunk's melee system
 
 Yet to come:
 * Ammo expenditure and reloads easily doable from chat messages.
 * Attack hit roll automatically translating to the name of the hit location.
 * Target selection for attacks.
-* The smorgasbord that is cyberpunk's melee system.
+* Martial arts key moves
 * Non-0-point skills to be shown first.
 * In progress: Improvement points for skills, custom skills. 
   * The biggest thing here is figuring out a non-cluttered UI for these.

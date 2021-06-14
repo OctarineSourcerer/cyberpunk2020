@@ -1,5 +1,5 @@
 import { martialOptions, meleeAttackTypes, meleeBonkOptions, rangedModifiers, weaponTypes } from "../lookups.js"
-import { localize } from "../utils.js"
+import { localize, localizeParam } from "../utils.js"
 import { ModifiersDialog } from "../dialog/modifiers.js"
 import { SortOrders } from "./skill-sort.js";
 
@@ -27,34 +27,42 @@ export class CyberpunkActorSheet extends ActorSheet {
   /** @override */
   getData() {
     // the data THIS returns is only available in this class and the template
-    const data = super.getData();
+    const sheetData = super.getData();
+    const actorData = sheetData.data;
+    sheetData.actor = actorData;
+    sheetData.data = actorData.data;
 
     // Prepare items.
     if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
-      // Give space for temporary stuff. Delete on sheet close?
-      if(data.data.transient == null) {
-        data.data.transient = { skillFilter: "" };
+      this._prepareCharacterItems(sheetData);
+      this._addWoundTrack(sheetData);
+      // Reset search text if it's null or we just rendered for the first time
+      if(sheetData.data.transient == null) {
+        sheetData.data.transient = { skillFilter: "" };
       }
-      this._prepareCharacterItems(data);
-      this._addWoundTrack(data);
-      data.skillsSort = this.actor.getFlag('cyberpunk2020', 'skillSortOrder') || "Name";
-      data.skillsSortChoices = Object.keys(SortOrders);
-      data.skillDisplayList = this._filterSkills(data);
-      data.weaponTypes = weaponTypes;
+      this._prepareSkills(sheetData);
+      // All this extra lookup is cos we can't store a list of entities in data :(
+      sheetData.weaponTypes = weaponTypes;
     }
+    return sheetData;
+  }
 
-    return data;
+  _prepareSkills(sheetData) {
+    sheetData.skillsSort = this.actor.data.skillsSortedBy || "Name";
+    sheetData.skillsSortChoices = Object.keys(SortOrders);
+    sheetData.filteredSkillIDs = this._filterSkills(sheetData);
+    sheetData.skillDisplayList = sheetData.filteredSkillIDs.map(id => this.actor.items.get(id));
   }
 
   // Handle searching skills
-  _filterSkills(data) {
-    if(data.data.transient.skillFilter == null) {
-      data.data.transient.skillFilter = "";
-    }
-    let upperSearch = data.data.transient.skillFilter.toUpperCase();
-    const fullList = data.data.sortedSkillView || Object.keys(data.data.skills);
+  _filterSkills(sheetData) {
+    let id = sheetData.actor._id;
 
-    let listToFilter = fullList;
+    if(sheetData.data.transient.skillFilter == null) {
+      sheetData.data.transient.skillFilter = "";
+    }
+    let upperSearch = sheetData.data.transient.skillFilter.toUpperCase();
+    let listToFilter = sheetData.data.sortedSkillIDs || game.actors.get(id).itemTypes.skill.map(skill => skill.id);
 
     // Only filter if we need to
     if(upperSearch === "") {
@@ -62,12 +70,13 @@ export class CyberpunkActorSheet extends ActorSheet {
     }
     else {
       // If we searched previously and the old search had results, we can filter those instead of the whole lot
-      if(data.data.transient.oldSearch != null 
-        && data.skillDisplayList != null
+      if(sheetData.data.transient.oldSearch != null 
+        && sheetData.filteredSkillIDs != null
         && upperSearch.startsWith(oldSearch)) {
-        listToFilter = data.skillDisplayList; 
+        listToFilter = sheetData.filteredSkillIDs; 
       }
-      return listToFilter.filter(skillName => {
+      return listToFilter.filter(id => {
+        let skillName = this.actor.items.get(id).name;
         return skillName.toUpperCase().includes(upperSearch);
       });
     }
@@ -88,32 +97,18 @@ export class CyberpunkActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareCharacterItems(sheetData) {
-    const actorData = sheetData.actor;
+    // We have to look the actor up, because the sheet's actor doesn't have itemTypes on, and I'd rather not reclassify all the skills etc when there's literally 100 of them
+    let id = sheetData.actor._id;
+    let sortedItems = game.actors.get(id).itemTypes;
 
-    // Initialize containers.
-    const misc = [];
-    const weapons = [];
-    const armor = [];
-    const cyberware = [];
-
-    const targetLookup = {
-      "weapon": weapons,
-      "armor": armor,
-      "cyberware": cyberware,
-      "misc": misc
-    };
-
-    actorData.items.forEach(item => {
-      (targetLookup[item.type] || misc).push(item);
-    });
-
-    actorData.data.gear = {
-      weapons: weapons,
-      armor: armor,
-      cyberware: cyberware,
-      misc: misc,
-      all: [weapons],
-      cyberCost: cyberware.reduce((a,b) => a + b.data.cost, 0)
+    // Does this copy need to be done with itemTypes being a thing?
+    sheetData.gear = {
+      weapons: sortedItems.weapon,
+      armor: sortedItems.armor,
+      cyberware: sortedItems.cyberware,
+      misc: sortedItems.misc,
+      all: [sortedItems.weapons],
+      cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.data.data.cost, 0)
     };
 
   }
@@ -128,9 +123,27 @@ export class CyberpunkActorSheet extends ActorSheet {
    */
     function getEventItem(sheet, ev) {
       let itemId = ev.currentTarget.dataset.itemId;
-      return sheet.actor.getOwnedItem(itemId);
+      return sheet.actor.items.get(itemId);
     }
-    
+    // TODO: Check if shift is held to skip dialog?
+    function deleteItemDialog(ev) {
+      ev.stopPropagation();
+      let item = getEventItem(this, ev);
+      let confirmDialog = new Dialog({
+        title: localize("ItemDeleteConfirmTitle"),
+        content: `<p>${localizeParam("ItemDeleteConfirmText", {itemName: item.name})}</p>`,
+        buttons: {
+          yes: {
+            label: localize("Yes"),
+            callback: () => item.delete()
+          },
+          no: { label: localize("No") },
+        },
+        default:"no"
+      });
+      confirmDialog.render(true);
+    }
+
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
     
@@ -142,13 +155,30 @@ export class CyberpunkActorSheet extends ActorSheet {
       let statName = ev.currentTarget.dataset.statName;
       this.actor.rollStat(statName);
     });
+    // TODO: Refactor these skill interactivity stuff into their own methods
+    html.find(".skill-level").click((event) => event.target.select()).change((event) => {
+      let skill = this.actor.items.get(event.currentTarget.dataset.skillId);
+      let target = skill.data.data.isChipped ? "data.chipLevel" : "data.level";
+      let updateData = {_id: skill.id};
+      updateData[target] = parseInt(event.target.value, 10);
+      this.actor.updateEmbeddedDocuments("Item", [updateData]);
+      // Mild hack to make sheet refresh and re-sort: the ability to do that should just be put in 
+    });
+    html.find(".chip-toggle").click(ev => {
+      let skill = this.actor.items.get(ev.currentTarget.dataset.skillId);
+      this.actor.updateEmbeddedDocuments("Item", [{
+        _id: skill.id,
+        "data.isChipped": !skill.data.data.isChipped
+      }]);
+    });
+
     html.find(".skill-sort > select").change(ev => {
       let sort = ev.currentTarget.value;
       this.actor.sortSkills(sort);
     });
     html.find(".skill-roll").click(ev => {
-      let skillName = ev.currentTarget.dataset.skillName;
-      this.actor.rollSkill(skillName);
+      let id = ev.currentTarget.dataset.skillId;
+      this.actor.rollSkill(id);
     });
     html.find(".roll-initiative").click(ev => {
       this.actor.rollInitiative();
@@ -174,24 +204,8 @@ export class CyberpunkActorSheet extends ActorSheet {
       let item = getEventItem(this, ev);
       item.sheet.render(true);
     });
-    html.find('.item-delete').click(ev => {
-      ev.stopPropagation();
-      let item = getEventItem(this, ev);
-      let confirmDialog = new Dialog({
-        title: localize("ItemDeleteConfirmTitle"),
-        content: `<p>${localize("ItemDeleteConfirmText")}</p>`,
-        buttons: {
-          yes: {
-            label: localize("Yes"),
-            callback: () => item.delete()
-          },
-          no: { label: localize("No") },
-        },
-        default:"no"
-      });
-      confirmDialog.render(true);
-    });
-
+    html.find('.item-delete').click(deleteItemDialog.bind(this));
+    html.find('.rc-item-delete').bind("contextmenu", deleteItemDialog.bind(this)); 
 
     html.find('.fire-weapon').click(ev => {
       ev.stopPropagation();

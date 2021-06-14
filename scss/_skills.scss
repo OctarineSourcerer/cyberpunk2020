@@ -22,34 +22,38 @@
         padding-top:3px; 
         padding-bottom: 3px;
     }
-
-    .chip-toggle { 
-        padding: 0px;
-        display: contents;
-
-        label {
-            background-color: $text-colour;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding-right: 3px;
-            >* {
-                font-variant: all-small-caps;
-            }
-        }
-        
-        input[type="checkbox"] {
-            display: none;
-        } 
-        .chip-icon {
-            // This just has to be less than the initial height of the bars...
-            @include image-bg;
-            height:1.5em;
-            width: 1.5em;
-            background-image: url(../img/chip.png);
+    >label {
+        &.skill-roll {
+            flex: 4;
         }
     }
-    
+
+
+    label.chip-toggle {
+        background-color: $text-colour;
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        align-items: center;
+        padding-right: 3px;
+        >* {
+            font-variant: all-small-caps;
+        }
+        .skill-stat-display {
+            flex: 1;
+        }
+    }
+        
+    input[type="checkbox"] {
+        display: none;
+    } 
+    .chip-icon {
+        // This just has to be less than the initial height of the bars...
+        @include image-bg;
+        height:1.5em;
+        width: 1.5em;
+        background-image: url(../img/chip.png);
+    }
 }
 
 .skill-group .field.skill {
