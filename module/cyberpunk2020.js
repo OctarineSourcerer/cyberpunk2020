@@ -17,8 +17,7 @@ Hooks.once('init', async function () {
             CyberpunkItem,
         },
         // A manual migrateworld.
-        migrateWorld: migrations.migrateWorld,
-        makeSkillsPack: makeSkillsCompendium
+        migrateWorld: migrations.migrateWorld
     };
 
     // Define custom Entity classes

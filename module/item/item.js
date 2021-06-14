@@ -366,7 +366,9 @@ export class CyberpunkItem extends Item {
   __meleeBonk(attackMods) {
     // Just doesn't have a DC - is contested instead
     let attackRoll = this.attackRoll(attackMods);
-    let damageRoll = new Roll(this.data.data.damage);
+    let damageRoll = new Roll(`${this.data.data.damage}+@strengthBonus`, {
+      strengthBonus: strengthDamageBonus(this.actor.data.data.stats.bt.total)
+    });
     let locationRoll = rollLocation(attackMods.targetActor, attackMods.targetArea);
 
     let bigRoll = new Multiroll(this.name, this.data.data.flavor)
