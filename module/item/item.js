@@ -383,6 +383,7 @@ export class CyberpunkItem extends Item {
     let actorData = actor.data.data;
     let action = attackMods.action;
     let martialArt = attackMods.martialArt;
+    let isMartial = martialArt != "Brawling";
 
     // Will be something this line once I add the martial arts bonuses. None for brawling, remember
     // let martialBonus = this.actor?.skills.MartialArts[martialArt].bonuses[action];
