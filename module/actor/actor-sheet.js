@@ -99,16 +99,16 @@ export class CyberpunkActorSheet extends ActorSheet {
   _prepareCharacterItems(sheetData) {
     // We have to look the actor up, because the sheet's actor doesn't have itemTypes on, and I'd rather not reclassify all the skills etc when there's literally 100 of them
     let id = sheetData.actor._id;
-    let sortedItems = game.actors.get(id).itemTypes;
+    let sortedItems = game.actors.get(id)?.itemTypes;
 
     // Does this copy need to be done with itemTypes being a thing?
     sheetData.gear = {
-      weapons: sortedItems.weapon,
-      armor: sortedItems.armor,
-      cyberware: sortedItems.cyberware,
-      misc: sortedItems.misc,
-      all: [sortedItems.weapons],
-      cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.data.data.cost, 0)
+      weapons: sortedItems?.weapon || [],
+      armor: sortedItems?.armor || [],
+      cyberware: sortedItems?.cyberware || [],
+      misc: sortedItems?.misc || [],
+      all: [sortedItems?.weapons] || [],
+      cyberCost: sortedItems?.cyberware.reduce((a,b) => a + b.data.data.cost, 0) || 0
     };
 
   }
