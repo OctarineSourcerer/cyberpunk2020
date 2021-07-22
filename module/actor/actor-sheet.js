@@ -103,12 +103,12 @@ export class CyberpunkActorSheet extends ActorSheet {
 
     // Does this copy need to be done with itemTypes being a thing?
     sheetData.gear = {
-      weapons: sortedItems?.weapon || [],
-      armor: sortedItems?.armor || [],
-      cyberware: sortedItems?.cyberware || [],
-      misc: sortedItems?.misc || [],
-      all: [sortedItems?.weapons] || [],
-      cyberCost: sortedItems?.cyberware.reduce((a,b) => a + b.data.data.cost, 0) || 0
+      weapons: sortedItems.weapon,
+      armor: sortedItems.armor,
+      cyberware: sortedItems.cyberware,
+      misc: sortedItems.misc,
+      all: [sortedItems.weapons],
+      cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.data.data.cost, 0)
     };
 
   }
