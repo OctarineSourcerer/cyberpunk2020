@@ -136,7 +136,8 @@ export async function migrateActorData(actorData) {
                 return acc;
             }, []);
 
-        trainedSkills = trainedSkills.map(([name, skillData]) => convertOldSkill(name, skillData))
+        knownMartialSet = Set(defaultMartialArts);
+        trainedSkills = trainedSkills.map(([name, skillData]) => convertOldSkill(name, skillData, knownMartialSet))
     }
     console.log("Trained skills:");
     console.log(trainedSkills);
@@ -191,6 +192,9 @@ export function migrateItemData(itemData) {
             updateData["data.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
         }
     }
+    else if(itemData.type == "skill") {
+        
+    }
     return updateData;
 }
 
@@ -210,8 +214,26 @@ export function migrateCompendium(compendium) {
     });
 }
 
-// Take an old hardcoded skill and translate it into data for a skill item
-export function convertOldSkill(name, skillData, localizeName=true) {
+// A set of translation keys for skills that are martial arts
+let defaultMartialArts = [
+    "Aikido", "AnimalKungFu", "Boxing", "Capoeira", "ChoiLiFut", "Judo", "Karate", "Savate", "TaeKwonDo", "ThaiKickBoxing", "Wrestling"
+].map(e => "Skill");
+let translatedMartials = []
+function translatedMartials() {
+    if(translatedMartials == [])
+        translatedMartials = defaultMartialArts.map(localize);
+
+    return translatedMartials;
+}
+/**
+ * Take an old hardcoded skill (not an item) and translate it into data for a skill item
+ * @param {*} name Name of the hardcoded skill
+ * @param {*} skillData Data of the hardcoded skill
+ * * @param {*} knownMartials Set of known martial arts
+ * @param {*} localizeName Whether to try localizing the name. Default true.
+ * @returns 
+ */
+export function convertOldSkill(name, skillData, knownMartials, localizeName=true) {
     let newName = localizeName ? tryLocalize("Skill"+name, name) : name;
     return {name: newName, type: "skill", data: {
         // Player-determined, change over time
@@ -226,6 +248,7 @@ export function convertOldSkill(name, skillData, localizeName=true) {
         diffMod: skillData.diffMod || 1, // No skills have those currently.
         isRoleSkill: skillData.isSpecial || false,
         stat: skillData.stat,
-        isMartial: skillData.isMartial || false
+        // Old hardcoded skills weren't translated, so we don't need to translate them for this
+        isMartialArt: skillData.isMartialArt || knownMartials?.has("Skill" + name) || false
     }};
 }

@@ -813,7 +813,7 @@
 			"diffMod": 1,
 			"isChipped": false,
 			"isRoleSkill": false,
-			"isMartial": false,
+			"isMartialArt": false,
 			"stat": "cool"
 		},
 		"weapon": {
