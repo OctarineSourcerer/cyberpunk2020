@@ -218,8 +218,7 @@ export function migrateCompendium(compendium) {
 let defaultMartialArts = [
     "Aikido", "AnimalKungFu", "Boxing", "Capoeira", "ChoiLiFut", "Judo", "Karate", "Savate", "TaeKwonDo", "ThaiKickBoxing", "Wrestling"
 ].map(e => "Skill");
-let translatedMartials = []
-function translatedMartials() {
+function getTranslatedMartials() {
     if(translatedMartials == [])
         translatedMartials = defaultMartialArts.map(localize);
 
