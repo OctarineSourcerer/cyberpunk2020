@@ -163,6 +163,13 @@
       "path": "packs/weapons-melee.db",
       "system": "cyberpunk2020",
       "entity": "Item"
+    },
+    {
+      "name": "weapons-exotic",
+      "label": "Weapons - Exotic",
+      "path": "packs/weapons-exotic.db",
+      "system": "cyberpunk2020",
+      "entity": "Item"
     }
   ],
   "languages": [
