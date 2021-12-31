@@ -26,16 +26,19 @@
                 </div>
             </div>
             {{/with}}
+            {{#with data.lifepath.ethnicity}}
+            {{var "ethnicity" "data.lifepath.ethnicity"}}
             <div class="field-list one-col">
                 <div class="field">
-                    <label for="data.lifepath.ethnicity.origin">{{CPLocal 'LifepathEthnicity'}}</label>
-                    <input name="data.lifepath.ethnicity.origin" type="text" value="{{data.lifepath.ethnicity.origin}}">
+                    <label for="{{ethnicity}}.origin">{{CPLocal 'LifepathEthnicity'}}</label>
+                    <input name="{{ethnicity}}.origin" type="text" value="{{origin}}">
                 </div>
                 <div class="field">
-                    <label for="data.lifepath.ethnicity.language">{{CPLocal 'LifepathLanguage'}}</label>
-                    <input name="data.lifepath.ethnicity.language" type="text" value="{{data.lifepath.ethnicity.language}}">
+                    <label for="{{ethnicity}}.language">{{CPLocal 'LifepathLanguage'}}</label>
+                    <input name="{{ethnicity}}.language" type="text" value="{{language}}">
                 </div>
             </div>
+            {{/with}}
         </div>
         <div class="tab motivations flexcol" data-group="lifepath" data-tab="motivations">
             {{#with data.lifepath.personalMotivations}}
