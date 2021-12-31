@@ -2,10 +2,10 @@ export class LifepathUtils {
 
 
   /**
-   * bindHTMLEvents will bind the events asccociated with lifepath
-   * on the actor sheet. This is mostly for the add/remove/editing
+   * Binds the events associated with lifepath on the actor sheet. 
+   * This is mostly for the add/remove/editing
    * of siblings and life events as these are array objects that
-   * handlebar/foundryvtt doesn't have great apis for.
+   * handlebar/foundryvtt doesn't have great APIs for.
    *
    * @static
    * @param {*} html - html that need to find the element and bind event to.
