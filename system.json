@@ -3,7 +3,7 @@
   "title": "Cyberpunk 2020",
   "description": "R. Talsorian Games' Cyberpunk 2020 System",
   "version": "0.3.2",
-  "compatibleCoreVersion": "0.9",
+  "compatibleCoreVersion": "9",
   "templateVersion": 2,
   "author": "OctarineSourcerer",
   "scripts": [],
