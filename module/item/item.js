@@ -241,7 +241,7 @@ export class CyberpunkItem extends Item {
   }
 
   // Roll just the attack roll of a weapon, return it
-  attackRoll(attackMods) {
+  async attackRoll(attackMods) {
     let data = this.data.data;
     let isRanged = this.isRanged();
 
@@ -259,10 +259,10 @@ export class CyberpunkItem extends Item {
       attackTerms.push(data.accuracy);
     }
 
-    return makeD10Roll(attackTerms, {
+    return await makeD10Roll(attackTerms, {
       stats: this.actor.data.data.stats,
       attackSkill: this.actor.getSkillVal(this.data.data.attackSkill)
-    }).roll();
+    }).evaluate();
   }
 
   /**
@@ -270,12 +270,12 @@ export class CyberpunkItem extends Item {
    * @param {*} attackMods The modifiers for an attack. fireMode, ambush, etc - look in lookups.js for the specification of these
    * @returns 
    */
-  __fullAuto(attackMods) {
+  async __fullAuto(attackMods) {
     let data = this.data.data;
     // The kind of distance we're attacking at, so we can display Close: <50m or something like that
     let actualRangeBracket = rangeResolve[attackMods.range](data.range);
     let DC = rangeDCs[attackMods.range];
-    let attackRoll = this.attackRoll(attackMods);
+    let attackRoll = await this.attackRoll(attackMods);
 
     let roundsFired = Math.min(data.shotsLeft, data.rof);
     let roundsHit = Math.min(roundsFired, attackRoll.total - DC);
@@ -285,8 +285,8 @@ export class CyberpunkItem extends Item {
     let areaDamages = {};
     // Roll damage for each of the bullets that hit
     for(let i = 0; i < roundsHit; i++) {
-      let damageRoll = new Roll(data.damage).roll();
-      let location = rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit; 
+      let damageRoll = await new Roll(data.damage).evaluate();
+      let location = await rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit; 
       if(!areaDamages[location]) {
         areaDamages[location] = [];
       }
@@ -309,12 +309,12 @@ export class CyberpunkItem extends Item {
     return roll;
   }
 
-  __threeRoundBurst(attackMods) {
+  async __threeRoundBurst(attackMods) {
     let data = this.data.data;
     // The kind of distance we're attacking at, so we can display Close: <50m or something like that
     let actualRangeBracket = rangeResolve[attackMods.range](data.range);
     let DC = rangeDCs[attackMods.range];
-    let attackRoll = this.attackRoll(attackMods);
+    let attackRoll = await this.attackRoll(attackMods);
 
     let roundsFired = Math.min(data.shotsLeft, data.rof, 3);
     let attackHits = attackRoll.total >= DC;
@@ -322,10 +322,10 @@ export class CyberpunkItem extends Item {
     let roundsHit;
     if(attackHits) {
       // In RAW this is 1d6/2, but this is functionally the same
-      roundsHit = new Roll("1d3").roll();
+      roundsHit = await new Roll("1d3").evaluate();
       for(let i = 0; i < roundsHit.total; i++) {
-        let damageRoll = new Roll(data.damage).roll();
-        let location = rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit;
+        let damageRoll = await new Roll(data.damage).evaluate();
+        let location = await rollLocation(attackMods.targetActor, attackMods.targetArea).areaHit;
         if(!areaDamages[location]) {
           areaDamages[location] = [];
         }
@@ -348,12 +348,12 @@ export class CyberpunkItem extends Item {
     roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
   }
 
-  __semiAuto(attackMods) {
+  async __semiAuto(attackMods) {
     // The range we're shooting at
     let DC = rangeDCs[attackMods.range];
-    let attackRoll = this.attackRoll(attackMods);
+    let attackRoll = await this.attackRoll(attackMods);
     let damageRoll = new Roll(this.data.data.damage);
-    let locationRoll = rollLocation(attackMods.targetActor, attackMods.targetArea);
+    let locationRoll = await rollLocation(attackMods.targetActor, attackMods.targetArea);
 
     let bigRoll = new Multiroll(this.name, this.data.data.flavor)
       .addRoll(new Roll(`${DC}`), {name: localize("ToHit")})
@@ -363,13 +363,13 @@ export class CyberpunkItem extends Item {
     bigRoll.defaultExecute({img:this.img});
     return bigRoll;
   }
-  __meleeBonk(attackMods) {
+  async __meleeBonk(attackMods) {
     // Just doesn't have a DC - is contested instead
-    let attackRoll = this.attackRoll(attackMods);
+    let attackRoll = await this.attackRoll(attackMods);
     let damageRoll = new Roll(`${this.data.data.damage}+@strengthBonus`, {
       strengthBonus: strengthDamageBonus(this.actor.data.data.stats.bt.total)
     });
-    let locationRoll = rollLocation(attackMods.targetActor, attackMods.targetArea);
+    let locationRoll = await (attackMods.targetActor, attackMods.targetArea);
 
     let bigRoll = new Multiroll(this.name, this.data.data.flavor)
       .addRoll(attackRoll, {name: localize("Attack")})
@@ -378,7 +378,7 @@ export class CyberpunkItem extends Item {
     bigRoll.defaultExecute({img:this.img});
     return bigRoll;
   }
-  __martialBonk(attackMods) {
+  async __martialBonk(attackMods) {
     let actor = this.actor;
     let actorData = actor.data.data;
     let action = attackMods.action;
@@ -411,7 +411,7 @@ export class CyberpunkItem extends Item {
     }
 
     if(damageFormula !== "") {
-      let loc = rollLocation(attackMods.targetArea);
+      let loc = await rollLocation(attackMods.targetArea);
       results.addRoll(loc.roll, {name: localize("Location"), flavor: loc.areaHit});
       results.addRoll(new Roll(damageFormula, {
         strengthBonus: strengthDamageBonus(actorData.stats.bt.total),

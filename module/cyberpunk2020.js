@@ -20,7 +20,7 @@ Hooks.once('init', async function () {
         migrateWorld: migrations.migrateWorld
     };
 
-    // Define custom Entity classes
+    // Define custom Document classes
     CONFIG.Actor.documentClass = CyberpunkActor;
     CONFIG.Item.documentClass = CyberpunkItem;
 
