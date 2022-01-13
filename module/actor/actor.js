@@ -4,7 +4,7 @@ import { btmFromBT } from "../lookups.js";
 import { properCase, localize, getDefaultSkills } from "../utils.js"
 
 /**
- * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
+ * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
 export class CyberpunkActor extends Actor {

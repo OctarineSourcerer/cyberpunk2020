@@ -45,7 +45,7 @@ async function migrateDocument(document, withUpdataData = defaultDataUse) {
     try {
         let migrateDataFunc = updateFuncs[document.documentName];
         if(migrateDataFunc === undefined) {
-            console.log(`No migrate function for entity with documentName field "${document.documentName}"`);
+            console.log(`No migrate function for document with documentName field "${document.documentName}"`);
         }
         const updateData = await migrateDataFunc(document.data);
         withUpdataData(document, updateData);
@@ -59,7 +59,7 @@ async function migrateDocument(document, withUpdataData = defaultDataUse) {
 
 // For now, actors. We can do migrate world as a total of them all. Nabbed framework of code from 5e
 /**
- * Migrate a single Actor entity to incorporate latest data model changes
+ * Migrate a single Actor document to incorporate latest data model changes
  * Return an Object of updateData to be applied
  * @param {object} actorData    The actor data object to update
  * @return {Object}         The updateData to apply
@@ -181,12 +181,12 @@ export function migrateCompendium(compendium) {
         return
     }
     console.log(`Updating entities in compendium ${compendium.metadata.label}`);
-    let entityIds = compendium.index.map(e => e.id);
-    entityIds.forEach(async (id) => {
-        let entity = await compendium.getEntity(id);
-        migrateDocument(entity, async (entity, updateData) => {
+    let documentIDs = compendium.index.map(e => e.id);
+    documentIDs.forEach(async (id) => {
+        let document = await compendium.getDocument(id);
+        migrateDocument(document, async (document, updateData) => {
             updateData.id = id;
-            await compendium.updateEntity(updateData);
+            await compendium.updateDocument(updateData);
         });
     });
 }
