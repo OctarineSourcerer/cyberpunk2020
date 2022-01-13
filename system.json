@@ -15,147 +15,147 @@
       "label": "Roll Tables",
       "system": "cyberpunk2020",
       "path": "./packs/roll-tables.db",
-      "entity": "RollTable"
+      "type": "RollTable"
     },
     {
       "name": "default-skills",
       "label": "Default Skills",
       "system": "cyberpunk2020",
       "path": "./packs/default-skills.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "role-skills",
       "label": "Role Skills",
       "system": "cyberpunk2020",
       "path": "./packs/role-skills.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "pistols",
       "label": "Pistols",
       "path": "./packs/pistols.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "rifles",
       "label": "Rifles",
       "path": "./packs/rifles.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "cyberware",
       "label": "Cyberware",
       "path": "./packs/cyberware.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "chipware",
       "label": "Chipware",
       "path": "./packs/chipware.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "communication",
       "label": "Communication",
       "path": "./packs/communication.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "electronics",
       "label": "Electronics",
       "path": "./packs/electronics.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "entertainment",
       "label": "Entertainment",
       "path": "./packs/entertainment.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "fashion",
       "label": "Fashion",
       "path": "./packs/fashion.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "furnishing",
       "label": "Furnishing",
       "path": "./packs/furnishing.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "medical",
       "label": "Medical",
       "path": "./packs/medical.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {  
       "name": "netrunningEquipment",
       "label": "Netrunning Equipment",
       "path": "./packs/netrunningEquipment.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "security",
       "label": "Security",
       "path": "./packs/security.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "surveillance",
       "label": "Surveillance",
       "path": "./packs/surveillance.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "tools",
       "label": "Tools",
       "path": "./packs/tools.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "rentalandservices",
       "label": "Rental&Services",
       "path": "./packs/rentalandservices.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "sellthedead",
       "label": "Sell the Dead",
       "path": "./packs/sellTheDead.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "armor",
       "label": "Armor",
       "path": "./packs/armor.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "vehicles",
       "label": "Vehicles",
       "path": "./packs/vehicles.db",
       "system": "cyberpunk2020",
-      "entity": "Item"
+      "type": "Item"
     }
   ],
   "languages": [
