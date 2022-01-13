@@ -136,7 +136,7 @@ export async function migrateActorData(actorData) {
                 return acc;
             }, []);
 
-        knownMartialSet = Set(defaultMartialArts);
+        let knownMartialSet = new Set(defaultMartialArts);
         trainedSkills = trainedSkills.map(([name, skillData]) => convertOldSkill(name, skillData, knownMartialSet))
     }
     console.log("Trained skills:");
