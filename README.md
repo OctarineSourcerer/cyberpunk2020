@@ -1,5 +1,6 @@
 # cyberpunk2020 (for FoundryVTT)
-*Finally on 0.8.6!*
+*Finally on 0.8.6! ...hopefully v9 now too!*
+**A note on dev time: For the past while, I've had enough going on that this has been on the backburner. I'm now taking time off from those other things to recover, but don't know how much time I'll be throwing at CP2020. Will still try to address bugs when my brain cooperates, and fingers crossed this situation changes.**
 
 R. Talsorian Games' [Cyberpunk 2020](https://talsorianstore.com/products/cyberpunk-2020) system, but for FoundryVTT. Time to get chromed, and frag some slags.
 
