@@ -112,7 +112,7 @@ export class CyberpunkItemSheet extends ItemSheet {
     html.find(".decel").click(() => this.item.accel(true));
     
     // roll for humanity loss on cyberware 
-    html.find('.humanity-cost-roll').click( ev => {
+    html.find('.humanity-cost-roll').click(async ev => {
       ev.stopPropagation();
       let itemId = this.object.data.id;
       const cyber = this.actor.items.get(itemId);
@@ -121,7 +121,7 @@ export class CyberpunkItemSheet extends ItemSheet {
       // determine if humanity cost is a number or dice
       if (formulaHasDice(hc)) {
         // roll the humanity cost
-        let r = new Roll(hc).roll();
+        let r = await new Roll(hc).evaluate();
         loss = r.total ? r.total : 0;
       } else {
         const num = Number(hc);

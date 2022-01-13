@@ -99,7 +99,7 @@ export function classifyRollDice(roll) {
     }
 
     /**
-     * 
+     * Note: You should provide either unevaluated Rolls, or fulfilledrolls (not promises). As things stand, promises will break a multiroll.
      * @param {*} speaker The speaker on the card for this multiroll
      * @param {string} templatePath Path to the template. eg systems/cyberpunk2020/templates/chat/weapon-roll.hbs
      * Template provided should be one that loops through rolls.
@@ -117,7 +117,7 @@ export function classifyRollDice(roll) {
     async execute(speaker, templatePath, extraTemplateData={}) {
         await Promise.all(this.rolls.map(async (r) => {
             if (!r._evaluated) {
-                return await r.evaluate({async: true});
+                return await r.evaluate();
             }
         }));
         
@@ -186,7 +186,7 @@ async function d10Roll({
     if(terms) {
         terms = [initialTerm, ...terms]
     }
-    let roll = new Roll(terms.join(" + "), rollData).roll();
+    let roll = await new Roll(terms.join(" + "), rollData).evaluate();
 
     if(useRollMessage) {
         await roll.toMessage({

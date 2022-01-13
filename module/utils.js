@@ -38,20 +38,21 @@ export function shortLocalize(str) {
  * @param {*} targetArea If you're aiming at a specific area, this is the NAME of that area - eg "Head"
  * @returns {*} {roll: The rolled diceroll when aiming, areaHit: where actually hit}
  */
-export function rollLocation(targetActor, targetArea) {
+export async function rollLocation(targetActor, targetArea) {
     if(targetArea) {
         // Area name to number lookup
         const hitLocs = (!!targetActor) ? targetActor.hitLocations : defaultHitLocations();
         const targetNum = hitLocs[targetArea].location[0];
+        let roll = await new Roll(`${targetNum}`).evaluate();
         return {
-            roll: new Roll(`${targetNum}`).roll(),
+            roll: roll,
             areaHit: targetArea
         };
     }
     // Number to area name lookup
     let hitAreaLookup = (!!targetActor && !!targetActor.hitLocLookup) ? targetActor.hitLocLookup : defaultAreaLookup;
 
-    let roll = new Roll("1d10").roll();
+    let roll = await new Roll("1d10").evaluate();
     return {
         roll: roll,
         areaHit: hitAreaLookup[roll.total]
