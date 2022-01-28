@@ -49,9 +49,15 @@ $field-border-width: 2px;
         border-bottom: 2px solid $text-colour;
         // Without these, tabs extend weirdly below the tab container itseld
         box-sizing: content-box;
+        // Let's not have the tabs grow to consume everything please
+        flex: 0;
+        padding-top: 0px;
+        padding-bottom: 0px;
 
         // A tab itself
         > .item {
+            padding-top: 4px;
+            padding-bottom: 4px;
             flex-grow: 1;
             &.active {
                 color: $text-colour-inverted;
