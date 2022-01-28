@@ -369,7 +369,7 @@ export class CyberpunkItem extends Item {
     let damageRoll = new Roll(`${this.data.data.damage}+@strengthBonus`, {
       strengthBonus: strengthDamageBonus(this.actor.data.data.stats.bt.total)
     });
-    let locationRoll = await (attackMods.targetActor, attackMods.targetArea);
+    let locationRoll = await rollLocation(attackMods.targetActor, attackMods.targetArea);
 
     let bigRoll = new Multiroll(this.name, this.data.data.flavor)
       .addRoll(attackRoll, {name: localize("Attack")})
