@@ -22,7 +22,7 @@
                             <span class="roll-result roll die d{{term.faces}}">{{die.result}}</span>
                         {{/each}}
                     {{else}}
-                        <span class="roll-result inactive">{{term}}</span>
+                        <span class="roll-result inactive">{{compare term.operator "||" term.number}}</span>
                     {{/if}}
                 {{/each}}
             </span>
