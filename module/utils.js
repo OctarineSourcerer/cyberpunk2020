@@ -97,24 +97,3 @@ export async function getDefaultSkills() {
     const content = await pack.getDocuments();
     return content;
 }
-
-// Yet to be fully tested, but should let editing of compendiums go pretty easily
-async function changePackItems(packName, dataDeltaF, dryRun = false) {
-    let pack = game.packs.get(packName);
-    let ids = pack.index.map(e => e._id);
-    ids.forEach(async id => {
-        let document = await pack.getDocument(id);
-        let oldData = document.data;
-        let dataChange = dataDeltaF(oldData);
-        dataChange._id = id;
-        console.log(`update data:`);
-        console.log(dataChange);
-        if(!dryRun)
-            await pack.updateDocument(dataChange); 
-    });
-}
-
-async function exampleCompendiumData(packName) {
-    let pack = game.packs.get(packName);
-    return await pack.getDocument(pack.index.values().next().value.data);
-}
