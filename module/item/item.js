@@ -381,6 +381,7 @@ export class CyberpunkItem extends Item {
   async __martialBonk(attackMods) {
     let actor = this.actor;
     let actorData = actor.data.data;
+    // Action being done, eg strike, block etc
     let action = attackMods.action;
     let martialArt = attackMods.martialArt;
 
