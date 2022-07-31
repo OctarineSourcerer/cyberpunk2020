@@ -383,12 +383,12 @@ export class CyberpunkItem extends Item {
     let actorData = actor.data.data;
     let action = attackMods.action;
     let martialArt = attackMods.martialArt;
-    let isMartial = martialArt != "Brawling";
 
     // Will be something this line once I add the martial arts bonuses. None for brawling, remember
     // let martialBonus = this.actor?.skills.MartialArts[martialArt].bonuses[action];
+    let isMartial = martialArt != "Brawling";
     let keyTechniqueBonus = 0;
-    let attackBonus = actor.getSkillVal(martialArt);
+    let martialSkillLevel = actor.getSkillVal(martialArt);
     let flavor = game.i18n.has(`CYBERPUNK.${action + "Text"}`) ? localize(action + "Text") : "";
 
     let results = new Multiroll(localizeParam("MartialTitle", {action: localize(action), martialArt: localize("Skill" + martialArt)}), flavor);
@@ -396,7 +396,7 @@ export class CyberpunkItem extends Item {
     // All martial arts are contested
     let attackRoll = new Roll(`1d10x10+@stats.ref.total+@attackBonus+@keyTechniqueBonus`, {
       stats: actorData.stats,
-      attackBonus: attackBonus,
+      attackBonus: martialSkillLevel,
       keyTechniqueBonus: keyTechniqueBonus,
     });
     results.addRoll(attackRoll, {name: "Attack"});
@@ -415,7 +415,8 @@ export class CyberpunkItem extends Item {
       results.addRoll(loc.roll, {name: localize("Location"), flavor: loc.areaHit});
       results.addRoll(new Roll(damageFormula, {
         strengthBonus: strengthDamageBonus(actorData.stats.bt.total),
-        martialDamageBonus: isMartial ? skillLevel : 0
+        // Martial arts get a damage bonus.
+        martialDamageBonus: isMartial ? martialSkillLevel : 0
       }), {name: localize("Damage")});
     }
     results.defaultExecute({img: this.img});
