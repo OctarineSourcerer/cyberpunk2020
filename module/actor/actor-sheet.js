@@ -29,16 +29,16 @@ export class CyberpunkActorSheet extends ActorSheet {
     // the data THIS returns is only available in this class and the template
     const sheetData = super.getData();
     const actorData = sheetData.data;
-    sheetData.actor = actorData;
-    sheetData.data = actorData.system;
+    // Make actor info available relatively easily
+    sheetData.system = actorData.system;
 
     // Prepare items.
-    if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
+    if (this.actor.type == 'character' || this.actor.type == "npc") {
       this._prepareCharacterItems(sheetData);
       this._addWoundTrack(sheetData);
       // Reset search text if it's null or we just rendered for the first time
-      if(sheetData.data.transient == null) {
-        sheetData.data.transient = { skillFilter: "" };
+      if(sheetData.system.transient == null) {
+        sheetData.system.transient = { skillFilter: "" };
       }
       this._prepareSkills(sheetData);
       // All this extra lookup is cos we can't store a list of entities in data :(
@@ -48,7 +48,7 @@ export class CyberpunkActorSheet extends ActorSheet {
   }
 
   _prepareSkills(sheetData) {
-    sheetData.skillsSort = this.actor.data.skillsSortedBy || "Name";
+    sheetData.skillsSort = this.actor.system.skillsSortedBy || "Name";
     sheetData.skillsSortChoices = Object.keys(SortOrders);
     sheetData.filteredSkillIDs = this._filterSkills(sheetData);
     sheetData.skillDisplayList = sheetData.filteredSkillIDs.map(id => this.actor.items.get(id));
@@ -58,11 +58,11 @@ export class CyberpunkActorSheet extends ActorSheet {
   _filterSkills(sheetData) {
     let id = sheetData.actor._id;
 
-    if(sheetData.data.transient.skillFilter == null) {
-      sheetData.data.transient.skillFilter = "";
+    if(sheetData.system.transient.skillFilter == null) {
+      sheetData.system.transient.skillFilter = "";
     }
-    let upperSearch = sheetData.data.transient.skillFilter.toUpperCase();
-    let listToFilter = sheetData.data.sortedSkillIDs || game.actors.get(id).itemTypes.skill.map(skill => skill.id);
+    let upperSearch = sheetData.system.transient.skillFilter.toUpperCase();
+    let listToFilter = sheetData.system.sortedSkillIDs || game.actors.get(id).itemTypes.skill.map(skill => skill.id);
 
     // Only filter if we need to
     if(upperSearch === "") {
@@ -70,7 +70,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     }
     else {
       // If we searched previously and the old search had results, we can filter those instead of the whole lot
-      if(sheetData.data.transient.oldSearch != null 
+      if(sheetData.system.transient.oldSearch != null 
         && sheetData.filteredSkillIDs != null
         && upperSearch.startsWith(oldSearch)) {
         listToFilter = sheetData.filteredSkillIDs; 
