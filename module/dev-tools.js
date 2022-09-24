@@ -39,8 +39,8 @@ export async function exampleCompendiumItem(packID) {
 export async function fixAttackSkillUndefineds(packID) {
     let skillsPerWeaponType = attackSkills;
     return game.packs.get(packID).updateAll((document) => {
-        let data = document.data.data;
-        let choices = skillsPerWeaponType[data.weaponType];
+        let system = document.system;
+        let choices = skillsPerWeaponType[system.weaponType];
         if(choices == undefined || choices.length == 0) {
             // No changes if we haven't got options
             return {};
@@ -51,13 +51,13 @@ export async function fixAttackSkillUndefineds(packID) {
             return update;
         }
         else {
-            console.warn(`Can't choose attack skill for item with ID ${document.id}; weapons of type ${data.weaponType} have multiple possible attack skills.`);
+            console.warn(`Can't choose attack skill for item with ID ${document.id}; weapons of type ${system.weaponType} have multiple possible attack skills.`);
             return {};
         }
     // Gotta have an undefined attackSkill to qualify
     },
     (document) => {
-        let attackSkill = document.data.data.attackSkill;
+        let attackSkill = document.system.attackSkill;
         return attackSkill == undefined || attackSkill == "undefined"
     });
 }

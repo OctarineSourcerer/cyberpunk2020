@@ -122,7 +122,7 @@ export function registerHandlebarsHelpers() {
     });
     // Woundstate: 0 for light, 1 for serious, etc
     // It's a little unintuitive, but handlebars loops start at 0, and that's our first would state
-    // Damage: How much damage the character has taken. Actor.data.data.damage.
+    // Damage: How much damage the character has taken. Actor.system.damage.
     // Provides within its context classes, and the current wound
     Handlebars.registerHelper("damageBoxes", function(woundState, damage, options) {
         const woundsPerState = 4;

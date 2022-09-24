@@ -32,7 +32,7 @@
                 <label class="name">{{name}}</label>
                 <span class="flex-pad"></span>
                 <span>
-                    <label class="inactive">{{armorSummary data.data.coverage}}</label>
+                    <label class="inactive">{{armorSummary system.coverage}}</label>
                 </span>
             </div>
             {{/each}}
@@ -49,7 +49,7 @@
                 <label class="name">{{weapon.name}}</label>
                 <span class="flex-pad"></span>
                 <span>
-                    {{#with weapon.data.data}}
+                    {{#with weapon.system}}
                     <div class="field-label inactive">{{#if attackType}}{{attackType}}{{else}}{{weaponType}}{{/if}}</div>
                     {{/with}}
                 </span>

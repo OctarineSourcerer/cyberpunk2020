@@ -146,7 +146,7 @@ export let defaultAreaLookup = {
 export function defaultHitLocations() { return game.system.template.Actor.templates.hitLocations.hitLocations; }
 
 export function rangedModifiers(weapon) {
-    let range = weapon.data.data.range || 50;
+    let range = weapon.system.range || 50;
     let fireModes = weapon.__getFireModes() || [];
     return [
         [{

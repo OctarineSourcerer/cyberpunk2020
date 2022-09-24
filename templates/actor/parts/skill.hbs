@@ -2,7 +2,7 @@
 <div class="field skill" data-item-id="{{skill.id}}">
     <label class="skill-roll action" data-skill-id="{{skill.id}}">{{skill.name}}</label>
     {{!-- TODO: Add data-item-id for this to work --}}
-    {{#with skill.data.data}}
+    {{#with skill.system}}
         <label class="chip-toggle" data-skill-id="{{../skill.id}}">
             <div class="skill-stat-display">
                 {{~#if isRoleSkill~}}

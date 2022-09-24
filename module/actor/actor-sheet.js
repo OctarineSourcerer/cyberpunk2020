@@ -108,7 +108,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       cyberware: sortedItems.cyberware,
       misc: sortedItems.misc,
       all: [sortedItems.weapons],
-      cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.data.data.cost, 0)
+      cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.system.cost, 0)
     };
 
   }
@@ -158,7 +158,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     // TODO: Refactor these skill interactivity stuff into their own methods
     html.find(".skill-level").click((event) => event.target.select()).change((event) => {
       let skill = this.actor.items.get(event.currentTarget.dataset.skillId);
-      let target = skill.data.data.isChipped ? "data.chipLevel" : "data.level";
+      let target = skill.system.isChipped ? "data.chipLevel" : "data.level";
       let updateData = {_id: skill.id};
       updateData[target] = parseInt(event.target.value, 10);
       this.actor.updateEmbeddedDocuments("Item", [updateData]);
@@ -168,7 +168,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       let skill = this.actor.items.get(ev.currentTarget.dataset.skillId);
       this.actor.updateEmbeddedDocuments("Item", [{
         _id: skill.id,
-        "data.isChipped": !skill.data.data.isChipped
+        "data.isChipped": !skill.system.isChipped
       }]);
     });
 
@@ -217,7 +217,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       if(isRanged) {
         modifierGroups = rangedModifiers(item);
       }
-      else if (item.data.data.attackType === meleeAttackTypes.martial){
+      else if (item.system.attackType === meleeAttackTypes.martial){
         modifierGroups = martialOptions(this.actor);
       }
       else {

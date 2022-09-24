@@ -28,7 +28,7 @@ export class CyberpunkActor extends Actor {
     const skillsData = 
       sortSkills(await getDefaultSkills(), SortOrders.Name)
       .map(item => item.toObject());
-    if (typeof data.data === "undefined") {
+    if (typeof system === "undefined") {
       createData.items = [];
       createData.items = data.items.concat(skillsData);
       createData["data.skillsSortedBy"] = "Name";
@@ -82,13 +82,13 @@ export class CyberpunkActor extends Actor {
     
     // Sort through this now so we don't have to later
     let equippedItems = this.items.contents.filter(item => {
-      return item.data.data.equipped;
+      return item.system.equipped;
     });
 
     // Reflex is affected by encumbrance values too
     stats.ref.armorMod = 0;
     equippedItems.filter(i => i.type === "armor").forEach(armor => {
-      let armorData = armor.data.data;
+      let armorData = armor.system;
       if(armorData.encumbrance != null) {
         stats.ref.armorMod -= armorData.encumbrance;
       }
@@ -114,7 +114,7 @@ export class CyberpunkActor extends Actor {
     body.modifier = btmFromBT(body.total);
     data.carryWeight = 0;
     equippedItems.forEach(item => {
-      let weight = item.data.data.weight || 0;
+      let weight = item.system.weight || 0;
       data.carryWeight += weight;
     });
 
@@ -142,7 +142,7 @@ export class CyberpunkActor extends Actor {
     // calculate total HL from cyberware
     let hl = 0;
     equippedItems.filter(i => i.type === "cyberware").forEach(cyberware => {
-      const cyber = cyberware.data.data;
+      const cyber = cyberware.system;
       hl += (cyber.humanityLoss) ? cyber.humanityLoss : 0;
     });
 
@@ -202,14 +202,14 @@ export class CyberpunkActor extends Actor {
   trainedMartials() {
     return this.itemTypes.skill
       .filter(skill => skill.name.startsWith("Martial"))
-      .filter(martial => martial.data.data.level > 0)
+      .filter(martial => martial.system.level > 0)
       .map(martial => martial.name);
   }
 
   // TODO: Make this doable with just skill name
   static realSkillValue(skill) {
-    // Sometimes we use this to sort raw item data before it becomes a full-fledged item. So we use either data.data or data, as needed
-    let data = skill.data.data || skill.data;
+    // Sometimes we use this to sort raw item data before it becomes a full-fledged item. So we use either system or data, as needed
+    let data = skill.system || skill.data;
     let value = data.level;
     if(data.isChipped) {
       value = skill.chipValue || 0;
@@ -223,7 +223,7 @@ export class CyberpunkActor extends Actor {
 
   rollSkill(skillId) {
     let skill = this.items.get(skillId);
-    let skillData = skill.data.data;
+    let skillData = skill.system;
     let value = CyberpunkActor.realSkillValue(skill);
 
     let rollParts = [];

@@ -48,9 +48,9 @@ export function hasPoints(skillA, skillB) {
 
 function byStat(skillA, skillB) {
     let searchRank = (skill) => {
-        if(skill.data.data.isRoleSkill)
+        if(skill.system.isRoleSkill)
             return statOrder["role"];
-        return statOrder[skill.data.data.stat];
+        return statOrder[skill.system.stat];
     };
     let order_a = searchRank(skillA) || -1;
     let order_b = searchRank(skillB) || -1;

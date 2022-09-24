@@ -35,10 +35,8 @@ export class CyberpunkItemSheet extends ItemSheet {
   getData() {
     // This means the handlebars data and the form edit data actually mirror each other
     const data = super.getData();
-    const actorData = data.data;
-    data.actor = actorData;
-    data.data = actorData.data;
 
+    // TODO: Check that this actually can switch on type okay
     switch (this.item.data.type) {
       case "weapon":
         this._prepareWeapon(data);
@@ -56,32 +54,32 @@ export class CyberpunkItemSheet extends ItemSheet {
     return data;
   }
 
-  _prepareSkill(data) {
-    data.stats = getStatNames();
+  _prepareSkill(system) {
+    system.stats = getStatNames();
   }
 
-  _prepareWeapon(data) {
-    data.weaponTypes = Object.values(weaponTypes).sort();
-    if(this.item.data.data.weaponType === weaponTypes.melee) {
-      data.attackTypes = Object.values(meleeAttackTypes).sort();
+  _prepareWeapon(system) {
+    system.weaponTypes = Object.values(weaponTypes).sort();
+    if(this.item.system.weaponType === weaponTypes.melee) {
+      system.attackTypes = Object.values(meleeAttackTypes).sort();
     }
     else {
-      data.attackTypes = sortedAttackTypes;
+      system.attackTypes = sortedAttackTypes;
     }
-    data.concealabilities = Object.values(concealability);
-    data.availabilities = Object.values(availability);
-    data.reliabilities = Object.values(reliability);
-    data.attackSkills = [...attackSkills[this.item.data.data.weaponType].map(x => localize("Skill"+x)), ...(this.actor?.trainedMartials() || [])];
+    system.concealabilities = Object.values(concealability);
+    system.availabilities = Object.values(availability);
+    system.reliabilities = Object.values(reliability);
+    system.attackSkills = [...attackSkills[this.item.system.weaponType].map(x => localize("Skill"+x)), ...(this.actor?.trainedMartials() || [])];
 
     // TODO: Be not so inefficient for this
-    if(!data.attackSkills.length && this.actor) {
+    if(!system.attackSkills.length && this.actor) {
       if(this.actor) {
-        data.attackSkills = this.actor.itemTypes.skill.map(skill => skill.name).sort();
+        system.attackSkills = this.actor.itemTypes.skill.map(skill => skill.name).sort();
       }
     }
   }
 
-  _prepareArmor(data) {
+  _prepareArmor(system) {
     
   }
 
@@ -116,7 +114,7 @@ export class CyberpunkItemSheet extends ItemSheet {
       ev.stopPropagation();
       let itemId = this.object.data.id;
       const cyber = this.actor.items.get(itemId);
-      const hc = cyber.data.data.humanityCost;
+      const hc = cyber.system.humanityCost;
       let loss = 0;
       // determine if humanity cost is a number or dice
       if (formulaHasDice(hc)) {
@@ -127,7 +125,7 @@ export class CyberpunkItemSheet extends ItemSheet {
         const num = Number(hc);
         loss = (isNaN(num)) ? 0 : num;
       }
-      cyber.data.data.humanityLoss = loss;
+      cyber.system.humanityLoss = loss;
       cyber.sheet.render(true);
     });
   }

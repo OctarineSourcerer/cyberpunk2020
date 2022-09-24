@@ -260,7 +260,7 @@ export class CyberpunkItem extends Item {
     }
 
     return await makeD10Roll(attackTerms, {
-      stats: this.actor.data.data.stats,
+      stats: this.actor.system.stats,
       attackSkill: this.actor.getSkillVal(this.system.attackSkill)
     }).evaluate();
   }
@@ -367,7 +367,7 @@ export class CyberpunkItem extends Item {
     // Just doesn't have a DC - is contested instead
     let attackRoll = await this.attackRoll(attackMods);
     let damageRoll = new Roll(`${this.system.damage}+@strengthBonus`, {
-      strengthBonus: strengthDamageBonus(this.actor.data.data.stats.bt.total)
+      strengthBonus: strengthDamageBonus(this.actor.system.stats.bt.total)
     });
     let locationRoll = await rollLocation(attackMods.targetActor, attackMods.targetArea);
 
