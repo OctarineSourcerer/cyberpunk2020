@@ -13,7 +13,7 @@
                 </h1>
                 <span class="summary inactive">{{> (varTemplate "item/parts/[VAR]/summary.hbs" item.type)}}</span>
             </span>
-            <textarea class="flavor" name="data.flavor" placeholder="{{CPLocal 'Flavor'}}">{{data.flavor}}</textarea>
+            <textarea class="flavor" name="system.flavor" placeholder="{{CPLocal 'Flavor'}}">{{system.flavor}}</textarea>
         </div>
         <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
     </header>
@@ -29,7 +29,7 @@
         
         {{!-- Notes Tab --}}
         <div class="tab" data-group="primary" data-tab="notes">
-            {{editor data.notes target="data.notes" button=true owner=owner editable=options.editable}}
+            {{editor system.notes target="system.notes" button=true owner=owner editable=options.editable}}
         </div>
 
         {{!-- Attributes Tab --}}
