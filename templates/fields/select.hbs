@@ -22,7 +22,7 @@
     <span class="flex-pad"></span>
     <select name="{{edit}}">
         {{#if allowBlank}}
-            <option value=" " {{#if (equals (deepLookup . edit) "")}}selected{{/if}}></option>
+            <option value="" {{#if (equals (deepLookup . edit) "")}}selected{{/if}}></option>
         {{/if}}
 
         {{#each choices as |choice|}}
