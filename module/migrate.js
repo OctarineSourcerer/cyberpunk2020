@@ -72,7 +72,7 @@ export async function migrateActor(actor) {
 
     if(typeof(actor.system.damage) == "string") {
         console.log("Making damage a number");
-        actorUpdates[`data.damage`] = 0;
+        actorUpdates[`system.damage`] = 0;
     }
     if(actor.type == "character") {
         if(!actor.token.actorLink) {
@@ -92,7 +92,7 @@ export async function migrateActor(actor) {
     let trainedSkills = [];
     if(actor.system.skills) {
         console.log(`${actor.name} still uses non-item skills. Removing.`);
-        actorUpdates["data.skills"] = undefined;
+        actorUpdates["system.skills"] = undefined;
 
         let trained = (skillData) => skillData.value > 0 || skillData.chipValue > 0;
         // Catalogue skills with points in them to keep
@@ -143,7 +143,7 @@ export async function migrateActor(actor) {
         }
         console.log(skillsToAdd);
         skillsToAdd = sortSkills(Object.values(skillsToAdd), SortOrders.Name);
-        actorUpdates["data.skillsSortedBy"] = "Name";
+        actorUpdates["system.skillsSortedBy"] = "Name";
 
         // Keep current items
         const currentItems = Array.from(actor.items).map(item => item.toObject());
@@ -164,12 +164,12 @@ export function migrateItem(item) {
 
     if(itemTemplates?.includes("common") && system.source === undefined) {
         console.log(`${item.name} has no source field. Giving it one.`)
-        itemUpdates["data.source"] = "";
+        itemUpdates["system.source"] = "";
     }
     if(item.type == "weapon") {
         if(!system.rangeDamages) {
             console.log(`${item.name} has no place to put damages per range. Instantiating those.`);
-            itemUpdates["data.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
+            itemUpdates["system.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
         }
     }
     return itemUpdates;

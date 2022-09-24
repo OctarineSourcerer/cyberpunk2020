@@ -46,7 +46,7 @@ export async function fixAttackSkillUndefineds(packID) {
             return {};
         }
         else if(choices.length == 1) {
-            let update = {"data.attackSkill": choices[0]};
+            let update = {"system.attackSkill": choices[0]};
             console.log(update);
             return update;
         }

@@ -28,10 +28,10 @@ export class CyberpunkActor extends Actor {
     const skillsData = 
       sortSkills(await getDefaultSkills(), SortOrders.Name)
       .map(item => item.toObject());
-    if (typeof system === "undefined") {
+    if (typeof data === "undefined") {
       createData.items = [];
       createData.items = data.items.concat(skillsData);
-      createData["data.skillsSortedBy"] = "Name";
+      createData["system.skillsSortedBy"] = "Name";
     }
     this.update(createData);
   }

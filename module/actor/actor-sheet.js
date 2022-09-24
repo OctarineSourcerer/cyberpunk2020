@@ -158,7 +158,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     // TODO: Refactor these skill interactivity stuff into their own methods
     html.find(".skill-level").click((event) => event.target.select()).change((event) => {
       let skill = this.actor.items.get(event.currentTarget.dataset.skillId);
-      let target = skill.system.isChipped ? "data.chipLevel" : "data.level";
+      let target = skill.system.isChipped ? "system.chipLevel" : "system.level";
       let updateData = {_id: skill.id};
       updateData[target] = parseInt(event.target.value, 10);
       this.actor.updateEmbeddedDocuments("Item", [updateData]);
@@ -168,7 +168,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       let skill = this.actor.items.get(ev.currentTarget.dataset.skillId);
       this.actor.updateEmbeddedDocuments("Item", [{
         _id: skill.id,
-        "data.isChipped": !skill.system.isChipped
+        "system.isChipped": !skill.system.isChipped
       }]);
     });
 
@@ -186,7 +186,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     html.find(".damage").click(ev => {
       let damage = Number(ev.currentTarget.dataset.damage);
       this.actor.update({
-        "data.damage": damage
+        "system.damage": damage
       });
     });
     html.find(".stun-death-save").click(ev => {
