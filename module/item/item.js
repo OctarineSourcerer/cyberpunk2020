@@ -380,7 +380,7 @@ export class CyberpunkItem extends Item {
   }
   async __martialBonk(attackMods) {
     let actor = this.actor;
-    let actorData = actor.data.data;
+    let system = actor.system;
     // Action being done, eg strike, block etc
     let action = attackMods.action;
     let martialArt = attackMods.martialArt;
@@ -396,7 +396,7 @@ export class CyberpunkItem extends Item {
 
     // All martial arts are contested
     let attackRoll = new Roll(`1d10x10+@stats.ref.total+@attackBonus+@keyTechniqueBonus`, {
-      stats: actorData.stats,
+      stats: system.stats,
       attackBonus: martialSkillLevel,
       keyTechniqueBonus: keyTechniqueBonus,
     });
@@ -415,7 +415,7 @@ export class CyberpunkItem extends Item {
       let loc = await rollLocation(attackMods.targetArea);
       results.addRoll(loc.roll, {name: localize("Location"), flavor: loc.areaHit});
       results.addRoll(new Roll(damageFormula, {
-        strengthBonus: strengthDamageBonus(actorData.stats.bt.total),
+        strengthBonus: strengthDamageBonus(system.stats.bt.total),
         // Martial arts get a damage bonus.
         martialDamageBonus: isMartial ? martialSkillLevel : 0
       }), {name: localize("Damage")});

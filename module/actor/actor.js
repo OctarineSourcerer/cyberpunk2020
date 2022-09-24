@@ -33,7 +33,7 @@ export class CyberpunkActor extends Actor {
       createData.items = data.items.concat(skillsData);
       createData["data.skillsSortedBy"] = "Name";
     }
-    this.data.update(createData);
+    this.update(createData);
   }
 
   /**
@@ -43,7 +43,7 @@ export class CyberpunkActor extends Actor {
     super.prepareData();
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    switch ( this.data.type ) {
+    switch ( this.type ) {
       // NPCs are exactly the same as characters at the moment, but don't get vision or default actorlink
       case "npc":
       case "character":

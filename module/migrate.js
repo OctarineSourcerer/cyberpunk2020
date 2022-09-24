@@ -2,8 +2,8 @@ import { sortSkills, SortOrders } from "./actor/skill-sort.js";
 import { getDefaultSkills, localize, tryLocalize } from "./utils.js";
 
 const updateFuncs = {
-    "Actor": migrateActorData,
-    "Item": migrateItemData
+    "Actor": migrateActor,
+    "Item": migrateItem
 }
 // I know there's a lot of await in here, and I think it might be possible to not wait for the results of updating entities. But I also don't know if it would blow foundry up to get so many update requests so far.
 
@@ -47,11 +47,11 @@ async function migrateDocument(document, withUpdataData = defaultDataUse) {
         if(migrateDataFunc === undefined) {
             console.log(`No migrate function for document with documentName field "${document.documentName}"`);
         }
-        const updateData = await migrateDataFunc(document.data);
+        const updateData = await migrateDataFunc(document);
         withUpdataData(document, updateData);
     } catch(err) {
         migrationSuccess = false;
-        err.message = `Failed cyberpunk system migration for ${document.data.type} ${document.name}: ${err.message}`;
+        err.message = `Failed cyberpunk system migration for ${document.type} ${document.name}: ${err.message}`;
         console.error(err);
         return;
     }
@@ -59,44 +59,44 @@ async function migrateDocument(document, withUpdataData = defaultDataUse) {
 
 // For now, actors. We can do migrate world as a total of them all. Nabbed framework of code from 5e
 /**
- * Migrate a single Actor document to incorporate latest data model changes
+ * Migrate a single Actor document to incorporate latest cyberpunk2020 data model changes
  * Return an Object of updateData to be applied
- * @param {object} actorData    The actor data object to update
- * @return {Object}         The updateData to apply
+ * @param {object} actor    The actor Document to update
+ * @return {Object}         The updateData to apply (via `document.update`)
  */
-export async function migrateActorData(actorData) {
-    console.log(`Migrating data of ${actorData.name}`);
+export async function migrateActor(actor) {
+    console.log(`Migrating data of ${actor.name}`);
 
     // No need to migrate items currently
-    let updateData = {}
-    let data = actorData.data;
+    let actorUpdates = {}
 
-    if(typeof(data.damage) == "string") {
+    if(typeof(actor.system.damage) == "string") {
         console.log("Making damage a number");
-        updateData[`data.damage`] = 0;
+        actorUpdates[`data.damage`] = 0;
     }
-    if(actorData.type == "character") {
-        if(!actorData.token.actorLink) {
-            console.log(`Making ${actorData.name}'s default token be linked to the actor, and be friendly`);
-            updateData[`token.actorLink`] = true;
-            updateData[`token.disposition`] = 1;
+    if(actor.type == "character") {
+        if(!actor.token.actorLink) {
+            console.log(`Making ${actor.name}'s default token be linked to the actor, and be friendly`);
+            actorUpdates[`token.actorLink`] = true;
+            actorUpdates[`token.disposition`] = 1;
         }
-        if(!actorData.token.vision) {
-            console.log(`Making ${actorData.name}'s default token actually have vision`);
-            updateData[`token.vision`] = true;
-            updateData[`token.dimSight`] = 30;
+        if(!actor.token.vision) {
+            console.log(`Making ${actor.name}'s default token actually have vision`);
+            actorUpdates[`token.vision`] = true;
+            actorUpdates[`token.dimSight`] = 30;
         }
     }
     
-    // Traied skills that we keep
+    // TODO: Test this works after v10
+    // Trained skills that we keep
     let trainedSkills = [];
-    if(data.skills) {
-        console.log(`${actorData.name} still uses non-item skills. Removing.`);
-        updateData["data.skills"] = undefined;
+    if(actor.system.skills) {
+        console.log(`${actor.name} still uses non-item skills. Removing.`);
+        actorUpdates["data.skills"] = undefined;
 
         let trained = (skillData) => skillData.value > 0 || skillData.chipValue > 0;
         // Catalogue skills with points in them to keep
-        trainedSkills = Object.entries(data.skills)
+        trainedSkills = Object.entries(actor.system.skills)
             .reduce((acc, [name, skill]) => {
                 if(trained(skill)) {
                     acc.push([name, skill]);
@@ -121,11 +121,11 @@ export async function migrateActorData(actorData) {
     }
     console.log("Trained skills:");
     console.log(trainedSkills);
-    let skills = actorData.items.filter(item => item.type === "skill");
+    let skills = actor.items.filter(item => item.type === "skill");
 
     // Migrate from pre-item times
     if(skills.length === 0) {
-        console.log(`${actorData.name} does not have item skills. Adding aaaall 78 core ones`);
+        console.log(`${actor.name} does not have item skills. Adding aaaall 78 core ones`);
         console.log(`Keeping any skills you had points in: ${trainedSkills.join(", ") || "None"}`);
 
         // Key core skills by name so they may be overridden
@@ -143,36 +143,36 @@ export async function migrateActorData(actorData) {
         }
         console.log(skillsToAdd);
         skillsToAdd = sortSkills(Object.values(skillsToAdd), SortOrders.Name);
-        updateData["data.skillsSortedBy"] = "Name";
+        actorUpdates["data.skillsSortedBy"] = "Name";
 
         // Keep current items
-        const currentItems = Array.from(actorData.items).map(item => item.toObject());
+        const currentItems = Array.from(actor.items).map(item => item.toObject());
         // TODO: This is repeated in a few places - centralise/refactor
-        updateData.items = currentItems.concat(currentItems, skillsToAdd);
+        actorUpdates.items = currentItems.concat(currentItems, skillsToAdd);
     }
 
-    return updateData;
+    return actorUpdates;
 } 
 
-export function migrateItemData(itemData) {
-    console.log(`Migrating data of ${itemData.name}`);
+export function migrateItem(item) {
+    console.log(`Migrating data of ${item.name}`);
 
     // No need to migrate items currently
-    let updateData = {}
-    let data = itemData.data;
-    let itemTemplates = game.system.template.Item[itemData.type].templates;
+    let itemUpdates = {}
+    let system = item.system;
+    let itemTemplates = game.system.template.Item[item.type].templates;
 
-    if(itemTemplates?.includes("common") && data.source === undefined) {
-        console.log(`${itemData.name} has no source field. Giving it one.`)
-        updateData["data.source"] = "";
+    if(itemTemplates?.includes("common") && system.source === undefined) {
+        console.log(`${item.name} has no source field. Giving it one.`)
+        itemUpdates["data.source"] = "";
     }
-    if(itemData.type == "weapon") {
-        if(!data.rangeDamages) {
-            console.log(`${itemData.name} has no place to put damages per range. Instantiating those.`);
-            updateData["data.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
+    if(item.type == "weapon") {
+        if(!system.rangeDamages) {
+            console.log(`${item.name} has no place to put damages per range. Instantiating those.`);
+            itemUpdates["data.rangeDamages"] = game.system.template.Item.weapon.rangeDamages;
         }
     }
-    return updateData;
+    return itemUpdates;
 }
 
 export function migrateCompendium(compendium) {

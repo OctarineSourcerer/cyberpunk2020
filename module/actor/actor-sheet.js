@@ -30,7 +30,7 @@ export class CyberpunkActorSheet extends ActorSheet {
     const sheetData = super.getData();
     const actorData = sheetData.data;
     sheetData.actor = actorData;
-    sheetData.data = actorData.data;
+    sheetData.data = actorData.system;
 
     // Prepare items.
     if (this.actor.data.type == 'character' || this.actor.data.type == "npc") {
