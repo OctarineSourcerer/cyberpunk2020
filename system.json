@@ -2,8 +2,8 @@
   "name": "cyberpunk2020",
   "title": "Cyberpunk 2020",
   "description": "R. Talsorian Games' Cyberpunk 2020 System",
-  "version": "0.3.5",
-  "compatibleCoreVersion": "9",
+  "version": "0.3.6",
+  "compatibleCoreVersion": "10",
   "templateVersion": 2,
   "author": "OctarineSourcerer",
   "scripts": [],
@@ -173,6 +173,6 @@
   "secondaryTokenAttribute": null,
   "url": "https://github.com/OctarineSourcerer/cyberpunk2020",
   "manifest": "https://raw.githubusercontent.com/OctarineSourcerer/cyberpunk2020/main/system.json",
-  "download": "https://github.com/OctarineSourcerer/cyberpunk2020/archive/v0.3.5.zip"
+  "download": "https://github.com/OctarineSourcerer/cyberpunk2020/archive/v0.3.6.zip"
 }
   
