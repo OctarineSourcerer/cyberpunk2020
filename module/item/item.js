@@ -48,21 +48,21 @@ export class CyberpunkItem extends Item {
     let nowOwned = !system.lastOwnerId && this.actor;
     let changedHands = system.lastOwnerId !== undefined && system.lastOwnerId != this.actor.id;
     if(!skipReform && (nowOwned || changedHands)) {
-      data.lastOwnerId = this.actor.id;
+      system.lastOwnerId = this.actor.id;
       let ownerLocs = this.actor.system.hitLocations;
       
       // Time to morph the armor to its new owner!
       // I just want this here so people can armor up giant robotic snakes if they want, y'know? or mechs.
       // ...I am fully aware this is overkill effort for most games.
-      let areasCovered = Object.keys(data.coverage).length;
+      let areasCovered = Object.keys(system.coverage).length;
       let cleanseAreas = areasCovered > COVERAGE_CLEANSE_THRESHOLD;
       if(cleanseAreas) {
         // Remove any extra areas
         // This is so that armors can't be made bigger indefinitely. No idea why players might do that, but hey.
-        for(let armorArea in data.coverage) {
+        for(let armorArea in system.coverage) {
           if(!ownerLocs[armorArea]) {
             console.warn(`ARMOR MORPH: The new owner of this armor (${this.actor.name}) does not have a ${armorArea}. Removing the area from the armor.`)
-            delete data.coverage.armorArea;
+            delete system.coverage.armorArea;
           }
         }
       }
@@ -70,8 +70,8 @@ export class CyberpunkItem extends Item {
       // TODO: Strict bodytypes option?
       // Add any areas the owner has but the armor doesn't.
       for(let ownerLoc in ownerLocs) {
-        if(!data.coverage[ownerLoc]) {
-          data.coverage[ownerLoc] = {
+        if(!system.coverage[ownerLoc]) {
+          system.coverage[ownerLoc] = {
             stoppingPower: 0,
             ablation: 0
           }
