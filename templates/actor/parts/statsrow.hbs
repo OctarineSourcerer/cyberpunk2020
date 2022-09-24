@@ -1,13 +1,13 @@
 {{!-- Container for all the stats --}}
 <div class="stats flexcol">
     <div class="statsrow">
-        {{#each data.stats as |stat key|}}
+        {{#each system.stats as |stat key|}}
         <div class="field stat">
             <label>{{localize (localizeStat key)}}</label>
             <div class="flexrow">
-                <input type="number" name="data.stats.{{key}}.base" value="{{stat.base}}" class="stat-base"/>
+                <input type="number" name="system.stats.{{key}}.base" value="{{stat.base}}" class="stat-base"/>
                 <div class="stat-mod">+</div>
-                <input class="stat-temp" type="number" name="data.stats.{{key}}.tempMod" value="{{stat.tempMod}}"/>
+                <input class="stat-temp" type="number" name="system.stats.{{key}}.tempMod" value="{{stat.tempMod}}"/>
             </div>
             <input class="stat-total action stat-roll" data-stat-name="{{key}}" value="{{stat.total}}" readonly>
         </div>
@@ -17,7 +17,7 @@
     {{!-- Run, Leap etc. These are below, cos we're a lot less starved for vertical space than horizontal --}}
     {{!-- If I had horizontal space, I'd just slap these against their relevant stats --}}
     <div class="derivedrow">
-        {{#with data.stats}}
+        {{#with system.stats}}
         <div class="field">
             <label title="{{CPLocal "BTM"}}">{{CPLocal 'BTMShort'}}</label>
             <input class="value not-editable" value="{{bt.modifier}}" readonly>

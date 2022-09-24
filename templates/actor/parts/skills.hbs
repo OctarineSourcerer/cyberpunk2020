@@ -3,10 +3,10 @@
     {{!-- Search bar --}}
     <div class="field">
         <div class="field-image search-icon"></div>
-        <input class="skill-search" name="data.transient.skillFilter" value="{{data.transient.skillFilter}}"></input>
+        <input class="skill-search" name="system.transient.skillFilter" value="{{system.transient.skillFilter}}"></input>
     </div>
 
-    {{> (template "fields/select") label="SortBy" edit="data.skillsSortedBy" choices=skillsSortChoices extraClasses="skill-sort"}}
+    {{> (template "fields/select") label="SortBy" edit="system.skillsSortedBy" choices=skillsSortChoices extraClasses="skill-sort"}}
 </div>
 
 {{!-- Actual skills --}}
