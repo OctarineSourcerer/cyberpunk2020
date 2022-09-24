@@ -11,29 +11,21 @@ export class CyberpunkActor extends Actor {
 
 
   /** @override */
-  async _preCreate(data, options={}) {
-    data.token = data.token || {};
+  async _onCreate(data, options={}) {
+    const updates = {_id: data._id};
     if (data.type === "character" ) {
-      mergeObject(data.token, {
-        vision: true,
-        dimSight: 30,
-        brightSight: 0,
-        actorLink: true, // boy do characters need this
-        disposition: 1
-      }, {overwrite: false});
+      updates["prototypeToken.actorLink"] = true;
+      updates["prototypeToken.sight.enabled"] = true;
     }
     
-    const createData = data;
     // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
     const skillsData = 
       sortSkills(await getDefaultSkills(), SortOrders.Name)
       .map(item => item.toObject());
-    if (typeof data === "undefined") {
-      createData.items = [];
-      createData.items = data.items.concat(skillsData);
-      createData["system.skillsSortedBy"] = "Name";
-    }
-    this.update(createData);
+    updates.items = [];
+    updates.items = data.items.concat(skillsData);
+    updates["system.skillsSortedBy"] = "Name";
+    this.update(updates);
   }
 
   /**
