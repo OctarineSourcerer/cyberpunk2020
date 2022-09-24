@@ -47,27 +47,27 @@ export class CyberpunkActor extends Actor {
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(data) {
-    const stats = data.stats;
+  _prepareCharacterData(system) {
+    const stats = system.stats;
     // Calculate stat totals using base+temp
     for(const stat of Object.values(stats)) {
       stat.total = stat.base + stat.tempMod;
     }
     // A lookup for translating hit rolls to names of hit locations
     // I know that for ranges there are better data structures to lookup, but we're using d10s for hit locations, so it's no issue
-    data.hitLocLookup = {};
-    for(const hitLoc in data.hitLocations) {
-      let area = data.hitLocations[hitLoc]
+    system.hitLocLookup = {};
+    for(const hitLoc in system.hitLocations) {
+      let area = system.hitLocations[hitLoc]
       area.stoppingPower = 0;
       let [start, end] = area.location;
       // Just one die number that'll hit the location
       if(!end) {
-        data.hitLocLookup[start] = hitLoc;
+        system.hitLocLookup[start] = hitLoc;
       }
       // A range of die numbers that'll hit the location
       else {
         for(let i = start; i <= end; i++) {
-          data.hitLocLookup[i] = hitLoc;
+          system.hitLocLookup[i] = hitLoc;
         }
       }
     }
@@ -87,7 +87,7 @@ export class CyberpunkActor extends Actor {
 
       // While we're looping through armor, might as well modify hit locations' armor
       for(let armorArea in armorData.coverage) {
-        let location = data.hitLocations[armorArea];
+        let location = system.hitLocations[armorArea];
         if(location !== undefined) {
           armorArea = armorData.coverage[armorArea];
           location.stoppingPower += armorArea.stoppingPower;
@@ -104,10 +104,10 @@ export class CyberpunkActor extends Actor {
     body.carry = body.total * 10;
     body.lift = body.total * 40;
     body.modifier = btmFromBT(body.total);
-    data.carryWeight = 0;
+    system.carryWeight = 0;
     equippedItems.forEach(item => {
       let weight = item.system.weight || 0;
-      data.carryWeight += weight;
+      system.carryWeight += weight;
     });
 
     // Apply wound effects
@@ -157,8 +157,8 @@ export class CyberpunkActor extends Actor {
     // Technically UI info, but we don't wanna calc every time we open a sheet so store it in the actor.
     this.update({
       // Why is it that when storing Item: {data: {data: {innerdata}}}, it comes out as {data: {innerdata}}
-      "data.sortedSkillIDs": sortedView,
-      "data.skillsSortedBy": sortOrder
+      "system.sortedSkillIDs": sortedView,
+      "system.skillsSortedBy": sortOrder
     });
   }
 
@@ -201,10 +201,10 @@ export class CyberpunkActor extends Actor {
   // TODO: Make this doable with just skill name
   static realSkillValue(skill) {
     // Sometimes we use this to sort raw item data before it becomes a full-fledged item. So we use either system or data, as needed
-    let data = skill.system || skill.data;
+    let data = skill.system || skill;
     let value = data.level;
     if(data.isChipped) {
-      value = skill.chipValue || 0;
+      value = data.chipValue || 0;
     }
     return value;
   }

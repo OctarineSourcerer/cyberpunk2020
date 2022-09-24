@@ -437,7 +437,7 @@ export class CyberpunkItem extends Item {
     let accelAdd = speed.acceleration * (decelerate ? -1 : 1);
     let newSpeed = clamp(speed.value + accelAdd, 0, speed.max);
     return this.update({
-      "data.speed.value": newSpeed
+      "system.speed.value": newSpeed
     });
   }
 }
