@@ -47,7 +47,7 @@ export class CyberpunkActor extends Actor {
       // NPCs are exactly the same as characters at the moment, but don't get vision or default actorlink
       case "npc":
       case "character":
-        this._prepareCharacterData(this.data.data);
+        this._prepareCharacterData(this.system);
         break;
     }
   }
@@ -180,7 +180,7 @@ export class CyberpunkActor extends Actor {
 
   // Current wound state. 0 for uninjured, going up by 1 for each new one. 1 for Light, 2 Serious, 3 Critical etc.
   woundState() {
-    const damage = this.data.data.damage;
+    const damage = this.system.damage;
     if(damage == 0) return 0;
     // Wound slots are 4 wide, so divide by 4, ceil the result
     return Math.ceil(damage/4);
@@ -188,7 +188,7 @@ export class CyberpunkActor extends Actor {
 
 
   stunThreshold() {
-    const body = this.data.data.stats.bt.total;
+    const body = this.system.stats.bt.total;
     // +1 as Light has no penalty, but is 1 from woundState()
     return body - this.woundState() + 1; 
   }
@@ -238,7 +238,7 @@ export class CyberpunkActor extends Actor {
     }
 
     let roll = new Multiroll(skill.name)
-      .addRoll(makeD10Roll(rollParts, this.data.data));
+      .addRoll(makeD10Roll(rollParts, this.system));
 
     roll.defaultExecute();
   }
@@ -248,7 +248,7 @@ export class CyberpunkActor extends Actor {
     let roll = new Multiroll(fullStatName);
     roll.addRoll(makeD10Roll(
       [`@stats.${statName}.total`],
-      this.data.data
+      this.system
     ));
     roll.defaultExecute();
   }
@@ -261,7 +261,7 @@ export class CyberpunkActor extends Actor {
     //   return;
     // }
     let roll = new Multiroll(`${this.name} ${localize("Initiative")}`, localize("InitiativeTrackerWarning"))
-      .addRoll(makeD10Roll(["@stats.ref.total","@skills.CombatSense.value"], this.data.data));
+      .addRoll(makeD10Roll(["@stats.ref.total","@skills.CombatSense.value"], this.system));
     roll.defaultExecute();
   }
 

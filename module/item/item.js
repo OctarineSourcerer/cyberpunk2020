@@ -13,26 +13,26 @@ export class CyberpunkItem extends Item {
   prepareData() {
     super.prepareData();
 
-    switch(this.data.type) {
+    switch(this.type) {
       case "weapon":
-        this._prepareWeaponData(this.data.data);
+        this._prepareWeaponData(this.system);
         break;
       case "armor":
-        this._prepareArmorData(this.data.data);
+        this._prepareArmorData(this.system);
         break;
     }
   }
 
   isRanged() {
-    let data = this.data.data;
-    return !(data.weaponType === "Melee" || data.weaponType === "Exotic" && Object.keys(meleeAttackTypes).includes(data.attackType));
+    let system = this.system;
+    return !(system.weaponType === "Melee" || system.weaponType === "Exotic" && Object.keys(meleeAttackTypes).includes(system.attackType));
   }
   
   _prepareWeaponData(data) {
     
   }
 
-  _prepareArmorData(data) {
+  _prepareArmorData(system) {
     // If new owner and armor covers this many areas or more, delete armor coverage areas the owner does not have
     const COVERAGE_CLEANSE_THRESHOLD = 20;
 
@@ -45,11 +45,11 @@ export class CyberpunkItem extends Item {
       skipReform = true;
     }
 
-    let nowOwned = !data.lastOwnerId && this.actor;
-    let changedHands = data.lastOwnerId !== undefined && data.lastOwnerId != this.actor.id;
+    let nowOwned = !system.lastOwnerId && this.actor;
+    let changedHands = system.lastOwnerId !== undefined && system.lastOwnerId != this.actor.id;
     if(!skipReform && (nowOwned || changedHands)) {
       data.lastOwnerId = this.actor.id;
-      let ownerLocs = this.actor.data.data.hitLocations;
+      let ownerLocs = this.actor.system.hitLocations;
       
       // Time to morph the armor to its new owner!
       // I just want this here so people can armor up giant robotic snakes if they want, y'know? or mechs.
@@ -152,7 +152,7 @@ export class CyberpunkItem extends Item {
     // +1/-1 per 10 bullets fired. + if close, - if medium onwards.
     // Friend's copy of the rulebook states penalties/bonus for all except point blank
     if(fireMode === fireModes.fullAuto) {
-      let bullets = Math.min(this.data.data.shotsLeft, this.data.data.rof);
+      let bullets = Math.min(this.system.shotsLeft, this.system.rof);
       // If close range, add, else subtract
       let multiplier = 
           (range === ranges.close) ? 1 
@@ -200,13 +200,13 @@ export class CyberpunkItem extends Item {
   // Look into `modifiers.js` for the modifier obect
   __weaponRoll(attackMods) {
     let owner = this.actor;
-    let data = this.data.data;
+    let system = this.system;
     if (owner === null) {
       throw new Error("This item isn't owned by anyone.");
     }
     let isRanged = this.isRanged();
     if(!isRanged) {
-      if(data.attackType === meleeAttackTypes.martial) {
+      if(system.attackType === meleeAttackTypes.martial) {
         return this.__martialBonk(attackMods);
       }
       else {
@@ -233,8 +233,8 @@ export class CyberpunkItem extends Item {
       console.error(`${this.name} is not a weapon, and therefore has no fire modes`)
       return [];
     }
-    if(this.data.data.attackType === rangedAttackTypes.auto
-      || this.data.data.attackType === rangedAttackTypes.autoshotgun) {
+    if(this.system.attackType === rangedAttackTypes.auto
+      || this.system.attackType === rangedAttackTypes.autoshotgun) {
       return [fireModes.fullAuto, fireModes.suppressive, fireModes.threeRoundBurst, fireModes.semiAuto];
     }
     return [fireModes.semiAuto];
@@ -242,11 +242,11 @@ export class CyberpunkItem extends Item {
 
   // Roll just the attack roll of a weapon, return it
   async attackRoll(attackMods) {
-    let data = this.data.data;
+    let system = this.system;
     let isRanged = this.isRanged();
 
     let attackTerms = ["@stats.ref.total"];
-    if(data.attackSkill) {
+    if(system.attackSkill) {
       attackTerms.push(`@attackSkill`);
     }
     if(isRanged) {
@@ -255,13 +255,13 @@ export class CyberpunkItem extends Item {
     else {
       attackTerms.push(...(this.__meleeModTerms(attackMods)));
     }
-    if(data.accuracy) {
-      attackTerms.push(data.accuracy);
+    if(system.accuracy) {
+      attackTerms.push(system.accuracy);
     }
 
     return await makeD10Roll(attackTerms, {
       stats: this.actor.data.data.stats,
-      attackSkill: this.actor.getSkillVal(this.data.data.attackSkill)
+      attackSkill: this.actor.getSkillVal(this.system.attackSkill)
     }).evaluate();
   }
 
@@ -271,13 +271,13 @@ export class CyberpunkItem extends Item {
    * @returns 
    */
   async __fullAuto(attackMods) {
-    let data = this.data.data;
+    let system = this.system;
     // The kind of distance we're attacking at, so we can display Close: <50m or something like that
-    let actualRangeBracket = rangeResolve[attackMods.range](data.range);
+    let actualRangeBracket = rangeResolve[attackMods.range](system.range);
     let DC = rangeDCs[attackMods.range];
     let attackRoll = await this.attackRoll(attackMods);
 
-    let roundsFired = Math.min(data.shotsLeft, data.rof);
+    let roundsFired = Math.min(system.shotsLeft, system.rof);
     let roundsHit = Math.min(roundsFired, attackRoll.total - DC);
     if(roundsHit < 0) {
       roundsHit = 0;
@@ -285,7 +285,7 @@ export class CyberpunkItem extends Item {
     let areaDamages = {};
     // Roll damage for each of the bullets that hit
     for(let i = 0; i < roundsHit; i++) {
-      let damageRoll = await new Roll(data.damage).evaluate();
+      let damageRoll = await new Roll(system.damage).evaluate();
       let location = (await rollLocation(attackMods.targetActor, attackMods.targetArea)).areaHit;
       if(!areaDamages[location]) {
         areaDamages[location] = [];
@@ -310,13 +310,13 @@ export class CyberpunkItem extends Item {
   }
 
   async __threeRoundBurst(attackMods) {
-    let data = this.data.data;
+    let system = this.system;
     // The kind of distance we're attacking at, so we can display Close: <50m or something like that
-    let actualRangeBracket = rangeResolve[attackMods.range](data.range);
+    let actualRangeBracket = rangeResolve[attackMods.range](system.range);
     let DC = rangeDCs[attackMods.range];
     let attackRoll = await this.attackRoll(attackMods);
 
-    let roundsFired = Math.min(data.shotsLeft, data.rof, 3);
+    let roundsFired = Math.min(system.shotsLeft, system.rof, 3);
     let attackHits = attackRoll.total >= DC;
     let areaDamages = {};
     let roundsHit;
@@ -324,7 +324,7 @@ export class CyberpunkItem extends Item {
       // In RAW this is 1d6/2, but this is functionally the same
       roundsHit = await new Roll("1d3").evaluate();
       for(let i = 0; i < roundsHit.total; i++) {
-        let damageRoll = await new Roll(data.damage).evaluate();
+        let damageRoll = await new Roll(system.damage).evaluate();
         let location = (await rollLocation(attackMods.targetActor, attackMods.targetArea)).areaHit;
         if(!areaDamages[location]) {
           areaDamages[location] = [];
@@ -352,10 +352,10 @@ export class CyberpunkItem extends Item {
     // The range we're shooting at
     let DC = rangeDCs[attackMods.range];
     let attackRoll = await this.attackRoll(attackMods);
-    let damageRoll = new Roll(this.data.data.damage);
+    let damageRoll = new Roll(this.system.damage);
     let locationRoll = await rollLocation(attackMods.targetActor, attackMods.targetArea);
 
-    let bigRoll = new Multiroll(this.name, this.data.data.flavor)
+    let bigRoll = new Multiroll(this.name, this.system.flavor)
       .addRoll(new Roll(`${DC}`), {name: localize("ToHit")})
       .addRoll(attackRoll, {name: localize("Attack")})
       .addRoll(damageRoll, {name: localize("Damage")})
@@ -366,12 +366,12 @@ export class CyberpunkItem extends Item {
   async __meleeBonk(attackMods) {
     // Just doesn't have a DC - is contested instead
     let attackRoll = await this.attackRoll(attackMods);
-    let damageRoll = new Roll(`${this.data.data.damage}+@strengthBonus`, {
+    let damageRoll = new Roll(`${this.system.damage}+@strengthBonus`, {
       strengthBonus: strengthDamageBonus(this.actor.data.data.stats.bt.total)
     });
     let locationRoll = await rollLocation(attackMods.targetActor, attackMods.targetArea);
 
-    let bigRoll = new Multiroll(this.name, this.data.data.flavor)
+    let bigRoll = new Multiroll(this.name, this.system.flavor)
       .addRoll(attackRoll, {name: localize("Attack")})
       .addRoll(damageRoll, {name: localize("Damage")})
       .addRoll(locationRoll.roll, {name: localize("Location"), flavor: locationRoll.areaHit });
@@ -433,7 +433,7 @@ export class CyberpunkItem extends Item {
     if(this.type !== "vehicle")
       return;
     
-    let speed = this.data.data.speed;
+    let speed = this.system.speed;
     let accelAdd = speed.acceleration * (decelerate ? -1 : 1);
     let newSpeed = clamp(speed.value + accelAdd, 0, speed.max);
     return this.update({
