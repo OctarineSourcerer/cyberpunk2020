@@ -156,6 +156,13 @@
       "path": "./packs/vehicles.db",
       "system": "cyberpunk2020",
       "type": "Item"
+    },
+    {
+      "name": "smgs",
+      "label": "SMGs",
+      "path": "./packs/smgs.db",
+      "system": "cyberpunk2020",
+      "type": "Item"
     }
   ],
   "languages": [
