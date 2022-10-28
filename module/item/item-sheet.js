@@ -69,7 +69,8 @@ export class CyberpunkItemSheet extends ItemSheet {
     sheet.concealabilities = Object.values(concealability);
     sheet.availabilities = Object.values(availability);
     sheet.reliabilities = Object.values(reliability);
-    sheet.attackSkills = [...attackSkills[this.item.system.weaponType].map(x => localize("Skill"+x)), ...(this.actor?.trainedMartials() || [])];
+    sheet.attackSkills = [...attackSkills[this.item.system.weaponType]
+      .map(x => localize("Skill"+x)), ...(this.actor?.trainedMartials() || [])];
 
     // TODO: Be not so inefficient for this
     if(!sheet.attackSkills.length && this.actor) {
