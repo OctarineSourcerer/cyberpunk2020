@@ -97,9 +97,7 @@ export class CyberpunkActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareCharacterItems(sheetData) {
-    // We have to look the actor up, because the sheet's actor doesn't have itemTypes on, and I'd rather not reclassify all the skills etc when there's literally 100 of them
-    let id = sheetData.actor._id;
-    let sortedItems = game.actors.get(id)?.itemTypes;
+    let sortedItems = sheetData.actor.itemTypes;
 
     // Does this copy need to be done with itemTypes being a thing?
     sheetData.gear = {
