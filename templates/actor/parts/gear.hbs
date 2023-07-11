@@ -21,7 +21,7 @@
 </div>
 
 {{#if (equals items.length 0)}}
-    <div class="inactive">Drag items here to add (for now)</div>
+    <div class="inactive">{{CPLocal "DragItemsPrompt"}}</div>
 {{/if}}
 <div class="field-list">
     {{#each gear.weapons}}
