@@ -204,7 +204,7 @@ export class CyberpunkActor extends Actor {
     let data = skill.system || skill;
     let value = data.level;
     if(data.isChipped) {
-      value = data.chipValue || 0;
+      value = data.chipLevel || 0;
     }
     return value;
   }
