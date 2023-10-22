@@ -3,9 +3,21 @@
   "title": "Cyberpunk 2020",
   "description": "R. Talsorian Games' Cyberpunk 2020 System",
   "version": "0.3.8",
-  "compatibleCoreVersion": "10",
+  "compatibleCoreVersion": "11",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "11",
+    "maximum": "11"
+  },
   "templateVersion": 2,
-  "author": "OctarineSourcerer",
+  "authors": [
+    {
+      "name": "OctarineSourceror",
+      "discord": "octarinesorcerer"
+    },
+    { "name": "cybersmily" },
+    { "name": "drowzero0" }
+  ],
   "scripts": [],
   "esmodules": ["module/cyberpunk2020.js"],
   "styles": ["css/cyberpunk2020.css"],
