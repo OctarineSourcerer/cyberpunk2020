@@ -380,5 +380,7 @@
 
     "SETTINGS.SysMigration": "System Migration Version",
     "SETTINGS.TrainedSkillsFirst": "Trained Skills First",
-    "SETTINGS.TrainedSkillsFirstHint": "Whether trained skills always come first in the skills list"
+    "SETTINGS.TrainedSkillsFirstHint": "Whether trained skills always come first in the skills list",
+    
+    "CYBERPUNK.NoCombatError": "There's currently no combat encounter present; you'll need to start one"
 }

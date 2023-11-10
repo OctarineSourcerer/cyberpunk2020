@@ -245,16 +245,17 @@ export class CyberpunkActor extends Actor {
     roll.defaultExecute();
   }
 
-  rollInitiative() {
-    // TODO: Get this actually working with the initiative tracker
-    // let activeCombat = game.combats.active;
-    // if(activeCombat !== undefined) {
-    //   activeCombat.rollInitiative(this.id);
-    //   return;
-    // }
-    let roll = new Multiroll(`${this.name} ${localize("Initiative")}`, localize("InitiativeTrackerWarning"))
-      .addRoll(makeD10Roll(["@stats.ref.total","@skills.CombatSense.value"], this.system));
-    roll.defaultExecute();
+  async addToCombatAndRollInitiative(options = {createCombatants: true}) {
+    if(!game.combat) {
+      ui.notifications.error(localize("NoCombatError"));
+      return;
+    }
+
+    // This... doesn't seem to actually roll the iniative, and the docs aren't telling in how to make this function do so
+    // So for now, we're going to have to add them to the combat, then ask the combat very nicely to roll this actor please
+    return this.rollInitiative(options = options).then( (combat) => {
+      combat.rollInitiative([combat.getCombatantByActor(this).id]);
+    });
   }
 
   rollStunDeath() {

@@ -179,7 +179,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       this.actor.rollSkill(id);
     });
     html.find(".roll-initiative").click(ev => {
-      this.actor.rollInitiative();
+      this.actor.addToCombatAndRollInitiative();
     });
     html.find(".damage").click(ev => {
       let damage = Number(ev.currentTarget.dataset.damage);
