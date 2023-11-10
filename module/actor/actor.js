@@ -245,6 +245,9 @@ export class CyberpunkActor extends Actor {
     roll.defaultExecute();
   }
 
+  /*
+   * Adds this actor to the current encounter - if there isn't one, this just shows an error - and rolls their initiative
+   */
   async addToCombatAndRollInitiative(options = {createCombatants: true}) {
     if(!game.combat) {
       ui.notifications.error(localize("NoCombatError"));
