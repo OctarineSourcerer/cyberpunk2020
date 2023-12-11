@@ -107,7 +107,7 @@ export class CyberpunkActor extends Actor {
     system.carryWeight = 0;
     equippedItems.forEach(item => {
       let weight = item.system.weight || 0;
-      system.carryWeight += parseInt(weight, 10);
+      system.carryWeight += parseFloat(weight);
     });
 
     // Apply wound effects
