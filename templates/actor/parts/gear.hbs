@@ -24,13 +24,7 @@
     <div class="inactive">{{CPLocal "DragItemsPrompt"}}</div>
 {{/if}}
 <div class="field-list">
-    {{#each gear.weapons}}
-        {{> itemListing}}
-    {{/each}}
-    {{#each gear.armor}}
-        {{> itemListing}}
-    {{/each}}
-    {{#each gear.misc}}
+    {{#each gearTabItems}}
         {{> itemListing}}
     {{/each}}
 </div>

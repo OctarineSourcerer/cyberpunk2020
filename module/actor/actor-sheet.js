@@ -88,6 +88,21 @@ export class CyberpunkActorSheet extends ActorSheet {
     const mortals = Array(7).fill().map((_,index) => game.i18n.format("CYBERPUNK.Mortal", {mortality: index}));
     sheetData.woundStates = nonMortals.concat(mortals);
   }
+  
+  /**
+   * Items that aren't actually cyberware or skills - everything that should be shown in the gear tab. 
+   */
+  _gearTabItems(allItems) {
+    let hideThese = new Set(["cyberware", "skill"])
+    // As per https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator
+    // Compares locale-compatibly, and pretty fast too apparently.
+    let nameSorter = new Intl.Collator();
+    let showItems = allItems.filter((item) => !hideThese.has(item.type))
+      .sort((a, b) => {
+        return nameSorter.compare(a.name, b.name)
+      });
+    return showItems;
+  }
 
   /**
    * Organize and classify Items for Character sheets.
@@ -98,14 +113,16 @@ export class CyberpunkActorSheet extends ActorSheet {
    */
   _prepareCharacterItems(sheetData) {
     let sortedItems = sheetData.actor.itemTypes;
+    
+    sheetData.gearTabItems = this._gearTabItems(sheetData.actor.items);
 
-    // Does this copy need to be done with itemTypes being a thing?
+    // Convenience copy of itemTypes tab, makes things a little less long-winded in the templates
+    // TODO: Does this copy need to be done with itemTypes being a thing?
     sheetData.gear = {
       weapons: sortedItems.weapon,
       armor: sortedItems.armor,
       cyberware: sortedItems.cyberware,
       misc: sortedItems.misc,
-      all: [sortedItems.weapons],
       cyberCost: sortedItems.cyberware.reduce((a,b) => a + b.system.cost, 0)
     };
 
