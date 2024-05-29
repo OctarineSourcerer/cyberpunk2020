@@ -11,7 +11,7 @@ export class CyberpunkActorSheet extends ActorSheet {
 
   /** @override */
   static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
+    return mergeObject(super.defaultOptions, {
       // Css classes
       classes: ["cyberpunk", "sheet", "actor"],
       template: "systems/cyberpunk2020/templates/actor/actor-sheet.hbs",

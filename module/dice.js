@@ -89,7 +89,7 @@ export function classifyRollDice(roll) {
                 fumbleThreshold = firstDie.number;
         }
 
-        this.rollMetaData.push(foundry.utils.mergeObject({
+        this.rollMetaData.push(mergeObject({
             name: name,
             flavor: flavor, 
             critThreshold: critThreshold,
@@ -121,7 +121,7 @@ export function classifyRollDice(roll) {
             }
         }));
         
-        const fullTemplateData = foundry.utils.mergeObject({
+        const fullTemplateData = mergeObject({
             user: game.user.id,
             title: this.title,
             flavor: this.flavor,
@@ -129,7 +129,7 @@ export function classifyRollDice(roll) {
                 let metaData = this.rollMetaData[i];
                 let firstDiceTerm = roll.terms.find(term => term instanceof Die) || roll.terms[0];
                 // Add name, flavor, critThreshold, fumbleThreshold etc. Also add whether crit or fumble.
-                return foundry.utils.mergeObject(metaData, { 
+                return mergeObject(metaData, { 
                     roll: roll,
                     diceInfo: classifyRollDice(roll),
                     isCrit: metaData.critThreshold && firstDiceTerm.total >= metaData.critThreshold,
