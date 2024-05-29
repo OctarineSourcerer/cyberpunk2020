@@ -2,7 +2,7 @@
   "name": "cyberpunk2020",
   "title": "Cyberpunk 2020",
   "description": "R. Talsorian Games' Cyberpunk 2020 System",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "compatibility": {
     "minimum": "10",
     "verified": "11",
