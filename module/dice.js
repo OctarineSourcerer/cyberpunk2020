@@ -1,3 +1,4 @@
+let Die = foundry.dice.terms.Die;
 export const BaseDie = "1d10x10";
 export const DefaultRollTemplate = "systems/cyberpunk2020/templates/chat/default-roll.hbs";
 
