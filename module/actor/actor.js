@@ -18,14 +18,18 @@ export class CyberpunkActor extends Actor {
       updates["prototypeToken.sight.enabled"] = true;
     }
     
-    // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
-    const skillsData = 
-      sortSkills(await getDefaultSkills(), SortOrders.Name)
-      .map(item => item.toObject());
-    updates.items = [];
-    updates.items = data.items.concat(skillsData);
-    updates["system.skillsSortedBy"] = "Name";
-    this.update(updates);
+    // Check if we have skills already, don't wipe skill items if we do
+    let firstSkill = data.items.find(item => item.type === 'skill');
+    if (!firstSkill) {
+      // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
+      const skillsData = 
+        sortSkills(await getDefaultSkills(), SortOrders.Name)
+        .map(item => item.toObject());
+      updates.items = [];
+      updates.items = data.items.concat(skillsData);
+      updates["system.skillsSortedBy"] = "Name";
+      this.update(updates);
+    }
   }
 
   /**
