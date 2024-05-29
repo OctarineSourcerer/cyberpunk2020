@@ -257,7 +257,7 @@ export class CyberpunkActor extends Actor {
     // This... doesn't seem to actually roll the iniative, and the docs aren't telling in how to make this function do so
     // So for now, we're going to have to add them to the combat, then ask the combat very nicely to roll this actor please
     return this.rollInitiative(options = options).then( (combat) => {
-      combat.rollInitiative([combat.getCombatantByActor(this).id]);
+      combat.rollInitiative(combat.getCombatantsByActor(this).id);
     });
   }
 
