@@ -140,7 +140,6 @@ export function classifyRollDice(roll) {
         }, extraTemplateData || {});
 
         let chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
             // Filter chat rolls to only those that actually have dice, for Dice So Nice. Doesn't seem to work without this filter if something "rolls" just a number
             rolls: this.rolls.filter(r=>r.dice.length > 0),
             user: game.user.id,
