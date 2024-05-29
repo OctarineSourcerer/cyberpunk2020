@@ -186,8 +186,10 @@
   ],
   "socket": false,
   "initiative": "1d10x10 + @stats.ref.total + @skills.CombatSense.value",
-  "gridDistance": 5,
-  "gridUnits": "m",
+  "grid": {
+    "distance": 5,
+    "units": "m"
+  },
   "primaryTokenAttribute": null,
   "secondaryTokenAttribute": null,
   "url": "https://github.com/OctarineSourcerer/cyberpunk2020",
