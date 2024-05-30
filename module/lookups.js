@@ -22,8 +22,12 @@ export let attackSkills = {
     "Exotic": []
 }
 
+/**
+ * 
+ * @returns The names of each stat a character has
+ */
 export function getStatNames() {
-    return Object.keys(game.system.template.Actor.templates.stats.stats)
+    return Object.keys(game.system.template.Actor.character.stats)
 }
 
 // How a weapon attacks. Something like pistol or an SMG have rigid rules on how they can attack, but shotguns can be regular or auto shotgun, exotic can be laser, etc. So this is for weird and special stuff that isn't necessarily covered by the weapon's type or other information
