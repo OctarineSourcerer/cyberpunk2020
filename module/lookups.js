@@ -153,7 +153,7 @@ export let defaultAreaLookup = {
 }
 export function defaultHitLocations() { return game.system.template.Actor.templates.hitLocations.hitLocations; }
 
-export function rangedModifiers(weapon) {
+export function rangedModifiers(weapon, targets=[]) {
     let range = weapon.system.range || 50;
     let fireModes = weapon.__getFireModes() || [];
     return [
@@ -185,7 +185,7 @@ export function rangedModifiers(weapon) {
             }),
         },
         {
-            localKey: "AimingAt",
+            localKey: "TargetArea",
             dataPath: "targetArea",
             defaultValue: "",
             // TODO: Have this dependent on target
@@ -242,7 +242,7 @@ export function martialOptions(actor) {
 export function meleeBonkOptions() {
     return [[
         {
-            localKey: "AimingAt",
+            localKey: "TargetArea",
             dataPath: "targetArea",
             defaultValue: "",
             // TODO: Have this dependent on target

@@ -310,7 +310,7 @@
     "CYBERPUNK.ExtraModifiers": "Extra Modifiers",
     "CYBERPUNK.FireMode": "Fire Mode",
     "CYBERPUNK.Aiming": "Aiming",
-    "CYBERPUNK.AimingAt": "Aiming At",
+    "CYBERPUNK.TargetArea": "Target Area",
     "CYBERPUNK.Rounds": "{rounds} round(s)",
     "CYBERPUNK.Ambush": "Ambush",
     "CYBERPUNK.FastDraw": "Fast Draw",
