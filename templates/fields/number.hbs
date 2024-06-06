@@ -1,6 +1,7 @@
 <div class="field">
     <label for="{{edit}}">{{CPLocal label}}</label>
     <span class="flex-pad"></span>
-    <input class="number nogrow nowidth" name="{{edit}}" 
+    {{log 'meeee' .}}
+    <input {{#if readOnly}}readonly{{/if}} class="number nogrow nowidth" name="{{edit}}" 
         type="number" value="{{deepLookup . edit}}"/>
 </div>

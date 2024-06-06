@@ -60,7 +60,10 @@ import { defaultTargetLocations } from "../lookups.js"
       data.modifierGroups.forEach(group => {
         group.forEach(modifier => {
           // path towards modifier's field template
-          modifier.fieldPath = `fields/${modifier.choices ? "select" : typeof(modifier.defaultValue)}`;
+          let fieldPath = `fields/${modifier.choices 
+            ? "select" : typeof(modifier.defaultValue)}`;
+ 
+          modifier.fieldPath = fieldPath;
           deepSet(data.defaultValues, modifier.dataPath, (modifier.defaultValue !== undefined ? modifier.defaultValue : ""));
         })
       })

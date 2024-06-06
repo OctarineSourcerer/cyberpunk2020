@@ -311,6 +311,7 @@
     "CYBERPUNK.FireMode": "Fire Mode",
     "CYBERPUNK.Aiming": "Aiming",
     "CYBERPUNK.TargetArea": "Target Area",
+    "CYBERPUNK.TargetsCount": "Targets Count",
     "CYBERPUNK.Rounds": "{rounds} round(s)",
     "CYBERPUNK.Ambush": "Ambush",
     "CYBERPUNK.FastDraw": "Fast Draw",

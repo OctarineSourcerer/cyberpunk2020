@@ -192,6 +192,12 @@ export function rangedModifiers(weapon, targets=[]) {
             choices: defaultTargetLocations,
             allowBlank: true
         },
+        {
+            localKey: "TargetsCount",
+            dataPath: "targets",
+            defaultValue: targets.length,
+            readOnly: true,
+        },
         {localKey:"Ambush", dataPath:"ambush",defaultValue: false},
         {localKey:"Blinded", dataPath:"blinded",defaultValue: false},
         {localKey:"DualWield", dataPath:"dualWield",defaultValue: false},
