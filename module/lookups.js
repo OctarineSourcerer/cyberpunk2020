@@ -153,7 +153,7 @@ export let defaultAreaLookup = {
 }
 export function defaultHitLocations() { return game.system.template.Actor.templates.hitLocations.hitLocations; }
 
-export function rangedModifiers(weapon, targetNames=[]) {
+export function rangedModifiers(weapon, targetTokens=[]) {
     let range = weapon.system.range || 50;
     let fireModes = weapon.__getFireModes() || [];
     return [
@@ -195,8 +195,8 @@ export function rangedModifiers(weapon, targetNames=[]) {
         {
             localKey: "TargetsCount",
             dataPath: "targetsCount",
-            defaultValue: targetNames.length,
-            readOnly: targetNames.length != 0,
+            defaultValue: targetTokens.length,
+            readOnly: targetTokens.length != 0,
         },
         {localKey:"Ambush", dataPath:"ambush",defaultValue: false},
         {localKey:"Blinded", dataPath:"blinded",defaultValue: false},

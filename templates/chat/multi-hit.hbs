@@ -1,10 +1,11 @@
 <div class="cyberpunk cyberpunk-card flexcol">
     <h2>{{title}}</h2>
     <div class="field-list one-col">
-        {{#if targetName}}
+        {{#if target}}
         <div class="field">
             <span>{{CPLocal "Target"}}: </span>
-            <span class="flex-pad">{{targetName}}</span>
+            {{!-- TODO: Make clicking this open the appropriate token sheet --}}
+            <span class="flex-pad">{{target.name}}</span>
         </div>        
         {{/if}}
         <div class="field">

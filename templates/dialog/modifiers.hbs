@@ -13,12 +13,12 @@
         </div>
     {{/each}}
 
-    {{#if (hasElements targetNames)}}
+    {{#if (hasElements targetTokens)}}
         <h2>{{CPLocal "Targets"}}</h2>
         <div class="fieldrow" style="margin-bottom: 5px; width: auto">
-        {{#each targetNames}}
+        {{#each targetTokens}}
             <div class="field">
-                <span style="width: 100%">{{this}}</span>        
+                <span style="width: 100%">{{this.name}}</span>        
             </div>
         {{/each}}
         </div>

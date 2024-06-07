@@ -198,7 +198,7 @@ export class CyberpunkItem extends Item {
 
   // Let's just pretend the unusual ranged doesn't exist for now
   // Look into `modifiers.js` for the modifier obect
-  __weaponRoll(attackMods, targetNames) {
+  __weaponRoll(attackMods, targetTokens) {
     let owner = this.actor;
     let system = this.system;
     if (owner === null) {
@@ -217,7 +217,7 @@ export class CyberpunkItem extends Item {
     // ---- Firemode-specific rolling. I may roll together some common aspects later ----
     // Full auto
     if(attackMods.fireMode === fireModes.fullAuto) {
-      return this.__fullAuto(attackMods, targetNames);
+      return this.__fullAuto(attackMods, targetTokens);
     }
     // Three-round burst. Shares... a lot in common with full auto actually
     else if(attackMods.fireMode === fireModes.threeRoundBurst) {
@@ -270,12 +270,12 @@ export class CyberpunkItem extends Item {
    * @param {*} attackMods The modifiers for an attack. fireMode, ambush, etc - look in lookups.js for the specification of these
    * @returns 
    */
-  async __fullAuto(attackMods, targetNames) {
+  async __fullAuto(attackMods, targetTokens) {
     let system = this.system;
     // The kind of distance we're attacking at, so we can display Close: <50m or something like that
     let actualRangeBracket = rangeResolve[attackMods.range](system.range);
     let DC = rangeDCs[attackMods.range];
-    let targetCount = targetNames.length || attackMods.targetsCount || 1;
+    let targetCount = targetTokens.length || attackMods.targetsCount || 1;
     
     // This is a somewhat flawed multi-target thing - given target tokens, we could calculate distance (& therefore penalty) for each, and apply damage to them
     let rolls = [];
@@ -297,9 +297,8 @@ export class CyberpunkItem extends Item {
         }
         areaDamages[location].push(damageRoll);
       }
-      let targetName = targetNames[i] || i;
       let templateData = {
-        targetName: targetName,
+        target: targetTokens[i] || undefined,
         range: attackMods.range,
         toHit: DC,
         attackRoll: attackRoll,
