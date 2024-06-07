@@ -194,7 +194,7 @@ export function rangedModifiers(weapon, targetNames=[]) {
         },
         {
             localKey: "TargetsCount",
-            dataPath: "targets",
+            dataPath: "targetsCount",
             defaultValue: targetNames.length,
             readOnly: targetNames.length != 0,
         },

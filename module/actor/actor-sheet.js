@@ -246,7 +246,7 @@ export class CyberpunkActorSheet extends ActorSheet {
         weapon: item,
         targetNames: targetNames,
         modifierGroups: modifierGroups,
-        onConfirm: (fireOptions) => item.__weaponRoll(fireOptions)
+        onConfirm: (fireOptions) => item.__weaponRoll(fireOptions, targetNames)
       });
       dialog.render(true);
     });
