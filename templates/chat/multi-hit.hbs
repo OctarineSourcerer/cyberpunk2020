@@ -1,6 +1,13 @@
 <div class="cyberpunk cyberpunk-card flexcol">
     <h2>{{title}}</h2>
     <div class="field-list one-col">
+        {{#if target}}
+        <div class="field">
+            <span>{{CPLocal "Target"}}: </span>
+            {{!-- TODO: Make clicking this open the appropriate token sheet --}}
+            <span class="flex-pad">{{target.name}}</span>
+        </div>        
+        {{/if}}
         <div class="field">
             <span>{{CPLocal "Range"}}: </span>
             <span class="flex-pad">{{CPLocalParam range locals.range}}</span>

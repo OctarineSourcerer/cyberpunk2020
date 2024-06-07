@@ -44,9 +44,11 @@ export class CyberpunkItemSheet extends ItemSheet {
     
       case "armor":
         this._prepareArmor(data);
+        break;
 
       case "skill":
         this._prepareSkill(data);
+        break;
 
       default:
         break;

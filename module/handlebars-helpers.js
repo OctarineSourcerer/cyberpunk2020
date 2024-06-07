@@ -94,6 +94,9 @@ export function registerHandlebarsHelpers() {
     Handlebars.registerHelper("skillRef", function(skill) {
         return "CYBERPUNK.Skill" + skill.split(".").pop();
     });
+    Handlebars.registerHelper("hasElements", function(array) {
+        return array.length > 0;
+    });
 
     // Allows you to use simple ["one", "two"] options for a select, or something like
     // [{value:"close", localKey:"RangeClose", localData: {range: 50}}, ...]

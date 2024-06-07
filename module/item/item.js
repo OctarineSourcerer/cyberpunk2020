@@ -198,7 +198,7 @@ export class CyberpunkItem extends Item {
 
   // Let's just pretend the unusual ranged doesn't exist for now
   // Look into `modifiers.js` for the modifier obect
-  __weaponRoll(attackMods) {
+  __weaponRoll(attackMods, targetTokens) {
     let owner = this.actor;
     let system = this.system;
     if (owner === null) {
@@ -217,7 +217,7 @@ export class CyberpunkItem extends Item {
     // ---- Firemode-specific rolling. I may roll together some common aspects later ----
     // Full auto
     if(attackMods.fireMode === fireModes.fullAuto) {
-      return this.__fullAuto(attackMods);
+      return this.__fullAuto(attackMods, targetTokens);
     }
     // Three-round burst. Shares... a lot in common with full auto actually
     else if(attackMods.fireMode === fireModes.threeRoundBurst) {
@@ -270,43 +270,51 @@ export class CyberpunkItem extends Item {
    * @param {*} attackMods The modifiers for an attack. fireMode, ambush, etc - look in lookups.js for the specification of these
    * @returns 
    */
-  async __fullAuto(attackMods) {
+  async __fullAuto(attackMods, targetTokens) {
     let system = this.system;
     // The kind of distance we're attacking at, so we can display Close: <50m or something like that
     let actualRangeBracket = rangeResolve[attackMods.range](system.range);
     let DC = rangeDCs[attackMods.range];
-    let attackRoll = await this.attackRoll(attackMods);
-
-    let roundsFired = Math.min(system.shotsLeft, system.rof);
-    let roundsHit = Math.min(roundsFired, attackRoll.total - DC);
-    if(roundsHit < 0) {
-      roundsHit = 0;
-    }
-    let areaDamages = {};
-    // Roll damage for each of the bullets that hit
-    for(let i = 0; i < roundsHit; i++) {
-      let damageRoll = await new Roll(system.damage).evaluate();
-      let location = (await rollLocation(attackMods.targetActor, attackMods.targetArea)).areaHit;
-      if(!areaDamages[location]) {
-        areaDamages[location] = [];
+    let targetCount = targetTokens.length || attackMods.targetsCount || 1;
+    
+    // This is a somewhat flawed multi-target thing - given target tokens, we could calculate distance (& therefore penalty) for each, and apply damage to them
+    let rolls = [];
+    for (let i = 0; i < targetCount; i++) {
+      let attackRoll = await this.attackRoll(attackMods);
+      let roundsFired = Math.min(system.shotsLeft, system.rof / targetCount);
+      await this.update({"system.shotsLeft": system.shotsLeft - roundsFired})
+      let roundsHit = Math.min(roundsFired, attackRoll.total - DC);
+      if(roundsHit < 0) {
+        roundsHit = 0;
       }
-      areaDamages[location].push(damageRoll);
-    }
-    let templateData = {
-      range: attackMods.range,
-      toHit: DC,
-      attackRoll: attackRoll,
-      fired: roundsFired,
-      hits: roundsHit,
-      hit: roundsHit > 0,
-      areaDamages: areaDamages,
-      locals: {
-        range: { range: actualRangeBracket }
+      let areaDamages = {};
+      // Roll damage for each of the bullets that hit
+      for(let i = 0; i < roundsHit; i++) {
+        let damageRoll = await new Roll(system.damage).evaluate();
+        let location = (await rollLocation(attackMods.targetActor, attackMods.targetArea)).areaHit;
+        if(!areaDamages[location]) {
+          areaDamages[location] = [];
+        }
+        areaDamages[location].push(damageRoll);
       }
+      let templateData = {
+        target: targetTokens[i] || undefined,
+        range: attackMods.range,
+        toHit: DC,
+        attackRoll: attackRoll,
+        fired: roundsFired,
+        hits: roundsHit,
+        hit: roundsHit > 0,
+        areaDamages: areaDamages,
+        locals: {
+          range: { range: actualRangeBracket }
+        }
+      }
+      let roll = new Multiroll(`${localize("Autofire")}`, `${localize("Range")}: ${localizeParam(attackMods.range, {range: actualRangeBracket})}`);
+      roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
+      rolls.push(roll);
     }
-    let roll = new Multiroll(localize("Autofire"), `${localize("Range")}: ${localizeParam(attackMods.range, {range: actualRangeBracket})}`);
-    roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
-    return roll;
+    return rolls;
   }
 
   async __threeRoundBurst(attackMods) {
@@ -346,6 +354,8 @@ export class CyberpunkItem extends Item {
     }
     let roll = new Multiroll(localize("ThreeRoundBurst"));
     roll.execute(undefined, "systems/cyberpunk2020/templates/chat/multi-hit.hbs", templateData);
+    this.update({"system.shotsLeft": system.shotsLeft - roundsFired})
+    return roll;
   }
 
   async __semiAuto(attackMods) {
@@ -361,6 +371,7 @@ export class CyberpunkItem extends Item {
       .addRoll(damageRoll, {name: localize("Damage")})
       .addRoll(locationRoll.roll, {name: localize("Location"), flavor: locationRoll.areaHit });
     bigRoll.defaultExecute({img:this.img});
+    this.update({"system.shotsLeft": system.shotsLeft - 1})
     return bigRoll;
   }
   async __meleeBonk(attackMods) {
