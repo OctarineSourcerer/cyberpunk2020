@@ -20,6 +20,7 @@ import { defaultTargetLocations } from "../lookups.js"
         weapon: null,
         // Use like [[mod1, mod2], [mod3, mod4, mod5]] etc to add groupings,
         modifierGroups: [],
+        targetNames: [],
         // Extra mod field for miscellaneous mod
         extraMod: true,
 
@@ -46,6 +47,7 @@ import { defaultTargetLocations } from "../lookups.js"
 
       let data = {
         modifierGroups: this.options.modifierGroups,
+        targetNames: this.options.targetNames,
         // You can't refer to indices in FormApplication form entries as far as I know, so let's give them a place to live
         defaultValues: {}
       };

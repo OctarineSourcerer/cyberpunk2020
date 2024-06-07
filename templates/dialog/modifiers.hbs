@@ -13,5 +13,15 @@
         </div>
     {{/each}}
 
+    {{#if (hasElements targetNames)}}
+        <h2>{{CPLocal "Targets"}}</h2>
+        <div class="fieldrow" style="margin-bottom: 5px; width: auto">
+        {{#each targetNames}}
+            <div class="field">
+                <span style="width: 100%">{{this}}</span>        
+            </div>
+        {{/each}}
+        </div>
+    {{/if}}
     <button type="submit" name="submit" class="fire" value="1" autofocus>{{CPLocal "OK"}}</button>
 </form>

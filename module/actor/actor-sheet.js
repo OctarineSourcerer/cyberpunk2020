@@ -229,12 +229,11 @@ export class CyberpunkActorSheet extends ActorSheet {
 
       let modifierGroups = undefined;
       let onConfirm = undefined;
+      let targetNames = Array.from(game.users.current.targets.values().map(target => target.actor.name))
       if(isRanged) {
         // For now just look at the names.
         // We have to get the values as an iterator; else if multiple targets share names, it'd turn a set with size 2 to one with size 1
-        let targets = Array.from(game.users.current.targets.values().map(target => target.actor.name))
-
-        modifierGroups = rangedModifiers(item, targets);
+        modifierGroups = rangedModifiers(item, targetNames);
       }
       else if (item.system.attackType === meleeAttackTypes.martial){
         modifierGroups = martialOptions(this.actor);
@@ -245,6 +244,7 @@ export class CyberpunkActorSheet extends ActorSheet {
       
       let dialog = new ModifiersDialog(this.actor, {
         weapon: item,
+        targetNames: targetNames,
         modifierGroups: modifierGroups,
         onConfirm: (fireOptions) => item.__weaponRoll(fireOptions)
       });
