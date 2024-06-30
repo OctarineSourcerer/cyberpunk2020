@@ -30,7 +30,7 @@ export function getStatNames() {
     }
     // v12 onwards
     else {
-        return actorTemplate.character.stats;
+        return Object.keys(actorTemplate.character.stats);
     }
 }
 
