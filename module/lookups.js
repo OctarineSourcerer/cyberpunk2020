@@ -25,7 +25,7 @@ export let attackSkills = {
 export function getStatNames() {
     let actorTemplate = game.system.template.Actor;
     // v11 and earlier format
-    if (actorTemplate.template) {
+    if (actorTemplate.templates) {
         return actorTemplate.templates.stats.stats;
     }
     // v12 onwards
