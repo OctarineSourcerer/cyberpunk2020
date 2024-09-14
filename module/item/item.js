@@ -12,7 +12,9 @@ export class CyberpunkItem extends Item {
 
   prepareData() {
     super.prepareData();
-
+  
+    console.log(`attackSkill перед подготовкой данных: "${this.system.attackSkill}"`);
+  
     switch(this.type) {
       case "weapon":
         this._prepareWeaponData(this.system);
@@ -21,16 +23,20 @@ export class CyberpunkItem extends Item {
         this._prepareArmorData(this.system);
         break;
     }
-  }
+  
+    console.log(`attackSkill после подготовки данных: "${this.system.attackSkill}"`);
+  }  
 
   isRanged() {
     let system = this.system;
     return !(system.weaponType === "Melee" || system.weaponType === "Exotic" && Object.keys(meleeAttackTypes).includes(system.attackType));
   }
   
-  _prepareWeaponData(data) {
-    
-  }
+  _prepareWeaponData(system) {
+    // if (!system.attackSkill.startsWith("CYBERPUNK.Skill")) {
+    //   system.attackSkill = `CYBERPUNK.Skill${system.attackSkill}`;
+    // }
+  }  
 
   _prepareArmorData(system) {
     // If new owner and armor covers this many areas or more, delete armor coverage areas the owner does not have
@@ -62,7 +68,7 @@ export class CyberpunkItem extends Item {
         for(let armorArea in system.coverage) {
           if(!ownerLocs[armorArea]) {
             console.warn(`ARMOR MORPH: The new owner of this armor (${this.actor.name}) does not have a ${armorArea}. Removing the area from the armor.`)
-            delete system.coverage.armorArea;
+            delete system.coverage[armorArea];
           }
         }
       }
@@ -259,6 +265,8 @@ export class CyberpunkItem extends Item {
       attackTerms.push(system.accuracy);
     }
 
+    console.log(`Значение attackSkill перед броском: "${this.system.attackSkill}"`);
+
     return await makeD10Roll(attackTerms, {
       stats: this.actor.system.stats,
       attackSkill: this.actor.getSkillVal(this.system.attackSkill)
@@ -390,20 +398,67 @@ export class CyberpunkItem extends Item {
     return bigRoll;
   }
   async __martialBonk(attackMods) {
+    console.log("attackMods:", attackMods);
     let actor = this.actor;
     let system = actor.system;
     // Action being done, eg strike, block etc
+    // Действие (например, 'strike', 'kick' и т.д.)
     let action = attackMods.action;
-    let martialArt = attackMods.martialArt;
+    let martialArtKey = attackMods.martialArt; // Теперь это корректный ключ локализации
 
     // Will be something this line once I add the martial arts bonuses. None for brawling, remember
     // let martialBonus = this.actor?.skills.MartialArts[martialArt].bonuses[action];
-    let isMartial = martialArt != "Brawling";
-    let keyTechniqueBonus = 0;
-    let martialSkillLevel = actor.getSkillVal(martialArt);
-    let flavor = game.i18n.has(`CYBERPUNK.${action + "Text"}`) ? localize(action + "Text") : "";
+    // let isMartial = martialArt != "Brawling";
+    // let keyTechniqueBonus = 0;
+    // let martialSkillLevel = actor.getSkillVal(attackMods.martialArtKey);
+    // let flavor = game.i18n.has(`CYBERPUNK.${action + "Text"}`) ? localize(action + "Text") : ""; 
+    //let results = new Multiroll(localizeParam("MartialTitle", {action: localize(action), martialArt: localize("Skill" + martialArt)}), flavor);
 
-    let results = new Multiroll(localizeParam("MartialTitle", {action: localize(action), martialArt: localize("Skill" + martialArt)}), flavor);
+    // Проверяем наличие martialArtKey
+    // Checking the availability of the martialArtKey
+    if (!martialArtKey) {
+      console.error("martialArt не определён в attackMods");
+      return;
+    }
+
+    // Получаем локализованное имя боевого искусства
+    // We get the localized name of the martial art
+    let martialArtName = game.i18n.localize(martialArtKey);
+
+    // Проверяем, является ли боевое искусство 'Дракой' (Brawling)
+    // Check if the martial art is 'Brawling' (Дракой)
+    let isMartial = martialArtKey !== "CYBERPUNK.SkillBrawling";
+
+    // Получаем уровень навыка
+    // Retrieve the skill level
+    let martialSkillLevel = actor.getSkillVal(martialArtKey);
+
+    // Проверяем, что уровень навыка получен корректно
+    // Verify that the skill level is retrieved correctly
+    if (martialSkillLevel === 0 && martialArtKey !== "CYBERPUNK.SkillBrawling") {
+      console.warn(`Уровень навыка для ${martialArtName} равен 0. Возможно, навык не добавлен персонажу.`);
+    }
+
+    // Получаем описание действия из локализации
+    // Retrieve the action description from localization
+    let flavorKey = `CYBERPUNK.${action}Text`;
+    let flavor = game.i18n.has(flavorKey) ? game.i18n.localize(flavorKey) : "";
+
+    // Объявляем keyTechniqueBonus перед использованием
+    // Declare keyTechniqueBonus before using it
+    let keyTechniqueBonus = 0; 
+    // Не уверен, что 0 корректен, тк у разных беовых исксусств разный бонус
+    // Not sure if 0 is correct, as different martial arts have different bonuses
+
+    // Создаём объект результата броска
+    // Create the roll result object
+    let results = new Multiroll(
+      game.i18n.format("CYBERPUNK.MartialTitle", {
+        action: game.i18n.localize(`CYBERPUNK.${action}`),
+        martialArt: martialArtName,
+      }),
+      flavor
+    );
 
     // All martial arts are contested
     let attackRoll = new Roll(`1d10x10+@stats.ref.total+@attackBonus+@keyTechniqueBonus`, {

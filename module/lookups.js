@@ -11,13 +11,22 @@ export let weaponTypes = {
     exotic: "Exotic"
 }
 export let attackSkills = {
-    "Pistol": ["Handgun"],
-    "SMG": ["Submachinegun"],
-    "Shotgun": ["Rifle"],
-    "Rifle": ["Rifle"],
-    "Heavy": ["HeavyWeapons"],
+    "Pistol": ["CYBERPUNK.SkillHandgun"],
+    "SMG": ["CYBERPUNK.SkillSubmachinegun"],
+    "Shotgun": ["CYBERPUNK.SkillRifle"],
+    "Rifle": ["CYBERPUNK.SkillRifle"],
+    "Heavy": ["CYBERPUNK.SkillHeavyWeapons"],
     // Trained martial arts get added in item-sheet for now
-    "Melee": ["Fencing", "Melee", "Brawling"],
+    "Melee": ["CYBERPUNK.SkillFencing", "CYBERPUNK.SkillMelee", "CYBERPUNK.SkillBrawling"],
+    
+    // "Pistol": ["Handgun"],
+    // "SMG": ["Submachinegun"],
+    // "Shotgun": ["Rifle"],
+    // "Rifle": ["Rifle"],
+    // "Heavy": ["HeavyWeapons"],
+    // // Trained martial arts get added in item-sheet for now
+    // "Melee": ["Fencing", "Melee", "Brawling"],
+
     // No limitations for exotic, go nuts
     "Exotic": []
 }
@@ -211,38 +220,28 @@ export function rangedModifiers(weapon, targetTokens=[]) {
 
 export function martialOptions(actor) {
     return [
-        [{
-            localKey: "Action",
-            dataPath: "action",
-            choices: [
-                {groupName: "Defensive", choices: [
-                    "Dodge",
-                    "BlockParry"
-                ]},
-                {groupName: "Attacks", choices: [
-                    "Strike",
-                    "Kick",
-                    "Disarm",
-                    "SweepTrip"
-                ]},
-                {groupName: "Grapple", choices: [
-                    "Grapple",
-                    "Hold",
-                    "Choke",
-                    "Throw",
-                    "Escape"
-                ]}
-            ]
-        },
-        {
-            localKey: "MartialArt",
-            dataPath: "martialArt",
-            choices: [{value: "Brawling", localKey: "SkillBrawling"}, ...(actor.trainedMartials().map(martialName => {
-                return {value: martialName, localKey: "Skill"+martialName}
-            }))]
-        }
-    ]]
-}
+      [{
+        localKey: "Action",
+        dataPath: "action",
+        choices: [
+          { groupName: "Defensive", choices: ["Dodge", "BlockParry"] },
+          { groupName: "Attacks", choices: ["Strike", "Kick", "Disarm", "SweepTrip"] },
+          { groupName: "Grapple", choices: ["Grapple", "Hold", "Choke", "Throw", "Escape"] }
+        ]
+      },
+      {
+        localKey: "MartialArt",
+        dataPath: "martialArt",
+        choices: [
+          { value: "CYBERPUNK.SkillДрака", localKey: "SkillДрака" },
+          ...actor.trainedMartials().map(martialKey => {
+            const keyWithoutPrefix = martialKey.replace("CYBERPUNK.Skill", "");
+            return { value: martialKey, localKey: `Skill${keyWithoutPrefix}` };
+          })
+        ]
+      }]
+    ];
+  }
 
 // Needs to be a function, or every time the modifiers dialog is launched, it'll add "extra mods" on
 export function meleeBonkOptions() {
