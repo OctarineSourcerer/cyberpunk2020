@@ -11,13 +11,22 @@ export let weaponTypes = {
     exotic: "Exotic"
 }
 export let attackSkills = {
-    "Pistol": ["Handgun"],
-    "SMG": ["Submachinegun"],
-    "Shotgun": ["Rifle"],
-    "Rifle": ["Rifle"],
-    "Heavy": ["HeavyWeapons"],
+    "Pistol": ["CYBERPUNK.SkillHandgun"],
+    "SMG": ["CYBERPUNK.SkillSubmachinegun"],
+    "Shotgun": ["CYBERPUNK.SkillRifle"],
+    "Rifle": ["CYBERPUNK.SkillRifle"],
+    "Heavy": ["CYBERPUNK.SkillHeavyWeapons"],
     // Trained martial arts get added in item-sheet for now
-    "Melee": ["Fencing", "Melee", "Brawling"],
+    "Melee": ["CYBERPUNK.SkillFencing", "CYBERPUNK.SkillMelee", "CYBERPUNK.SkillBrawling"],
+    
+    // "Pistol": ["Handgun"],
+    // "SMG": ["Submachinegun"],
+    // "Shotgun": ["Rifle"],
+    // "Rifle": ["Rifle"],
+    // "Heavy": ["HeavyWeapons"],
+    // // Trained martial arts get added in item-sheet for now
+    // "Melee": ["Fencing", "Melee", "Brawling"],
+
     // No limitations for exotic, go nuts
     "Exotic": []
 }

@@ -254,14 +254,26 @@ async _onCreate(data, options={}) {
       console.warn(`Ключ локализации навыка не определён`);
       return 0;
     }
-    
+
+    console.log(`Получен навык "${skillLocalizationKey}" у персонажа "${this.name}"`);
+  
+    // Удаляем логику добавления префикса
+    // if (!skillLocalizationKey.startsWith("CYBERPUNK.Skill")) {
+    //   skillLocalizationKey = `CYBERPUNK.Skill${skillLocalizationKey}`;
+    // }
+  
+    // Удаляем возможные пробелы в начале и конце строки
+    skillLocalizationKey = skillLocalizationKey.trim();
+
+    console.log(`Поиск навыка с ключом "${skillLocalizationKey}" у персонажа "${this.name}"`);
+
     const skill = this.itemTypes.skill.find(skill => skill.system.localizationKey === skillLocalizationKey);
-    
+
     if (!skill) {
       console.warn(`Навык с ключом "${skillLocalizationKey}" не найден у персонажа "${this.name}"`);
       return 0;
     }
-    
+
     return CyberpunkActor.realSkillValue(skill);
   }  
   

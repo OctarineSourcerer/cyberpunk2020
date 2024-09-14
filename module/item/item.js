@@ -12,7 +12,9 @@ export class CyberpunkItem extends Item {
 
   prepareData() {
     super.prepareData();
-
+  
+    console.log(`attackSkill перед подготовкой данных: "${this.system.attackSkill}"`);
+  
     switch(this.type) {
       case "weapon":
         this._prepareWeaponData(this.system);
@@ -21,16 +23,20 @@ export class CyberpunkItem extends Item {
         this._prepareArmorData(this.system);
         break;
     }
-  }
+  
+    console.log(`attackSkill после подготовки данных: "${this.system.attackSkill}"`);
+  }  
 
   isRanged() {
     let system = this.system;
     return !(system.weaponType === "Melee" || system.weaponType === "Exotic" && Object.keys(meleeAttackTypes).includes(system.attackType));
   }
   
-  _prepareWeaponData(data) {
-    
-  }
+  _prepareWeaponData(system) {
+    // if (!system.attackSkill.startsWith("CYBERPUNK.Skill")) {
+    //   system.attackSkill = `CYBERPUNK.Skill${system.attackSkill}`;
+    // }
+  }  
 
   _prepareArmorData(system) {
     // If new owner and armor covers this many areas or more, delete armor coverage areas the owner does not have
@@ -258,6 +264,8 @@ export class CyberpunkItem extends Item {
     if(system.accuracy) {
       attackTerms.push(system.accuracy);
     }
+
+    console.log(`Значение attackSkill перед броском: "${this.system.attackSkill}"`);
 
     return await makeD10Roll(attackTerms, {
       stats: this.actor.system.stats,
