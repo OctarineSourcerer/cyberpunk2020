@@ -10,27 +10,29 @@ import { properCase, localize, getDefaultSkills } from "../utils.js"
 export class CyberpunkActor extends Actor {
 
 
-  /** @override */
-  async _onCreate(data, options={}) {
-    const updates = {_id: data._id};
-    if (data.type === "character" ) {
-      updates["prototypeToken.actorLink"] = true;
-      updates["prototypeToken.sight.enabled"] = true;
-    }
-    
-    // Check if we have skills already, don't wipe skill items if we do
-    let firstSkill = data.items.find(item => item.type === 'skill');
-    if (!firstSkill) {
-      // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
-      const skillsData = 
-        sortSkills(await getDefaultSkills(), SortOrders.Name)
-        .map(item => item.toObject());
-      updates.items = [];
-      updates.items = data.items.concat(skillsData);
-      updates["system.skillsSortedBy"] = "Name";
-      this.update(updates);
-    }
+/** @override */
+async _onCreate(data, options={}) {
+  const updates = {_id: data._id};
+  if (data.type === "character" ) {
+    updates["prototypeToken.actorLink"] = true;
+    updates["prototypeToken.sight.enabled"] = true;
   }
+  
+  // Check if we have skills already, don't wipe skill items if we do
+  let firstSkill = data.items.find(item => item.type === 'skill');
+  if (!firstSkill) {
+    // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
+    const skillsData = 
+      sortSkills(await getDefaultSkills(), SortOrders.Name)
+      .map(item => item); 
+      // Убираем дополнительное присвоение localizationKey, так как оно уже есть
+      // Remove the additional assignment of localizationKey, as it already exists
+    updates.items = [];
+    updates.items = data.items.concat(skillsData);
+    updates["system.skillsSortedBy"] = "Name";
+    this.update(updates);
+  }
+}
 
   /**
    * Augment the basic actor data with additional dynamic data - the stuff that's calculated from other data
@@ -228,12 +230,13 @@ export class CyberpunkActor extends Actor {
   }
 
   // TODO: Again, will not work if skill names localized
+  // UPD: It should work now
   trainedMartials() {
     return this.itemTypes.skill
-      .filter(skill => skill.name.startsWith("Martial"))
-      .filter(martial => martial.system.level > 0)
-      .map(martial => martial.name);
-  }
+      .filter(skill => skill.system.localizationKey && skill.system.localizationKey.startsWith("CYBERPUNK.SkillMartialArts"))
+      .filter(skill => skill.system.level > 0)
+      .map(skill => skill.system.localizationKey);
+  }  
 
   // TODO: Make this doable with just skill name
   static realSkillValue(skill) {
@@ -246,9 +249,22 @@ export class CyberpunkActor extends Actor {
     return value;
   }
 
-  getSkillVal(skillName) {
-    return CyberpunkActor.realSkillValue(this.itemTypes.skill.find(skill => skill.name === skillName));
-  }
+  getSkillVal(skillLocalizationKey) {
+    if (!skillLocalizationKey) {
+      console.warn(`Ключ локализации навыка не определён`);
+      return 0;
+    }
+    
+    const skill = this.itemTypes.skill.find(skill => skill.system.localizationKey === skillLocalizationKey);
+    
+    if (!skill) {
+      console.warn(`Навык с ключом "${skillLocalizationKey}" не найден у персонажа "${this.name}"`);
+      return 0;
+    }
+    
+    return CyberpunkActor.realSkillValue(skill);
+  }  
+  
 
   rollSkill(skillId) {
     let skill = this.items.get(skillId);
@@ -262,9 +278,11 @@ export class CyberpunkActor extends Actor {
       rollParts.push(`@stats.${skillData.stat}.total`);
     }
     // TODO: When using localized names for skills, this will not work
-    if(skill.name === "Awareness/Notice") {
+    // UPD: It should work now
+    const awarenessNoticeName = game.i18n.localize("CYBERPUNK.SkillAwarenessNotice");
+    if (skill.name === awarenessNoticeName) {
       rollParts.push("@skills.CombatSense.value");
-    }
+    }    
 
     let roll = new Multiroll(skill.name)
       .addRoll(makeD10Roll(rollParts, this.system));

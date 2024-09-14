@@ -94,10 +94,12 @@ export function clamp(x, min, max) {
 
 export async function getDefaultSkills() {
     // Получаем значение настройки языка
-    const selectedLanguage= game.i18n.lang
-    console.log("TEST: LANG: ", selectedLanguage)
+    // Retrieve the language setting value
+    const selectedLanguage = game.i18n.lang;
+    console.log("TEST: LANG: ", selectedLanguage);
 
     // Определяем, какой пакет загружать на основе выбранного языка
+    // Determine which package to load based on the selected language
     let packName;
     switch(selectedLanguage) {
         case "en":
@@ -111,11 +113,25 @@ export async function getDefaultSkills() {
     }
 
     // Получаем пакет на основе его имени
+    // Retrieve the package based on its name
     const pack = game.packs.get(packName);
 
     // Загружаем содержимое выбранного пакета
+    // Load the contents of the selected package
     const content = await pack.getDocuments();
 
-    // Возвращаем содержимое пакета
-    return content;
+    // Генерируем localizationKey для каждого навыка на основе его имени
+    // Generate localizationKey for each skill based on its name
+    const skillsData = content.map(skill => {
+        const skillData = skill.toObject();
+        // Создаем localizationKey на основе имени навыка
+        // Удаляем пробелы и специальные символы для консистентности
+        // Create localizationKey based on the skill name
+        // Remove spaces and special characters for consistency
+        const sanitizedSkillName = skill.name.replace(/\s+/g, '').replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
+        skillData.system.localizationKey = `CYBERPUNK.Skill${sanitizedSkillName}`;
+        return skillData;
+    });
+
+    return skillsData;
 }
