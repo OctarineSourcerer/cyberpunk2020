@@ -10,27 +10,29 @@ import { properCase, localize, getDefaultSkills } from "../utils.js"
 export class CyberpunkActor extends Actor {
 
 
-  /** @override */
-  async _onCreate(data, options={}) {
-    const updates = {_id: data._id};
-    if (data.type === "character" ) {
-      updates["prototypeToken.actorLink"] = true;
-      updates["prototypeToken.sight.enabled"] = true;
-    }
-    
-    // Check if we have skills already, don't wipe skill items if we do
-    let firstSkill = data.items.find(item => item.type === 'skill');
-    if (!firstSkill) {
-      // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
-      const skillsData = 
-        sortSkills(await getDefaultSkills(), SortOrders.Name)
-        .map(item => item.toObject());
-      updates.items = [];
-      updates.items = data.items.concat(skillsData);
-      updates["system.skillsSortedBy"] = "Name";
-      this.update(updates);
-    }
+/** @override */
+async _onCreate(data, options={}) {
+  const updates = {_id: data._id};
+  if (data.type === "character" ) {
+    updates["prototypeToken.actorLink"] = true;
+    updates["prototypeToken.sight.enabled"] = true;
   }
+  
+  // Check if we have skills already, don't wipe skill items if we do
+  let firstSkill = data.items.find(item => item.type === 'skill');
+  if (!firstSkill) {
+    // Using toObject is important - foundry REALLY doesn't like creating new documents from documents themselves
+    const skillsData = 
+      sortSkills(await getDefaultSkills(), SortOrders.Name)
+      .map(item => item); 
+      // Убираем дополнительное присвоение localizationKey, так как оно уже есть
+      // Remove the additional assignment of localizationKey, as it already exists
+    updates.items = [];
+    updates.items = data.items.concat(skillsData);
+    updates["system.skillsSortedBy"] = "Name";
+    this.update(updates);
+  }
+}
 
   /**
    * Augment the basic actor data with additional dynamic data - the stuff that's calculated from other data
@@ -90,13 +92,46 @@ export class CyberpunkActor extends Actor {
       }
 
       // While we're looping through armor, might as well modify hit locations' armor
+      // I. Version of the direct addition of armor. In the future, can add it as an additional option in the settings
+      // for(let armorArea in armorData.coverage) {
+      //   let location = system.hitLocations[armorArea];
+      //   if(location !== undefined) {
+      //     armorArea = armorData.coverage[armorArea];
+      //     // Преобразование обоих значений в числа перед сложением
+      //     location.stoppingPower = Number(location.stoppingPower) + Number(armorArea.stoppingPower);
+      //   }
+      // }
+      
+      // II. The version of the addition of armor according to the rule book
       for(let armorArea in armorData.coverage) {
         let location = system.hitLocations[armorArea];
         if(location !== undefined) {
-          armorArea = armorData.coverage[armorArea];
-          location.stoppingPower += armorArea.stoppingPower;
+          let armorValue = armorData.coverage[armorArea].stoppingPower;
+            let locationStoppingPower = Number(location.stoppingPower);
+            let armorStoppingPower = Number(armorValue);
+
+            // If there is no armor on one of the zones, just add armor
+            if(locationStoppingPower === 0 || armorStoppingPower === 0) {
+                location.stoppingPower = locationStoppingPower + armorStoppingPower;
+            } else {
+                // If the armor is already on, we count it according to the modification table
+                let difference = Math.abs(locationStoppingPower - armorStoppingPower);
+                let maxValue = Math.max(locationStoppingPower, armorStoppingPower);
+                let modifier = 0;
+
+                if (difference >= 27) modifier = 0;
+                else if (difference >= 21) modifier = 2;
+                else if (difference >= 15) modifier = 3;
+                else if (difference >= 9) modifier = 3;
+                else if (difference >= 5) modifier = 4;
+                else modifier = 5;
+
+                // Adding the modifier to the highest value
+                location.stoppingPower = maxValue + modifier;
+            }
         }
       }
+
     });
     stats.ref.total = stats.ref.base + stats.ref.tempMod + stats.ref.armorMod;
 
@@ -195,12 +230,13 @@ export class CyberpunkActor extends Actor {
   }
 
   // TODO: Again, will not work if skill names localized
+  // UPD: It should work now
   trainedMartials() {
     return this.itemTypes.skill
-      .filter(skill => skill.name.startsWith("Martial"))
-      .filter(martial => martial.system.level > 0)
-      .map(martial => martial.name);
-  }
+      .filter(skill => skill.system.localizationKey && skill.system.localizationKey.startsWith("CYBERPUNK.SkillMartialArts"))
+      .filter(skill => skill.system.level > 0)
+      .map(skill => skill.system.localizationKey);
+  }  
 
   // TODO: Make this doable with just skill name
   static realSkillValue(skill) {
@@ -213,9 +249,34 @@ export class CyberpunkActor extends Actor {
     return value;
   }
 
-  getSkillVal(skillName) {
-    return CyberpunkActor.realSkillValue(this.itemTypes.skill.find(skill => skill.name === skillName));
-  }
+  getSkillVal(skillLocalizationKey) {
+    if (!skillLocalizationKey) {
+      console.warn(`Ключ локализации навыка не определён`);
+      return 0;
+    }
+
+    console.log(`Получен навык "${skillLocalizationKey}" у персонажа "${this.name}"`);
+  
+    // Удаляем логику добавления префикса
+    // if (!skillLocalizationKey.startsWith("CYBERPUNK.Skill")) {
+    //   skillLocalizationKey = `CYBERPUNK.Skill${skillLocalizationKey}`;
+    // }
+  
+    // Удаляем возможные пробелы в начале и конце строки
+    skillLocalizationKey = skillLocalizationKey.trim();
+
+    console.log(`Поиск навыка с ключом "${skillLocalizationKey}" у персонажа "${this.name}"`);
+
+    const skill = this.itemTypes.skill.find(skill => skill.system.localizationKey === skillLocalizationKey);
+
+    if (!skill) {
+      console.warn(`Навык с ключом "${skillLocalizationKey}" не найден у персонажа "${this.name}"`);
+      return 0;
+    }
+
+    return CyberpunkActor.realSkillValue(skill);
+  }  
+  
 
   rollSkill(skillId) {
     let skill = this.items.get(skillId);
@@ -229,9 +290,11 @@ export class CyberpunkActor extends Actor {
       rollParts.push(`@stats.${skillData.stat}.total`);
     }
     // TODO: When using localized names for skills, this will not work
-    if(skill.name === "Awareness/Notice") {
+    // UPD: It should work now
+    const awarenessNoticeName = game.i18n.localize("CYBERPUNK.SkillAwarenessNotice");
+    if (skill.name === awarenessNoticeName) {
       rollParts.push("@skills.CombatSense.value");
-    }
+    }    
 
     let roll = new Multiroll(skill.name)
       .addRoll(makeD10Roll(rollParts, this.system));
