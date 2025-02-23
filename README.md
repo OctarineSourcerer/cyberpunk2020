@@ -1,5 +1,9 @@
 # cyberpunk2020 (for FoundryVTT)
-*Finally on 0.8.6! ...hopefully v9 now too!*
+**Hey Octarine, what's the repo at https://github.com/2020-Fission/cyberpunk2020?**
+A couple developers that had helped with this wanted to take ownership of development - fine by me, as they'd done good work and I don't have the time. I wanted oversight as a just-in-case, so I moved the original repo to that location, and added them to the org 2020-Fission. So yes, that repo is fine and not malicious :) 
+
+In retrospect, I should have just kept the full repo here, as the move removed all releases on this repo and thus burned the links.
+
 **A note on dev time: For the past while, I've had enough going on that this has been on the backburner. I'm now taking time off from those other things to recover, but don't know how much time I'll be throwing at CP2020. Will still try to address bugs when my brain cooperates, and fingers crossed this situation changes.**
 
 R. Talsorian Games' [Cyberpunk 2020](https://talsorianstore.com/products/cyberpunk-2020) system, but for FoundryVTT. Time to get chromed, and frag some slags.
